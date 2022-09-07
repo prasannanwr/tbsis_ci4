@@ -769,119 +769,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										<td><input type="text" class="total_male_percent form-control " name="total_male_percent" id="total_male_percent" value="<?php echo et_setFormVal('total_male_percent', $objOldRec); ?>" /></td>
 
 								</tr>
-								<script type="text/javascript">
-									$(document).ready(function() {
-										//iterate through each textboxes and add keyup
-										//handler to trigger sum event
-										$(".ph-text").each(function() {
-											$(this).keyup(function() {
-												total_members_community = sumNum('.ph-text');
-												$(".ph-sum").val(total_members_community);
-												calculatePublicSum($(this));
-												total_caste_percent = sumPercent(".total_caste_percent");
-												$(".total_sum_percent").val(total_caste_percent);
-												//calculate percent
-												//reCalc();
-											});
-										});
-										$(".ph-female").keyup(function() {
-											var phtotal = $(this).val();
-											if (!isNaN(phtotal) && phtotal.length != 0) {
-												var percent_total = (phtotal/$("#ph-sum").val()) * 100;
-												$("#total_female_percent").val(percent_total.toFixed(2));
-											}
-										});
-										$(".ph-male").keyup(function() {
-											var phtotal = $(this).val();
-											if (!isNaN(phtotal) && phtotal.length != 0) {
-												var percent_total = (phtotal/$("#ph-sum").val()) * 100;
-												$("#total_male_percent").val(percent_total.toFixed(2));
-											}
-										});
-
-										$(".bc-text").each(function() {
-											$(this).keyup(function() {
-												calculateSum($(this));
-												//calculate grand total
-												//calculate percent
-												//reCalc();
-											});
-										});
-										function calculateSum($obj, $strRef='') {
-											//colId = $obj.data('col');
-											rowId = $obj.data('row');
-											//calculate sub-total
-											const bc_women = parseInt($(".bc_women_"+rowId).val());
-											const bc_men = parseInt($(".bc_men_"+rowId).val());
-											//var bc_total_col = parseFloat($(".bc_total_"+rowId).value());
-											//console.log(bc_women);
-											//console.log(bc_men);
-											var sub_total = parseInt(bc_women+bc_men);
-											$('.bc_sub_total_' + rowId).val(sub_total);
-											
-											// var bc_total = sumNum('.bc_total').toFixed(2);
-											const bc_total = sumNum('.bc_total');
-											const bc_poor = sumNum('.bc_poor');
-											const bc_women_no = sumNum('.bc_women');
-											const bc_men_no = sumNum('.bc_men');
-											const bc_sub_total = sumNum('.bc_sub_total');
-											const percent_poor = (bc_poor/bc_total) * 100;
-											const percent_women = (bc_women_no/bc_total) * 100;
-											const percent_men = (bc_men_no/bc_total) * 100;
-											const percent_total = (parseInt($('#total_no_households').val()) / parseInt($("#grand_total").val())) * 100;
-											// console.log(parseInt($('#total_no_households').val()));
-											// console.log(parseInt($('#grand_total').val()));
-											// console.log(percent_total);
-											$('#total_no_households').val(bc_total);
-											$('#total_no_households_poor').val(bc_poor);
-											$('#bp_women_total').val(bc_women_no);
-											$('#bp_men_total').val(bc_men_no);
-											$('#grand_total').val(bc_sub_total);
-											$('#percent_no_households').val("100");	
-											$('#percent_no_households_poor').val(percent_poor.toFixed(2));	
-											$('#bp_women_percent').val(percent_women.toFixed(2));	
-											$('#bp_men_percent').val(percent_men.toFixed(2));		
-											$('#grand_percent').val(percent_total.toFixed(2));										
-
-											//x = sumNum('.' + $strRef + 'Amt.' + colId).toFixed(2);
-											//$('.' + $strRef + 'Total.' + colId).html(x);
-										}
-										function sumNum($selector) {
-											sum = 0;
-											$($selector).each(function() {
-												//add only if the value is number
-												const selected = parseInt(this.value);
-												if (!isNaN(selected) && selected.length != 0) {
-													sum += parseInt(selected);
-												}
-											});
-											return sum;
-										}
-										function sumPercent($selector) {
-											sum = 0;
-											$($selector).each(function() {
-												//add only if the value is number
-												const selected = parseFloat(this.value);
-												if (!isNaN(selected) && selected.length != 0) {
-													sum += parseFloat(selected);
-												}
-											});
-											return sum.toFixed(2);
-										}
-
-										function calculatePublicSum($obj, $strRef='') {
-											//colId = $obj.data('col');
-											rowId = $obj.data('row');											
-											$(".ph-text").each(function() {
-												id = $(this).data('row');
-												const ph_total = $("#ph_total_"+id).val();
-												const ph_sum = $("#ph-sum").val();
-												const total_caste_percent = (ph_total/ph_sum) * 100;
-												$("#total_caste_percent_"+id).val(total_caste_percent.toFixed(2));
-											});
-										}
-									});
-								</script>
+								
 								<tr>
 
 									<th class="cost width center">Assessment By</th>
@@ -972,77 +860,77 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<?php
 									foreach ($casteGroup as $key => $caste) :
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" class="uc-text form-control uc_cp_total_<?= $key; ?>" name="uc_cp_total_<?= $key; ?>" id="uc_cp_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
+									<td><input type="text" data-row="<?=$key; ?>" data-col="cp" class="uc-text uc-cp-text form-control uc_caste_<?= $key; ?> uc_cp_total_<?= $key; ?>" name="uc_cp_total_<?= $key; ?>" id="uc_cp_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc-sum form-control " name="uc-cp-sum" id="uc-cp-sum" value="<?php echo et_setFormVal('uc-cp-sum', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-female form-control " name="uc-cp-female" id="uc-cp-female" value="<?php echo et_setFormVal('uc-cp-female', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-male form-control " name="uc-male" id="uc-male" value="<?php echo et_setFormVal('uc-male', $objOldRec); ?>" /></td>
+									<td><input type="text" class=" uc-female form-control " name="uc-<?=$key;?>-female" id="uc-cp-female" value="<?php echo et_setFormVal('uc-cp-female', $objOldRec); ?>" /></td>
+									<td><input type="text" class=" uc-male form-control " name="uc-<?=$key;?>-male" value="<?php echo et_setFormVal('uc-male', $objOldRec); ?>" /></td>
 								</tr>
 								<tr>
 									<td>(DY) Chairperson</td>
 									<?php
 									foreach ($casteGroup as $key => $caste) :
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" class="uc-text form-control uc_dy_total_<?= $key; ?>" name="uc_dy_total_<?= $key; ?>" id="uc_dy_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
+									<td><input type="text" data-row="<?=$key; ?>" data-col="dy" class="uc-text uc-dy-text form-control uc_caste_<?= $key; ?> uc_dy_total_<?= $key; ?>" name="uc_dy_total_<?= $key; ?>" id="uc_dy_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc-sum form-control " name="uc-dy-sum" id="uc-dy-sum" value="<?php echo et_setFormVal('uc-dy-sum', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-female form-control " name="uc-dy-female" id="uc-dy-female" value="<?php echo et_setFormVal('uc-dy-female', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-male form-control " name="uc-dy-male" id="uc-dy-male" value="<?php echo et_setFormVal('uc-dy-male', $objOldRec); ?>" /></td>
+									<td><input type="text" class=" uc-female form-control " name="uc-<?=$key;?>-female" id="uc-dy-female" value="<?php echo et_setFormVal('uc-dy-female', $objOldRec); ?>" /></td>
+									<td><input type="text" class=" uc-male form-control " name="uc-<?=$key;?>-male" id="uc-dy-male" value="<?php echo et_setFormVal('uc-dy-male', $objOldRec); ?>" /></td>
 								</tr>
 								<tr>
 									<td>Secretary</td>
 									<?php
 									foreach ($casteGroup as $key => $caste) :
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" class="uc-text form-control uc_sc_total_<?= $key; ?>" name="uc_sc_total_<?= $key; ?>" id="uc_sc_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
+									<td><input type="text" data-row="<?=$key; ?>" data-col="sc" class="uc-text uc-sc-text form-control uc_caste_<?= $key; ?> uc_sc_total_<?= $key; ?>" name="uc_sc_total_<?= $key; ?>" id="uc_sc_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc-sum form-control " name="uc-sc-sum" id="uc-sc-sum" value="<?php echo et_setFormVal('uc-sc-sum', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-female form-control " name="uc-sc-female" id="uc-sc-female" value="<?php echo et_setFormVal('uc-sc-female', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-male form-control " name="uc-sc-male" id="uc-sc-male" value="<?php echo et_setFormVal('uc-sc-male', $objOldRec); ?>" /></td>
+									<td><input type="text" class=" uc-female form-control " name="uc-<?=$key;?>-female" id="uc-sc-female" value="<?php echo et_setFormVal('uc-sc-female', $objOldRec); ?>" /></td>
+									<td><input type="text" class=" uc-male form-control " name="uc-<?=$key;?>-male" id="uc-sc-male" value="<?php echo et_setFormVal('uc-sc-male', $objOldRec); ?>" /></td>
 								</tr>
 								<tr>
 									<td>Treasurer</td>
 									<?php
 									foreach ($casteGroup as $key => $caste) :
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" class="uc-text form-control uc_tr_total_<?= $key; ?>" name="uc_tr_total_<?= $key; ?>" id="uc_tr_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
+									<td><input type="text" data-row="<?=$key; ?>" data-col="tr" class="uc-text uc-tr-text form-control uc_caste_<?= $key; ?> uc_tr_total_<?= $key; ?>" name="uc_tr_total_<?= $key; ?>" id="uc_tr_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc-sum form-control " name="uc-tr-sum" id="uc-tr-sum" value="<?php echo et_setFormVal('uc-tr-sum', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-female form-control " name="uc-tr-female" id="uc-tr-female" value="<?php echo et_setFormVal('uc-tr-female', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-male form-control " name="uc-tr-male" id="uc-tr-male" value="<?php echo et_setFormVal('uc-tr-male', $objOldRec); ?>" /></td>
+									<td><input type="text" class=" uc-female form-control " name="uc-<?=$key;?>-female" id="uc-tr-female" value="<?php echo et_setFormVal('uc-tr-female', $objOldRec); ?>" /></td>
+									<td><input type="text" class=" uc-male form-control " name="uc-<?=$key;?>-male" id="uc-tr-male" value="<?php echo et_setFormVal('uc-tr-male', $objOldRec); ?>" /></td>
 								</tr>
 								<tr>
 									<td>UC Members</td>
 									<?php
 									foreach ($casteGroup as $key => $caste) :
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" class="uc-text form-control uc_mem_total_<?= $key; ?>" name="uc_mem_total_<?= $key; ?>" id="uc_mem_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
+									<td><input type="text" data-row="<?=$key; ?>" data-col="mem" class="uc-text uc-mem-text form-control uc_caste_<?= $key; ?> uc_mem_total_<?= $key; ?>" name="uc_mem_total_<?= $key; ?>" id="uc_mem_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc-sum form-control " name="uc-mem-sum" id="uc-mem-sum" value="<?php echo et_setFormVal('uc-mem-sum', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-female form-control " name="uc-mem-female" id="uc-mem-female" value="<?php echo et_setFormVal('uc-mem-female', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-male form-control " name="uc-mem-male" id="uc-mem-male" value="<?php echo et_setFormVal('uc-mem-male', $objOldRec); ?>" /></td>
+									<td><input type="text" class=" uc-female form-control " name="uc-<?=$key;?>-female" id="uc-mem-female" value="<?php echo et_setFormVal('uc-mem-female', $objOldRec); ?>" /></td>
+									<td><input type="text" class=" uc-male form-control " name="uc-<?=$key;?>-male" id="uc-mem-male" value="<?php echo et_setFormVal('uc-mem-male', $objOldRec); ?>" /></td>
 								</tr>
 								<tr>
 									<td>Total</td>
 									<?php
 									foreach ($casteGroup as $key => $caste) :
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" class="uc-text form-control uc_total_<?= $key; ?>" name="uc_total_<?= $key; ?>" id="uc_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
+									<td><input type="text" readonly data-row="<?=$key; ?>" class="uc-text form-control uc_total_<?= $key; ?>" name="uc_total_<?= $key; ?>" id="uc_total_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
 									<?php endforeach; ?>
-									<td><input type="text" readonly class="uc-sum form-control " name="uc-sum" id="uc-sum" value="<?php echo et_setFormVal('uc-sum', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-female form-control " name="uc-female" id="uc-female" value="<?php echo et_setFormVal('uc-female', $objOldRec); ?>" /></td>
-									<td><input type="text" class=" uc-male form-control " name="uc-male" id="uc-male" value="<?php echo et_setFormVal('uc-male', $objOldRec); ?>" /></td>
+									<td><input type="text" readonly class="form-control " name="uc-sum" id="uc-sum" value="<?php echo et_setFormVal('uc-sum', $objOldRec); ?>" /></td>
+									<td><input type="text" readonly class=" form-control " name="uc-female" id="uc-female" value="<?php echo et_setFormVal('uc-female', $objOldRec); ?>" /></td>
+									<td><input type="text" readonly class=" form-control " name="uc-male" id="uc-male" value="<?php echo et_setFormVal('uc-male', $objOldRec); ?>" /></td>
 								</tr>
 								<tr>
 								<td>%</td>
 									<?php
 									foreach ($casteGroup as $key => $caste) :
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" class="uc-percent form-control uc_percent_<?= $key; ?>" name="uc_percent_<?= $key; ?>" id="uc_percent_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
+									<td><input type="text" readonly data-row="<?=$key; ?>" class="uc-percent form-control uc_percent_<?= $key; ?>" name="uc_percent_<?= $key; ?>" id="uc_percent_<?= $key; ?>" value="<?php echo et_setFormVal('bri03bridge_name', $objOldRec); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc_total_sum_percent form-control " name="uc_total_sum_percent" id="uc_total_sum_percent" value="<?php echo et_setFormVal('uc_total_sum_percent', $objOldRec); ?>" /></td>
-									<td><input type="text" class="uc_total_female_percent form-control " name="uc_total_female_percent" id="uc_total_female_percent" value="<?php echo et_setFormVal('uc_total_female_percent', $objOldRec); ?>" /></td>
-									<td><input type="text" class="uc_total_male_percent form-control " name="uc_total_male_percent" id="uc_total_male_percent" value="<?php echo et_setFormVal('uc_total_male_percent', $objOldRec); ?>" /></td>
+									<td><input type="text" readonly class="uc_total_female_percent form-control " name="uc_total_female_percent" id="uc_total_female_percent" value="<?php echo et_setFormVal('uc_total_female_percent', $objOldRec); ?>" /></td>
+									<td><input type="text" readonly class="uc_total_male_percent form-control " name="uc_total_male_percent" id="uc_total_male_percent" value="<?php echo et_setFormVal('uc_total_male_percent', $objOldRec); ?>" /></td>
 								</tr>
 								<tr>
 
@@ -1056,9 +944,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 											<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 
-											<input type="text" class=" form-control " name="uc_assessment_date" id="uc_assessment_date" value="<?php if (isset($objImplementationRec['uc_assessment_date']) && $objImplementationRec['bri05site_assessment'] != "0000-00-00") {
-																																						echo et_setFormVal('uc_assessment_date', $objImplementationRec);
-																																					} ?>" />
+											<input type="text" class=" form-control " name="uc_assessment_date" id="uc_assessment_date" value="<?php if (isset($objImplementationRec['uc_assessment_date']) && $objImplementationRec['bri05site_assessment'] != "0000-00-00") { echo et_setFormVal('uc_assessment_date', $objImplementationRec); } ?>" />
 
 										</div>
 
@@ -1070,19 +956,164 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 							</table>
 
 						</div>
-
-
 					</div>
 				</div>
-
-
-
 			</div>
-
-
-
 			<!----end fifth Bridge---->
+			<script type="text/javascript">
+				$(document).ready(function() {
+					//iterate through each textboxes and add keyup
+					//uc composition
+					$(".uc-text").each(function() {
+						$(this).keyup(function() {
+							rowId = $(this).data('row');
+							colId = $(this).data('col');
+							total_cp = sumNum('.uc-'+colId+'-text');
+							$("#uc-"+colId+"-sum").val(total_cp);
+							total = sumNum('.uc_caste_'+rowId);
+							$(".uc_total_"+rowId).val(total)
+							// total_sum = sumNum('.uc-sum');
+							// $("#uc-sum").val(total_sum);
+							//total sum
+							total_sum = sumNum('.uc-sum');
+							$("#uc-sum").val(total_sum);
+							//total female
+							total_female = sumNum('.uc-female');
+							$("#uc-female").val(total_female);
+							//total male
+							total_male = sumNum('.uc-male');
+							$("#uc-male").val(total_male);
+							//total percentage
+							calculateUcPercent($(this));
+							$("#uc_total_sum_percent").val(100);
+							total_female_percent = ($('#uc-female').val()/$('#uc-sum').val())*100;
+							total_male_percent = ($('#uc-male').val()/$('#uc-sum').val())*100;
+							$('#uc_total_female_percent').val(total_female_percent.toFixed(2));
+							$('#uc_total_male_percent').val(total_male_percent.toFixed(2));
+						});
+					});
+					
+					//handler to trigger sum event
+					$(".ph-text").each(function() {
+						$(this).keyup(function() {
+							total_members_community = sumNum('.ph-text');
+							$(".ph-sum").val(total_members_community);
+							calculatePublicSum($(this));
+							total_caste_percent = sumPercent(".total_caste_percent");
+							$(".total_sum_percent").val(total_caste_percent);
+							//calculate percent
+							//reCalc();
+						});
+					});
+					$(".ph-female").keyup(function() {
+						var phtotal = $(this).val();
+						if (!isNaN(phtotal) && phtotal.length != 0) {
+							var percent_total = (phtotal/$("#ph-sum").val()) * 100;
+							$("#total_female_percent").val(percent_total.toFixed(2));
+						}
+					});
+					$(".ph-male").keyup(function() {
+						var phtotal = $(this).val();
+						if (!isNaN(phtotal) && phtotal.length != 0) {
+							var percent_total = (phtotal/$("#ph-sum").val()) * 100;
+							$("#total_male_percent").val(percent_total.toFixed(2));
+						}
+					});
 
+					$(".bc-text").each(function() {
+						$(this).keyup(function() {
+							calculateSum($(this));
+							//calculate grand total
+							//calculate percent
+							//reCalc();
+						});
+					});
+					function calculateSum($obj, $strRef='') {
+						//colId = $obj.data('col');
+						rowId = $obj.data('row');
+						//calculate sub-total
+						const bc_women = parseInt($(".bc_women_"+rowId).val());
+						const bc_men = parseInt($(".bc_men_"+rowId).val());
+						//var bc_total_col = parseFloat($(".bc_total_"+rowId).value());
+						//console.log(bc_women);
+						//console.log(bc_men);
+						var sub_total = parseInt(bc_women+bc_men);
+						$('.bc_sub_total_' + rowId).val(sub_total);
+						
+						// var bc_total = sumNum('.bc_total').toFixed(2);
+						const bc_total = sumNum('.bc_total');
+						const bc_poor = sumNum('.bc_poor');
+						const bc_women_no = sumNum('.bc_women');
+						const bc_men_no = sumNum('.bc_men');
+						const bc_sub_total = sumNum('.bc_sub_total');
+						const percent_poor = (bc_poor/bc_total) * 100;
+						const percent_women = (bc_women_no/bc_total) * 100;
+						const percent_men = (bc_men_no/bc_total) * 100;
+						const percent_total = (parseInt($('#total_no_households').val()) / parseInt($("#grand_total").val())) * 100;
+						// console.log(parseInt($('#total_no_households').val()));
+						// console.log(parseInt($('#grand_total').val()));
+						// console.log(percent_total);
+						$('#total_no_households').val(bc_total);
+						$('#total_no_households_poor').val(bc_poor);
+						$('#bp_women_total').val(bc_women_no);
+						$('#bp_men_total').val(bc_men_no);
+						$('#grand_total').val(bc_sub_total);
+						$('#percent_no_households').val("100");	
+						$('#percent_no_households_poor').val(percent_poor.toFixed(2));	
+						$('#bp_women_percent').val(percent_women.toFixed(2));	
+						$('#bp_men_percent').val(percent_men.toFixed(2));		
+						$('#grand_percent').val(percent_total.toFixed(2));										
+
+						//x = sumNum('.' + $strRef + 'Amt.' + colId).toFixed(2);
+						//$('.' + $strRef + 'Total.' + colId).html(x);
+					}
+					function sumNum($selector) {
+						sum = 0;
+						$($selector).each(function() {
+							//add only if the value is number
+							const selected = parseInt(this.value);
+							if (!isNaN(selected) && selected.length != 0) {
+								sum += parseInt(selected);
+							}
+						});
+						return sum;
+					}
+					function sumPercent($selector) {
+						sum = 0;
+						$($selector).each(function() {
+							//add only if the value is number
+							const selected = parseFloat(this.value);
+							if (!isNaN(selected) && selected.length != 0) {
+								sum += parseFloat(selected);
+							}
+						});
+						return sum.toFixed(2);
+					}
+
+					function calculatePublicSum($obj, $strRef='') {
+						//colId = $obj.data('col');
+						rowId = $obj.data('row');											
+						$(".ph-text").each(function() {
+							id = $(this).data('row');
+							const ph_total = $("#ph_total_"+id).val();
+							const ph_sum = $("#ph-sum").val();
+							const total_caste_percent = (ph_total/ph_sum) * 100;
+							$("#total_caste_percent_"+id).val(total_caste_percent.toFixed(2));
+						});
+					}
+					function calculateUcPercent($obj, $strRef='') {
+						//colId = $obj.data('col');
+						rowId = $obj.data('row');											
+						$(".uc-percent").each(function() {
+							rowId = $(this).data('row');
+							uc_sum = $("#uc-sum").val();
+							uc_total = $("#uc_total_"+rowId).val();
+							uc_percent = (uc_total/uc_sum) * 100;
+							$("#uc_percent_"+rowId).val(uc_percent.toFixed(2));
+						});
+					}
+				});
+			</script>
 
 
 			<!----start six Bridge---->

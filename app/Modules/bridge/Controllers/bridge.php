@@ -9,6 +9,8 @@ use App\Modules\bridge\Models\bridge_beneficiaries_model;
 use App\Modules\bridge\Models\bridge_model;
 use App\Modules\bridge\Models\bridge_public_hearing_members_model;
 use App\Modules\bridge\Models\bridge_public_hearing_model;
+use App\Modules\bridge\Models\bridge_uc_formation_data_model;
+use App\Modules\bridge\Models\bridge_uc_formation_model;
 use App\Modules\construction\Models\construction_model;
 use App\Modules\fiscal_year\Models\FiscalYearModel;
 use App\Modules\supporting_agencies\Models\supporting_agencies_model;
@@ -43,6 +45,10 @@ class bridge extends BaseController
 
 	private $bridge_public_hearing_members_model;
 
+	private $bridge_uc_formation_model;
+
+	private $bridge_uc_formation_data_model;
+
 	public function __construct()
 	{
 		helper(['form', 'html', 'et_helper']);
@@ -57,6 +63,8 @@ class bridge extends BaseController
 		$bridge_beneficiaries_composition_model = new bridge_beneficiaries_composition_model();
 		$bridge_public_hearing_model = new bridge_public_hearing_model();
 		$bridge_public_hearing_members_model = new bridge_public_hearing_members_model();
+		$bridge_uc_formation_model = new bridge_uc_formation_model();
+		$bridge_uc_formation_data_model = new bridge_uc_formation_data_model();
 		$this->fiscal_year_model = $fiscal_year_model;
 		$this->construction_model = $construction_model;
 		$this->view_vdc_model = $view_vdc_model;
@@ -67,7 +75,9 @@ class bridge extends BaseController
 		$this->bridge_beneficiaries_model = $bridge_beneficiaries_model;
 		$this->bridge_beneficiaries_composition_model = $bridge_beneficiaries_composition_model;
 		$this->bridge_public_hearing_model = $bridge_public_hearing_model;
-		$this->bridge_public_hearing_members_model = $bridge_public_hearing_members_model;
+		$this->bridge_public_hearing_members_model = $bridge_public_hearing_members_model; 
+		$this->bridge_uc_formation_model = $bridge_uc_formation_model;
+		$this->bridge_uc_formation_data_model = $bridge_uc_formation_data_model;
 		if (count(self::$arrDefData) <= 0) {
 			$FName = basename(__FILE__, '.php');
 			$fName = strtolower($FName);
@@ -414,6 +424,27 @@ class bridge extends BaseController
 							'ph_percent' => @$this->request->getVar("total_caste_percent_".$key)
 						);
 						$this->bridge_public_hearing_members_model->save($ph_members_data);
+					endforeach;
+
+
+					//uc formation
+					$uc_data = array(
+						'b_id' => $bri03id,
+						'b_uc_assessment_by' => @$this->request->getVar('uc_assessment_by'),
+						'b_uc_assessment_date' => @$this->request->getVar('uc_assessment_date'),
+						'b_uc_status' => @$this->request->getVar('uc_active')
+					);
+					$this->bridge_uc_formation_model->save($uc_data);
+					$uc_id = $this->bridge_uc_formation_model->getInsertID();
+					foreach ($casteGroup as $key => $caste) :
+						$uc_members_data = array(
+							'b_uc_id ' => $uc_id,
+							'b_uc_position' => $key,
+							'b_uc_caste' => $key,
+							'b_uc_female' => @$this->request->getVar("uc-".$key."-female"),
+							'b_uc_male' => @$this->request->getVar("uc-".$key."-male")
+						);
+						$this->bridge_uc_formation_data_model->save($uc_members_data);
 					endforeach;
 
 
