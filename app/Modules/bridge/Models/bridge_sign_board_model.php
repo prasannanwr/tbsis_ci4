@@ -4,35 +4,20 @@ namespace App\Modules\bridge\Models;
 
 use CodeIgniter\Model;
 
-class bridge_public_hearing_model extends Model
+class bridge_sign_board_model extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'bridge_public_hearing';
-    protected $primaryKey       = 'ph_id';
+    protected $table            = 'bridge_sign_board';
+    protected $primaryKey       = 'bsb_id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'ph_bridge_id',
-        'ph_assessment_by',
-        'ph_assessment_date',
-        'ph_status',
-        'dalit_total',
-        'dalit_percent',
-        'janjati_total',
-        'janjati_percent',
-        'minorities_total',
-        'minorities_percent',
-        'bct_total',
-        'bct_percent',
-        'ph_sum',
-        'ph_female',
-        'ph_male',
-        'ph_sum_percent',
-        'ph_female_percent',
-        'ph_male_percent'
+        'b_id',
+        'sign_board_check',
+        'sign_board_date'
     ];
 
     // Dates

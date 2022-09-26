@@ -6,13 +6,19 @@ use App\Controllers\BaseController;
 use App\Modules\bridge\Models\bridge_basic_data_model;
 use App\Modules\bridge\Models\bridge_beneficiaries_composition_model;
 use App\Modules\bridge\Models\bridge_beneficiaries_model;
+use App\Modules\bridge\Models\bridge_cost_estimate_model;
+use App\Modules\bridge\Models\bridge_design_model;
 use App\Modules\bridge\Models\bridge_employment_generation_detail_model;
 use App\Modules\bridge\Models\bridge_employment_generation_model;
 use App\Modules\bridge\Models\bridge_final_inspection_model;
+use App\Modules\bridge\Models\bridge_insurance_model;
 use App\Modules\bridge\Models\bridge_model;
+use App\Modules\bridge\Models\bridge_public_audit_model;
 use App\Modules\bridge\Models\bridge_public_hearing_members_model;
 use App\Modules\bridge\Models\bridge_public_hearing_model;
+use App\Modules\bridge\Models\bridge_sign_board_model;
 use App\Modules\bridge\Models\bridge_site_assesment_model;
+use App\Modules\bridge\Models\bridge_steel_parts_model;
 use App\Modules\bridge\Models\bridge_uc_formation_data_model;
 use App\Modules\bridge\Models\bridge_uc_formation_model;
 use App\Modules\construction\Models\construction_model;
@@ -61,6 +67,18 @@ class bridge extends BaseController
 
 	private $bridge_final_inspection_model;
 
+	private $bridge_design_model;
+
+	private $bridge_public_audit_model;
+
+	private $bridge_insurance_model;
+
+	private $bridge_sign_board_model;
+
+	private $bridge_cost_estimate_model;
+
+	private $bridge_steel_parts_model;
+
 	public function __construct()
 	{
 		helper(['form', 'html', 'et_helper']);
@@ -81,6 +99,12 @@ class bridge extends BaseController
 		$bridge_employment_generation_detail_model = new bridge_employment_generation_detail_model();
 		$bridge_site_assesment_model = new bridge_site_assesment_model();
 		$bridge_final_inspection_model = new bridge_final_inspection_model();
+		$bridge_design_model = new bridge_design_model();
+		$bridge_public_audit_model = new bridge_public_audit_model();
+		$bridge_insurance_model = new bridge_insurance_model();
+		$bridge_sign_board_model = new bridge_sign_board_model();
+		$bridge_cost_estimate_model = new bridge_cost_estimate_model();
+		$bridge_steel_parts_model = new bridge_steel_parts_model();
 		$this->fiscal_year_model = $fiscal_year_model;
 		$this->construction_model = $construction_model;
 		$this->view_vdc_model = $view_vdc_model;
@@ -98,6 +122,12 @@ class bridge extends BaseController
 		$this->bridge_employment_generation_detail_model = $bridge_employment_generation_detail_model;
 		$this->bridge_site_assesment_model = $bridge_site_assesment_model;
 		$this->bridge_final_inspection_model = $bridge_final_inspection_model;
+		$this->bridge_design_model = $bridge_design_model;
+		$this->bridge_public_audit_model = $bridge_public_audit_model;
+		$this->bridge_insurance_model = $bridge_insurance_model;
+		$this->bridge_sign_board_model = $bridge_sign_board_model;
+		$this->bridge_cost_estimate_model = $bridge_cost_estimate_model;
+		$this->bridge_steel_parts_model = $bridge_steel_parts_model;
 		if (count(self::$arrDefData) <= 0) {
 			$FName = basename(__FILE__, '.php');
 			$fName = strtolower($FName);
@@ -149,6 +179,12 @@ class bridge extends BaseController
 		$data['objBeneficiariesRec'] = '';
 		$data['objSiteAssesment'] = '';
 		$data['objFinalInspection'] = '';
+		$data['objBridgeDesign'] = '';
+		$data['objCostEstimate'] = '';
+		$data['objBridgeInsurance'] = '';
+		$data['objBridgeSignBoard'] = '';
+		$data['objBridgeSteelParts'] = '';
+		$data['objPublicAudit'] = '';
 		$data['postURL'] = "bridge/form";
 		
 
@@ -174,12 +210,24 @@ class bridge extends BaseController
 				redirect('/bridge');
 			}
 			
+			$data['objSiteAssesment'] = $this->bridge_site_assesment_model->where('b_id', $data['objOldRec']['bri03id'])->first();
 			$data['objBeneficiariesRec'] = $this->bridge_beneficiaries_model->where('bb_bridge_id', $data['objOldRec']['bri03id'])->first();
 			$data['objPublicHearingRec'] = $this->bridge_public_hearing_model->where('ph_bridge_id', $data['objOldRec']['bri03id'])->first();
 			$data['objUCCompositionRec'] = $this->bridge_uc_formation_model->where('b_id', $data['objOldRec']['bri03id'])->first();
-			$data['objEmploymentGeneration'] = $this->bridge_employment_generation_model->where('b_id', $data['objOldRec']['bri03id'])->first();
-			$data['objSiteAssesment'] = $this->bridge_site_assesment_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			$data['objBridgeDesign'] = $this->bridge_design_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			$data['objCostEstimate'] = $this->bridge_cost_estimate_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			$data['objBridgeInsurance'] = $this->bridge_insurance_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			$data['objBridgeSignBoard'] = $this->bridge_sign_board_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			$data['objBridgeSteelParts'] = $this->bridge_steel_parts_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			
 			$data['objFinalInspection'] = $this->bridge_final_inspection_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			$data['objPublicAudit'] = $this->bridge_public_audit_model->where('pa_bridge_id', $data['objOldRec']['bri03id'])->first();
+			
+			$data['objEmploymentGeneration'] = $this->bridge_employment_generation_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			
+			
+			
+			
 			
 			// $builder = $this->bridge_uc_formation_model->builder();
 			// $builder->select('*');
@@ -536,13 +584,13 @@ class bridge extends BaseController
 						'ph_assessment_date' => @$this->request->getVar('ph_assessment_date'),
 						'ph_status' => @$this->request->getVar('ph_active'),
 						'dalit_total' => @$this->request->getVar("ph_total_dalit_total"),
-						'dalit_percent' => @$this->request->getVar("total_caste_percent_dalit"),
+						'dalit_percent' => @$this->request->getVar("total_ph_caste_percent_dalit"),
 						'janjati_total' => @$this->request->getVar("ph_total_janjati_total"),
-						'janjati_percent' => @$this->request->getVar("total_caste_percent_janjati"),
+						'janjati_percent' => @$this->request->getVar("total_ph_caste_percent_janjati"),
 						'minorities_total' => @$this->request->getVar("ph_total_minorities_total"),
-						'minorities_percent' => @$this->request->getVar("total_caste_percent_minorities"),
+						'minorities_percent' => @$this->request->getVar("total_ph_caste_percent_minorities"),
 						'bct_total' => @$this->request->getVar("ph_total_bct_total"),
-						'bct_percent' => @$this->request->getVar("total_caste_percent_bct"),
+						'bct_percent' => @$this->request->getVar("total_ph_caste_percent_bct"),
 						'ph_sum' => @$this->request->getVar('ph-sum'),
 						'ph_female' => @$this->request->getVar('ph-female'),
 						'ph_male' => @$this->request->getVar('ph-male'),
@@ -621,6 +669,40 @@ class bridge extends BaseController
 					);
 					$this->bridge_uc_formation_model->save($uc_data);
 
+					//Design
+					$design_data = array(
+						'b_id' => $bri03id,
+						'bri_bri_type_check' =>  @$this->request->getVar("bri_bri_type_check"),
+						'bri_cable_geo_check' =>  @$this->request->getVar("bri_cable_geo_check"),
+						'bri_overall_design_check' =>  @$this->request->getVar("bri_overall_design_check"),
+						'bri_foundation_check' =>  @$this->request->getVar("bri_foundation_check"),
+						'bri_env_con_check' =>  @$this->request->getVar("bri_env_con_check"),
+						'bri_design_opt_check' =>  @$this->request->getVar("bri_design_opt_check"),
+						'bri_free_board_check' =>  @$this->request->getVar("bri_free_board_check"),
+						'bri_design_status' =>  @$this->request->getVar("design_active"),
+						'design_site_assessment_date' =>  @$this->request->getVar("design_site_assessment_date"),
+						'design_site_assessment_by' =>  @$this->request->getVar("design_site_assessment_by"),
+						'bri_design_remarks' =>  @$this->request->getVar("bri_design_remarks")
+					);
+					$this->bridge_design_model->save($design_data);
+
+					//Cost Estimate
+					$cost_est_data = array(
+						'b_id' => $bri03id,
+						'bri_impl_approach_check' =>  @$this->request->getVar("bri_impl_approach_check"),
+						'bri_unit_rates_steel_check' =>  @$this->request->getVar("bri_unit_rates_steel_check"),
+						'bri_unit_rates_check' =>  @$this->request->getVar("bri_unit_rates_check"),
+						'bri_portering_dis_check' =>  @$this->request->getVar("bri_portering_dis_check"),
+						'cost_est_site_assessment_by' =>  @$this->request->getVar("cost_est_site_assessment_by"),
+						'cost_est_site_assessment_date' =>  @$this->request->getVar("cost_est_site_assessment_date"),
+						'cost_est_remark' =>  @$this->request->getVar("cost_est_remark"),
+						'cost_est_active' =>  @$this->request->getVar("cost_est_active"),
+
+					);
+					$this->bridge_cost_estimate_model->save($cost_est_data);
+
+					//Steel Parts
+
 					//employment generation
 					// $eg_data = array(
 					// 	'b_id' => $bri03id,
@@ -675,6 +757,28 @@ class bridge extends BaseController
 					);
 					$this->bridge_employment_generation_model->save($eg_data);
 
+					$pa_data = array(
+						'pa_bridge_id' => $bri03id,
+						'pa_assessment_by' => @$this->request->getVar('pa_assessment_by'),
+						'pa_assessment_date' => @$this->request->getVar('pa_assessment_date'),
+						'pa_status' => @$this->request->getVar('pa_active'),
+						'dalit_total' => @$this->request->getVar('pa_dalit_total'),
+						'dalit_percent' => @$this->request->getVar('total_pa_caste_percent_dalit'),
+						'janjati_total' => @$this->request->getVar('pa_janjati_total'),
+						'janjati_percent' => @$this->request->getVar('total_pa_caste_percent_janjati'),
+						'minorities_total' => @$this->request->getVar('pa_minorities_total'),
+						'minorities_percent' => @$this->request->getVar('total_pa_caste_percent_minorities'),
+						'bct_total' => @$this->request->getVar('pa_bct_total'),
+						'bct_percent' => @$this->request->getVar('total_pa_caste_percent_bct'),
+						'pa_sum' => @$this->request->getVar('pa-sum'),
+						'pa_female' => @$this->request->getVar('pa-female'),
+						'pa_male' => @$this->request->getVar('pa-male'),
+						'pa_sum_percent' => @$this->request->getVar('total_sum_percent_pa'),
+						'pa_female_percent' => @$this->request->getVar('total_female_percent_pa'),
+						'pa_male_percent' => @$this->request->getVar('total_male_percent_pa'),
+					);
+					$this->bridge_public_audit_model->save($pa_data);
+
 					//final inspection
 					$fi_data = array(
 						'b_id' => $bri03id,
@@ -696,7 +800,7 @@ class bridge extends BaseController
 						'bri_remarks' => @$this->request->getVar("bri_remarks")
 					);
 					//echo "<pre>";var_dump($sa_data);exit;
-					$this->bridge_site_assesment_model->save($sa_data);
+					$this->bridge_final_inspection_model->save($fi_data);
 					
 					// $this->bridge_technical_data_model->save($form_data2);
 					session()->setFlashdata('message', 'Updated successfully.');

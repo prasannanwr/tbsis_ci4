@@ -4,21 +4,21 @@ namespace App\Modules\bridge\Models;
 
 use CodeIgniter\Model;
 
-class bridge_public_hearing_model extends Model
+class bridge_public_audit_model extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'bridge_public_hearing';
-    protected $primaryKey       = 'ph_id';
+    protected $table            = 'bridge_public_audit';
+    protected $primaryKey       = 'pa_id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'ph_bridge_id',
-        'ph_assessment_by',
-        'ph_assessment_date',
-        'ph_status',
+        'pa_bridge_id',
+        'pa_assessment_by',
+        'pa_assessment_date',
+        'pa_status',
         'dalit_total',
         'dalit_percent',
         'janjati_total',
@@ -27,12 +27,12 @@ class bridge_public_hearing_model extends Model
         'minorities_percent',
         'bct_total',
         'bct_percent',
-        'ph_sum',
-        'ph_female',
-        'ph_male',
-        'ph_sum_percent',
-        'ph_female_percent',
-        'ph_male_percent'
+        'pa_sum',
+        'pa_female',
+        'pa_male',
+        'pa_sum_percent',
+        'pa_female_percent',
+        'pa_male_percent',
     ];
 
     // Dates

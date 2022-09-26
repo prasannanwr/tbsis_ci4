@@ -4,35 +4,26 @@ namespace App\Modules\bridge\Models;
 
 use CodeIgniter\Model;
 
-class bridge_public_hearing_model extends Model
+class bridge_cost_estimate_model extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'bridge_public_hearing';
-    protected $primaryKey       = 'ph_id';
+    protected $table            = 'bridge_cost_estimate';
+    protected $primaryKey       = 'bce_id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'ph_bridge_id',
-        'ph_assessment_by',
-        'ph_assessment_date',
-        'ph_status',
-        'dalit_total',
-        'dalit_percent',
-        'janjati_total',
-        'janjati_percent',
-        'minorities_total',
-        'minorities_percent',
-        'bct_total',
-        'bct_percent',
-        'ph_sum',
-        'ph_female',
-        'ph_male',
-        'ph_sum_percent',
-        'ph_female_percent',
-        'ph_male_percent'
+        'b_id',
+        'bri_impl_approach_check',
+        'bri_unit_rates_steel_check',
+        'bri_unit_rates_check',
+        'bri_portering_dis_check',
+        'cost_est_site_assessment_by',
+        'cost_est_site_assessment_date',
+        'cost_est_remarks',
+        'cost_est_active'
     ];
 
     // Dates
@@ -58,6 +49,5 @@ class bridge_public_hearing_model extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
 
 }

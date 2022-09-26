@@ -65,7 +65,7 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                New Construction Report<b class="caret"></b>
+                                                Social Issues<b class="caret"></b>
                                             </a>
 
 
@@ -616,11 +616,11 @@
                                     </ul>
                                     <!--end  Committed bridege -->
                                 </li>
-                                <!----Start major mantain daya---->
+                                <!----Start Unacceptable bridge---->
                                 <li class="divider"></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        Major Maintenance Report<b class="caret"></b>
+                                        Unacceptable Bridge<b class="caret"></b>
                                     </a>
 
                                     <ul class="dropdown-menu1">
@@ -1331,12 +1331,1439 @@
                                     </ul>
                                     <!--end  Committed bridege -->
 
+                                </li>
+                                <!-------- Acceptable Bridge ------------->
+                                <li class="divider"></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        Acceptable Bridge List<b class="caret"></b>
+                                    </a>
+
+                                    <ul class="dropdown-menu1">
+                                        <li class="dropdown" style="display:none">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                Commited Bridges Reports <b class="caret"></b>
+                                            </a>
+
+                                            <ul class="dropdown-menu2">
+
+                                                <!--All Bridge List Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        All Bridge List <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <?php echo anchor('reports/districtwise/Major_Maintenance', 'District Wise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <?php echo anchor('reports/devregionwise/Major_Maintenance', 'Dev. Region Wise Report'); ?>
+
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <!--  <li class="child-menu">
+                                                    <?php // echo anchor('reports/tbss_regionwise/Major_Maintenance', 'region Wise Report ');
+                                                    ?>
+                                                    
+                                                    </li>
+                                                    <div class="clear"></div>-->
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--All Bridge List End--->
+
+                                                <!--Basic Record Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Basic Records <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Bridge Wise <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4 ">
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Bridgewise/Major_Maintenance', '
+                                                            Bridge Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Over All <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3 ">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Overall_DateWise/Major_Maintenance', '
+                                                            Overall DateWise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Overall_FYWise/Major_Maintenance', '
+                                                            Overall FY Wise Report '); ?>
+
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Estimated Bridge Cost<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Overall_DateWise/' . MM_CODE, 'Over All Date Wise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Overall_FYWise/' . MM_CODE, 'FY Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Dist_DateWise/' . MM_CODE, 'District Date Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Dist_FYWise/' . MM_CODE, 'District FY Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Dev_DateWise/' . MM_CODE, 'Dev.Region Date Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Dev_FYWise/' . MM_CODE, 'Dev.Region FY Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_TBSS_DateWise/' . MM_CODE, 'TBSU region data Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_TBSS_FYWise/' . MM_CODE, 'TBSU region FY Wise Report '); ?>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Estimated Contribution Commitment<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Overall_DateWise/' . MM_CODE, ' Overall DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Overall_FYWise/' . MM_CODE, 'Overall Fiscal Year Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Dist_DateWise/' . MM_CODE, 'District DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Dist_FYWise/' . MM_CODE, 'District Fiscal Year Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Dev_DateWise/' . MM_CODE, 'Dev. Region Date Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Dev_FYWise/' . MM_CODE, 'Dev. Region Fiscal Year Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_TBSS_DateWise/' . MM_CODE, 'Contribution TBSU Date Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_TBSS_FYWise/' . MM_CODE, 'Contribution TBSU Fiscal Year Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--Basic Record End--->
+                                                <!--Work Progress Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Work Progress <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu2">
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Fiscal Year <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
 
 
+                                                                    <?php echo anchor('reports/Work_Carryover_Bridges/' . MM_CODE, 'New and Carryover Bridges Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Work_Cancelled_Bridges/' . MM_CODE, 'Cancelled Bridges Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Work_Completed_Bridges/' . MM_CODE, 'Completed Bridges Report '); ?>
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+
+                                                        </li>
+                                                        <li class="divider"> </li>
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Date Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Work_Datewise_Completed/' . MM_CODE, 'Datewise Completed Report'); ?>
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"> </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--Work Progress End--->
+                                                <!--Engineering Work Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Engineering Work <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu2">
+                                                        <li>
+
+                                                            <?php echo anchor('reports/Eng_SiteAssesment_Survey/MM', 'Site Assesment and Survey DateWise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/Eng_Desing_Cost_Estimate/MM', 'Desing and Cost  Estimate DateWise Wise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/Eng_Design_Approval/MM', 'Desing and CostDesign Approval DateWise Wise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/Eng_FYWise/MM', 'Fiscal Years Wise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"> </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--Engineering Work End--->
+
+                                            </ul>
+
+                                        </li>
+                                        <!---start Completed Bridges Report--->
+                                        <li class="divider" style="display:none"></li>
+
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                Completed Bridges Report <b class="caret"></b>
+                                            </a>
+
+                                            <ul class="dropdown-menu2">
+
+                                                <!--General Bridge List Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Completed Bridge List <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Over All <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4 ">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Overall_DateWise/' . MM_CODE, '
+                                                            DateWise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Overall_FYWise/' . MM_CODE, '
+                                                           FY Wise Report '); ?>
+
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <!--<li class="child-menu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                    District Wise<b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu4">
+                                                        <li>
+                                                        <?php echo anchor('reports/Gen_Dist_DateWise/' . MM_CODE, 'Date Wise Report'); ?>
+                                                        
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                        <?php echo anchor('reports/Gen_Dist_FYWise/' . MM_CODE, 'FY Wise Report '); ?>
+                                                        </li>
+                                                        
+                                                        <li class="divider"></li>
+                                                        
+                                                    </ul>
+                                                </li>-->
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                State Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Dev_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Dev_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+                                                        <!--<li class="child-menu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                    TBSU Wise<b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu4">
+                                                        <li>
+                                                        <?php echo anchor('reports/Gen_TBSS_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"></li> 
+                                                        <li>
+                                                        <?php echo anchor('reports/Gen_TBSS_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                        </li>
+                                                        
+                                                        <li class="divider"></li>                                            
+                                                    </ul>
+                                                </li>
+                                                   <li class="divider"></li>   -->
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Palika Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Munc_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Munc_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--General Bridge List End--->
+
+                                                <!--Actual Brigde Cost Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Actual Bridge Cost <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Over All <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4 ">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Overall_DateWise/' . MM_CODE, '
+                                                            DateWise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Overall_FYWise/' . MM_CODE, '
+                                                           FY Wise Report '); ?>
+
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                District Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Dist_DateWise/' . MM_CODE, 'Date Wise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Dist_FYWise/' . MM_CODE, 'FY Wise Report '); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                State Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Dev_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Dev_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                TBSU Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_TBSS_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_TBSS_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Supporting Agency Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Supporting_AgencyWise_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Supporting_AgencyWise_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Palika Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Munc_DateWise/' . MM_CODE, 'Date Wise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Munc_FYWise/' . MM_CODE, 'FY Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--Actual Brigde Cost End--->
+                                                <!--Actual Bridge Contribution Commitment Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Actual Cost Contribution <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Over All <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4 ">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Overall_datewise/' . MM_CODE, '
+                                                            DateWise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Overall_Fywise/' . MM_CODE, '
+                                                           FY Wise Report '); ?>
+
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                District Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Districtwise_datewise/' . MM_CODE, 'Date Wise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Districtwise_FYwise/' . MM_CODE, 'FY Wise Report '); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                State Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Dev_RegionWise_datewise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Dev_RegionWise_fywise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                TBSU Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_TBSSPRegionWise_datewise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_TBSSPRegionWise_FYwise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Supporting Agency Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Supporting_AgencyWise_datewise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Supporting_AgencyWise_FYwise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Palika Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Munc_datewise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Munc_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--Actual Bridge Contribution Commitment End--->
+
+
+                                            </ul>
+
+                                        </li>
+                                        <li class="divider"></li>
+                                        <!----end of complted bridge--->
+
+                                        <!--- start of progress report----->
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                Progress Status Report <b class="caret"></b>
+                                            </a>
+
+                                            <ul class="dropdown-menu2">
+                                                <?php /*<li> 
+                                            <?php echo anchor('reports/Pro_Overall_Status/'.MM_CODE, '
+                                           Overall Status Report');?>
+                                            </li>
+                                             <li class="divider"></li>
+                                            <li> 
+                                            <?php echo anchor('reports/Pro_CarryOver_Status/'.MM_CODE, '
+                                           Carry Over Status Report');?>
+                                            </li>
+                                             <li class="divider"></li>
+                                            <li> 
+                                            <?php echo anchor('reports/Pro_New_Status/'.MM_CODE, '
+                                           New Status Report');?>
+                                            </li>
+                                             <li class="divider"></li>
+                                             */ ?>
+                                                <li>
+                                                    <?php echo anchor('reports/Pro_Physical_Progress/' . MM_CODE, '
+                                           Bridge Wise Progress Report'); ?>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li>
+                                                    <?php echo anchor('reports/Pro_Cumulative_Overall/' . MM_CODE, '
+                                           Summary Progress Report'); ?>
+                                                </li>
+
+                                                <li class="divider"></li>
+                                            </ul>
+
+                                        </li>
+                                        <li class="divider"></li>
+                                        <!--- end of progress report---->
+                                        <!--- start R7----->
+
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                R7 Report<b class="caret"></b>
+                                            </a>
+
+                                            <ul class="dropdown-menu2">
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Under Construction Report<b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Under_Construction/' . MM_CODE, 'District Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Under_Construction_Regional/' . MM_CODE, 'TBSU Regional Office Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Under_Construction_Palika' . MM_CODE, 'Palika Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Completed Report<b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Completed/' . MM_CODE, 'District Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Completed_Regional/' . MM_CODE, 'TBSU Regional Office Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Completed_Palika/' . MM_CODE, 'Palika Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li class="divider"></li>
+                                            </ul>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <!--- end of R7--->
+                                        <!--Basic Record Start--->
+                                        <li class="dropdown">
+                                            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        Basic Records <b class="caret"></b>
+                                        </a>-->
+                                            <?php echo anchor('reports/Bridgewise/MM', '
+                                                            Bridge Wise Basic Report'); ?>
+                                        </li>
+                                        <li class="divider"></li>
+                                    </ul>
+                                    <!--end  Committed bridege -->
 
                                 </li>
+                                <!-- Access & Utility -->
+                                <li class="divider"></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        Access & Utility<b class="caret"></b>
+                                    </a>
 
-                                <!--------end major maintain------------->
+                                    <ul class="dropdown-menu1">
+                                        <li class="dropdown" style="display:none">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                Commited Bridges Reports <b class="caret"></b>
+                                            </a>
+
+                                            <ul class="dropdown-menu2">
+
+                                                <!--All Bridge List Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        All Bridge List <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <?php echo anchor('reports/districtwise/Major_Maintenance', 'District Wise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <?php echo anchor('reports/devregionwise/Major_Maintenance', 'Dev. Region Wise Report'); ?>
+
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <!--  <li class="child-menu">
+                                                    <?php // echo anchor('reports/tbss_regionwise/Major_Maintenance', 'region Wise Report ');
+                                                    ?>
+                                                    
+                                                    </li>
+                                                    <div class="clear"></div>-->
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--All Bridge List End--->
+
+                                                <!--Basic Record Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Basic Records <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Bridge Wise <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4 ">
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Bridgewise/Major_Maintenance', '
+                                                            Bridge Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Over All <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3 ">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Overall_DateWise/Major_Maintenance', '
+                                                            Overall DateWise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Overall_FYWise/Major_Maintenance', '
+                                                            Overall FY Wise Report '); ?>
+
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Estimated Bridge Cost<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Overall_DateWise/' . MM_CODE, 'Over All Date Wise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Overall_FYWise/' . MM_CODE, 'FY Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Dist_DateWise/' . MM_CODE, 'District Date Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Dist_FYWise/' . MM_CODE, 'District FY Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Dev_DateWise/' . MM_CODE, 'Dev.Region Date Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Dev_FYWise/' . MM_CODE, 'Dev.Region FY Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_TBSS_DateWise/' . MM_CODE, 'TBSU region data Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_TBSS_FYWise/' . MM_CODE, 'TBSU region FY Wise Report '); ?>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Estimated Contribution Commitment<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Overall_DateWise/' . MM_CODE, ' Overall DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Overall_FYWise/' . MM_CODE, 'Overall Fiscal Year Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Dist_DateWise/' . MM_CODE, 'District DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Dist_FYWise/' . MM_CODE, 'District Fiscal Year Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Dev_DateWise/' . MM_CODE, 'Dev. Region Date Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_Dev_FYWise/' . MM_CODE, 'Dev. Region Fiscal Year Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_TBSS_DateWise/' . MM_CODE, 'Contribution TBSU Date Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Est_Cont_TBSS_FYWise/' . MM_CODE, 'Contribution TBSU Fiscal Year Wise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--Basic Record End--->
+                                                <!--Work Progress Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Work Progress <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu2">
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Fiscal Year <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+
+
+                                                                    <?php echo anchor('reports/Work_Carryover_Bridges/' . MM_CODE, 'New and Carryover Bridges Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Work_Cancelled_Bridges/' . MM_CODE, 'Cancelled Bridges Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Work_Completed_Bridges/' . MM_CODE, 'Completed Bridges Report '); ?>
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+
+                                                        </li>
+                                                        <li class="divider"> </li>
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Date Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Work_Datewise_Completed/' . MM_CODE, 'Datewise Completed Report'); ?>
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"> </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--Work Progress End--->
+                                                <!--Engineering Work Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Engineering Work <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu2">
+                                                        <li>
+
+                                                            <?php echo anchor('reports/Eng_SiteAssesment_Survey/MM', 'Site Assesment and Survey DateWise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/Eng_Desing_Cost_Estimate/MM', 'Desing and Cost  Estimate DateWise Wise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/Eng_Design_Approval/MM', 'Desing and CostDesign Approval DateWise Wise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/Eng_FYWise/MM', 'Fiscal Years Wise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"> </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--Engineering Work End--->
+
+                                            </ul>
+
+                                        </li>
+                                        <!---start Completed Bridges Report--->
+                                        <li class="divider" style="display:none"></li>
+
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                Completed Bridges Report <b class="caret"></b>
+                                            </a>
+
+                                            <ul class="dropdown-menu2">
+
+                                                <!--General Bridge List Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Completed Bridge List <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Over All <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4 ">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Overall_DateWise/' . MM_CODE, '
+                                                            DateWise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Overall_FYWise/' . MM_CODE, '
+                                                           FY Wise Report '); ?>
+
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <!--<li class="child-menu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                    District Wise<b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu4">
+                                                        <li>
+                                                        <?php echo anchor('reports/Gen_Dist_DateWise/' . MM_CODE, 'Date Wise Report'); ?>
+                                                        
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                        <?php echo anchor('reports/Gen_Dist_FYWise/' . MM_CODE, 'FY Wise Report '); ?>
+                                                        </li>
+                                                        
+                                                        <li class="divider"></li>
+                                                        
+                                                    </ul>
+                                                </li>-->
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                State Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Dev_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Dev_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+                                                        <!--<li class="child-menu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                    TBSU Wise<b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu4">
+                                                        <li>
+                                                        <?php echo anchor('reports/Gen_TBSS_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                        </li>
+                                                        <li class="divider"></li> 
+                                                        <li>
+                                                        <?php echo anchor('reports/Gen_TBSS_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                        </li>
+                                                        
+                                                        <li class="divider"></li>                                            
+                                                    </ul>
+                                                </li>
+                                                   <li class="divider"></li>   -->
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Palika Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Munc_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Gen_Munc_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--General Bridge List End--->
+
+                                                <!--Actual Brigde Cost Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Actual Bridge Cost <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Over All <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4 ">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Overall_DateWise/' . MM_CODE, '
+                                                            DateWise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Overall_FYWise/' . MM_CODE, '
+                                                           FY Wise Report '); ?>
+
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                District Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Dist_DateWise/' . MM_CODE, 'Date Wise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Dist_FYWise/' . MM_CODE, 'FY Wise Report '); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                State Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Dev_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Dev_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                TBSU Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_TBSS_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_TBSS_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Supporting Agency Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Supporting_AgencyWise_DateWise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Supporting_AgencyWise_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Palika Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Munc_DateWise/' . MM_CODE, 'Date Wise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Munc_FYWise/' . MM_CODE, 'FY Wise Report '); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--Actual Brigde Cost End--->
+                                                <!--Actual Bridge Contribution Commitment Start--->
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Actual Cost Contribution <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Over All <b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4 ">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Overall_datewise/' . MM_CODE, '
+                                                            DateWise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Overall_Fywise/' . MM_CODE, '
+                                                           FY Wise Report '); ?>
+
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                District Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Districtwise_datewise/' . MM_CODE, 'Date Wise Report'); ?>
+
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Districtwise_FYwise/' . MM_CODE, 'FY Wise Report '); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                State Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Dev_RegionWise_datewise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Dev_RegionWise_fywise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                TBSU Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_TBSSPRegionWise_datewise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_TBSSPRegionWise_FYwise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Supporting Agency Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Supporting_AgencyWise_datewise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Supporting_AgencyWise_FYwise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="child-menu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Palika Wise<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu4">
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Munc_datewise/' . MM_CODE, 'DateWise Report'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <?php echo anchor('reports/Act_Con_Munc_FYWise/' . MM_CODE, 'Fiscal Year Wise Report'); ?>
+                                                                </li>
+
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <!--Actual Bridge Contribution Commitment End--->
+
+
+                                            </ul>
+
+                                        </li>
+                                        <li class="divider"></li>
+                                        <!----end of complted bridge--->
+
+                                        <!--- start of progress report----->
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                Progress Status Report <b class="caret"></b>
+                                            </a>
+
+                                            <ul class="dropdown-menu2">
+                                                <?php /*<li> 
+                                            <?php echo anchor('reports/Pro_Overall_Status/'.MM_CODE, '
+                                           Overall Status Report');?>
+                                            </li>
+                                             <li class="divider"></li>
+                                            <li> 
+                                            <?php echo anchor('reports/Pro_CarryOver_Status/'.MM_CODE, '
+                                           Carry Over Status Report');?>
+                                            </li>
+                                             <li class="divider"></li>
+                                            <li> 
+                                            <?php echo anchor('reports/Pro_New_Status/'.MM_CODE, '
+                                           New Status Report');?>
+                                            </li>
+                                             <li class="divider"></li>
+                                             */ ?>
+                                                <li>
+                                                    <?php echo anchor('reports/Pro_Physical_Progress/' . MM_CODE, '
+                                           Bridge Wise Progress Report'); ?>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li>
+                                                    <?php echo anchor('reports/Pro_Cumulative_Overall/' . MM_CODE, '
+                                           Summary Progress Report'); ?>
+                                                </li>
+
+                                                <li class="divider"></li>
+                                            </ul>
+
+                                        </li>
+                                        <li class="divider"></li>
+                                        <!--- end of progress report---->
+                                        <!--- start R7----->
+
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                R7 Report<b class="caret"></b>
+                                            </a>
+
+                                            <ul class="dropdown-menu2">
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Under Construction Report<b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Under_Construction/' . MM_CODE, 'District Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Under_Construction_Regional/' . MM_CODE, 'TBSU Regional Office Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Under_Construction_Palika' . MM_CODE, 'Palika Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        Completed Report<b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Completed/' . MM_CODE, 'District Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Completed_Regional/' . MM_CODE, 'TBSU Regional Office Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <?php echo anchor('reports/R_Completed_Palika/' . MM_CODE, 'Palika Wise'); ?>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li class="divider"></li>
+                                            </ul>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <!--- end of R7--->
+                                        <!--Basic Record Start--->
+                                        <li class="dropdown">
+                                            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        Basic Records <b class="caret"></b>
+                                        </a>-->
+                                            <?php echo anchor('reports/Bridgewise/MM', '
+                                                            Bridge Wise Basic Report'); ?>
+                                        </li>
+                                        <li class="divider"></li>
+                                    </ul>
+                                    <!--end  Committed bridege -->
+
+                                </li>
                             </ul>
 
 

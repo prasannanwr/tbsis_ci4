@@ -4,35 +4,26 @@ namespace App\Modules\bridge\Models;
 
 use CodeIgniter\Model;
 
-class bridge_public_hearing_model extends Model
+class bridge_steel_parts_model extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'bridge_public_hearing';
-    protected $primaryKey       = 'ph_id';
+    protected $table            = 'bridge_steel_parts';
+    protected $primaryKey       = 'bsp_id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'ph_bridge_id',
-        'ph_assessment_by',
-        'ph_assessment_date',
-        'ph_status',
-        'dalit_total',
-        'dalit_percent',
-        'janjati_total',
-        'janjati_percent',
-        'minorities_total',
-        'minorities_percent',
-        'bct_total',
-        'bct_percent',
-        'ph_sum',
-        'ph_female',
-        'ph_male',
-        'ph_sum_percent',
-        'ph_female_percent',
-        'ph_male_percent'
+        'b_id',
+        'bri_quality_steel_check',
+        'bri_qa_document_check',
+        'bri_welding_check',
+        'bri_zinc_coating_check',
+        'factory_visit_assessment_by',
+        'factory_visit_assessment_date',
+        'factory_visit_remarks',
+        'factory_visit_active'
     ];
 
     // Dates
@@ -58,6 +49,5 @@ class bridge_public_hearing_model extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
 
 }
