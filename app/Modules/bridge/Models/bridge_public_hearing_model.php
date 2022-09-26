@@ -19,6 +19,14 @@ class bridge_public_hearing_model extends Model
         'ph_assessment_by',
         'ph_assessment_date',
         'ph_status',
+        'dalit_total',
+        'dalit_percent',
+        'janjati_total',
+        'janjati_percent',
+        'minorities_total',
+        'minorities_percent',
+        'bct_total',
+        'bct_percent',
         'ph_sum',
         'ph_female',
         'ph_male',
@@ -50,4 +58,8 @@ class bridge_public_hearing_model extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getDblist() {
+       
+    }
 }

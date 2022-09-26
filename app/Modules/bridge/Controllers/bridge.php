@@ -6,9 +6,13 @@ use App\Controllers\BaseController;
 use App\Modules\bridge\Models\bridge_basic_data_model;
 use App\Modules\bridge\Models\bridge_beneficiaries_composition_model;
 use App\Modules\bridge\Models\bridge_beneficiaries_model;
+use App\Modules\bridge\Models\bridge_employment_generation_detail_model;
+use App\Modules\bridge\Models\bridge_employment_generation_model;
+use App\Modules\bridge\Models\bridge_final_inspection_model;
 use App\Modules\bridge\Models\bridge_model;
 use App\Modules\bridge\Models\bridge_public_hearing_members_model;
 use App\Modules\bridge\Models\bridge_public_hearing_model;
+use App\Modules\bridge\Models\bridge_site_assesment_model;
 use App\Modules\bridge\Models\bridge_uc_formation_data_model;
 use App\Modules\bridge\Models\bridge_uc_formation_model;
 use App\Modules\construction\Models\construction_model;
@@ -49,6 +53,14 @@ class bridge extends BaseController
 
 	private $bridge_uc_formation_data_model;
 
+	private $bridge_employment_generation_model;
+
+	private $bridge_employment_generation_detail_model;
+
+	private $bridge_site_assesment_model;
+
+	private $bridge_final_inspection_model;
+
 	public function __construct()
 	{
 		helper(['form', 'html', 'et_helper']);
@@ -65,6 +77,10 @@ class bridge extends BaseController
 		$bridge_public_hearing_members_model = new bridge_public_hearing_members_model();
 		$bridge_uc_formation_model = new bridge_uc_formation_model();
 		$bridge_uc_formation_data_model = new bridge_uc_formation_data_model();
+		$bridge_employment_generation_model = new bridge_employment_generation_model();
+		$bridge_employment_generation_detail_model = new bridge_employment_generation_detail_model();
+		$bridge_site_assesment_model = new bridge_site_assesment_model();
+		$bridge_final_inspection_model = new bridge_final_inspection_model();
 		$this->fiscal_year_model = $fiscal_year_model;
 		$this->construction_model = $construction_model;
 		$this->view_vdc_model = $view_vdc_model;
@@ -78,6 +94,10 @@ class bridge extends BaseController
 		$this->bridge_public_hearing_members_model = $bridge_public_hearing_members_model; 
 		$this->bridge_uc_formation_model = $bridge_uc_formation_model;
 		$this->bridge_uc_formation_data_model = $bridge_uc_formation_data_model;
+		$this->bridge_employment_generation_model = $bridge_employment_generation_model;
+		$this->bridge_employment_generation_detail_model = $bridge_employment_generation_detail_model;
+		$this->bridge_site_assesment_model = $bridge_site_assesment_model;
+		$this->bridge_final_inspection_model = $bridge_final_inspection_model;
 		if (count(self::$arrDefData) <= 0) {
 			$FName = basename(__FILE__, '.php');
 			$fName = strtolower($FName);
@@ -123,6 +143,12 @@ class bridge extends BaseController
 		$data['objOldRec'] = '';
 		$data['objbasicRec'] = '';
 		$data['objImplementationRec'] = '';
+		$data['objPublicHearingRec'] = '';
+		$data['objUCCompositionRec'] = '';
+		$data['objEmploymentGeneration'] = '';
+		$data['objBeneficiariesRec'] = '';
+		$data['objSiteAssesment'] = '';
+		$data['objFinalInspection'] = '';
 		$data['postURL'] = "bridge/form";
 		
 
@@ -133,18 +159,40 @@ class bridge extends BaseController
 		$data['countLocal'] = $this->supporting_agencies_model->where('sup01sup_agency_type', ENUM_SUPPORT_LOCAL)->orderBy('sup01index asc')->findAll();
 		$data['countGovt'] = $this->supporting_agencies_model->where('sup01sup_agency_type', ENUM_SUPPORT_GOVERMENT)->orderBy('sup01index asc')->findAll();
 		$data['countOther'] = $this->supporting_agencies_model->where('sup01sup_agency_type', ENUM_SUPPORT_OTHER)->orderBy('sup01index asc')->findAll();
+		
 		$casteGroup = array("1" => "Dalit", "2" => "Janjati", "3" => "Minorities", "4" => "BCT");
 		$data['casteGroup'] = $casteGroup;
+		// $egCasteGroup = array("1" => "Dalit", "2" => "Janjati", "3" => "Minorities", "4" => "BCT (Male)", "5" => "BCT (Female)");
+		// $data['egCasteGroup'] = $egCasteGroup;
 
 		if ($emp_id !== false) {
 			$emp_id = urldecode($emp_id);
 
 			$data['objOldRec'] = $this->bridge_basic_data_model->where('bri03bridge_no', $emp_id)->first();
-			$data['objImplementationRec'] = $this->bridge_beneficiaries_model->where('bri05bridge_no', $emp_id)->first();
 			
 			if (empty($data['objOldRec'])) {
 				redirect('/bridge');
 			}
+			
+			$data['objBeneficiariesRec'] = $this->bridge_beneficiaries_model->where('bb_bridge_id', $data['objOldRec']['bri03id'])->first();
+			$data['objPublicHearingRec'] = $this->bridge_public_hearing_model->where('ph_bridge_id', $data['objOldRec']['bri03id'])->first();
+			$data['objUCCompositionRec'] = $this->bridge_uc_formation_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			$data['objEmploymentGeneration'] = $this->bridge_employment_generation_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			$data['objSiteAssesment'] = $this->bridge_site_assesment_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			$data['objFinalInspection'] = $this->bridge_final_inspection_model->where('b_id', $data['objOldRec']['bri03id'])->first();
+			
+			// $builder = $this->bridge_uc_formation_model->builder();
+			// $builder->select('*');
+			// $builder->join('bridge_uc_composition_detail', 'bridge_uc_composition_detail.b_uc_id = bridge_uc_composition.b_uc_id');
+			// $query = $builder->where('bridge_uc_composition.b_id', $data['objOldRec']['bri03id'])->get();
+			// $data['objUCCompositionRec'] = $query->getRow();
+
+			// $builder = $this->bridge_public_hearing_model->builder();
+			// $builder->select('*');
+			// $builder->join('bridge_public_hearing_members', 'bridge_public_hearing_members.ph_id = bridge_public_hearing.ph_id');
+			// $query = $builder->where('ph_bridge_id', $data['objOldRec']['bri03id'])->get();
+			// $data['objPublicHearingRec'] = $query->getResult();
+			
 			//$data['objbasicRec'] = $this->bridge_technical_data_model->where('bri04bridge_no', $emp_id)->first();
 			$oldmajor_vdc = $data['objOldRec']['bri03major_vdc'];
 			if ($oldmajor_vdc == 1) { //right
@@ -162,30 +210,29 @@ class bridge extends BaseController
 
 		//if post
 		if ($this->request->getMethod() == 'post') {
-			$ph_data = array(
-				'ph_bridge_id' => '33',
-				'ph_assessment_by' => @$this->request->getVar('ph_assessment_by'),
-				'ph_assessment_date' => @$this->request->getVar('ph_assessment_date'),
-				'ph_status' => @$this->request->getVar('ph_active'),
-				'ph_sum' => @$this->request->getVar('ph-sum'),
-				'ph_female' => @$this->request->getVar('ph-female'),
-				'ph_male' => @$this->request->getVar('ph-male'),
-				'ph_sum_percent' => @$this->request->getVar('total_sum_percent'),
-				'ph_female_percent' => @$this->request->getVar('total_female_percent'),
-				'ph_male_percent' => @$this->request->getVar('total_male_percent')
-			);
-			$this->bridge_public_hearing_model->save($ph_data);
-			$ph_id = $this->bridge_public_hearing_model->getInsertID();
-			foreach ($casteGroup as $key => $caste) :
-				$ph_members_data = array(
-					'ph_id' => $ph_id,
-					'ph_caste' => $key,
-					'ph_total' => @$this->request->getVar("ph_total_".$key),
-					'ph_percent' => @$this->request->getVar("total_caste_percent_".$key)
-				);
-				$this->bridge_public_hearing_members_model->save($ph_members_data);
-			endforeach;
-			exit;
+			// $ph_data = array(
+			// 	'ph_bridge_id' => '33',
+			// 	'ph_assessment_by' => @$this->request->getVar('ph_assessment_by'),
+			// 	'ph_assessment_date' => @$this->request->getVar('ph_assessment_date'),
+			// 	'ph_status' => @$this->request->getVar('ph_active'),
+			// 	'ph_sum' => @$this->request->getVar('ph-sum'),
+			// 	'ph_female' => @$this->request->getVar('ph-female'),
+			// 	'ph_male' => @$this->request->getVar('ph-male'),
+			// 	'ph_sum_percent' => @$this->request->getVar('total_sum_percent'),
+			// 	'ph_female_percent' => @$this->request->getVar('total_female_percent'),
+			// 	'ph_male_percent' => @$this->request->getVar('total_male_percent')
+			// );
+			// $this->bridge_public_hearing_model->save($ph_data);
+			// $ph_id = $this->bridge_public_hearing_model->getInsertID();
+			// foreach ($casteGroup as $key => $caste) :
+			// 	$ph_members_data = array(
+			// 		'ph_id' => $ph_id,
+			// 		'ph_caste' => $key,
+			// 		'ph_total' => @$this->request->getVar("ph_total_".$key),
+			// 		'ph_percent' => @$this->request->getVar("total_caste_percent_".$key)
+			// 	);
+			// 	$this->bridge_public_hearing_members_model->save($ph_members_data);
+			// endforeach;
 			
 			//check if the form is submitted or not bri03project_fiscal_year
 			$rules = [
@@ -374,39 +421,128 @@ class bridge extends BaseController
 						$form_data1['bri03bridge_series'] = $dist_left;
 					}
 					$form_data1['bri03major_vdc'] = @$this->request->getVar('bri03major_vdc');
-					//} 
-					//var_dump($_POST);
-					// echo "<pre>";
-					// var_dump($form_data1);
-					// die();
+					
+
 					$xx = $this->bridge_basic_data_model->save($form_data1);
 					$bri03id = $this->bridge_basic_data_model->getInsertID();
+
+					//site assesment
+					$sa_data = array(
+						'b_id' => $bri03id,
+						'bsa_stability' =>  @$this->request->getVar("bri_stablility_check"),
+						'bsa_meandering' => @$this->request->getVar("bri_meandering_check"),
+						'bsa_influencing_rivulet' => @$this->request->getVar("bri_influencing_check"),
+						'bsa_source_sand' => @$this->request->getVar("bri_source_sand_check"),
+						'bsa_source_stone' => @$this->request->getVar("bri_source_stone_check"),
+						'bsa_source_gravel' => @$this->request->getVar("bri_source_gravel_check"),
+						'bsa_profile_survey' => @$this->request->getVar("bri_profile_survey_check"),
+						'bsa_assesment_by' => @$this->request->getVar("site_assessment_by"),
+						'bsa_assesment_date' => @$this->request->getVar("site_assessment_date"),
+						'bsa_remark' => @$this->request->getVar("bsa_remarks")
+					);
+					//echo "<pre>";var_dump($sa_data);exit;
+					$this->bridge_site_assesment_model->save($sa_data);
+
+					// $form_data2 = array(
+					// 	'bb_bridge_id' => $bri03id,
+					// 	'bb_assessment_by' => @$this->request->getVar('bb_assessment_by'),
+					// 	'bb_assessment_date' => @$this->request->getVar('bb_assessment_date'),
+					// 	'bb_status' => @$this->request->getVar('rd_active')
+					// );
+					// $this->bridge_beneficiaries_model->save($form_data2);
+					// $bb_id = $this->bridge_beneficiaries_model->getInsertID();
+					// foreach ($casteGroup as $key => $caste) :
+					// 	$form_data2 = array(
+					// 		'bb_id' => $bb_id,
+					// 		'bc_caste' => $key,
+					// 		'bc_total' => @$this->request->getVar("bc_total_".$key),
+					// 		'bc_poor' => @$this->request->getVar("bc_poor_".$key),
+					// 		'bc_women' => @$this->request->getVar("bc_women_".$key),
+					// 		'bc_men' => @$this->request->getVar("bc_men_".$key),
+					// 	);
+					// 	$xxx = $this->bridge_beneficiaries_composition_model->save($form_data2);
+					// endforeach;
+
+					//beneficiaries composition
+					//$bri03id = $bridge_id;
 					$form_data2 = array(
 						'bb_bridge_id' => $bri03id,
+						'dalit_total' => @$this->request->getVar("bc_total_dalit"),
+						'dalit_poor' => @$this->request->getVar("bc_poor_dalit"),
+						'dalit_women' => @$this->request->getVar("bc_women_dalit"),
+						'dalit_men' => @$this->request->getVar("bc_men_dalit"),
+
+						'janjati_total' => @$this->request->getVar("bc_total_janjati"),
+						'janjati_poor' => @$this->request->getVar("bc_poor_janjati"),
+						'janjati_women' => @$this->request->getVar("bc_women_janjati"),
+						'janjati_men' => @$this->request->getVar("bc_men_janjati"),
+
+						'minorities_total' => @$this->request->getVar("bc_total_minorities"),
+						'minorities_poor' => @$this->request->getVar("bc_poor_minorities"),
+						'minorities_women' => @$this->request->getVar("bc_women_minorities"),
+						'minorities_men' => @$this->request->getVar("bc_men_minorities"),
+
+						'bct_total' => @$this->request->getVar("bc_total_bct"),
+						'bct_poor' => @$this->request->getVar("bc_poor_bct"),
+						'bct_women' => @$this->request->getVar("bc_women_bct"),
+						'bct_men' => @$this->request->getVar("bc_men_bct"),
+
+						'total_household' => @$this->request->getVar("total_no_households"),
+						'total_poor' => @$this->request->getVar("total_no_households_poor"),
+						'total_women' => @$this->request->getVar("bp_women_total"),
+						'total_men' => @$this->request->getVar("bp_men_total"),
+
+						'percent_household' => @$this->request->getVar("percent_no_households"),
+						'percent_poor' => @$this->request->getVar("percent_no_households_poor"),
+						'percent_women' => @$this->request->getVar("bp_women_percent"),
+						'percent_men' => @$this->request->getVar("bp_men_percent"),
+
 						'bb_assessment_by' => @$this->request->getVar('bb_assessment_by'),
 						'bb_assessment_date' => @$this->request->getVar('bb_assessment_date'),
-						'bb_status' => @$this->request->getVar('rd_active')
+						'bb_status' => @$this->request->getVar('bb_status')
 					);
+					//echo "<pre>";
+					//var_dump($form_data2);exit;
 					$this->bridge_beneficiaries_model->save($form_data2);
-					$bb_id = $this->bridge_beneficiaries_model->getInsertID();
-					foreach ($casteGroup as $key => $caste) :
-						$form_data2 = array(
-							'bb_id' => $bb_id,
-							'bc_caste' => $key,
-							'bc_total' => @$this->request->getVar("bc_total_".$key),
-							'bc_poor' => @$this->request->getVar("bc_poor_".$key),
-							'bc_women' => @$this->request->getVar("bc_women_".$key),
-							'bc_men' => @$this->request->getVar("bc_men_".$key),
-						);
-						$xxx = $this->bridge_beneficiaries_composition_model->save($form_data2);
-					endforeach;
-					
+					//exit;
 					//public hearing
+					// $ph_data = array(
+					// 	'ph_bridge_id' => $bri03id,
+					// 	'ph_assessment_by' => @$this->request->getVar('ph_assessment_by'),
+					// 	'ph_assessment_date' => @$this->request->getVar('ph_assessment_date'),
+					// 	'ph_status' => @$this->request->getVar('ph_active'),
+					// 	'ph_sum' => @$this->request->getVar('ph-sum'),
+					// 	'ph_female' => @$this->request->getVar('ph-female'),
+					// 	'ph_male' => @$this->request->getVar('ph-male'),
+					// 	'ph_sum_percent' => @$this->request->getVar('total_sum_percent'),
+					// 	'ph_female_percent' => @$this->request->getVar('total_female_percent'),
+					// 	'ph_male_percent' => @$this->request->getVar('total_male_percent')
+					// );
+					// $this->bridge_public_hearing_model->save($ph_data);
+					// $ph_id = $this->bridge_public_hearing_model->getInsertID();
+					// foreach ($casteGroup as $key => $caste) :
+					// 	$ph_members_data = array(
+					// 		'ph_id' => $ph_id,
+					// 		'ph_caste' => $key,
+					// 		'ph_total' => @$this->request->getVar("ph_total_".$key),
+					// 		'ph_percent' => @$this->request->getVar("total_caste_percent_".$key)
+					// 	);
+					// 	$this->bridge_public_hearing_members_model->save($ph_members_data);
+					// endforeach;
+
 					$ph_data = array(
 						'ph_bridge_id' => $bri03id,
 						'ph_assessment_by' => @$this->request->getVar('ph_assessment_by'),
 						'ph_assessment_date' => @$this->request->getVar('ph_assessment_date'),
 						'ph_status' => @$this->request->getVar('ph_active'),
+						'dalit_total' => @$this->request->getVar("ph_total_dalit_total"),
+						'dalit_percent' => @$this->request->getVar("total_caste_percent_dalit"),
+						'janjati_total' => @$this->request->getVar("ph_total_janjati_total"),
+						'janjati_percent' => @$this->request->getVar("total_caste_percent_janjati"),
+						'minorities_total' => @$this->request->getVar("ph_total_minorities_total"),
+						'minorities_percent' => @$this->request->getVar("total_caste_percent_minorities"),
+						'bct_total' => @$this->request->getVar("ph_total_bct_total"),
+						'bct_percent' => @$this->request->getVar("total_caste_percent_bct"),
 						'ph_sum' => @$this->request->getVar('ph-sum'),
 						'ph_female' => @$this->request->getVar('ph-female'),
 						'ph_male' => @$this->request->getVar('ph-male'),
@@ -415,39 +551,153 @@ class bridge extends BaseController
 						'ph_male_percent' => @$this->request->getVar('total_male_percent')
 					);
 					$this->bridge_public_hearing_model->save($ph_data);
-					$ph_id = $this->bridge_public_hearing_model->getInsertID();
-					foreach ($casteGroup as $key => $caste) :
-						$ph_members_data = array(
-							'ph_id' => $ph_id,
-							'ph_caste' => $key,
-							'ph_total' => @$this->request->getVar("ph_total_".$key),
-							'ph_percent' => @$this->request->getVar("total_caste_percent_".$key)
-						);
-						$this->bridge_public_hearing_members_model->save($ph_members_data);
-					endforeach;
 
 
 					//uc formation
+					// $uc_data = array(
+					// 	'b_id' => $bri03id,
+					// 	'b_uc_assessment_by' => @$this->request->getVar('uc_assessment_by'),
+					// 	'b_uc_assessment_date' => @$this->request->getVar('uc_assessment_date'),
+					// 	'b_uc_status' => @$this->request->getVar('uc_active')
+					// );
+					// $this->bridge_uc_formation_model->save($uc_data);
+					// $uc_id = $this->bridge_uc_formation_model->getInsertID();
+					// foreach ($casteGroup as $key => $caste) :
+					// 	$uc_members_data = array(
+					// 		'b_uc_id ' => $uc_id,
+					// 		'b_uc_position' => $key,
+					// 		'b_uc_caste' => $key,
+					// 		'b_uc_female' => @$this->request->getVar("uc-".$key."-female"),
+					// 		'b_uc_male' => @$this->request->getVar("uc-".$key."-male")
+					// 	);
+					// 	$this->bridge_uc_formation_data_model->save($uc_members_data);
+					// endforeach;
+
 					$uc_data = array(
 						'b_id' => $bri03id,
 						'b_uc_assessment_by' => @$this->request->getVar('uc_assessment_by'),
 						'b_uc_assessment_date' => @$this->request->getVar('uc_assessment_date'),
+						'b_uc_cp_dalit' => @$this->request->getVar('uc_cp_total_dalit'),
+						'b_uc_cp_janjati' => @$this->request->getVar('uc_cp_total_janjati'),
+						'b_uc_cp_minorities' => @$this->request->getVar('uc_cp_total_minorities'),
+						'b_uc_cp_bct' => @$this->request->getVar('uc_cp_total_bct'),
+						'b_uc_cp_female' => @$this->request->getVar('uc_cp_female'),
+						'b_uc_cp_male' => @$this->request->getVar('uc_cp_male'),
+						'b_uc_cp_total' => @$this->request->getVar('uc-cp-sum'), 
+
+						'b_uc_dy_dalit' => @$this->request->getVar('uc_dy_total_dalit'),
+						'b_uc_dy_janjati' => @$this->request->getVar('uc_dy_total_janjati'),
+						'b_uc_dy_minorities' => @$this->request->getVar('uc_dy_total_minorities'),
+						'b_uc_dy_bct' => @$this->request->getVar('uc_dy_total_bct'),
+						'b_uc_dy_female' => @$this->request->getVar('uc-dy-female'),
+						'b_uc_dy_male' => @$this->request->getVar('uc-dy-male'),
+						'b_uc_dy_total' => @$this->request->getVar('uc-dy-sum'), 
+
+						'b_uc_sc_dalit' => @$this->request->getVar('uc_sc_total_dalit'),
+						'b_uc_sc_janjati' => @$this->request->getVar('uc_sc_total_janjati'),
+						'b_uc_sc_minorities' => @$this->request->getVar('uc_sc_total_minorities'),
+						'b_uc_sc_bct' => @$this->request->getVar('uc_sc_total_bct'),
+						'b_uc_sc_female' => @$this->request->getVar('uc-sc-female'),
+						'b_uc_sc_male' => @$this->request->getVar('uc-sc-male'),
+						'b_uc_sc_total' => @$this->request->getVar('uc-sc-sum'), 
+
+						'b_uc_tr_dalit' => @$this->request->getVar('uc_tr_total_dalit'),
+						'b_uc_tr_janjati' => @$this->request->getVar('uc_tr_total_janjati'),
+						'b_uc_tr_minorities' => @$this->request->getVar('uc_tr_total_minorities'),
+						'b_uc_tr_bct' => @$this->request->getVar('uc_tr_total_bct'),
+						'b_uc_tr_female' => @$this->request->getVar('uc-tr-female'),
+						'b_uc_tr_male' => @$this->request->getVar('uc-tr-male'),
+						'b_uc_tr_total' => @$this->request->getVar('uc-tr-sum'), 
+
+						'b_uc_mm_dalit' => @$this->request->getVar('uc_mem_total_dalit'),
+						'b_uc_mm_janjati' => @$this->request->getVar('uc_mem_total_janjati'),
+						'b_uc_mm_minorities' => @$this->request->getVar('uc_mem_total_minorities'),
+						'b_uc_mm_bct' => @$this->request->getVar('uc_mem_total_bct'),
+						'b_uc_mm_female' => @$this->request->getVar('uc-mem-female'),
+						'b_uc_mm_male' => @$this->request->getVar('uc-mem-male'),
+						'b_uc_mm_total' => @$this->request->getVar('uc-mm-sum'),
+
 						'b_uc_status' => @$this->request->getVar('uc_active')
 					);
 					$this->bridge_uc_formation_model->save($uc_data);
-					$uc_id = $this->bridge_uc_formation_model->getInsertID();
-					foreach ($casteGroup as $key => $caste) :
-						$uc_members_data = array(
-							'b_uc_id ' => $uc_id,
-							'b_uc_position' => $key,
-							'b_uc_caste' => $key,
-							'b_uc_female' => @$this->request->getVar("uc-".$key."-female"),
-							'b_uc_male' => @$this->request->getVar("uc-".$key."-male")
-						);
-						$this->bridge_uc_formation_data_model->save($uc_members_data);
-					endforeach;
 
+					//employment generation
+					// $eg_data = array(
+					// 	'b_id' => $bri03id,
+					// 	'beg_total_women' => @$this->request->getVar('eg_women_total'),
+					// 	'beg_total_men' => @$this->request->getVar('eg_men_total'),
+					// 	'beg_total_poor' => @$this->request->getVar('eg_poor'),
+					// 	'beg_total' => @$this->request->getVar('eg_grand_total'),
+					// 	'beg_percent_women' => @$this->request->getVar('eg_women_percent'),
+					// 	'beg_percent_men' => @$this->request->getVar('eg_men_percent'),
+					// 	'beg_percent_poor' => @$this->request->getVar('eg_poor_percent'),
+					// 	'beg_percent_total' => @$this->request->getVar('eg_grand_percent')
+					// );
+					// $this->bridge_employment_generation_model->save($eg_data);
+					// $eg_id = $this->bridge_employment_generation_model->getInsertID();
+					// foreach ($casteGroup as $key => $caste) :
+					// 	$eg_data2 = array(
+					// 		'beg_id' => $eg_id,
+					// 		'begi_caste' => $key,
+					// 		'begi_women' => @$this->request->getVar('eg_women_'.$key),
+					// 		'begi_men' => @$this->request->getVar('eg_men_'.$key),
+					// 		'begi_poor' => @$this->request->getVar('eg_poor_'.$key),
+					// 		'begi_total' => @$this->request->getVar('eg_sub_total_'.$key)
+					// 	);
+					// 	$this->bridge_employment_generation_detail_model->save($eg_data2);
+					// endforeach;
+					$eg_data = array(
+						'b_id' => $bri03id,
+						'beg_dalit_women' => @$this->request->getVar('beg_dalit_women'),
+						'beg_dalit_men' => @$this->request->getVar('beg_dalit_men'),
+						'beg_dalit_poor' => @$this->request->getVar('beg_dalit_poor'),
+						
+						'beg_janjati_women' => @$this->request->getVar('beg_janjati_women'),
+						'beg_janjati_men' => @$this->request->getVar('beg_janjati_men'),
+						'beg_janjati_poor' => @$this->request->getVar('beg_janjati_poor'),
 
+						'beg_minorities_women' => @$this->request->getVar('beg_minorities_women'),
+						'beg_minorities_men' => @$this->request->getVar('beg_minorities_men'),
+						'beg_minorities_poor' => @$this->request->getVar('beg_minorities_poor'),
+
+						'beg_bct_women' => @$this->request->getVar('beg_bct_women'),
+						'beg_bct_men' => @$this->request->getVar('beg_bct_men'),
+						'beg_bct_poor' => @$this->request->getVar('beg_bct_poor'),
+
+						'beg_total_women' => @$this->request->getVar('eg_women_total'),
+						'beg_total_men' => @$this->request->getVar('eg_men_total'),
+						'beg_total_poor' => @$this->request->getVar('eg_poor'),
+						'beg_total' => @$this->request->getVar('eg_grand_total'),
+						'beg_percent_women' => @$this->request->getVar('eg_women_percent'),
+						'beg_percent_men' => @$this->request->getVar('eg_men_percent'),
+						'beg_percent_poor' => @$this->request->getVar('eg_poor_percent'),
+						'beg_percent_total' => @$this->request->getVar('eg_grand_percent')
+					);
+					$this->bridge_employment_generation_model->save($eg_data);
+
+					//final inspection
+					$fi_data = array(
+						'b_id' => $bri03id,
+						'bri_cable_check' =>  @$this->request->getVar("bri_cable_check"),
+						'bri_bulldog_check' => @$this->request->getVar("bri_bulldog_check"),
+						'bri_anchorage_check' => @$this->request->getVar("bri_anchorage_check"),
+						'bri_walkway_check' => @$this->request->getVar("bri_walkway_check"),
+						'bri_wire_check' => @$this->request->getVar("bri_wire_check"),
+						'bri_fixtures_check' => @$this->request->getVar("bri_fixtures_check"),
+						'bri_relative_check' => @$this->request->getVar("bri_relative_check"),
+						'bri_anchorage_dimension_check' => @$this->request->getVar("bri_anchorage_dimension_check"),
+						'bri_anchorage_stone_check' => @$this->request->getVar("bri_anchorage_stone_check"),
+						'bri_suspenders_check' => @$this->request->getVar("bri_suspenders_check"),
+						'bri_wire_mesh_check' => @$this->request->getVar("bri_wire_mesh_check"),
+						'bridge_completion_date' => @$this->request->getVar("bridge_completion_date"),
+						'fi_site_assessment_by' => @$this->request->getVar("fi_site_assessment_by"),
+						'fi_site_assessment_date' => @$this->request->getVar("fi_site_assessment_date"),
+						'bri_completion_fiscal_year' => @$this->request->getVar("bri_completion_fiscal_year"),
+						'bri_remarks' => @$this->request->getVar("bri_remarks")
+					);
+					//echo "<pre>";var_dump($sa_data);exit;
+					$this->bridge_site_assesment_model->save($sa_data);
+					
 					// $this->bridge_technical_data_model->save($form_data2);
 					session()->setFlashdata('message', 'Updated successfully.');
 					if ($this->request->getVar('cmdSubmit') == 'Save and Close') {

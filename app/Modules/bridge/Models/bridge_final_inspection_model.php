@@ -4,48 +4,34 @@ namespace App\Modules\bridge\Models;
 
 use CodeIgniter\Model;
 
-class bridge_beneficiaries_model extends Model
+class bridge_final_inspection_model extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'bridge_beneficiaries';
-    protected $primaryKey       = 'bb_id';
+    protected $table            = 'bridge_final_inspection';
+    protected $primaryKey       = 'bri_f_id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'bb_id',
-        'bb_bridge_id',
-        'dalit_total',
-        'dalit_poor',
-        'dalit_women',
-        'dalit_men',
-        'janjati_total',
-        'janjati_poor',
-        'janjati_women',
-        'janjati_men',
-        'minorities_total',
-        'minorities_poor',
-        'minorities_women',
-        'minorities_men',
-        'bct_total',
-        'bct_poor',
-        'bct_women',
-        'bct_men',
-        'total_household',
-        'total_poor',
-        'total_women',
-        'total_men',
-        'percent_household',
-        'percent_poor',
-        'percent_women',
-        'percent_men',
-        'bb_assessment_by',
-        'bb_assessment_date',
-        'bb_status',
-        'bb_added_date',
-        'bb_updated_date'
+        'b_id',
+        'bri_cable_check',
+        'bri_bulldog_check',
+        'bri_anchorage_check',
+        'bri_walkway_check',
+        'bri_wire_check',
+        'bri_fixtures_check',
+        'bri_relative_check',
+        'bri_anchorage_dimension_check',
+        'bri_anchorage_stone_check',
+        'bri_suspenders_check',
+        'bri_wire_mesh_check',
+        'bri_completion_fiscal_year',
+        'bri_remarks',
+        'bridge_completion_date',
+        'fi_site_assessment_by',
+        'fi_site_assessment_date',
     ];
 
     // Dates
@@ -71,4 +57,5 @@ class bridge_beneficiaries_model extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
 }

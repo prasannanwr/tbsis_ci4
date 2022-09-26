@@ -4,48 +4,38 @@ namespace App\Modules\bridge\Models;
 
 use CodeIgniter\Model;
 
-class bridge_beneficiaries_model extends Model
+class bridge_employment_generation_model extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'bridge_beneficiaries';
-    protected $primaryKey       = 'bb_id';
+    protected $table            = 'bridge_employment_generation';
+    protected $primaryKey       = 'beg_id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'bb_id',
-        'bb_bridge_id',
-        'dalit_total',
-        'dalit_poor',
-        'dalit_women',
-        'dalit_men',
-        'janjati_total',
-        'janjati_poor',
-        'janjati_women',
-        'janjati_men',
-        'minorities_total',
-        'minorities_poor',
-        'minorities_women',
-        'minorities_men',
-        'bct_total',
-        'bct_poor',
-        'bct_women',
-        'bct_men',
-        'total_household',
-        'total_poor',
-        'total_women',
-        'total_men',
-        'percent_household',
-        'percent_poor',
-        'percent_women',
-        'percent_men',
-        'bb_assessment_by',
-        'bb_assessment_date',
-        'bb_status',
-        'bb_added_date',
-        'bb_updated_date'
+        'b_id',
+        'beg_dalit_women',
+        'beg_dalit_men',
+        'beg_dalit_poor',
+        'beg_janjati_women',
+        'beg_janjati_men',
+        'beg_janjati_poor',
+        'beg_minorities_women',
+        'beg_minorities_men',
+        'beg_minorities_poor',
+        'beg_bct_women',
+        'beg_bct_men',
+        'beg_bct_poor',
+        'beg_total_women',
+        'beg_total_men',
+        'beg_total_poor',
+        'beg_total',
+        'beg_percent_women',
+        'beg_percent_men',
+        'beg_percent_poor',
+        'beg_percent_total'
     ];
 
     // Dates
