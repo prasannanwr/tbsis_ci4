@@ -194,6 +194,44 @@ class Reports extends BaseController
         require($x);
     }
 
+
+    //beneficiaries
+    public function Beneficiaries_FYWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Beneficiaries_FYWise', $data);
+    }
+
+    function Beneficiaries_FYWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function Beneficiaries_DateWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Beneficiaries_DateWise', $data);
+    }
+
+    function Beneficiaries_DateWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
    
 
 

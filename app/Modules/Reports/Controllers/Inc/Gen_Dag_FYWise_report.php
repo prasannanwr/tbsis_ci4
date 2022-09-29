@@ -13,7 +13,7 @@ use App\Modules\view\Models\view_regional_office_model;
 
 //use App\Modules\Reports\Models\ReportsModel;
 
-class Gen_Dev_FYWise_report extends BaseController
+class Gen_Dag_FYWise_report extends BaseController
 {
     private static $arrDefData = array();
 
@@ -148,7 +148,7 @@ class Gen_Dev_FYWise_report extends BaseController
             } else
             {
                 redirect("reports/Gen_Dev_FYWise/".$stat);
-                //return redirect()->to(base_url('reports/Gen_Dev_FYWise_report/'));  
+                //return redirect()->to(base_url('reports/Gen_Dag_FYWise_report/'));  
             }
             
         } else
@@ -157,7 +157,7 @@ class Gen_Dev_FYWise_report extends BaseController
         }
         // echo "<pre>";
         // var_dump($data['arrPrintList']);exit;
-        return view('\Modules\Reports\Views\Gen_Dev_FYWise_report', $data);
+        return view('\Modules\Reports\Views\Gen_Dag_FYWise_report', $data);
 
     }
 }

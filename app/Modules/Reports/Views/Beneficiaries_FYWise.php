@@ -7,7 +7,7 @@
     <!-- Page Heading -->
 
     <div class="row center">
-      <h3>DAGS</h3>
+      <h3>Immediate Beneficiaries Report</h3>
       <h4>Choose Fiscal Year</h4>
     </div>
     <!-- /.row -->
@@ -15,7 +15,7 @@
       <div class="col-lg-3 clearfix">
       </div>
       <div class="col-lg-5 clearfix">
-        <form action="<?php echo site_url(); ?>/reports/Gen_Dag_FYWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . MM_CODE : ''; ?>" method="post">
+        <form action="<?php echo site_url(); ?>/reports/Beneficiaries_FYWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . MM_CODE : ''; ?>" method="post">
           <div class="form-group clearfix">
             <label class="col-lg-4 ">Start Year:</label>
             <div class="col-lg-8">

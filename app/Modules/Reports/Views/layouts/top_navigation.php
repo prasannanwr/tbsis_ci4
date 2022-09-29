@@ -94,11 +94,11 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'DateWise'); ?>
+                                                        <?php echo anchor('reports/Beneficiaries_DateWise', 'DateWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'FYWise'); ?>
+                                                        <?php echo anchor('reports/Beneficiaries_FYWise', 'FYWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                     </ul>
