@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>TBSIS - Login</title>
+  <title>TBSIS - Trail Bridge Sub-Sector Project - Login</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?=base_url("css/bootstrap.min.css");?>">
@@ -14,9 +14,9 @@
 <body>
 <div id="wrapper">
             <div class="login-header">
-                <div class="header" style="float: left;">
+                <div class="header">
                     <div class="logo" style="text-align: center;">
-                        <a href="#"><img src='<?= base_url('images/0349198001423239216.jpg');?>'></a>
+                        <a href="#"><img src='<?= base_url('images/TBSU_HELVETAS.jpg');?>'></a>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
     <div class="row">&nbsp;</div>
     <div class="row inner-row">
         <div class="col-2">&nbsp;</div>
-        <div class="panel panel-primary col-5 xs login-form col-lg-offset-3">
+        <div class="panel col-5 xs login-form col-lg-offset-3">
             <div class="panel-heading">TBSIS - User Login</div>
             <div class="panel-body">
                 <?php if (isset($validation)) : ?>

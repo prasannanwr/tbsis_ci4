@@ -7,7 +7,8 @@ use CodeIgniter\Model;
 class view_district_reg_office_model extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'view_district';
+    //protected $table            = 'view_district';
+    protected $table            = 'view_district_having_bridge';
     protected $primaryKey       = 'dist01id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -39,4 +40,5 @@ class view_district_reg_office_model extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
 }

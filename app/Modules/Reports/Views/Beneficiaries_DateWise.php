@@ -1,4 +1,4 @@
-<?= $this->extend("\Modules\Reports\Views\layouts\my_template") ?>
+<?= $this->extend("\Modules\Template\Views\my_template") ?>
 <?= $this->section("body") ?>
 <div id="page-wrapper">
 
@@ -15,7 +15,7 @@
                    <div class="col-lg-3 clearfix">
                     </div>
 					<div class="col-lg-5 clearfix">
-                   <form action="<?php echo site_url();?>/reports/Gen_Dag_DateWise_report<?php echo (isset($blnMM) && $blnMM)? '/'.MM_CODE: ''; ?>" method="post"> 
+                   <form action="<?php echo site_url();?>/reports/Beneficiaries_DateWise_report<?php echo (isset($blnMM) && $blnMM)? '/'.MM_CODE: ''; ?>" method="post"> 
                 <div class="form-group clearfix">
                 <label class="col-lg-4 ">Start Date:</label>
                 <div class="col-lg-8 datebox-container ">

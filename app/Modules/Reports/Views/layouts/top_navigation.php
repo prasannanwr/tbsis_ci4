@@ -13,7 +13,7 @@
                     <span class="icon-bar">
                     </span>
                 </button>
-                <img src="<?php echo  base_url("images/0349198001423239216.jpg"); ?> " style="max-height: 100px;" />
+                <img src="<?php echo  base_url("images/tbsu_logo.jpg"); ?> " style="max-height: 110px;" />
                 <!--    <img src="<?php // echo base_url(); 
                                     ?>images/final_tbssp.gif" /> -->
                 <a href="<?php echo  base_url() ?>" class="navbar-brand"><?php //echo $logoimg['log01name']; ?></a>
@@ -111,11 +111,11 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'DateWise'); ?>
+                                                        <?php echo anchor('reports/UC_Composition_DateWise', 'DateWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'FYWise'); ?>
+                                                        <?php echo anchor('reports/UC_Composition_FYWise', 'FYWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                     </ul>
@@ -128,11 +128,11 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'DateWise'); ?>
+                                                        <?php echo anchor('reports/UC_Proportion_Representation_DateWise', 'DateWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'FYWise'); ?>
+                                                        <?php echo anchor('reports/UC_Proportion_Representation_FYWise', 'FYWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                     </ul>
@@ -145,11 +145,11 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'DateWise'); ?>
+                                                        <?php echo anchor('reports/UC_Executive_Position_DateWise', 'DateWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'FYWise'); ?>
+                                                        <?php echo anchor('reports/UC_Executive_Position_FYWise', 'FYWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                     </ul>
@@ -179,11 +179,11 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'DateWise'); ?>
+                                                        <?php echo anchor('reports/Public_Audit_DateWise', 'DateWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'FYWise'); ?>
+                                                        <?php echo anchor('reports/Public_Audit_FYWise', 'FYWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                     </ul>
@@ -196,11 +196,11 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'DateWise'); ?>
+                                                        <?php echo anchor('reports/Employment_Generation_DateWise', 'DateWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'FYWise'); ?>
+                                                        <?php echo anchor('reports/Employment_Generation_FYWise', 'FYWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                     </ul>
@@ -210,7 +210,35 @@
                                     </ul>
                                     <!--end  Committed bridege -->
                                 </li>
-                                
+                                <!-- Unacceptable -->
+                                <li class="divider"></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        Unacceptable Bridge<b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu1">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                Social <b class="caret"></b>
+                                            </a>
+                                            <ul class="dropdown-menu2">
+                                                <li>
+                                                <?php echo anchor('reports/Gen_Dist_DateWise', 'Under Construction'); ?>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                         <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                Technical <b class="caret"></b>
+                                            </a>
+                                            <ul class="dropdown-menu2">
+                                                <li>
+                                                <?php echo anchor('reports/Gen_Dist_DateWise', 'Under Construction'); ?>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <!-- Access & Utility -->
                                 <li class="divider"></li>
                                 <li class="dropdown">
@@ -220,6 +248,9 @@
 
                                     <ul class="dropdown-menu1">
                                         <li class="dropdown">
+                                            <?php echo anchor('reports/Access_Utility_Underconstruction', 'Under construction'); ?>
+                                        </li>
+                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                                 Completed <b class="caret"></b>
                                             </a>
@@ -227,11 +258,9 @@
                                                 <li>
                                                 <?php echo anchor('reports/Gen_Dist_DateWise', 'DateWise'); ?>
                                                 </li>
-                                                <li class="divider"></li>
-                                                <li>
+                                                 <li>
                                                 <?php echo anchor('reports/Gen_Dist_DateWise', 'FYWise'); ?>
                                                 </li>
-                                                <li class="divider"></li>
                                             </ul>
                                         </li>
                                     </ul>

@@ -140,7 +140,7 @@ class bridge extends BaseController
 		}
 	}
 
-	function index()
+	function index($type = "")
 	{
 		//check access
 		//_check(array('org_view'), 'general', '', "You don't have permission to view New_bridge.", 'info', 'dashboard');
@@ -148,8 +148,15 @@ class bridge extends BaseController
 		$data = self::$arrDefData;
 		$PostRadio = @$this->request->getVar('sort');
 		$data['dataRadio'] = $PostRadio;
+		if ($type == "new")
+			$data['btype'] = 0;
+		elseif ($type == "mm")
+			$data['btype'] = 1;
+		else
+			$data['btype'] = 0;
 		$data['arrConstructionTypeList'] = $this->construction_model->findAll();
-		return view('\Modules\bridge\Views'. DIRECTORY_SEPARATOR .__FUNCTION__, $data);
+		// return view('\Modules\bridge\Views'. DIRECTORY_SEPARATOR .__FUNCTION__, $data);
+		return view('\Modules\bridge\Views'. DIRECTORY_SEPARATOR . 'lists', $data);
 	}
 
 	function form($emp_id = FALSE)
@@ -197,12 +204,15 @@ class bridge extends BaseController
 		$data['countOther'] = $this->supporting_agencies_model->where('sup01sup_agency_type', ENUM_SUPPORT_OTHER)->orderBy('sup01index asc')->findAll();
 		
 		$casteGroup = array("1" => "Dalit", "2" => "Janjati", "3" => "Minorities", "4" => "BCT");
+		$bctcasteGroup = array("1" => "Dalit", "2" => "Janjati", "3" => "Minorities", "4" => "BCT_M", "5" => "BCT_F");
 		$data['casteGroup'] = $casteGroup;
+		$data['bctcasteGroup'] = $bctcasteGroup;
 		// $egCasteGroup = array("1" => "Dalit", "2" => "Janjati", "3" => "Minorities", "4" => "BCT (Male)", "5" => "BCT (Female)");
 		// $data['egCasteGroup'] = $egCasteGroup;
 
 		if ($emp_id !== false) {
 			$emp_id = urldecode($emp_id);
+			$data['title'] = 'Edit Bridge';
 
 			$data['objOldRec'] = $this->bridge_basic_data_model->where('bri03bridge_no', $emp_id)->first();
 			
@@ -293,6 +303,16 @@ class bridge extends BaseController
 				'bri03work_category' => 'required',
 				'bri03project_fiscal_year' => 'required'
 			];
+			// $errors = [
+			// 	'bri03bridge_name' => 'Bridge name is required',
+			// 	'bri03place_name' => 'Place name required',
+			// 	'bri03district_name_lb' => 'District is required',
+			// 	'bri03district_name_rb' => 'District is required',
+			// 	'bri03river_name' => 'River name is required',
+			// 	'bri03supporting_agency' => 'Agency is required',
+			// 	'bri03work_category' => 'Work category is required',
+			// 	'bri03project_fiscal_year' => 'Fiscal year is required'
+			// ];
 
 		if (!$this->validate($rules)) {
 			$data['validation'] = $this->validator;
@@ -315,6 +335,9 @@ class bridge extends BaseController
 					$blnIsNew = false;
 					// log_message('error', 'bno:'.$bridge_no);
 					// log_message('error', 'bid:'.$bridge_id);
+					// echo $bridge_no;
+					// echo "<br>";
+					// echo $bridge_id;exit;
 					if (($bridge_no == '' && $bridge_id == '') || ($bridge_no == 0 && $bridge_id == 0)) {
 						$blnIsNew = true;
 						$bridge_no = '';
@@ -325,7 +348,6 @@ class bridge extends BaseController
 					}
 
 					$enumMajorVDC = @$this->request->getVar('bri03major_vdc');
-
 
 					if ($blnIsNew) {
 						$mVDC = @$this->request->getVar('bri03municipality_rb');
@@ -470,8 +492,10 @@ class bridge extends BaseController
 					}
 					$form_data1['bri03major_vdc'] = @$this->request->getVar('bri03major_vdc');
 					
-
 					$xx = $this->bridge_basic_data_model->save($form_data1);
+					if($bridge_id > 0)
+					$bri03id = $bridge_id;
+					else 
 					$bri03id = $this->bridge_basic_data_model->getInsertID();
 
 					//site assesment
@@ -488,7 +512,6 @@ class bridge extends BaseController
 						'bsa_assesment_date' => @$this->request->getVar("site_assessment_date"),
 						'bsa_remark' => @$this->request->getVar("bsa_remarks")
 					);
-					//echo "<pre>";var_dump($sa_data);exit;
 					$this->bridge_site_assesment_model->save($sa_data);
 
 					// $form_data2 = array(
@@ -742,9 +765,14 @@ class bridge extends BaseController
 						'beg_minorities_men' => @$this->request->getVar('beg_minorities_men'),
 						'beg_minorities_poor' => @$this->request->getVar('beg_minorities_poor'),
 
-						'beg_bct_women' => @$this->request->getVar('beg_bct_women'),
-						'beg_bct_men' => @$this->request->getVar('beg_bct_men'),
-						'beg_bct_poor' => @$this->request->getVar('beg_bct_poor'),
+						// 'beg_bct_women' => @$this->request->getVar('beg_bct_women'),
+						// 'beg_bct_men' => @$this->request->getVar('beg_bct_men'),
+						// 'beg_bct_poor' => @$this->request->getVar('beg_bct_poor'),
+
+						'beg_bct_m_men' => @$this->request->getVar('beg_bct_m_men'),
+						'beg_bct_f_women' => @$this->request->getVar('beg_bct_f_women'),
+						'beg_bct_m_poor' => @$this->request->getVar('beg_bct_m_poor'),
+						'beg_bct_f_poor' => @$this->request->getVar('beg_bct_f_poor'),
 
 						'beg_total_women' => @$this->request->getVar('eg_women_total'),
 						'beg_total_men' => @$this->request->getVar('eg_men_total'),

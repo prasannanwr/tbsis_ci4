@@ -39,7 +39,7 @@
 						<div class="col-lg-3 left">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
-									<h3 class="panel-title">Quick Menu</h3>
+									<h3 class="panel-title">Utilities</h3>
 								</div>
 								<div class="padd" style="padding:7px 15px;">
 								   <?php echo anchor('bridge/form', 'Add Bridge') ?>
@@ -54,7 +54,7 @@
                             
 							<div class="panel panel-primary">
 								<div class="panel-heading">
-									<h3 class="panel-title">Search - Bridge Wise</h3>
+									<h3 class="panel-title">Search - Bridge</h3>
 								</div>
                                
                                
@@ -155,7 +155,7 @@
                 {data: 'dist01name'},
                 {name: 'bri03place_name', data: 'bri03place_name', visible: true},
                 {name: 'bri03supporting_agency', data: 'sup01sup_agency_name', visible: true},
-                {name: 'bri05bridge_complete', data: 'bri05bridge_complete',
+                {name: 'bri05bridge_complete', data: 'bridge_completion_date',
                     mRender: function( data, type, full){
                         if(data == '0000-00-00'){
                             return '';
@@ -180,13 +180,11 @@
             $('#bridgeList').DataTable().column( 7 )
                 .search( btype )
                 .draw();  
-            $(".bltitle").html("List of New Construction bridges");              
                 
         } else if(btype == '1') {
             $('#bridgeList').DataTable().column( 7 )
             .search( btype )
-            .draw();
-            $(".bltitle").html("List of Major Maintenance bridges");                 
+            .draw();                
             
         }
 
@@ -230,46 +228,12 @@
             if($(this).val() == '') {
                 $(".bltitle").html("List of All bridges"); 
             }
-            if($(this).val() == '1') {
-                $(".bltitle").html("List of Major Maintenance bridges"); 
-            }
-            if($(this).val() == '0') {
-                $(".bltitle").html("List of New Construction bridges"); 
-            }   
 
-            if($(this).attr("id") == "cancelled") {
-            	$('#bridgeList').DataTable().column( 8 )
-                .search( $(this).val() )
-                .draw();
-                $(".bltitle").html("List of Cancelled bridges");     
-                ev.preventDefault();
-            	return false;
-			} else if($(this).attr("id") == "completed") {            	
-            	$('#bridgeList').DataTable().column( 6 )
-                .search( 1 )
-                .draw();
-                $(".bltitle").html("List of Completed bridges");
-                ev.preventDefault();
-            	return false;
-            } else if($(this).attr("id") == "inprogress") {            	
-            	$('#bridgeList').DataTable().column( 6 )
-                .search(0)
-                .draw();
-                $('#bridgeList').DataTable().column( 8 )
-                .search('')
-                .draw();
-                $(".bltitle").html("List of Inprogress bridges");
-                ev.preventDefault();
-            	return false;
-            } else {
-            	$('#bridgeList').DataTable().column( 7 )
-                .search( $(this).val() )
-                .draw();
-                ev.preventDefault();
-            	return false;
-            }      
-
-               
+            $('#bridgeList').DataTable().column( 7 )
+            .search( $(this).val() )
+            .draw();
+            ev.preventDefault();
+            return false;      
         });
     });
        

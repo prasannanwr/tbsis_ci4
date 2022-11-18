@@ -14,9 +14,16 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 		<!-- Page Heading 
 
 	<form role="form form-group New_Bridge">-->
+		
 		<?php if (session()->getFlashdata('warning')) {
 			echo "warning: " . session()->getFlashdata('warning');
 		} ?>
+		<?php if(isset($validation)) { ?> 
+			<div class="alert alert-danger" role="alert">
+			<?php echo $validation->listErrors(); ?>
+			</div>
+		<?php } ?>
+		</div>
 		<?php echo form_open_multipart($postURL, array('id' => 'emp-form', 'class' => 'form-horizontal panel-body', 'role' => 'form', 'data-form' => 'validate')) ?>
 
 		<?php // var_dump($objOldRec); 
@@ -899,9 +906,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 					<div class="col-lg-12">
 
-
-						<input type="hidden" class="form-control" name="bri03id" id="bri03id" value="0">
-
 						<div class="form-group clearfix ">
 							
 							<table class="table table-bordered table-hover">
@@ -1021,9 +1025,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 					<div class="col-lg-12">
 
-
-						<input type="hidden" class="form-control" name="bri03id" id="bri03id" value="0">
-
 						<div class="form-group clearfix ">
 							
 							<table class="table table-bordered table-hover">
@@ -1135,9 +1136,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 				<div class="row clearfix">
 
 					<div class="col-lg-12">
-
-
-						<input type="hidden" class="form-control" name="bri03id" id="bri03id" value="0">
 
 						<div class="form-group clearfix ">
 							
@@ -1723,9 +1721,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 					<div class="col-lg-12">
 
-
-						<input type="hidden" class="form-control" name="bri03id" id="bri03id" value="0">
-
 						<div class="form-group clearfix ">
 							
 							<table class="table table-bordered table-hover">
@@ -1821,9 +1816,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 					<div class="col-lg-12">
 
-
-						<input type="hidden" class="form-control" name="bri03id" id="bri03id" value="0">
-
 						<div class="form-group clearfix ">
 							
 							<table class="table table-bordered table-hover">
@@ -1844,19 +1836,35 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									$total_percent = '100';
 								}
 			
-								foreach ($casteGroup as $key => $caste) :
+								foreach ($bctcasteGroup as $key => $caste) :
 									$beg_caste = 'beg_'.strtolower($caste);
+									$disabled_m = '';
+									$disabled_f = '';
+									if(strtolower($caste) == "bct_m") {
+										$disabled_f = "disabled";
+										$caste = "BCT (Male)";
+									} elseif(strtolower($caste) == "bct_f") {
+										$disabled_m = "disabled";
+										$caste = "BCT (Female)";
+									}
 									if(is_array($objEmploymentGeneration)) { 
 										// $total = $objEmploymentGeneration[$beg_caste.'_women'] + $objEmploymentGeneration[$beg_caste.'_men'] + $objEmploymentGeneration[$beg_caste.'_poor']; 
-										$total = $objEmploymentGeneration[$beg_caste.'_women'] + $objEmploymentGeneration[$beg_caste.'_men']; 
+										if(strtolower($caste) == "bct_m") {
+										$total = $objEmploymentGeneration[$beg_caste.'_men']; 
+										} elseif(strtolower($caste) == "bct_f") {
+										$total = $objEmploymentGeneration[$beg_caste.'_women']; 
+										} else {
+											$total = $objEmploymentGeneration[$beg_caste.'_women'] + $objEmploymentGeneration[$beg_caste.'_men'];
+										}
+										
 										$grand_total = $grand_total + $total;
 
 									}
 								?>
 									<tr>
 										<td><?= $caste ?></td>
-										<td><input type="text" data-row="<?=$key; ?>" class="eg-text eg_women form-control eg_women_<?= $key; ?>" name="<?= $beg_caste; ?>_women" id="eg_women_<?= $key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_women']:0); ?>" /></td>
-										<td><input type="text" data-row="<?=$key; ?>" class="eg-text eg_men form-control eg_men_<?= $key; ?>" name="<?= $beg_caste; ?>_men" id="eg_men_<?= $key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_men']:0); ?>" /></td>
+										<td><input type="text" data-row="<?=$key; ?>" <?=$disabled_f;?> class="eg-text eg_women form-control eg_women_<?= $key; ?>" name="<?= $beg_caste; ?>_women" id="eg_women_<?= $key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_women']:0); ?>" /></td>
+										<td><input type="text" data-row="<?=$key; ?>" <?=$disabled_m;?> <?php echo (strtolower($caste) == "bct_f") ? 'disabled':'';?> class="eg-text eg_men form-control eg_men_<?= $key; ?>" name="<?= $beg_caste; ?>_men" id="eg_men_<?= $key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_men']:0); ?>" /></td>
 										<td><input type="text" data-row="<?=$key; ?>" class="eg-text eg_poor form-control eg_poor_<?= $key; ?>" name="<?= $beg_caste; ?>_poor" id="eg_poor_<?= $key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_poor']:0); ?>" /></td>
 										<td><input type="text" readonly data-row="<?=$key; ?>" data-col="" class="eg_sub_total eg_sub_total_<?= $key; ?> form-control " name="eg_sub_total_<?= $key; ?>" id="eg_sub_total_<?= $key; ?>" value="<?php echo $total; ?>" /></td>
 									</tr>

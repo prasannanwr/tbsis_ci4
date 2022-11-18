@@ -232,6 +232,236 @@ class Reports extends BaseController
         require($x);
     }
 
+    public function UC_Composition_FYWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\UC_Composition_FYWise', $data);
+    }
+
+    function UC_Composition_FYWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function UC_Composition_DateWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\UC_Composition_DateWise', $data);
+    }
+
+    function UC_Composition_DateWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function UC_Proportion_Representation_FYWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\UC_Proportion_Representation_FYWise', $data);
+    }
+
+    function UC_Proportion_Representation_FYWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function UC_Proportion_Representation_DateWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\UC_Proportion_Representation_DateWise', $data);
+    }
+
+    function UC_Proportion_Representation_DateWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function UC_Executive_Position_FYWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\UC_Executive_Position_FYWise', $data);
+    }
+
+    function UC_Executive_Position_FYWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function UC_Executive_Position_DateWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\UC_Executive_Position_DateWise', $data);
+    }
+
+    function UC_Executive_Position_DateWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+
+    public function Employment_Generation_FYWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Employment_Generation_FYWise', $data);
+    }
+
+    function Employment_Generation_FYWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function Employment_Generation_DateWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Employment_Generation_DateWise', $data);
+    }
+
+    function Employment_Generation_DateWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function Public_Audit_FYWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Public_Audit_FYWise', $data);
+    }
+
+    function Public_Audit_FYWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function Public_Audit_DateWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Public_Audit_DateWise', $data);
+    }
+
+    function Public_Audit_DateWise_report($stat = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    //unacceptable
+    public function Unacceptable_Underconstruction($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Unacceptable_Underconstruction', $data);
+    }
+
+    //access utility
+    public function Access_Utility_Underconstruction($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+
+        $perPage = 4;
+        $arrPrintList = array();
+        $selDist=$this->view_district_reg_office_model->paginate($perPage);
+        $data['selDist'] = $selDist;
+        $data['pager'] = $this->view_district_reg_office_model->pager;
+        if(is_array( $selDist)){
+            $i = 0;
+            // echo "<pre>";
+            // var_dump($selDist);exit;
+            foreach( $selDist as $k=>$v){
+                $rr=$v['dist01id'];
+                // var_dump($v1);exit;
+                $arrChild1=null;
+                
+                $arrBridgeList = $this->bridge_model->getBridgeUtilities($rr);
+                
+                if(is_array($arrBridgeList) && !empty($arrBridgeList)){
+                    //print header
+                    //echo 'header';
+                    $row['dist'] = $v;
+                    $row['data'] = $arrBridgeList;
+                    $arrPrintList[] = $row;
+                    $i++;
+                }
+            }
+        }
+        $data['arrPrintList'] = $arrPrintList;
+
+        return view('\Modules\Reports\Views\Access_Utility_Underconstruction_report', $data);
+    }
+
+    
    
 
 

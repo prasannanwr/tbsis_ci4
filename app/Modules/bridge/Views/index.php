@@ -35,25 +35,8 @@
 								<?php  
                 //     if  (session()->get('type') == ENUM_ADMINISTRATOR || session()->get('type') == ENUM_CENTRAL_MANAGER)
                 // {
-                    if  (session()->get('type') == ENUM_ADMINISTRATOR)
-                {  
+                   
                 ?>
-								<div class="padd" style="padding:0px 10px 10px 15px;">
-								    <?php echo anchor('fiscal_data/index', 'Annual Plan') ?>
-								</div>
-				<?php } ?>
-								<div class="padd" style="padding:0px 10px 10px 15px;">
-								    <?php echo anchor('bridge/lists/new', 'New Construction Bridges') ?>
-								</div>
-								<div class="padd" style="padding:0px 10px 10px 15px;">
-								    <?php echo anchor('bridge/lists/mm', 'Major Maintenance Bridges') ?>
-								</div>
-							<!--	<div class="panel-body  padd">
-								   <a href="#">Delete Bridge</a>
-								</div>
-								<div class="panel-body padd">
-								   <a href="#">Display Details</a>
-								</div> -->
 							</div>
                             <?php } ?>
                             
@@ -92,31 +75,7 @@
                                 
 							</div>
 						</div>
-                        <div style="font-size:36px; text-align:center; padding-top:100px;">Programme Monitoring Information System (PMIS)</div>
-						<div class="col-lg-9 right" style="display:none">                            
-						<h3 style="text-align: center;">Bridge List</h3>
-							<div class="table-responsive">
-								<table class="table table-bordered table-hover ajaxdata" id="bridgeList">
-									<thead>
-										<tr>
-											<!--<th>S.N.</th>-->
-                                            
-											<th>Bridge No</th>
-											<th>Name</th>
-											<th>River name</th>
-											<th>Span</th>
-											<th>District</th>
-											<th>Completed Date</th>
-											<th>Completed check</th>
-											<th>Construction Type</th>
-											<th>Work Category</th>
-								            <th><?php echo lang('index_action_th'); ?></th> 
-										</tr>
-									</thead>
-									
-								</table>
-							</div>
-						</div>
+						
                         
 						<div class="clear"></div>
 					</div>

@@ -2,36 +2,41 @@
 namespace App\Modules\Reports\Controllers\Inc;
 
 use App\Controllers\BaseController;
-use App\Modules\cost_components\Models\CostComponentsModel;
+use App\Modules\bridge\Models\bridge_beneficiaries_model;
 use App\Modules\province\Models\ProvinceModel;
 use App\Modules\view\Models\view_bridge_detail_model;
+use App\Modules\view\Models\view_district_reg_office_model;
 use App\Modules\view\Models\view_regional_office_model;
 
 //use App\Modules\Reports\Models\ReportsModel;
 
-class Gen_Dev_DateWise_report extends BaseController
+class Gen_Dag_DateWise_report extends BaseController
 {
     private static $arrDefData = array();
   
     private $view_brigde_detail_model;
 
-    private $cost_components_model;
-
     private $province_model;
 
     private $view_regional_office_model;
+    
+    private $bridge_beneficiaries_model;
+
+    private $view_district_reg_office_model;
   
     public function __construct()
     {
       helper(['form', 'html', 'et_helper']);
       $view_bridge_detail_model = new view_bridge_detail_model();
-      $cost_components_model = new CostComponentsModel();
       $province_model = new ProvinceModel();
       $view_regional_office_model = new view_regional_office_model();
+      $bridge_beneficiaries_model  = new bridge_beneficiaries_model();
+      $view_district_reg_office_model = new view_district_reg_office_model();
       $this->view_brigde_detail_model = $view_bridge_detail_model;
-      $this->cost_components_model = $cost_components_model;
       $this->province_model = $province_model;
       $this->view_regional_office_model = $view_regional_office_model;
+      $this->bridge_beneficiaries_model = $bridge_beneficiaries_model;
+      $this->view_district_reg_office_model = $view_district_reg_office_model;
       if (count(self::$arrDefData) <= 0) {
         $FName = basename(__FILE__, '.php');
         $fName = strtolower($FName);
@@ -46,80 +51,93 @@ class Gen_Dev_DateWise_report extends BaseController
 
     public function index($stat = '')
     {
-        $Postback = @$this->request->getVar('submit');
-        $dataStart = @$this->request->getVar('start_date');
-        $dateEnd = @$this->request->getVar('end_date');
+        $request = service('request');
+        $searchData = $request->getGet();
+    
+        $dateStart = "";
+        $dateEnd = "";
+        if(isset($searchData) && isset($searchData['dateStart'])){
+           $dateStart = $searchData['dataStart'];
+           $dateEnd = $searchData['dateEnd'];
+           $Postback = '';
+        } else {
+
+            $Postback = @$this->request->getVar('submit');
+            $dateStart = @$this->request->getVar('start_date');
+            $dateEnd = @$this->request->getVar('end_date');
+        } 
+          
+            $data['blnMM'] = $stat;
+           $data['title'] = "Beneficiaries DateWise Report";
         
-        $data['blnMM'] = $stat;
-        $data['startdate'] = $dataStart;
-        $data['enddate'] = $dateEnd;
-        if ($Postback == 'Back')
-        {
-            redirect(site_url());
-        } elseif ($dataStart <= $dateEnd)
-        {
-            if ($dataStart != 0 || $dateEnd != 0)
+            $data['startdate'] = $dateStart;
+            $data['enddate'] = $dateEnd;
+
+            //echo $dataStart;exit;
+            if ($Postback == 'Back')
             {
-                $data['arrCostCompList'] = $this->cost_components_model->findAll();
-                $arrPrintList = array();
-               // $data['arrDevList']= $this->development_region_model->findAll();
-                $data['arrDevList']= $this->province_model->findAll();
-                if (is_array($data['arrDevList'])){
+                redirect(site_url());
+            } elseif ($dateStart <= $dateEnd)
+            {
+                if ($dateStart != 0 || $dateEnd != 0)
+                {
+                    $arrPrintList = array();
+                    $perPage = 4;
+                    //pager
+                    // $pager=service('pager');
+                    // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;
+                    // $total = $this->view_district_reg_office_model->countAll();
+                    // $pager->makeLinks($page+1, $perPage, $total);
+                    // $offset = $page * $perPage;
+                    //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
+                    $selDist=$this->view_district_reg_office_model->paginate($perPage);
+                    $data['selDist'] = $selDist;
+                    $data['pager'] = $this->view_district_reg_office_model->pager;
                     
-                    foreach ($data['arrDevList'] as $k => $v){
-                        $arrChild=null;
-                        
-                        //$arrDistList=$this->view_regional_office_model->where('dev01id', $v->dev01id)->findAll();
-                        $arrDistList=$this->view_regional_office_model->where('province_name', $v['province_name'])->asObject()->findAll();
-                        if(is_array($arrDistList)){
+                    if(is_array( $selDist)){
+                        $i =0;
+                        foreach( $selDist as $k=>$v){
+                            $rr=$v['dist01id'];
+                            // var_dump($v1);exit;
+                            $arrChild1=null;
                             
-                            foreach( $arrDistList as $k1=>$v1){
-                                $arrChild1=null;
-                                 if (empty($stat))
-                                    {
-                                        $this->view_brigde_detail_model->where('bri03construction_type',
-                                            ENUM_NEW_CONSTRUCTION);
-                                    } else
-                                    {
-                                        $this->view_brigde_detail_model->where('bri03construction_type',
-                                            ENUM_MAJOR_MAINTENANCE);
-                                    }
-                            $this->view_brigde_detail_model->where('bri05bridge_complete_check', 1)->where('bri05bridge_completion_fiscalyear_check', 1);
-                                $arrBridgeList = $this->view_brigde_detail_model->
-                                    where('bri05bridge_complete >=', $dataStart)->
-                                    where('bri05bridge_complete <=', $dateEnd)->
-                                    where('dist01id', $v1->dist01id)->
-                                    asObject()->
-                                    findAll();
-                                
-                                foreach ($arrBridgeList as $k2 => $v2)
-                                {
-                                    $arrChild2=null;
-                                    
-                                    $arrChild1[] = array('info' => $v2);
-                                } //bridge list for
-                                if($arrChild1){
-                                    $arrChild[]=array('info'=>$v1, 'arrChildList'=>$arrChild1);
-                                }
+                            $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiariesByDate($dateStart, $dateEnd, $rr);
+                            
+                            if(is_array($arrBridgeList) && !empty($arrBridgeList)){
+                                //print header
+                                //echo 'header';
+                                $row['dist'] = $v;
+                                $row['data'] = $arrBridgeList;
+                                $arrPrintList[] = $row;
+                                $i++;
                             }
                         }
-                        if($arrChild){
-                        $arrPrintList[]=array('info'=>$v, 'arrChildList'=>$arrChild);
-                        }
                     }
+
+                    //$data = ['pager' => $bridge_beneficiaries_model->pager];
+                        
+                    // echo "<pre>";
+                    // print_r($arrPrintList);exit;
+                    $data['arrPrintList'] = $arrPrintList;
+                    $data['dataStart'] = $dateStart;
+                    $data['dateEnd'] = $dateEnd;
+                    
+
+                    
+                } else
+                {
+                    redirect("reports/Gen_Dag_DateWise/".$stat);
+                    //return redirect()->to(base_url('reports/Beneficiaries_DateWise_report/'));  
                 }
-                //print_r($arrPrintList);
-                $data['arrPrintList'] = $arrPrintList;
                 
             } else
             {
-                redirect("reports/Gen_Dev_DateWise/".$stat);
+                'start date is Smaller than End Date';
             }
-        } else
-        {
-            'start date is Smaller than End Date';
-        }
-        return view('\Modules\Reports\Views\Gen_Dev_DateWise_report', $data);
+            // echo "<pre>";
+            // var_dump($data['arrPrintList']);exit;
+           
+        return view('\Modules\Reports\Views\Gen_Dag_DateWise_report', $data);
 
     }
 }

@@ -3,7 +3,7 @@
 <div id="page-wrapper" class="largeRpt">
 
 <div class="alignRight"> 
-        <form method="post" action="<?php echo site_url();?>/reports/Gen_Dev_FYWise_print<?php echo (isset($blnMM) && $blnMM)? '/'.MM_CODE: ''; ?>" target="_blank">
+        <form method="post" action="<?php echo site_url();?>/reports/Beneficiaries_DateWise_print<?php echo (isset($blnMM) && $blnMM)? '/'.MM_CODE: ''; ?>" target="_blank">
        <input type="hidden" name="start_year" value="<?php echo $startyear['fis01id']; ?>" />
        <input type="hidden" name="end_year" value="<?php echo $endyear['fis01id']; ?>" />
        <!-- <input type="submit"  class="btn btn-md btn-success btn-print" name="submit" value="Print" data-target="printArea" /> -->
@@ -170,13 +170,13 @@
                         </table>
                         <!-- pagination block -->
                         <div class="mt-3">
-                            <?php $pager = \Config\Services::pager(); ?>
+                            <?php //$pager = \Config\Services::pager(); ?>
                             <?php if ($pager):?>
-                                <?php $pagi_path = 'my_controller/my_model'; ?>
-                                <?php $pager->setPath($pagi_path); ?>
+                                <?php $pagi_path = 'reports/Beneficiaries_FYWise_report?dataStart='.$dataStart; ?>
+                                <?php //$pager->setPath($pagi_path); ?>
                                 <?= $pager->links(); ?>
                             <?php endif; ?>
-                            <?php echo "Page ".$pager->getCurrentPage()." of ".$pager->getPageCount();?>
+                            <?php //echo "Page ".$pager->getCurrentPage()." of ".$pager->getPageCount();?>
                         </div>
 
 

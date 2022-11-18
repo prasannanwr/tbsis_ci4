@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>TBIS - Dashboard</title>
+    <title>Trail Bridge Sub-Sector Project - TBIS - Dashboard</title>
     <title>
         TBIS -
         <?php //echo $title ?>

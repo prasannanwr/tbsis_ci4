@@ -1,6 +1,6 @@
 /*log-in*/
 .login-header {
-    background: #E9F1F4 !important;
+    /*background: #E9F1F4 !important;*/
     min-height: 100px;
 }
 .dashboard-bg{
@@ -8,7 +8,8 @@
 .dashboard-section {
     background: none;min-height:500px;
 }
-.navbar.navbar-fixed-top{background: #E9F1F4!important;}
+/*.navbar.navbar-fixed-top{background: #E9F1F4!important;}*/
+.navbar.navbar-fixed-top{background: #ffff!important;}
 body{
     background: #FFF!important;
 }
@@ -24,7 +25,7 @@ body{
     
 }
 .login-form h1{
-    background: #3399cc;
+    background: #A1191D;
     height: 60px;
     line-height: 60px;
     color:#fff;
@@ -35,12 +36,13 @@ body{
     padding:10px;
 }
 .login-form form button{
-    background: #3399cc;
+    /*background: #A1191D;*/
+    background: #A1191D;
     color:#fff;
 }
 .login-form form button:hover{
     background: #fff;
-    color:#3399cc;
+    color:#A1191D;
 }
 .navbar-header img{
     float: left;
@@ -119,7 +121,8 @@ ul.nav.navbar-nav.tabHeads li:hover a, ul.nav.navbar-nav.tabHeads li.active a{co
 .nopad{padding: 0!important;}
 .margR{margin-right: 2%;}
 .margL{margin-Left: 2%;}
-.panel-primary >.panel-heading {background-color:#428bca; border:1px solid #428bca;}
+/*.panel-primary >.panel-heading {background-color:#428bca; border:1px solid #428bca;}*/
+.panel-heading {background-color:#A51922; border:1px solid #A51922; color: #fff;}
 .NewFormTopHeader .header ul li a{font-size: 14px;}
 .checkPad{padding:2px 0 ;}
 .checkPad input[type=checkbox]{margin: -1px 0 0 ;}
