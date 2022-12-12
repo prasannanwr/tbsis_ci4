@@ -65,7 +65,7 @@
                         </select> -->
                         <?php //echo et_form_dropdown_db('district_auth[]', 'dist01district', 'dist01name','dist01id', ($arrData != ''?$arrData['dist_id']: ''),'', 'class="form-control childDrops" id="multiple" multiple="multiple" ') ?>
                         <?php // echo form_dropdown('District', $arrDistList, '');?>
-                         <?php echo et_form_dropdown_db('district_auth[]', 'dist01district', 'dist01name','dist01id', '','', 'class="form-control childDrops" id="multiple" multiple="multiple" ') ?>
+                         <?php echo et_form_dropdown_db('district_auth[]', 'dist01district', 'dist01name','dist01id', $arrDistList,'', 'class="form-control childDrops" id="multiple" multiple="multiple" ') ?>
 
                     </div>
                     
@@ -85,6 +85,7 @@
                         <label for="phone_no">Phone No</label>
                         <input type="text" class="form-control" name="phone_no" id="phone_no" >
                     </div> -->
+                    <input type="hidden" name="userref" value="<?php echo ($arrData != ''?$arrData['id']: '');?>">
                     <button type="submit" class="btn btn-success">Submit</button>
                     <button type="submit" name="submit" class="btn btn-success" value="Cancel">Cancel</button>
                 </form>

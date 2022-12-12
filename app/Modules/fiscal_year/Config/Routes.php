@@ -4,6 +4,7 @@ $routes->group("fiscal_year", ["namespace" => 'App\Modules\fiscal_year\Controlle
 
 	// welcome page - URL: /student
 	$routes->get("/", "fiscal_year::index", ['filter' => 'auth']);
+	$routes->get("index", "fiscal_year::index", ['filter' => 'auth']);
 	
 	// $routes->match(['get','post'],'create/(:any)/(:any)/(:any)', 'Fiscal_data::create/$1/$2/$3', ['filter' => 'auth']);
 	$routes->match(['get','post'],'create', 'Fiscal_year::create', ['filter' => 'auth']);

@@ -106,7 +106,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 							<input type="hidden" class="form-control" name="bri03id" id="bri03id" value="<?php echo et_setFormVal('bri03id', $objOldRec); ?>" />
 
-							<div class="form-group clearfix ">
+							<div class="form-group clearfix required">
 
 								<label class="col-lg-5 ">Bridge Name</label>
 
@@ -153,7 +153,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 							</div>
 
 							<div class="form-group clearfix">
-								<label class="col-lg-5">VDC/Municipality LB</label>
+								<label class="col-lg-5">Palika/Municipality LB</label>
 								<div class="col-lg-7 ">
 									<?php echo et_form_dropdown_db(
 										'bri03municipality_lb',
@@ -167,25 +167,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										'',
 										'class="form-control" ' . $valDisable . '',
 										array('SortBy' => 'muni01name DESC')
-									) ?>
-								</div>
-							</div>
-
-							<div class="form-group clearfix">
-								<label class="col-lg-5">Utility of Bridge LB</label>
-								<div class="col-lg-7 ">
-									<?php echo et_form_dropdown_db(
-										'bri03utility_left_bank',
-
-										'bridge_utilities',
-										'bu_name',
-										'bu_id',
-
-										et_setFormVal('bri03utility_left_bank', $objOldRec),
-
-										'',
-										'class="form-control" ' . $valDisable . '',
-										array('SortBy' => 'bu_id ASC')
 									) ?>
 								</div>
 							</div>
@@ -309,7 +290,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 							<div class="form-group clearfix">
 
-								<label class="col-lg-5 ">Project Fiscal Year</label>
+								<label class="col-lg-5 ">Implementing Year</label>
 
 								<div class="col-lg-7 ">
 									<?php
@@ -331,6 +312,39 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										</script>
 									<?php } ?>
 
+
+								</div>
+
+							</div>
+
+							<div class="form-group clearfix"><h4><strong>Utility of Bridge</strong></h4></div>
+
+							<div class="form-group clearfix">
+								<label class="col-lg-5">Left Bank</label>
+								<div class="col-lg-7 ">
+									<?php echo et_form_dropdown_db(
+										'bri03utility_left_bank',
+
+										'bridge_utilities',
+										'bu_name',
+										'bu_id',
+
+										et_setFormVal('bri03utility_left_bank', $objOldRec),
+
+										'',
+										'class="form-control" ' . $valDisable . '',
+										array('SortBy' => 'bu_id ASC')
+									) ?>
+								</div>
+							</div>
+
+							<div class="form-group clearfix">
+
+								<label class="col-lg-5 ">Physical Progress</label>
+
+								<div class="col-lg-7 ">
+
+									<?php echo et_form_dropdown_db('bri03physical_progress', 'physical_progress_types', 'pp_name', 'pp_id', et_setFormVal('bri03physical_progress', $objOldRec), '', 'class="form-control"') ?>
 
 								</div>
 
@@ -397,25 +411,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								</div>
 							</div>
 
-							<div class="form-group clearfix">
-								<label class="col-lg-5">Utility of Bridge Right Bank</label>
-								<div class="col-lg-7 ">
-									<?php echo et_form_dropdown_db(
-										'bri03utility_right_bank',
-
-										'bridge_utilities',
-										'bu_name',
-										'bu_id',
-
-										et_setFormVal('bri03utility_right_bank', $objOldRec),
-
-										'',
-										'class="form-control" ' . $valDisable . '',
-										array('SortBy' => 'bu_id ASC')
-									) ?>
-								</div>
-							</div>
-
 							<!-- <div class="form-group clearfix">
 
 								<label class="col-lg-5 ">Bridge Series</label>
@@ -478,16 +473,35 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 							</div>
 
+							<div class="form-group clearfix">&nbsp;</div>
+
+							<div class="form-group clearfix">&nbsp;</div>
+
+							<div class="form-group clearfix">&nbsp;</div>
+
+							<div class="form-group clearfix">&nbsp;</div>
+
+							<div class="form-group clearfix">&nbsp;</div>
+
+							<div class="form-group clearfix">&nbsp;</div>
+
 							<div class="form-group clearfix">
-
-								<label class="col-lg-5 ">Physical Progress</label>
-
+								<label class="col-lg-5">Right Bank</label>
 								<div class="col-lg-7 ">
+									<?php echo et_form_dropdown_db(
+										'bri03utility_right_bank',
 
-									<?php echo et_form_dropdown_db('bri03physical_progress', 'physical_progress_types', 'pp_name', 'pp_id', et_setFormVal('bri03physical_progress', $objOldRec), '', 'class="form-control"') ?>
+										'bridge_utilities',
+										'bu_name',
+										'bu_id',
 
+										et_setFormVal('bri03utility_right_bank', $objOldRec),
+
+										'',
+										'class="form-control" ' . $valDisable . '',
+										array('SortBy' => 'bu_id ASC')
+									) ?>
 								</div>
-
 							</div>
 
 
@@ -577,76 +591,61 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 						</h1>
 					</div>
 				</div>
+				<input type="hidden" class="form-control " name="bsa_id" id="bsa_id" value="<?php echo et_setFormVal('bsa_id',$objSiteAssesment ); ?>"/>
 
 				<div class="row clearfix">
-					<div class="col-lg-13">
-						<div class="col-lg-4">
-							<div class="form-group clearfix ">
-								<label class="col-lg-6 ">Stability of the bank/slopes</label>
-								<div class="col-lg-2 ">
-									<div class="col-lg-4 checkPad ">
+					<div class="col-lg-10">
+						
+					<table class="table table-bordered table-hover">
+								<tr>
+									<td>S.No.</td>
+									<td>Issues</td>
+									<td>Acceptable</td>
+									<td>Deficiency</td>
+									<td>Remedial Action</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Stability of the bank/slopes</td>
+									<td>Solid rock or soil and fully vegetated</td>
+									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bri_stablility_check" id="bri_stablility_check" value="1" <?php echo (et_setFormVal('bsa_stability', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group clearfix">
-								<label class="col-lg-6 ">Meandering/Curving River</label>
-								<div class="col-lg-2">
+									</div></td>
+									<td><input type="text" name="bsa_stability_remark" value="<?=et_setFormValBlank('bsa_stability_remark', $objSiteAssesment);?>"></td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>Influencing rivulet</td>
+									<td>No nearby rivulets</td>
+									<td>
 									<div class="col-lg-4 checkPad ">
-										<input type="checkbox" class=" form-control " name="bri_meandering_check" id="bri_meandering_check" value="1" <?php echo (et_setFormVal('bsa_meandering', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
+										<input type="checkbox" class=" form-control " name="bri_influencing_check" id="bsa_influencing_check" value="1" <?php echo (et_setFormVal('bsa_influencing_rivulet', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
 									</div>
-								</div>
-							</div>
-
-							<div class="form-group clearfix">
-								<label class="col-lg-6 ">Source of Sand</label>
-								<div class="col-lg-2">
-									<div class="col-lg-4 checkPad ">
-										<input type="checkbox" class=" form-control " name="bri_source_sand_check" id="bri_source_sand_check" value="1" <?php echo (et_setFormVal('bsa_source_sand', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group clearfix">
-								<label class="col-lg-6 ">Source of Gravel</label>
-								<div class="col-lg-2">
-									<div class="col-lg-4 checkPad ">
+									</td>
+									<td><input type="text" name="bsa_rivulet_remark" value="<?=et_setFormValBlank('bsa_rivulet_remark', $objSiteAssesment);?>"></td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Source of Gravel</td>
+									<td>Solid rock or soil and fully vegetated</td>
+									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bri_source_gravel_check" id="bri_source_gravel_check" value="1" <?php echo (et_setFormVal('bsa_source_gravel', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
-									</div>
-								</div>
-							</div>
+									</div></td>
+									<td><input type="text" name="bsa_source_gravel_remark" value="<?=et_setFormValBlank('bsa_source_gravel_remark', $objSiteAssesment);?>"></td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>Source of Sand</td>
+									<td>Solid rock or soil and fully vegetated</td>
+									<td><div class="col-lg-4 checkPad ">
+										<input type="checkbox" class=" form-control " name="bri_source_sand_check" id="bri_source_sand_check" value="1" <?php echo (et_setFormVal('bsa_source_sand', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
+									</div></td>
+									<td><input type="text" name="bsa_source_sand_remark" value="<?=et_setFormValBlank('bsa_source_sand_remark', $objSiteAssesment);?>"></td>
+								</tr>
+					</table>
+					<div class="col-lg-8">
 
-							<div class="form-group clearfix">
-								<label class="col-lg-6 ">Profile Survey</label>
-								<div class="col-lg-2">
-									<div class="col-lg-4 checkPad ">
-										<input type="checkbox" class=" form-control " name="bri_profile_survey_check" id="bri_profile_survey_check" value="1" <?php echo (et_setFormVal('bsa_profile_survey', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
-									</div>
-								</div>
-							</div>
-
-						</div>
-						<div class="col-lg-4">
-
-							<div class="form-group clearfix">
-								<label class="col-lg-6 ">Influencing rivulet</label>
-								<div class="col-lg-2">
-									<div class="col-lg-4 checkPad ">
-										<input type="checkbox" class=" form-control " name="bri_influencing_check" id="bri_influencing_check" value="1" <?php echo (et_setFormVal('bsa_influencing_rivulet', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group clearfix">
-								<label class="col-lg-6 ">Source of Stone</label>
-								<div class="col-lg-2">
-									<div class="col-lg-4 checkPad ">
-										<input type="checkbox" class=" form-control " name="bri_source_stone_check" id="bri_source_stone_check" value="1" <?php echo (et_setFormVal('bsa_source_stone', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
-									</div>
-								</div>
-							</div>
-
+						
 							<div class="form-group clearfix ">
 								<label class="col-lg-6 ">Assessment By</label>
 								<div class="col-lg-6 ">
@@ -875,6 +874,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<label class="col-lg-8 ">Remark</label>
 								<div class="col-lg-4 ">
 									<input type="text" class=" form-control " name="bri_remarks" id="bri_remarks" value="<?php echo et_setFormValBlank('bri_remarks', $objFinalInspection); ?>" />
+									<input type="hidden" class="form-control " name="bri_f_id" id="bri_f_id" value="<?php echo et_setFormVal('bri_f_id',$objFinalInspection); ?>"/>
 								</div>
 							</div>
 
@@ -888,8 +888,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 			<!----start third Bridge--->
 
-
-
 			<div class="tab-pane" id="Beneficiaries_Composition">
 
 				<div class="row">
@@ -901,7 +899,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 						</u>
 					</div>
 				</div>
-
+			
 				<div class="row clearfix">
 
 					<div class="col-lg-12">
@@ -980,7 +978,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										</div>
 									</th>
 									<th colspan="2"><input name="bb_status" id="bb_status" type="radio" value="1" <?php echo (is_array($objBeneficiariesRec) && $objBeneficiariesRec['bb_status'] == 1 ? "checked='checked'" : '');?>><label for="bb_status">Active</label></th>
-
+									<input type="hidden" class="form-control " name="bb_id" id="bb_id" value="<?php echo et_setFormVal('bb_id',$objBeneficiariesRec ); ?>"/>
 								</tr>
 							</table>
 
@@ -1091,9 +1089,8 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 										</div>
 									</th>
-									<th colspan="2"><input name="ph_active" id="ph_active" type="radio" value="1"><label for="ph_active">Active</label></th>
-
-								</tr>
+									<th colspan="2"><input name="ph_status" id="ph_status" type="radio" value="1" <?php echo (is_array($objPublicHearingRec) && $objPublicHearingRec['ph_status'] == 1 ? "checked='checked'" : '');?>><label for="ph_status">Active</label></th>
+									<input type="hidden" class="form-control " name="ph_id" id="ph_id" value="<?php echo et_setFormVal('ph_id',$objPublicHearingRec); ?>"/>								</tr>
 							</table>
 
 						</div>
@@ -1296,8 +1293,9 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 										</div>
 									</th>
-									<th colspan="4"><input name="uc_active" id="uc_active" type="radio" value="1"><label for="uc_active">Active</label></th>
-
+									<th colspan="4"><input name="b_uc_status" id="b_uc_status" type="radio" value="1" <?php echo (is_array($objUCCompositionRec) && $objUCCompositionRec['b_uc_status'] == 1 ? "checked='checked'" : '');?>><label for="b_uc_status">Active</label></th>
+									<input type="hidden" class="form-control" name="b_uc_id" id="b_uc_id" value="<?php echo et_setFormVal('b_uc_id',$objUCCompositionRec); ?>"/>								
+								</tr>
 								</tr>
 							</table>
 
@@ -1423,6 +1421,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<label class="col-lg-6 ">Remark</label>
 								<div class="col-lg-6 ">
 									<input type="text" class=" form-control " name="bri_design_remarks" id="bri_design_remarks" value="<?php echo et_setFormValBlank('bri_design_remarks', $objBridgeDesign); ?>" />
+									<input type="hidden" class="form-control " name="bd_id" id="bd_id" value="<?php echo et_setFormVal('bd_id',$objBridgeDesign); ?>"/>
 								</div>
 							</div>
 
@@ -1469,7 +1468,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 						</div>
 					</div>
 				</div>
-
+				<input type="hidden" class="form-control " name="bi_id" id="bi_id" value="<?php echo et_setFormVal('bi_id',$objBridgeInsurance); ?>"/>
 			</div>
 
 			<!-- Sign Board -->
@@ -1507,6 +1506,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 																																		echo et_setFormVal('sign_board_date', $objBridgeSignBoard);
 																																	} ?>" />
 						</div>
+						<input type="hidden" class="form-control " name="bsb_id" id="bsb_id" value="<?php echo et_setFormVal('bsb_id',$objBridgeSignBoard); ?>"/>
 					</div>
 				</div>
 
@@ -1597,7 +1597,134 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<input name="factory_visit_active" id="factory_visit_active" type="radio" value="1" <?php echo ($objBridgeSteelParts && $objBridgeSteelParts['factory_visit_active'] == 1)? 'checked="checked"':'';?>><label for="factory_visit_active">Active</label>
 								</div>
 							</div>
+							<input type="hidden" class="form-control " name="bsp_id" id="bsp_id" value="<?php echo et_setFormVal('bsp_id',$objBridgeSteelParts); ?>"/>
+						</div>
+					</div>
+				</div>
+			</div>
 
+			<!-- Construction Work -->
+			<div class="tab-pane" id="Construction_Work">
+
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header font">
+						Quality of Civil Works and Cable Sag (Site Visit)
+						</h1>
+					</div>
+				</div>
+
+				<div class="row clearfix">
+					<div class="col-lg-13">
+						<div class="col-lg-4">
+							<div class="form-group clearfix ">
+								<label class="col-lg-6 ">Cross Check the quality of stones/aggregate/sand</label>
+								<div class="col-lg-2 ">
+									<div class="col-lg-4 checkPad ">
+										<input type="checkbox" class=" form-control " name="bri_quality_steel_check" id="bri_quality_steel_check" value="1" <?php echo (et_setFormVal('bri_quality_steel_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group clearfix">
+								<label class="col-lg-6 ">Verify Concreting of Drum</label>
+								<div class="col-lg-2">
+									<div class="col-lg-4 checkPad ">
+										<input type="checkbox" class=" form-control " name="bri_qa_document_check" id="bri_qa_document_check" value="1" <?php echo (et_setFormVal('bri_qa_document_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group clearfix">
+								<label class="col-lg-6 ">Bulldog Grips</label>
+								<div class="col-lg-2">
+									<div class="col-lg-4 checkPad ">
+										<input type="checkbox" class=" form-control " name="bri_welding_check" id="bri_welding_check" value="1" <?php echo (et_setFormVal('bri_welding_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group clearfix">
+								<label class="col-lg-6 ">Workmanship(General)</label>
+								<div class="col-lg-2">
+									<div class="col-lg-4 checkPad ">
+										<input type="checkbox" class=" form-control " name="bri_zinc_coating_check" id="bri_zinc_coating_check" value="1" <?php echo (et_setFormVal('bri_zinc_coating_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
+									</div>
+								</div>
+							</div>	
+							
+							<div class="form-group clearfix">
+								<label class="col-lg-6 ">Dry stone masonry for dead load</label>
+								<div class="col-lg-2">
+									<div class="col-lg-4 checkPad ">
+										<input type="checkbox" class=" form-control " name="bri_zinc_coating_check" id="bri_zinc_coating_check" value="1" <?php echo (et_setFormVal('bri_zinc_coating_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
+									</div>
+								</div>
+							</div>	
+
+							<div class="form-group clearfix">
+								<label class="col-lg-6 ">Verify Concreting of Anchorage/Foundation Block</label>
+								<div class="col-lg-2">
+									<div class="col-lg-4 checkPad ">
+										<input type="checkbox" class=" form-control " name="bri_zinc_coating_check" id="bri_zinc_coating_check" value="1" <?php echo (et_setFormVal('bri_zinc_coating_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
+									</div>
+								</div>
+							</div>	
+
+							<div class="form-group clearfix">
+								<label class="col-lg-6 ">Tower (N Types only)</label>
+								<div class="col-lg-2">
+									<div class="col-lg-4 checkPad ">
+										<input type="checkbox" class=" form-control " name="bri_zinc_coating_check" id="bri_zinc_coating_check" value="1" <?php echo (et_setFormVal('bri_zinc_coating_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
+									</div>
+								</div>
+							</div>	
+
+							<div class="form-group clearfix">
+								<label class="col-lg-6 ">Cement</label>
+								<div class="col-lg-2">
+									<div class="col-lg-4 checkPad ">
+										<input type="checkbox" class=" form-control " name="bri_zinc_coating_check" id="bri_zinc_coating_check" value="1" <?php echo (et_setFormVal('bri_zinc_coating_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
+									</div>
+								</div>
+							</div>	
+
+						</div>
+						<div class="col-lg-6">
+
+							<div class="form-group clearfix ">
+								<label class="col-lg-6 ">Assessment By</label>
+								<div class="col-lg-6 ">
+									<input type="text" class=" form-control " name="factory_visit_assessment_by" id="factory_visit_assessment_by" value="<?php echo et_setFormValBlank('factory_visit_assessment_by', $objBridgeSteelParts); ?>" />
+								</div>
+							</div>
+
+							<div class="form-group clearfix ">
+								<label class="col-lg-6 ">Assessment Date</label>
+								<div class="col-lg-6 datebox-container ">
+									<div class="col-lg-8 nopad datetimepicker input-group date ">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+										<input type="text" class=" form-control " name="factory_visit_assessment_date" id="factory_visit_assessment_date" value="<?php if (isset($objBridgeSteelParts['factory_visit_assessment_date']) && $objBridgeSteelParts['factory_visit_assessment_date'] != "0000-00-00") {
+																																					echo et_setFormVal('factory_visit_assessment_date', $objBridgeSteelParts);
+																																				} ?>" />
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group clearfix ">
+								<label class="col-lg-6 ">Remark</label>
+								<div class="col-lg-6 ">
+									<input type="text" class=" form-control " name="factory_visit_remarks" id="factory_visit_remarks" value="<?php echo et_setFormValBlank('factory_visit_remarks', $objBridgeSteelParts); ?>" />
+								</div>
+							</div>
+
+							<div class="form-group clearfix ">
+								<label class="col-lg-6 ">Active</label>
+								<div class="col-lg-4 ">
+									<input name="factory_visit_active" id="factory_visit_active" type="radio" value="1" <?php echo ($objBridgeSteelParts && $objBridgeSteelParts['factory_visit_active'] == 1)? 'checked="checked"':'';?>><label for="factory_visit_active">Active</label>
+								</div>
+							</div>
+							<input type="hidden" class="form-control " name="bsp_id" id="bsp_id" value="<?php echo et_setFormVal('bsp_id',$objBridgeSteelParts); ?>"/>
 						</div>
 					</div>
 				</div>
@@ -1688,6 +1815,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<input name="cost_est_active" id="cost_est_active" type="radio" value="1" <?php echo ($objCostEstimate && $objCostEstimate['cost_est_active'] == 1)? 'checked="checked"':'';?>><label for="design_active">Active</label>
 								</div>
 							</div>
+							<input type="hidden" class="form-control " name="bce_id" id="bce_id" value="<?php echo et_setFormVal('bce_id',$objCostEstimate); ?>"/>
 
 						</div>
 					</div>
@@ -1787,8 +1915,8 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 										</div>
 									</th>
-									<th colspan="2"><input name="pa_active" id="pa_active" type="radio" value="1"><label for="pa_active">Active</label></th>
-
+									<th colspan="2"><input name="pa_status" id="pa_status" type="radio" value="1" <?php echo ($objPublicAudit && $objPublicAudit['pa_status'] == 1)? 'checked="checked"':'';?>><label for="pa_status">Active</label></th>
+									<input type="hidden" class="form-control " name="pa_id" id="pa_id" value="<?php echo et_setFormVal('pa_id',$objPublicAudit); ?>"/>
 								</tr>
 							</table>
 
@@ -1886,7 +2014,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 							</table>
 
 						</div>
-
+						<input type="hidden" class="form-control " name="beg_id" id="beg_id" value="<?php echo et_setFormVal('beg_id',$objEmploymentGeneration); ?>"/>
 
 					</div>
 				</div>

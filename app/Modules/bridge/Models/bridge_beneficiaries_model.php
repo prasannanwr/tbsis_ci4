@@ -72,7 +72,7 @@ class bridge_beneficiaries_model extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getBeneficiaries($startDate = '', $endDate = '', $distId, $perPage='', $offset = 0) {
+    public function getBeneficiaries($startDate = '', $endDate = '', $distId, $state = '', $perPage='', $offset = 0) {
         // $sql = "select `a`.`dist01id` AS `dist01id`,`a`.`dist01name` AS `dist01name`,`b`.`bri03id` AS `bri03id`,`b`.`bri03bridge_name` AS `bri03bridge_name`,`b`.`bri03bridge_no` AS `bri03bridge_no`,`b`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`b`.`bri03status` AS `bri03status`,`b`.`bri03major_dist_id` AS `bri03major_dist_id`, `c`.`total_women`, `c`.`total_men`, `c`.`dalit_total`, `c`.`dalit_poor`,`c`.`janjati_total`,`c`.`janjati_poor`,`c`.`minorities_total`,`c`.`minorities_poor`,`c`.`bct_total`,`c`.`bct_poor` from (`view_bridge_child` `b` left join `view_district` `a` on(`b`.`bri03major_dist_id` = `a`.`dist01id`) left join `bridge_beneficiaries` as `c` ON (`c`.`bb_bridge_id` = `b`.`bri03id`)) WHERE 1=1";
         // if($startDate != '')
         // $sql .=" AND `b`.`bri03project_fiscal_year` >= '$startDate'";
@@ -102,6 +102,8 @@ class bridge_beneficiaries_model extends Model
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+        if($state != '')
+            $builder = $builder->where('`view_district`.`province_id` =', $state);
 
 //         $result = $builder->limit($perPage, $offset)->getCompiledSelect();
 // echo $result;exit;

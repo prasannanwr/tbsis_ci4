@@ -171,7 +171,8 @@ class bridge extends BaseController
 		$data['view_file'] = __FUNCTION__;
 
 
-		if (session()->get('user_rights') == 3 || session()->get('user_rights') == 5) {
+		// if (session()->get('user_rights') == 3 || session()->get('user_rights') == 5) {
+		if (session()->get('user_rights') == 1) {
 			$data['is_admin'] = 1;
 		} else {
 			$data['is_admin'] = 0;
@@ -500,13 +501,18 @@ class bridge extends BaseController
 
 					//site assesment
 					$sa_data = array(
+						'bsa_id' => @$this->request->getVar("bsa_id"),
 						'b_id' => $bri03id,
 						'bsa_stability' =>  @$this->request->getVar("bri_stablility_check"),
+						'bsa_stability_remark' =>  @$this->request->getVar("bsa_stability_remark"),
 						'bsa_meandering' => @$this->request->getVar("bri_meandering_check"),
 						'bsa_influencing_rivulet' => @$this->request->getVar("bri_influencing_check"),
+						'bsa_rivulet_remark' => @$this->request->getVar("bsa_rivulet_remark"),
 						'bsa_source_sand' => @$this->request->getVar("bri_source_sand_check"),
+						'bsa_source_sand_remark' => @$this->request->getVar("bsa_source_sand_remark"),
 						'bsa_source_stone' => @$this->request->getVar("bri_source_stone_check"),
 						'bsa_source_gravel' => @$this->request->getVar("bri_source_gravel_check"),
+						'bsa_source_gravel_remark' => @$this->request->getVar("bsa_source_gravel_remark"),
 						'bsa_profile_survey' => @$this->request->getVar("bri_profile_survey_check"),
 						'bsa_assesment_by' => @$this->request->getVar("site_assessment_by"),
 						'bsa_assesment_date' => @$this->request->getVar("site_assessment_date"),
@@ -537,6 +543,7 @@ class bridge extends BaseController
 					//beneficiaries composition
 					//$bri03id = $bridge_id;
 					$form_data2 = array(
+						'bb_id' => @$this->request->getVar("bb_id"),
 						'bb_bridge_id' => $bri03id,
 						'dalit_total' => @$this->request->getVar("bc_total_dalit"),
 						'dalit_poor' => @$this->request->getVar("bc_poor_dalit"),
@@ -602,6 +609,7 @@ class bridge extends BaseController
 					// endforeach;
 
 					$ph_data = array(
+						'ph_id' => @$this->request->getVar("ph_id"),
 						'ph_bridge_id' => $bri03id,
 						'ph_assessment_by' => @$this->request->getVar('ph_assessment_by'),
 						'ph_assessment_date' => @$this->request->getVar('ph_assessment_date'),
@@ -645,6 +653,7 @@ class bridge extends BaseController
 					// endforeach;
 
 					$uc_data = array(
+						'b_uc_id' => @$this->request->getVar("b_uc_id"),
 						'b_id' => $bri03id,
 						'b_uc_assessment_by' => @$this->request->getVar('uc_assessment_by'),
 						'b_uc_assessment_date' => @$this->request->getVar('uc_assessment_date'),
@@ -694,6 +703,7 @@ class bridge extends BaseController
 
 					//Design
 					$design_data = array(
+						'bd_id' => @$this->request->getVar("bd_id"),
 						'b_id' => $bri03id,
 						'bri_bri_type_check' =>  @$this->request->getVar("bri_bri_type_check"),
 						'bri_cable_geo_check' =>  @$this->request->getVar("bri_cable_geo_check"),
@@ -711,6 +721,7 @@ class bridge extends BaseController
 
 					//Cost Estimate
 					$cost_est_data = array(
+						'bce_id' => @$this->request->getVar("bce_id"),
 						'b_id' => $bri03id,
 						'bri_impl_approach_check' =>  @$this->request->getVar("bri_impl_approach_check"),
 						'bri_unit_rates_steel_check' =>  @$this->request->getVar("bri_unit_rates_steel_check"),
@@ -752,6 +763,7 @@ class bridge extends BaseController
 					// 	$this->bridge_employment_generation_detail_model->save($eg_data2);
 					// endforeach;
 					$eg_data = array(
+						'beg_id' => @$this->request->getVar("bce_id"),
 						'b_id' => $bri03id,
 						'beg_dalit_women' => @$this->request->getVar('beg_dalit_women'),
 						'beg_dalit_men' => @$this->request->getVar('beg_dalit_men'),
@@ -786,6 +798,7 @@ class bridge extends BaseController
 					$this->bridge_employment_generation_model->save($eg_data);
 
 					$pa_data = array(
+						'pa_id' => @$this->request->getVar("pa_id"),
 						'pa_bridge_id' => $bri03id,
 						'pa_assessment_by' => @$this->request->getVar('pa_assessment_by'),
 						'pa_assessment_date' => @$this->request->getVar('pa_assessment_date'),
@@ -809,6 +822,7 @@ class bridge extends BaseController
 
 					//final inspection
 					$fi_data = array(
+						'bri_f_id' => @$this->request->getVar("bri_f_id"),
 						'b_id' => $bri03id,
 						'bri_cable_check' =>  @$this->request->getVar("bri_cable_check"),
 						'bri_bulldog_check' => @$this->request->getVar("bri_bulldog_check"),
@@ -829,6 +843,41 @@ class bridge extends BaseController
 					);
 					//echo "<pre>";var_dump($sa_data);exit;
 					$this->bridge_final_inspection_model->save($fi_data);
+
+					//insurance
+					$bi_data = array(
+						'bi_id' => @$this->request->getVar("bi_id"),
+						'b_id' => $bri03id,
+						'bri_insurance_check' =>  @$this->request->getVar("bri_insurance_check"),
+						'insurance_exp_date' => @$this->request->getVar("insurance_exp_date")
+					);
+					//echo "<pre>";var_dump($sa_data);exit;
+					$this->bridge_insurance_model->save($bi_data);
+
+					//sign board
+					$sb_data = array(
+						'bsb_id' => @$this->request->getVar("bsb_id"),
+						'b_id' => $bri03id,
+						'sign_board_check' =>  @$this->request->getVar("sign_board_check"),
+						'sign_board_date' => @$this->request->getVar("sign_board_date")
+					);
+					$this->bridge_sign_board_model->save($sb_data);
+
+					//steel parts
+					$sp_data = array(
+						'bsp_id' => @$this->request->getVar("bsp_id"),
+						'b_id' => $bri03id,
+						'bri_quality_steel_check' =>  @$this->request->getVar("bri_quality_steel_check"),
+						'bri_qa_document_check' =>  @$this->request->getVar("bri_qa_document_check"),
+						'bri_welding_check' =>  @$this->request->getVar("bri_welding_check"),
+						'bri_zinc_coating_check' =>  @$this->request->getVar("bri_zinc_coating_check"),
+						'factory_visit_assessment_by' =>  @$this->request->getVar("factory_visit_assessment_by"),
+						'factory_visit_assessment_date' => @$this->request->getVar("factory_visit_assessment_date"),
+						'factory_visit_remarks' =>  @$this->request->getVar("factory_visit_remarks"),
+						'factory_visit_active' =>  @$this->request->getVar("factory_visit_active"),
+						'bsp_updated_date' =>  @$this->request->getVar("bsp_updated_date")
+					);
+					$this->bridge_steel_parts_model->save($sp_data);
 					
 					// $this->bridge_technical_data_model->save($form_data2);
 					session()->setFlashdata('message', 'Updated successfully.');
@@ -865,11 +914,11 @@ class bridge extends BaseController
 
 		$data['objOldRec'] = $this->view_all_join_bridge_table_model->where('bri03bridge_no', $GetBridgeNo)->first();
 		$data['Completion_Fiscal_Year'] = $this->fiscal_year_model->where('fis01id', $data['objOldRec']->bri05bridge_completion_fiscalyear)->first();
-		$data['arrEstCost'] = $this->bridge_est_cost_model->where('bri07bridge_no', $data['objOldRec']->bri03bridge_no)->findAll();
-		$data['arrCstCost'] = $this->contribution_agencies_model->where('bri08bridge_no', $data['objOldRec']->bri03bridge_no)->findAll();
+		// $data['arrEstCost'] = $this->bridge_est_cost_model->where('bri07bridge_no', $data['objOldRec']->bri03bridge_no)->findAll();
+		// $data['arrCstCost'] = $this->contribution_agencies_model->where('bri08bridge_no', $data['objOldRec']->bri03bridge_no)->findAll();
 
-		$data['arrSupList'] = $this->supporting_agencies_model->findAll();
-		$data['arrCostCompList'] = $this->cost_components_model->findAll();
+		// $data['arrSupList'] = $this->supporting_agencies_model->findAll();
+		// $data['arrCostCompList'] = $this->cost_components_model->findAll();
 		$data['arrVDCList'] = $this->view_vdc_model->findAll();
 
 		return view('\Modules\bridge\Views'. DIRECTORY_SEPARATOR .__FUNCTION__, $data);
@@ -889,11 +938,11 @@ class bridge extends BaseController
 			$arrdeltable = $this->bridge_model->where('bri03bridge_no', $delete_id)->first();
 
 			$this->bridge_model->where('bri03bridge_no', $arrdeltable->bri03bridge_no)->delete();
-			$this->bridge_technical_data_model->where('bri04bridge_no', $arrdeltable->bri03bridge_no)->delete();
-			$this->bridge_beneficiaries_model->where('bri05bridge_no', $arrdeltable->bri03bridge_no)->delete();
-			$this->personnel_information_model->where('bri06bridge_no', $arrdeltable->bri03bridge_no)->delete();
-			$this->bridge_est_cost_model->where('bri07bridge_no', $arrdeltable->bri03bridge_no)->delete();
-			$this->contribution_agencies_model->where('bri08bridge_no', $arrdeltable->bri03bridge_no)->delete();
+			// $this->bridge_technical_data_model->where('bri04bridge_no', $arrdeltable->bri03bridge_no)->delete();
+			// $this->bridge_beneficiaries_model->where('bri05bridge_no', $arrdeltable->bri03bridge_no)->delete();
+			// $this->personnel_information_model->where('bri06bridge_no', $arrdeltable->bri03bridge_no)->delete();
+			// $this->bridge_est_cost_model->where('bri07bridge_no', $arrdeltable->bri03bridge_no)->delete();
+			// $this->contribution_agencies_model->where('bri08bridge_no', $arrdeltable->bri03bridge_no)->delete();
 
 			$message = 'Selected Data Deleted.';
 			// log_query($message);
@@ -919,11 +968,11 @@ class bridge extends BaseController
 				//$arrdeltable = $this->bridge_model->where('bri03id', $delete_id)->first();
 				//print_r($arrdeltable->bri03bridge_no);exit;
 				$this->bridge_model->where('bri03bridge_no', $delete_id->bri03bridge_no)->delete();
-				$this->bridge_technical_data_model->where('bri04bridge_no', $delete_id->bri03bridge_no)->delete();
-				$this->bridge_beneficiaries_model->where('bri05bridge_no', $delete_id->bri03bridge_no)->delete();
-				$this->personnel_information_model->where('bri06bridge_no', $delete_id->bri03bridge_no)->delete();
-				$this->bridge_est_cost_model->where('bri07bridge_no', $delete_id->bri03bridge_no)->delete();
-				$this->contribution_agencies_model->where('bri08bridge_no', $delete_id->bri03bridge_no)->delete();
+				// $this->bridge_technical_data_model->where('bri04bridge_no', $delete_id->bri03bridge_no)->delete();
+				// $this->bridge_beneficiaries_model->where('bri05bridge_no', $delete_id->bri03bridge_no)->delete();
+				// $this->personnel_information_model->where('bri06bridge_no', $delete_id->bri03bridge_no)->delete();
+				// $this->bridge_est_cost_model->where('bri07bridge_no', $delete_id->bri03bridge_no)->delete();
+				// $this->contribution_agencies_model->where('bri08bridge_no', $delete_id->bri03bridge_no)->delete();
 			}
 			//exit;
 
@@ -976,7 +1025,8 @@ class bridge extends BaseController
 
 		//for ordering
 		//$arrColumns = array('bri03bridge_no', 'bri03bridge_name', 'bri03river_name', 'bri03design', 'dist01name', 'bri05bridge_complete', 'bri05bridge_complete_check', 'bri03construction_type');
-		$arrColumns = array('bri03bridge_no', 'bri03bridge_name', 'bri03river_name', 'bri03design', 'dist01name', 'bri05bridge_complete', 'bri05bridge_complete_check', 'bri03construction_type', 'bri03work_category');
+		// $arrColumns = array('bri03bridge_no', 'bri03bridge_name', 'bri03river_name', 'bri03design', 'dist01name', 'bri05bridge_complete', 'bri05bridge_complete_check', 'bri03construction_type', 'bri03work_category');
+		$arrColumns = array('bri03bridge_no', 'bri03bridge_name', 'bri03river_name', 'dist01name', 'bri05bridge_complete', 'bri05bridge_complete_check', 'bri03construction_type', 'bri03work_category');
 		$order = $this->request->getVar('order');
 		// var_dump($order['0']['column']);
 		// if (is_array($order)) {

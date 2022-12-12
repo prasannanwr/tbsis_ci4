@@ -152,7 +152,7 @@
                 {data: 'bri03bridge_no'},
                 {data: 'bri03bridge_name'}, 
                 {data: 'bri03river_name'}, 
-                {data: 'dist01name'},
+                {name: 'dist01name', data: 'dist01name', visible: true},
                 {name: 'bri03place_name', data: 'bri03place_name', visible: true},
                 {name: 'bri03supporting_agency', data: 'sup01sup_agency_name', visible: true},
                 {name: 'bri05bridge_complete', data: 'bridge_completion_date',
@@ -209,7 +209,7 @@
             
         $('#district').on('change', function(ev){
             //4 for column: dist01name;
-            $('#bridgeList').DataTable().column( 4 )
+            $('#bridgeList').DataTable().column( 3 )
                 .search( $('#district option:selected').text() )
                 .draw();
                 ev.preventDefault();

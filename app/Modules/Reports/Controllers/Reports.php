@@ -414,23 +414,26 @@ class Reports extends BaseController
     }
 
     //unacceptable
-    public function Unacceptable_Underconstruction($ext = '')
+    // public function Unacceptable_Underconstruction($ext = '')
+    // {
+    //     $data = self::$arrDefData;
+    //     $data['view_file'] = __FUNCTION__;
+    //     // 
+    //     $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+    //     $data['blnMM'] = $ext;
+    //     return view('\Modules\Reports\Views\Unacceptable_Underconstruction', $data);
+    // }
+    public function Unacceptable_Social_UnderConstruction($ext = '') 
     {
         $data = self::$arrDefData;
         $data['view_file'] = __FUNCTION__;
-        // 
-        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
         $data['blnMM'] = $ext;
-        return view('\Modules\Reports\Views\Unacceptable_Underconstruction', $data);
-    }
-
-    //access utility
-    public function Access_Utility_Underconstruction($ext = '')
-    {
-        $data = self::$arrDefData;
-        $data['view_file'] = __FUNCTION__;
 
         $perPage = 4;
+        $dataStart = "";
+        $dateEnd = "";
+        $data['dataStart'] = $dataStart;
+        $data['dateEnd'] = $dateEnd;
         $arrPrintList = array();
         $selDist=$this->view_district_reg_office_model->paginate($perPage);
         $data['selDist'] = $selDist;
@@ -457,13 +460,26 @@ class Reports extends BaseController
             }
         }
         $data['arrPrintList'] = $arrPrintList;
-
-        return view('\Modules\Reports\Views\Access_Utility_Underconstruction_report', $data);
+        return view('\Modules\Reports\Views\Unacceptable_Social_UnderConstruction', $data);
     }
 
-    
-   
+    //access utility
+    public function Access_Utility_Completed_FYWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Access_Utility_Completed_FYWise', $data);
+    }
 
-
+    public function Access_Utility_Completed_FYWise_report($ext = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
   
 }

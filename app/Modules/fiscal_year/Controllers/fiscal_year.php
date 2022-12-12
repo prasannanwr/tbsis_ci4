@@ -105,57 +105,7 @@ class fiscal_year extends BaseController {
 				{
 					/* save fiscal data */
 					
-					$arrDistList= $this->district_name_model->findAll();
-					// build array for the model
-					foreach($arrDistList as $distData){
-						//var_dump($SupData);	        	            
-						$form_data = array(
-							'fis02dist01codeid' =>$distData->dist01id,
-										//'fis02dist01codeid' => @$this->request->getVar('fis02dist01codeid'),
-										'fis02year' => @$this->request->getVar('fis01year'),
-										'fis02name1' => 0,
-										'fis02name2' => 0,
-										'fis02name3' => 0,
-										'fis02name4' => 0,
-										'fis02sup01id' => 1,
-										'fis02constype' => 0
-						);	                
-						$this->fiscal_data_model->save($form_data);
-
-						$form_data1 = array(
-							'fis02dist01codeid' =>$distData->dist01id,
-										//'fis02dist01codeid' => @$this->request->getVar('fis02dist01codeid'),
-										'fis02year' => @$this->request->getVar('fis01year'),
-										'fis02name1' => 0,
-										'fis02name2' => 0,
-										'fis02name3' => 0,
-										'fis02name4' => 0,
-										'fis02sup01id' => 1,
-										'fis02constype' => 1
-						);
-						
-						$this->fiscal_data_model->save($form_data1);
-					} 
-					
-					//save carry over bridges from previous fy
-					
-					//new construction
-					$Previous_carry= $this->view_all_views_model->view_sup03_dist01_bri05_count_carry_previous_data(0,$fis01year);
-					//var_dump($Previous_carry);
-					//exit;
-					
-					foreach($Previous_carry as $previous) {
-										
-						$this->fiscal_data_model->dbInsertAData($previous->dist01id, @$this->request->getVar('fis01year'), 0, $previous->bri03supporting_agency, $previous->bri03total_previous_carry_count);
-						
-					}
-					
-					//major maintenance
-					$Previous_carry= $this->view_all_views_model->view_sup03_dist01_bri05_count_carry_previous_data(1,$fis01year);
-					foreach($Previous_carry as $previous) {	                	                
-						$this->fiscal_data_model->dbInsertAData($previous->dist01id, @$this->request->getVar('fis01year'), 1, $previous->bri03supporting_agency, $previous->bri03total_previous_carry_count);
-					}
-					//exit;				
+					$arrDistList= $this->district_name_model->findAll();			
 
 					//set_message('Fiscal Year successfully created.', 'success');
 					session()->setFlashdata('message', 'Fiscal Year successfully created.');
@@ -180,7 +130,6 @@ class fiscal_year extends BaseController {
 		$fy = $objOldRec->fis01year;
 		 
  	    $this->fiscal_year_model->where('fis01id', $delete_id)->delete();
-		$this->fiscal_data_model->dbDeleteData($fy);
           
 			$message = 'Selected Data Deleted.';
 			// log_query($message);

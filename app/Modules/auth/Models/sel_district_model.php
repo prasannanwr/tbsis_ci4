@@ -14,7 +14,10 @@ class sel_district_model extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'user02userid',
+        'user02dist01id'
+    ];
 
     // Dates
     protected $useTimestamps = false;

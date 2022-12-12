@@ -1,3 +1,6 @@
+<?= $this->extend("\Modules\Template\Views\my_template") ?>
+<?= $this->section("body") ?>
+<div id="page-wrapper">
     <div class="container-fluid">
 		<div class="panel panel-default">
 			<div class="AddEdit-form ">
@@ -17,8 +20,7 @@
 							Code:
 						</label>
 						<div class="col-sm-6">
-                            <input id="sup03sup_agency_code" class="form-control" type="text" name="sup03sup_agency_code" maxlength="3" value="<?php echo et_setFormVal('sup03sup_agency_code', $objOldRec); ?>"  />
-                            <?php echo form_error('sup03sup_agency_code'); ?>
+                            <input id="sup03sup_agency_code" class="form-control" type="text" name="sup03sup_agency_code" maxlength="3" value="<?php echo et_setFormValBlank('sup03sup_agency_code', $objOldRec); ?>"  />
 						</div>
 					</div>
 					<div class="form-group">
@@ -26,8 +28,7 @@
 							Name:
 						</label>
 						<div class="col-sm-6">
-                            <input id="sup03sup_agency_name" class="form-control" type="text" name="sup03sup_agency_name" maxlength="30" value="<?php echo et_setFormVal('sup03sup_agency_name', $objOldRec); ?>"  />
-                            <?php echo form_error('sup03sup_agency_name'); ?>
+                            <input id="sup03sup_agency_name" class="form-control" type="text" name="sup03sup_agency_name" maxlength="30" value="<?php echo et_setFormValBlank('sup03sup_agency_name', $objOldRec); ?>"  />
 						</div>
 					</div>
 					<div class="form-group">
@@ -37,7 +38,7 @@
 						<div class="col-sm-6">
                         
                         <select class="form-control height" name="sup03sup_agency_type" id="sup03sup_agency_type">
-						 <?php if( $objOldRec->sup03sup_agency_type == '' || $objOldRec->sup03sup_agency_type == 'null' ){?>
+						 <?php if( $objOldRec != '' && ($objOldRec->sup03sup_agency_type == '' || $objOldRec->sup03sup_agency_type == 'null') ){?>
                            
                             <option class=""  value="0"  >None</option>
 							<option class=""  value="<?php echo ENUM_SUPPORT_LOCAL ;?>" >Local</option>
@@ -46,17 +47,17 @@
                              
 						    <?php }else{ ?>
                             
-                            <option class=""  value="0" <?php echo $objOldRec->sup03sup_agency_type == 0 ? "selected": " " ; ?> >None</option>
-							<option class=""  value="<?php echo ENUM_SUPPORT_LOCAL ;?>" <?php echo $objOldRec->sup03sup_agency_type == ENUM_SUPPORT_LOCAL ? "selected": " " ; ?> >Local</option>
-							<option class="" value="<?php echo ENUM_SUPPORT_GOVERMENT ;?>" <?php echo $objOldRec->sup03sup_agency_type == ENUM_SUPPORT_GOVERMENT ? "selected": " " ; ?> >Govt.</option>
-							<option class="" value="<?php echo ENUM_SUPPORT_OTHER ;?>" <?php echo $objOldRec->sup03sup_agency_type == ENUM_SUPPORT_OTHER ? "selected": " " ; ?> >Other</option>
+                            <option class=""  value="0" <?php echo ($objOldRec != '' && $objOldRec->sup03sup_agency_type == 0 ? "selected": " ") ; ?> >None</option>
+							<option class=""  value="<?php echo ENUM_SUPPORT_LOCAL ;?>" <?php echo ($objOldRec != '' && $objOldRec->sup03sup_agency_type == ENUM_SUPPORT_LOCAL ? "selected": " "); ?> >Local</option>
+							<option class="" value="<?php echo ENUM_SUPPORT_GOVERMENT ;?>" <?php echo ($objOldRec != '' && $objOldRec->sup03sup_agency_type == ENUM_SUPPORT_GOVERMENT ? "selected": " ") ; ?> >Govt.</option>
+							<option class="" value="<?php echo ENUM_SUPPORT_OTHER ;?>" <?php echo ($objOldRec != '' && $objOldRec->sup03sup_agency_type == ENUM_SUPPORT_OTHER ? "selected": " "); ?> >Other</option>
                              
                          <?php } ?>
                                  
                     	</select>                        
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="display: none;">
 						<label for="first_name" class="col-sm-3 control-label">
 							Indexing:
 						</label>
@@ -64,7 +65,7 @@
                         
                         <select class="form-control height" name="sup03index" id="sup03index">
                             
-					 <?php if( $objOldRec->sup03index == '' || $objOldRec->sup03index == 'null' ){?>
+					 <?php if( $objOldRec != '' && ($objOldRec->sup03index == '' || $objOldRec->sup03index == 'null') ){?>
                              <?php 
                             for ($i = 1; $i <= 15; $i++) {
                              ?>
@@ -76,7 +77,7 @@
                              <?php 
                             for ($i = 1; $i <= 15; $i++) {
                              ?>
- 							<option class=""  value="<?php echo $i ; ?>" <?php echo $objOldRec->sup03index == $i ? "selected": " " ; ?> ><?php echo $i; ?></option>
+ 							<option class=""  value="<?php echo $i ; ?>" <?php echo ($objOldRec != '' && $objOldRec->sup03index == $i) ? "selected": " " ; ?> ><?php echo $i; ?></option>
 					       <?php 
                             } 
                             ?>
@@ -93,7 +94,6 @@
 						</label>
 						<div class="col-sm-6">
                             <textarea id="sup03description" class="form-control" name="sup03description" maxlength="100"><?php echo et_setFormVal('sup03description', $objOldRec); ?></textarea>
-                            <?php echo form_error('sup03description'); ?>
 						</div>
 					</div>
                     
@@ -121,6 +121,7 @@
 			</div>
 		</div>
     </div>
+</div>
                 
 
 <script type="text/javascript" src="<?php echo base_url(); ?>/js/jquery.validate.min.js"></script>
@@ -165,3 +166,4 @@ $(document).ready(function()
             });
       });
 </script>
+<?= $this->endSection() ?>

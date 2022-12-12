@@ -14,7 +14,10 @@ class FiscalYearModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'fis01year',
+        'fis01code'
+    ];
 
     // Dates
     protected $useTimestamps = false;

@@ -1,4 +1,7 @@
-    <div id="" class="dashboard-bg">
+<?= $this->extend("\Modules\Template\Views\my_template") ?>
+<?= $this->section("body") ?>
+<div id="page-wrapper">
+	    <div id="" class="dashboard-bg">
     	<div class="container-fluid">
     		<div class="panel panel-default">
     			<div class="ShowForm-form ">
@@ -11,7 +14,7 @@
                 <div class="AddBtn">
             	    <?php //if (check_access_general(array('emp_add'))): ?>
                     <?php //format anchor(module_name, caption);?>
-            	    <?php echo anchor('basic_supporting_agencies/create', '<button type="button" class="btn btn-small"><i class="icon-user icon"></i> Create Supporting Agencies</button>'); ?>
+            	    <?php echo anchor('basic_supporting_agencies/create', '<button type="button" class="btn btn-small"><i class="icon-user icon"></i> Add</button>'); ?>
             	    <?php //endif ?>
                </div>
     
@@ -27,9 +30,9 @@
                                 <th>Code</th>
                                 <th>Name</th>
                                 <th>Type</th>
-                                <th>Sorting</th>
+                                <!-- <th>Sorting</th> -->
                                 
-                                <th><?php echo lang('index_action_th'); ?></th>
+                                <th><?php echo lang('Locale.index_action_th'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,9 +66,9 @@
                                   ?>
                                 	<?php // echo $objData->sup03sup_agency_type; ?>
                     			</td>
-                    			<td>
-                    				<?php echo $objData->sup03index; ?>
-                    			</td>
+                    			<!-- <td>
+                    				<?php //echo $objData->sup03index; ?>
+                    			</td> -->
                                
                     		
                                 
@@ -122,3 +125,4 @@ $(document).ready(function()
 </script>
 
 <?php endif ?>
+<?= $this->endSection() ?>  

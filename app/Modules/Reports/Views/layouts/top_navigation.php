@@ -223,7 +223,7 @@
                                             </a>
                                             <ul class="dropdown-menu2">
                                                 <li>
-                                                <?php echo anchor('reports/Gen_Dist_DateWise', 'Under Construction'); ?>
+                                                <?php echo anchor('reports/Unacceptable_Social_UnderConstruction', 'Under Construction'); ?>
                                                 </li>
                                             </ul>
                                         </li>
@@ -247,19 +247,19 @@
                                     </a>
 
                                     <ul class="dropdown-menu1">
-                                        <li class="dropdown">
-                                            <?php echo anchor('reports/Access_Utility_Underconstruction', 'Under construction'); ?>
-                                        </li>
+                                        <!-- <li class="dropdown">
+                                            <?php //echo anchor('reports/Access_Utility_Underconstruction', 'Under construction'); ?>
+                                        </li> -->
                                          <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                                 Completed <b class="caret"></b>
                                             </a>
                                             <ul class="dropdown-menu2">
                                                 <li>
-                                                <?php echo anchor('reports/Gen_Dist_DateWise', 'DateWise'); ?>
+                                                <?php echo anchor('reports/Access_Utility_Completed_FYWise', 'DateWise'); ?>
                                                 </li>
                                                  <li>
-                                                <?php echo anchor('reports/Gen_Dist_DateWise', 'FYWise'); ?>
+                                                <?php echo anchor('reports/Access_Utility_Completed_FYWise', 'FYWise'); ?>
                                                 </li>
                                             </ul>
                                         </li>
@@ -278,46 +278,13 @@
                             // {
                             if (session()->get('user_rights') == ENUM_ADMINISTRATOR) {
                             ?>
-
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         Settings <b class="caret"></b>
                                     </a>
-                                    <ul class="dropdown-menu Bgset" style="width: 500px; display:none" >
+                                    <ul class="dropdown-menu Bgset">
                                         <div class="" style="width: 230px; overflow: hidden; float: left; margin-right: 10px; margin-left:10px ;">
                                             <li class="divider"> </li>
-                                            <li>
-                                                <?php echo anchor('bridge_type', '<i class="fa  fa-tasks fa-1x"></i> Bridge Types'); ?>
-                                            </li>
-                                            <li class="divider"> </li>
-                                            <li>
-                                                <?php echo anchor('bridge_design_standard', '
-                                                                <i class="fa fa-pencil-square-o fa-1x"></i> Bridge Design Standard'); ?>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <?php echo anchor('bridge_designer', '
-                                                                <i class="fa fa-pencil fa-1x"></i> Bridge Designer'); ?>
-                                            </li>
-                                            <li class="divider"> </li>
-                                            <li><?php echo anchor('country', ' <i class="fa fa-flag fa-1x"></i> Countries'); ?>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <?php echo anchor('cost_components', '
-                                                                <i class="fa fa-money fa-1x"></i> Cost Components'); ?>
-                                            </li>
-                                            <li class="divider"> </li>
-                                            <li>
-                                                <?php echo anchor('construction', '
-                                                                <i class="fa fa-comments fa-1x"></i> Contruction Components'); ?>
-                                            </li>
-                                            <li class="divider"> </li>
-                                            <li>
-                                                <?php echo anchor('development_region', '
-                                                                <i class="fa fa-align-justify fa-1x"></i> Development Region'); ?>
-                                            </li>
-                                            <li class="divider"></li>
                                             <li>
                                                 <?php echo anchor('province', '
                                                                 <i class="fa fa-align-justify fa-1x"></i> States'); ?>
@@ -334,43 +301,9 @@
                                             </li>
                                             <li class="divider"> </li>
                                             <li>
-                                                <?php echo anchor('handrail_cable', '
-                                                                <i class="fa fa-comments fa-1x"></i> Handrail Cable'); ?>
-                                            </li>
-
-                                            <li class="divider"> </li>
-                                            <li>
-                                                <?php echo anchor('logo_upload', '
-                                                                <i class="fa fa-align-center fa-1x"></i> Logo Upload'); ?>
-                                            </li>
-                                            <li class="divider"></li>
-
-                                            <li>
                                                 <?php echo anchor('vcd_municipality', '
                                                                 <i class="fa fa-align-right fa-1x"></i> Municipality and VDC'); ?>
 
-                                            </li>
-                                            <li class="divider"></li>
-
-
-                                        </div>
-
-
-                                        <div class="" style="width: 230px; overflow: hidden; float: left;">
-                                            <li class="divider"></li>
-                                            <li>
-                                                <?php echo anchor('main_walkway_cable_diam', '
-                                                                <i class="fa fa-comments fa-1x"></i> Main Walkway Cable Diam'); ?>
-                                            </li>
-                                            <li class="divider"> </li>
-                                            <li>
-                                                <?php echo anchor('main_walkway_cable_number', '
-                                                                <i class="fa fa-comments fa-1x"></i> Main Walkway Cable Number'); ?>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <?php echo anchor('rust_prev_measures', '
-                                                                <i class="fa fa-comments fa-1x"></i>  Rust Prev Measures'); ?>
                                             </li>
                                             <li class="divider"></li>
                                             <li>
@@ -382,49 +315,11 @@
                                                 <?php echo anchor('basic_supporting_agencies', '
                                                             <i class="fa fa-users fa-1x"></i> Supporting Agencies'); ?>
                                             </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <?php echo anchor('supporting_agencies', '
-                                                            <i class="fa fa-users fa-1x"></i> Contributing Agencies'); ?>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <?php echo anchor('site_surveyors', '
-                                                                <i class="fa fa-square fa-1x"></i> Site Surveyors'); ?>
-                                            </li>
                                             <li class="divider"> </li>
 
                                             <li>
                                                 <?php echo anchor('user', '<i class="fa fa-user fa-1x"></i> Users'); ?>
                                             </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <?php echo anchor('walkway_width', '
-                                                                <i class="fa fa-comments fa-1x"></i> Walk way Width'); ?>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <?php echo anchor('walkway_deck', '
-                                                                <i class="fa fa-comments fa-1x"></i> Walk way Deck'); ?>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <?php echo anchor('weighted', '
-                                                                <i class="fa fa-align-center fa-1x"></i> Weighted'); ?>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <?php echo anchor('work_category', '
-                                                                <i class="fa fa-comments fa-1x"></i> Work Category'); ?>
-                                            </li>
-                                            <li class="divider"> </li>
-
-                                            <li>
-                                                <?php echo anchor('zone', '
-                                                                <i class="fa fa-align-center fa-1x"></i> Zone'); ?>
-                                            </li>
-                                            <li class="divider"></li>
-
 
                                         </div>
                                     </ul>

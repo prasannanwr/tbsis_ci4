@@ -62,9 +62,9 @@ $routes->group("reports", ["namespace" => "App\Modules\Reports\Controllers"], fu
 	$routes->get('Public_Audit_FYWise', 'Reports::Public_Audit_FYWise', ['filter' => 'auth']);
 	$routes->get('Public_Audit_FYWise/(:any)', 'Reports::Public_Audit_FYWise/$1', ['filter' => 'auth']);
 
-	$routes->get('Unacceptable_Underconstruction', 'Reports::Unacceptable_Underconstruction', ['filter' => 'auth']);
+	$routes->get('Unacceptable_Social_UnderConstruction', 'Reports::Unacceptable_Social_UnderConstruction', ['filter' => 'auth']);
 
-	$routes->get('Access_Utility_Underconstruction', 'Reports::Access_Utility_Underconstruction', ['filter' => 'auth']);
+	$routes->get('Access_Utility_Completed_FYWise', 'Reports::Access_Utility_Completed_FYWise', ['filter' => 'auth']);
 	
 });
 
@@ -107,11 +107,24 @@ $routes->post('reports/Public_Audit_FYWise_report/(:any)', '\App\Modules\Reports
 $routes->post('reports/Public_Audit_DateWise_report', '\App\Modules\Reports\Controllers\Inc\Public_Audit_DateWise_report::index', ['filter' => 'auth']);
 $routes->post('reports/Public_Audit_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Public_Audit_DateWise_report::index/$1', ['filter' => 'auth']);
 
+$routes->post('reports/UC_Proportion_Representation_FYWise_report/', '\App\Modules\Reports\Controllers\Inc\UC_Proportion_Representation_FYWise_report::index', ['filter' => 'auth']);
+$routes->post('reports/UC_Proportion_Representation_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\UC_Proportion_Representation_FYWise_report::index/$1', ['filter' => 'auth']);
+
 $routes->get('reports/Beneficiaries_FYWise_report/', '\App\Modules\Reports\Controllers\Inc\Beneficiaries_FYWise_report::index', ['filter' => 'auth']);
 $routes->get('reports/Beneficiaries_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Beneficiaries_FYWise_report::index/$1', ['filter' => 'auth']);
 
 $routes->post('reports/Beneficiaries_DateWise_report', '\App\Modules\Reports\Controllers\Inc\Beneficiaries_DateWise_report::index', ['filter' => 'auth']);
 $routes->post('reports/Beneficiaries_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Beneficiaries_DateWise_report::index/$1', ['filter' => 'auth']);
 
+$routes->post('reports/Access_Utility_Completed_FYWise_report', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_FYWise_report::index', ['filter' => 'auth']);
+$routes->post('reports/Access_Utility_Completed_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_FYWise_report::index/$1', ['filter' => 'auth']);
+
+$routes->post('reports/Access_Utility_Completed_DateWise_report', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_DateWise_report::index', ['filter' => 'auth']);
+$routes->post('reports/Access_Utility_Completed_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_DateWise_report::index/$1', ['filter' => 'auth']);
+
 $routes->get('reports/Gen_Dag_FYWise_report/', '\App\Modules\Reports\Controllers\Inc\Gen_Dag_FYWise_report::index', ['filter' => 'auth']);
 $routes->get('reports/Gen_Dag_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Gen_Dag_FYWise_report::index/$1', ['filter' => 'auth']);
+
+$routes->get('reports/UC_Proportion_Representation_FYWise_report/', '\App\Modules\Reports\Controllers\Inc\UC_Proportion_Representation_FYWise_report::index', ['filter' => 'auth']);
+$routes->get('reports/UC_Proportion_Representation_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\UC_Proportion_Representation_FYWise_report::index/$1', ['filter' => 'auth']);
+
