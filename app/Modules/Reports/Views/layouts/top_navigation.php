@@ -217,23 +217,44 @@
                                         Unacceptable Bridge<b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu1">
-                                        <li class="dropdown">
+                                        <!-- <li class="dropdown" style="display: none;">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                                 Social <b class="caret"></b>
                                             </a>
                                             <ul class="dropdown-menu2">
                                                 <li>
-                                                <?php echo anchor('reports/Unacceptable_Social_UnderConstruction', 'Under Construction'); ?>
+                                                <?php //echo anchor('reports/Unacceptable_Social_UnderConstruction', 'Under Construction'); ?>
                                                 </li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                          <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                                 Technical <b class="caret"></b>
                                             </a>
                                             <ul class="dropdown-menu2">
                                                 <li>
-                                                <?php echo anchor('reports/Gen_Dist_DateWise', 'Under Construction'); ?>
+                                                    <?php echo anchor('reports/Unacceptable_Technical_UnderConstruction', 'Under Construction'); ?>
+                                                    <!-- <ul class="dropdown-menu3">
+                                                        <li>
+                                                        <?php //echo anchor('reports/Unacceptable_Technical_UnderConstruction_DateWise', 'DateWise'); ?>
+                                                        </li>
+                                                        <li>
+                                                        <?php //echo anchor('reports/Unacceptable_Technical_UnderConstruction_FYWise', 'FYWise'); ?>
+                                                        </li>
+                                                    </ul> -->
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                    Completed <b class="caret"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu3">
+                                                        <li>
+                                                        <?php echo anchor('reports/Unacceptable_Technical_Completed_DateWise', 'DateWise'); ?>
+                                                        </li>
+                                                        <li>
+                                                        <?php echo anchor('reports/Unacceptable_Technical_Completed_FYWise', 'FYWise'); ?>
+                                                        </li>
+                                                    </ul>
                                                 </li>
                                             </ul>
                                         </li>
@@ -301,7 +322,7 @@
                                             </li>
                                             <li class="divider"> </li>
                                             <li>
-                                                <?php echo anchor('vcd_municipality', '
+                                                <?php echo anchor('vdc_municipality', '
                                                                 <i class="fa fa-align-right fa-1x"></i> Municipality and VDC'); ?>
 
                                             </li>

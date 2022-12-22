@@ -1,4 +1,6 @@
-    <div class="container-fluid">
+<?= $this->extend("\Modules\Template\Views\my_template") ?>
+<?= $this->section("body") ?>
+<div class="container-fluid">
 		<div class="panel panel-default">
 			<div class="AddEdit-form ">
 				<div class="panel-heading">
@@ -17,8 +19,7 @@
 							Name:
 						</label>
 						<div class="col-sm-6">
-                            <input id="muni01name" class="form-control" type="text" name="muni01name"  value="<?php echo et_setFormVal('muni01name', $objOldRec); ?>"  />
-                            <?php echo form_error('muni01name'); ?>
+                            <input id="muni01name" class="form-control" type="text" name="muni01name"  value="<?php echo et_setFormValBlank('muni01name', $objOldRec); ?>"  />
 						</div>
 					</div>
                 <div class="form-group">
@@ -39,8 +40,6 @@
 						</label>
 						<div class="col-sm-6">
                          <?php echo et_form_dropdown_db('muni01dist01id', 'dist01district', 'dist01name', 'dist01id', et_setFormVal('muni01dist01id', $objOldRec), '', 'class="form-control"') ?>
-  
-                            <?php echo form_error('muni01dist01id'); ?>
 						</div>
 					</div>
                     <div class="form-group">
@@ -48,8 +47,7 @@
 							RM/UM Code:
 						</label>
 						<div class="col-sm-6">
-                          <input id="muni01code" class="form-control" type="text" name="muni01code"  value="<?php echo et_setFormVal('muni01code', $objOldRec); ?>"  />
-                            <?php echo form_error('muni01code'); ?>
+                          <input id="muni01code" class="form-control" type="text" name="muni01code"  value="<?php echo et_setFormValBlank('muni01code', $objOldRec); ?>"  />
 						</div>
 					</div>
 					
@@ -58,8 +56,7 @@
 							Description:
 						</label>
 						<div class="col-sm-6">
-                            <textarea id="dist0remark" class="form-control" name="dist01remark" ><?php echo et_setFormVal('dist01remark', $objOldRec); ?></textarea>
-                            <?php echo form_error('dist01remark'); ?>
+                            <textarea id="dist0remark" class="form-control" name="dist01remark" ><?php echo et_setFormValBlank('dist01remark', $objOldRec); ?></textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -76,7 +73,7 @@
                           ?>
                         <?php echo form_hidden('muni01id', et_setFormVal('muni01id', $objOldRec)); ?>
                         <?php echo form_button($btn_submit); ?>
-                        <?php echo anchor('vcd_municipality', 'Cancel', array('class' => 'btn btn-default')); ?>
+                        <?php echo anchor('vdc_municipality', 'Cancel', array('class' => 'btn btn-default')); ?>
 						</div>
 					</div>
                     <?php echo form_close();?>
@@ -136,3 +133,4 @@ $(document).ready(function()
             });
       });
 </script>
+<?= $this->endSection() ?>

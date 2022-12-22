@@ -17,9 +17,13 @@ class bridge_cost_estimate_model extends Model
     protected $allowedFields    = [
         'b_id',
         'bri_impl_approach_check',
+        'bri_impl_approach_remarks',
         'bri_unit_rates_steel_check',
+        'bri_unit_rates_steel_remarks',
         'bri_unit_rates_check',
+        'bri_unit_rates_remarks',
         'bri_portering_dis_check',
+        'bri_portering_dis_remarks',
         'cost_est_site_assessment_by',
         'cost_est_site_assessment_date',
         'cost_est_remarks',

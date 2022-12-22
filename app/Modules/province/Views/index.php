@@ -27,10 +27,7 @@
                                 <th width="25px"><input type="checkbox" name=""></th>
                                 <th width="25px">SN</th>
                                 <th>Name</th>
-                                 <th>code</th>
-                                
-                               
-                                
+                                <th>Code</th>
                                 <th><?php echo lang('index_action_th'); ?></th>
                             </tr>
                         </thead>

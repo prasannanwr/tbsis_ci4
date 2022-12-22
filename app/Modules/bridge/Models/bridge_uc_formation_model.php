@@ -18,6 +18,8 @@ class bridge_uc_formation_model extends Model
         'b_id',
         'b_uc_assessment_by',
         'b_uc_assessment_date',
+        'uc_contractor_name',
+        'uc_contract_date',
         'b_uc_cp_dalit',
         'b_uc_cp_janjati',
         'b_uc_cp_minorities',

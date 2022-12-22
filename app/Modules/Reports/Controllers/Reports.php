@@ -9,7 +9,7 @@ use App\Modules\cost_components\Models\cost_components_model;
 use App\Modules\district_name\Models\district_name_model;
 use App\Modules\fiscal_year\Models\FiscalYearModel;
 use App\Modules\template\Controllers\Template;
-use App\Modules\vdc_municipality\Models\vdc_municipality_model;
+//use App\Modules\vdc_municipality\Models\vdc_municipality_model;
 use App\Modules\view\Models\view_bridge_detail_model;
 use App\Modules\view\Models\view_district_reg_office_model;
 use App\Modules\view\Models\view_vdc_model;
@@ -28,6 +28,7 @@ use App\Modules\fiscal_data\Models\fiscal_data_model;
 use App\Modules\view\Models\view_bridge_actual_supporting_cost;
 use App\Modules\view\Models\view_regional_office_model;
 use App\Modules\regional_office\Models\regional_office_model;
+use App\Modules\vdc_municipality\Models\MunicipalityModel;
 use App\Modules\view\Models\view_bridge_actual_cost;
 //use App\Modules\Reports\Models\ReportsModel;
 
@@ -93,7 +94,7 @@ class Reports extends BaseController
         $fiscal_year_model = new FiscalYearModel();
         $view_bridge_detail_model = new view_bridge_detail_model();
         $view_district_reg_office_model = new view_district_reg_office_model();
-        $vcd_municipality_model = new vdc_municipality_model();
+        $vcd_municipality_model = new MunicipalityModel();
         $district_name_model = new district_name_model();
         $view_vdc_model  = new view_vdc_model();
         $supporting_agencies_model = new supporting_agencies_model();
@@ -423,7 +424,7 @@ class Reports extends BaseController
     //     $data['blnMM'] = $ext;
     //     return view('\Modules\Reports\Views\Unacceptable_Underconstruction', $data);
     // }
-    public function Unacceptable_Social_UnderConstruction($ext = '') 
+    public function Unacceptable_Technical_UnderConstruction($ext = '') 
     {
         $data = self::$arrDefData;
         $data['view_file'] = __FUNCTION__;
@@ -460,7 +461,7 @@ class Reports extends BaseController
             }
         }
         $data['arrPrintList'] = $arrPrintList;
-        return view('\Modules\Reports\Views\Unacceptable_Social_UnderConstruction', $data);
+        return view('\Modules\Reports\Views\Unacceptable_Technical_UnderConstruction', $data);
     }
 
     //access utility

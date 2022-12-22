@@ -137,6 +137,15 @@ class bridge_model extends Model
         return $x;
     }
 
+    /**
+     * Access_Utility_Completed_FYWise_report
+
+     *
+     * @param [type] $distId
+     * @param string $perPage
+     * @param integer $offset
+     * @return void
+     */
     public function getBridgeUtilities($distId, $perPage='', $offset = 0) {
 
         //using builder
@@ -146,6 +155,35 @@ class bridge_model extends Model
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
             ->join('bridge_utilities as `bu`','`bu`.`bu_id` = `view_bridge_child`.`bri03utility_left_bank`', 'left')
             ->join('bridge_utilities as `bu1`','`bu1`.`bu_id` = `view_bridge_child`.`bri03utility_right_bank`', 'left');
+        
+        if($distId != '')
+            $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+
+        $result = $builder->get();
+        
+
+        if($result->getNumRows() <= 0)
+            return '';
+
+        return $result->getResultArray();
+    }
+
+    /**
+     * Unacceptable_Technical_UnderConstruction
+     *
+     * @param [type] $distId
+     * @param string $perPage
+     * @param integer $offset
+     * @return void
+     */
+    public function getUTechUnderConstruction($distId, $perPage='', $offset = 0) {
+
+        //using builder
+        $builder = $this->db->table("view_bridge_child");
+        $builder = $builder
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`,`view_bridge_child`.`bri03portering_distance` AS `bri03portering_distance`,`view_bridge_child`.`bri03road_head` AS `bri03road_head`,`view_bridge_child`.`bri03river_type` AS `bri03river_type`,`bu`.`bu_name` as 'bri03utility_lb_name',`bu1`.`bu_name` as `bri03utility_rb_name`")
+            ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
+            ->join('bridge_utilities as `bu`','`bu`.`bu_id` = `view_bridge_child`.`bri03utility_left_bank`', 'left');
         
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
