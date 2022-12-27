@@ -72,9 +72,12 @@ class Employment_Generation_DateWise_report extends BaseController
           
         $data['blnMM'] = $stat;
         $data['title'] = "Beneficiaries DateWise Report";
+        $selProvince = @$this->request->getVar('selProvince');       
+        $data['selProvince'] = $selProvince;
         
         $data['startdate'] = $dateStart;
         $data['enddate'] = $dateEnd;
+        $data['provinceList'] = $this->province_model->asObject()->findAll();
 
         if ($Postback == 'Back')
         {
@@ -92,7 +95,11 @@ class Employment_Generation_DateWise_report extends BaseController
                 // $pager->makeLinks($page+1, $perPage, $total);
                 // $offset = $page * $perPage;
                 //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
-                $selDist=$this->view_district_reg_office_model->paginate($perPage);
+                if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                    $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
+                } else {
+                    $selDist=$this->view_district_reg_office_model->paginate($perPage);
+                } 
                 $data['selDist'] = $selDist;
                 $data['pager'] = $this->view_district_reg_office_model->pager;
                 

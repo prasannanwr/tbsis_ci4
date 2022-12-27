@@ -61,81 +61,87 @@ class Gen_Dag_DateWise_report extends BaseController
            $dateEnd = $searchData['dateEnd'];
            $Postback = '';
         } else {
-
             $Postback = @$this->request->getVar('submit');
             $dateStart = @$this->request->getVar('start_date');
             $dateEnd = @$this->request->getVar('end_date');
         } 
-          
-            $data['blnMM'] = $stat;
-           $data['title'] = "Beneficiaries DateWise Report";
         
-            $data['startdate'] = $dateStart;
-            $data['enddate'] = $dateEnd;
+        $selProvince = @$this->request->getVar('selProvince');       
+        $data['selProvince'] = $selProvince;
+        $data['blnMM'] = $stat;
+        $data['title'] = "Beneficiaries DateWise Report";
+    
+        $data['startdate'] = $dateStart;
+        $data['enddate'] = $dateEnd;
+        $data['provinceList'] = $this->province_model->asObject()->findAll();
 
-            //echo $dataStart;exit;
-            if ($Postback == 'Back')
+        //echo $dataStart;exit;
+        if ($Postback == 'Back')
+        {
+            redirect(site_url());
+        } elseif ($dateStart <= $dateEnd)
+        {
+            if ($dateStart != 0 || $dateEnd != 0)
             {
-                redirect(site_url());
-            } elseif ($dateStart <= $dateEnd)
-            {
-                if ($dateStart != 0 || $dateEnd != 0)
-                {
-                    $arrPrintList = array();
-                    $perPage = 4;
-                    //pager
-                    // $pager=service('pager');
-                    // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;
-                    // $total = $this->view_district_reg_office_model->countAll();
-                    // $pager->makeLinks($page+1, $perPage, $total);
-                    // $offset = $page * $perPage;
-                    //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
+                $arrPrintList = array();
+                $perPage = 4;
+                //pager
+                // $pager=service('pager');
+                // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;
+                // $total = $this->view_district_reg_office_model->countAll();
+                // $pager->makeLinks($page+1, $perPage, $total);
+                // $offset = $page * $perPage;
+                //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
+                if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                    $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
+                } else {
                     $selDist=$this->view_district_reg_office_model->paginate($perPage);
-                    $data['selDist'] = $selDist;
-                    $data['pager'] = $this->view_district_reg_office_model->pager;
-                    
-                    if(is_array( $selDist)){
-                        $i =0;
-                        foreach( $selDist as $k=>$v){
-                            $rr=$v['dist01id'];
-                            // var_dump($v1);exit;
-                            $arrChild1=null;
-                            
-                            $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiariesByDate($dateStart, $dateEnd, $rr);
-                            
-                            if(is_array($arrBridgeList) && !empty($arrBridgeList)){
-                                //print header
-                                //echo 'header';
-                                $row['dist'] = $v;
-                                $row['data'] = $arrBridgeList;
-                                $arrPrintList[] = $row;
-                                $i++;
-                            }
+                } 
+                $data['selDist'] = $selDist;
+                $data['pager'] = $this->view_district_reg_office_model->pager;
+                
+                if(is_array( $selDist)){
+                    $i =0;
+                    foreach( $selDist as $k=>$v){
+                        $rr=$v['dist01id'];
+                        // var_dump($v1);exit;
+                        $arrChild1=null;
+                        
+                        $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiariesByDate($dateStart, $dateEnd, $rr);
+                        
+                        if(is_array($arrBridgeList) && !empty($arrBridgeList)){
+                            //print header
+                            //echo 'header';
+                            $row['dist'] = $v;
+                            $row['data'] = $arrBridgeList;
+                            $arrPrintList[] = $row;
+                            $i++;
                         }
                     }
-
-                    //$data = ['pager' => $bridge_beneficiaries_model->pager];
-                        
-                    // echo "<pre>";
-                    // print_r($arrPrintList);exit;
-                    $data['arrPrintList'] = $arrPrintList;
-                    $data['dataStart'] = $dateStart;
-                    $data['dateEnd'] = $dateEnd;
-                    
-
-                    
-                } else
-                {
-                    redirect("reports/Gen_Dag_DateWise/".$stat);
-                    //return redirect()->to(base_url('reports/Beneficiaries_DateWise_report/'));  
                 }
+
+                //$data = ['pager' => $bridge_beneficiaries_model->pager];
+                    
+                // echo "<pre>";
+                // print_r($arrPrintList);exit;
+                $data['arrPrintList'] = $arrPrintList;
+                $data['dataStart'] = $dateStart;
+                $data['dateEnd'] = $dateEnd;
+                
+
                 
             } else
             {
-                'start date is Smaller than End Date';
+                redirect("reports/Gen_Dag_DateWise/".$stat);
+                //return redirect()->to(base_url('reports/Beneficiaries_DateWise_report/'));  
             }
-            // echo "<pre>";
-            // var_dump($data['arrPrintList']);exit;
+            
+        } else
+        {
+            'start date is Smaller than End Date';
+        }
+        // echo "<pre>";
+        // var_dump($data['arrPrintList']);exit;
            
         return view('\Modules\Reports\Views\Gen_Dag_DateWise_report', $data);
 

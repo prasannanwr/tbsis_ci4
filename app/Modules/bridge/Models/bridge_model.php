@@ -3,7 +3,7 @@
 namespace App\Modules\bridge\Models;
 
 use App\Modules\auth\Models\sel_district_model;
-use App\Modules\vdc_municipality\Models\vdc_municipality_model;
+use App\Modules\vdc_municipality\Models\MunicipalityModel;
 use App\Modules\view\Models\view_vdc_new_model;
 use CodeIgniter\Model;
 
@@ -129,7 +129,7 @@ class bridge_model extends Model
             $x .= "M";
         }
         
-        $vdc_municipality_model = new vdc_municipality_model();
+        $vdc_municipality_model = new MunicipalityModel();
         $vdc_municipality_model->update($intVDCNo, array('muni01id'=>$intVDCNo, 'muni01last_bridge_no'=> $arrInfo['muni01last_bridge_no'] + 1 ));
         //echo $this->db->last_query();
         //die();

@@ -44,6 +44,8 @@ class bridge_construction_work_model extends Model
         'bri_relative_sag_remarks',
         'bri_painting_works_check',
         'bri_painting_works_remarks',
+        'bri_plum_concrete_check',
+        'bri_plum_concrete_remarks',
         'bcw_assessment_by',
         'bcw_assessment_date',
         'bcw_remarks',

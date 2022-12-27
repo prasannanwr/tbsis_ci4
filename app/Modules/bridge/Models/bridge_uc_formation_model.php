@@ -176,9 +176,9 @@ class bridge_uc_formation_model extends Model
             ->join('bridge_beneficiaries','`bridge_beneficiaries`.`bb_bridge_id` = `view_bridge_child`.`bri03id`', 'left')
             ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
         if($startDate != '')
-            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` >=', $startDate);
         if($endDate != '')
-            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` <=', $endDate);
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
 

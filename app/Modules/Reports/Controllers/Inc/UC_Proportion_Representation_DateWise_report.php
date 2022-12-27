@@ -68,78 +68,83 @@ class UC_Proportion_Representation_DateWise_report extends BaseController
             $Postback = @$this->request->getVar('submit');
             $dateStart = @$this->request->getVar('start_date');
             $dateEnd = @$this->request->getVar('end_date');
-        } 
-          
-            $data['blnMM'] = $stat;
-           $data['title'] = "UC Proportion Representation DateWise Report";
-        
-           $data['startdate'] = $dateStart;
-            $data['enddate'] = $dateEnd;
+        }
 
-            if ($Postback == 'Back')
+        $selProvince = @$this->request->getVar('selProvince');       
+        $data['selProvince'] = $selProvince;
+        $data['blnMM'] = $stat;
+        $data['title'] = "UC Proportion Representation DateWise Report";
+    
+        $data['startdate'] = $dateStart;
+        $data['enddate'] = $dateEnd;
+        $data['provinceList'] = $this->province_model->asObject()->findAll();
+
+        if ($Postback == 'Back')
+        {
+            redirect(site_url());
+        } elseif ($dateStart <= $dateEnd)
+        {
+            if ($dateStart != 0 || $dateEnd != 0)
             {
-                redirect(site_url());
-            } elseif ($dateStart <= $dateEnd)
-            {
-                if ($dateStart != 0 || $dateEnd != 0)
-                {
-                    // echo $dateStart;exit;
-                    $arrPrintList = array();
-                    $perPage = 4;
-                    //pager
-                    // $pager=service('pager');
-                    // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;
-                    // $total = $this->view_district_reg_office_model->countAll();
-                    // $pager->makeLinks($page+1, $perPage, $total);
-                    // $offset = $page * $perPage;
-                    //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
+                // echo $dateStart;exit;
+                $arrPrintList = array();
+                $perPage = 4;
+                //pager
+                // $pager=service('pager');
+                // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;
+                // $total = $this->view_district_reg_office_model->countAll();
+                // $pager->makeLinks($page+1, $perPage, $total);
+                // $offset = $page * $perPage;
+                //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
+                if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                    $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
+                } else {
                     $selDist=$this->view_district_reg_office_model->paginate($perPage);
-                    $data['selDist'] = $selDist;
-                    $data['pager'] = $this->view_district_reg_office_model->pager;
-                    
-                    if(is_array( $selDist)){
-                        $i =0;
-                        foreach( $selDist as $k=>$v){
-                            $rr=$v['dist01id'];
-                            // var_dump($v1);exit;
-                            $arrChild1=null;
-                            
-                            $arrBridgeList = $this->bridge_uc_formation_model->getUCProRepresentationByDate($dateStart, $dateEnd, $rr);
-                            
-                            if(is_array($arrBridgeList) && !empty($arrBridgeList)){
-                                //print header
-                                //echo 'header';
-                                $row['dist'] = $v;
-                                $row['data'] = $arrBridgeList;
-                                $arrPrintList[] = $row;
-                                $i++;
-                            }
+                } 
+                $data['selDist'] = $selDist;
+                $data['pager'] = $this->view_district_reg_office_model->pager;
+                
+                if(is_array( $selDist)){
+                    $i =0;
+                    foreach( $selDist as $k=>$v){
+                        $rr=$v['dist01id'];
+                        // var_dump($v1);exit;
+                        $arrChild1=null;
+                        
+                        $arrBridgeList = $this->bridge_uc_formation_model->getUCProRepresentationByDate($dateStart, $dateEnd, $rr);
+                        
+                        if(is_array($arrBridgeList) && !empty($arrBridgeList)){
+                            //print header
+                            //echo 'header';
+                            $row['dist'] = $v;
+                            $row['data'] = $arrBridgeList;
+                            $arrPrintList[] = $row;
+                            $i++;
                         }
                     }
-
-                    //$data = ['pager' => $bridge_beneficiaries_model->pager];
-                        
-                    // echo "<pre>";
-                    // print_r($arrPrintList);exit;
-                    $data['arrPrintList'] = $arrPrintList;
-                    $data['dataStart'] = $dateStart;
-                    $data['dateEnd'] = $dateEnd;
-                    
-
-                    
-                } else
-                {
-                    redirect("reports/UC_Proportion_Representation_DateWise/".$stat);
-                    //return redirect()->to(base_url('reports/Beneficiaries_FYWise_report/'));  
                 }
-                
+
+                //$data = ['pager' => $bridge_beneficiaries_model->pager];
+                    
+                // echo "<pre>";
+                // print_r($arrPrintList);exit;
+                $data['arrPrintList'] = $arrPrintList;
+                $data['dataStart'] = $dateStart;
+                $data['dateEnd'] = $dateEnd;
+                  
             } else
             {
-                'start date is Smaller than End Date';
+                redirect("reports/UC_Proportion_Representation_DateWise/".$stat);
+                //return redirect()->to(base_url('reports/Beneficiaries_FYWise_report/'));  
             }
-            // echo "<pre>";
-            // var_dump($data['arrPrintList']);exit;
-            return view('\Modules\Reports\Views\UC_Proportion_Representation_DateWise_report', $data);
+            
+        } else
+        {
+            'start date is Smaller than End Date';
+        }
+        // echo "<pre>";
+        // var_dump($data['arrPrintList']);exit;
+        return view('\Modules\Reports\Views\UC_Proportion_Representation_DateWise_report', $data);
 
     }
 }

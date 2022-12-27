@@ -2,12 +2,22 @@
 <?= $this->section("body") ?>
 <div id="page-wrapper" class="largeRpt">
 
-    <div class="alignRight">
-        <form method="post" action="<?php echo site_url(); ?>/reports/UC_Executive_Position_FYWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . MM_CODE : ''; ?>" target="_blank">
+    <div class="alignLeft">
+        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/UC_Executive_Position_FYWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . MM_CODE : ''; ?>">
             <input type="hidden" name="start_date" value="<?php echo $startdate; ?>" />
             <input type="hidden" name="end_date" value="<?php echo $enddate; ?>" />
             <!-- <input type="submit"  class="btn btn-md btn-success btn-print" name="submit" value="Print" data-target="printArea" /> -->
-            <input type="button" class="btn btn-md btn-success no-print" name="submit" value="Print" id="cmdPrint" onClick="window.print();return false;" />
+            <input type="button" class="btn btn-md btn-success no-print" name="btn_submit" value="Print" id="cmdPrint" onClick="window.print();return false;" />
+            <p><h4 class="no-print">Filter By Province</h4></p>
+            <select name="selProvince" onchange="document.frmProvinceFilter.submit();" class="no-print">
+                <option value="">--Select--</option>
+                <?php                         
+                foreach($provinceList as $province) {                                              
+                    ?>                            
+                <option value="<?php echo $province->province_id;?>" <?php echo ($selProvince != '' && $selProvince == $province->province_id)?'selected="selected"':'';?>><?php echo $province->province_name;?></option>
+                <?php } ?>
+                <option value="all">All</option>
+            </select>
         </form>
     </div>
 

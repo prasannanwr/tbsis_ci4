@@ -93,7 +93,11 @@ class Beneficiaries_FYWise_report extends BaseController
                 // $pager->makeLinks($page+1, $perPage, $total);
                 // $offset = $page * $perPage;
                 //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
-                $selDist=$this->view_district_reg_office_model->paginate($perPage);
+                if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                    $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
+                } else {
+                    $selDist=$this->view_district_reg_office_model->paginate($perPage);
+                } 
                 $data['selDist'] = $selDist;
                 $data['pager'] = $this->view_district_reg_office_model->pager;
                 
@@ -125,7 +129,7 @@ class Beneficiaries_FYWise_report extends BaseController
 
                 //$data = ['pager' => $bridge_beneficiaries_model->pager];
                     
-                // echo "<pre>";
+                //  echo "<pre>";
                 // print_r($arrPrintList);exit;
                 $data['arrPrintList'] = $arrPrintList;
                 $data['dataStart'] = $dataStart;

@@ -1,12 +1,22 @@
 <?= $this->extend("\Modules\Template\Views\my_template") ?>
 <?= $this->section("body") ?>
 <div id="page-wrapper" class="largeRpt">
-<div class="alignRight"> 
-    <form method="post" action="<?php echo site_url();?>/reports/Beneficiaries_DateWise_report <?php echo (isset($blnMM) && $blnMM)? '/'.MM_CODE: ''; ?>" target="_blank">
+<div class="alignLeft"> 
+    <form method="get" name="frmProvinceFilter" action="<?php echo site_url();?>/reports/Beneficiaries_DateWise_report <?php echo (isset($blnMM) && $blnMM)? '/'.MM_CODE: ''; ?>">
        <input type="hidden" name="start_date" value="<?php echo $startdate; ?>" />
        <input type="hidden" name="end_date" value="<?php echo $enddate; ?>" />
        <!-- <input type="submit"  class="btn btn-md btn-success" name="submit" value="Print" onclick="window.print();return false;" /> -->
-       <input type="button" class="btn btn-md btn-success no-print" name="submit" value="Print" id="cmdPrint" onClick="window.print();return false;" />
+       <input type="button" class="btn btn-md btn-success no-print" name="btn_submit" value="Print" id="cmdPrint" onClick="window.print();return false;" />
+       <p><h4 class="no-print">Filter By Province</h4></p>
+       <select name="selProvince" onchange="document.frmProvinceFilter.submit();" class="no-print">
+        <option value="">--Select--</option>
+        <?php                         
+        foreach($provinceList as $province) {                                              
+            ?>                            
+        <option value="<?php echo $province->province_id;?>" <?php echo ($selProvince != '' && $selProvince == $province->province_id)?'selected="selected"':'';?>><?php echo $province->province_name;?></option>
+        <?php } ?>
+        <option value="all">All</option>
+    </select> 
     </form>
    </div>
 
@@ -24,6 +34,7 @@
                                                 <th style="width:55px;" rowspan="2" class="center">SN</th>
                                                 <th rowspan="2" class="center">Bridge Id</th>
                                                 <th style="width:150px;" rowspan="2" class="center">Bridge Name</th>
+                                                <th style="width:150px;" rowspan="2" class="center">Palika</th>
                                                 <th style="width:150px;" rowspan="2" class="center">Total Beneficiaries</th>
                                                 <th style="width:80px;" rowspan="2" class="center">Men</th>
                                                 <th style="width:80px;" rowspan="2" class="center">Women</th>
@@ -96,12 +107,18 @@ if(is_array($arrPrintList)){
                         $minorities_poor = $minorities_poor + $dataRow1['minorities_poor'];
                         $bct_total = $bct_total + $dataRow1['bct_total'];
                         $bct_poor = $bct_poor + $dataRow1['bct_poor'];
+                        if($dataRow1['major_vdc'] == 0) {
+                            $palika = $dataRow1['left_palika'];
+                        } else {
+                            $palika = $dataRow1['right_palika'];
+                        }
                     ?>
 
                                             <tr>
                                                 <td style="width:55px;" class="center"><?php echo $i + 1; ?></td>
                                                 <td style="width:120px;" class="center"><?php echo $dataRow1['bri03bridge_no']; ?></td>
                                                 <td style="width:120px;" class="center"><?php echo $dataRow1['bri03bridge_name']; ?></td>
+                                                <td style="width:120px;" class="center"><?php echo $palika; ?></td>
                                                 <td style="width:60px;" class="center"><?php echo $beneficiaries; ?></td>
                                                 <td style="width:75px;" class="center"><?php echo ($dataRow1['total_women'] != ''? $dataRow1['total_women']:0) ?></td>
                                                 <td style="width:150px;" class="center"><?php echo ($dataRow1['total_men'] != ''?$dataRow1['total_men']:0); ?></td>
@@ -171,7 +188,7 @@ if(is_array($arrPrintList)){
                         <div class="mt-3">
                             <?php //$pager = \Config\Services::pager(); ?>
                             <?php if ($pager):?>
-                                <?php $pagi_path = 'reports/Beneficiaries_DateWise_report?dataStart='.$dataStart; ?>
+                                <?php $pagi_path = 'reports/Beneficiaries_DateWise_report?dateStart='.$dateStart; ?>
                                 <?php //$pager->setPath($pagi_path); ?>
                                 <?= $pager->links(); ?>
                             <?php endif; ?>
