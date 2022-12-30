@@ -65,6 +65,17 @@ $routes->group("reports", ["namespace" => "App\Modules\Reports\Controllers"], fu
 	$routes->get('Unacceptable_Social_UnderConstruction', 'Reports::Unacceptable_Social_UnderConstruction', ['filter' => 'auth']);
 
 	$routes->get('Access_Utility_Completed_FYWise', 'Reports::Access_Utility_Completed_FYWise', ['filter' => 'auth']);
+	$routes->get('Access_Utility_Completed_DateWise', 'Reports::Access_Utility_Completed_DateWise', ['filter' => 'auth']);
+
+	$routes->get('Unacceptable_Technical_UnderConstruction', 'Reports::Unacceptable_Technical_UnderConstruction', ['filter' => 'auth']);
+	$routes->get('Unacceptable_Technical_UnderConstruction/(:any)', 'Reports::Unacceptable_Technical_UnderConstruction/$1', ['filter' => 'auth']);
+
+	$routes->get('Unacceptable_Technical_Completed_DateWise', 'Reports::Unacceptable_Technical_Completed_DateWise', ['filter' => 'auth']);
+	$routes->get('Unacceptable_Technical_Completed_DateWise/(:any)', 'Reports::Unacceptable_Technical_Completed_DateWise/$1', ['filter' => 'auth']);
+
+	$routes->get('Unacceptable_Technical_Completed_FYWise', 'Reports::Unacceptable_Technical_Completed_FYWise', ['filter' => 'auth']);
+	$routes->get('Unacceptable_Technical_Completed_FYWise/(:any)', 'Reports::Unacceptable_Technical_Completed_FYWise/$1', ['filter' => 'auth']);
+	
 	
 });
 
@@ -122,6 +133,9 @@ $routes->get('reports/Employment_Generation_FYWise_report/(:any)', '\App\Modules
 $routes->post('reports/Employment_Generation_DateWise_report', '\App\Modules\Reports\Controllers\Inc\Employment_Generation_DateWise_report::index', ['filter' => 'auth']);
 $routes->post('reports/Employment_Generation_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Employment_Generation_DateWise_report::index/$1', ['filter' => 'auth']);
 
+$routes->get('reports/Employment_Generation_DateWise_report', '\App\Modules\Reports\Controllers\Inc\Employment_Generation_DateWise_report::index', ['filter' => 'auth']);
+$routes->get('reports/Employment_Generation_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Employment_Generation_DateWise_report::index/$1', ['filter' => 'auth']);
+
 $routes->post('reports/Public_Audit_FYWise_report', '\App\Modules\Reports\Controllers\Inc\Public_Audit_FYWise_report::index', ['filter' => 'auth']);
 $routes->post('reports/Public_Audit_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Public_Audit_FYWise_report::index/$1', ['filter' => 'auth']);
 
@@ -140,8 +154,14 @@ $routes->get('reports/Beneficiaries_DateWise_report/(:any)', '\App\Modules\Repor
 $routes->post('reports/Access_Utility_Completed_FYWise_report', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_FYWise_report::index', ['filter' => 'auth']);
 $routes->post('reports/Access_Utility_Completed_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_FYWise_report::index/$1', ['filter' => 'auth']);
 
+$routes->get('reports/Access_Utility_Completed_FYWise_report', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_FYWise_report::index', ['filter' => 'auth']);
+$routes->get('reports/Access_Utility_Completed_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_FYWise_report::index/$1', ['filter' => 'auth']);
+
 $routes->post('reports/Access_Utility_Completed_DateWise_report', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_DateWise_report::index', ['filter' => 'auth']);
 $routes->post('reports/Access_Utility_Completed_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_DateWise_report::index/$1', ['filter' => 'auth']);
+
+$routes->get('reports/Access_Utility_Completed_DateWise_report', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_DateWise_report::index', ['filter' => 'auth']);
+$routes->get('reports/Access_Utility_Completed_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Access_Utility_Completed_DateWise_report::index/$1', ['filter' => 'auth']);
 
 $routes->get('reports/Gen_Dag_FYWise_report/', '\App\Modules\Reports\Controllers\Inc\Gen_Dag_FYWise_report::index', ['filter' => 'auth']);
 $routes->get('reports/Gen_Dag_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Gen_Dag_FYWise_report::index/$1', ['filter' => 'auth']);
@@ -149,3 +169,14 @@ $routes->get('reports/Gen_Dag_FYWise_report/(:any)', '\App\Modules\Reports\Contr
 $routes->get('reports/UC_Proportion_Representation_FYWise_report/', '\App\Modules\Reports\Controllers\Inc\UC_Proportion_Representation_FYWise_report::index', ['filter' => 'auth']);
 $routes->get('reports/UC_Proportion_Representation_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\UC_Proportion_Representation_FYWise_report::index/$1', ['filter' => 'auth']);
 
+$routes->get('reports/Unacceptable_Technical_Completed_FYWise_report', '\App\Modules\Reports\Controllers\Inc\Unacceptable_Technical_Completed_FYWise_report::index', ['filter' => 'auth']);
+$routes->get('reports/Unacceptable_Technical_Completed_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Unacceptable_Technical_Completed_FYWise_report::index/$1', ['filter' => 'auth']);
+
+$routes->post('reports/Unacceptable_Technical_Completed_FYWise_report', '\App\Modules\Reports\Controllers\Inc\Unacceptable_Technical_Completed_FYWise_report::index', ['filter' => 'auth']);
+$routes->post('reports/Unacceptable_Technical_Completed_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Unacceptable_Technical_Completed_FYWise_report::index/$1', ['filter' => 'auth']);
+
+$routes->get('reports/Unacceptable_Technical_Completed_DateWise_report', '\App\Modules\Reports\Controllers\Inc\Unacceptable_Technical_Completed_DateWise_report::index', ['filter' => 'auth']);
+$routes->get('reports/Unacceptable_Technical_Completed_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Unacceptable_Technical_Completed_DateWise_report::index/$1', ['filter' => 'auth']);
+
+$routes->post('reports/Unacceptable_Technical_Completed_DateWise_report', '\App\Modules\Reports\Controllers\Inc\Unacceptable_Technical_Completed_DateWise_report::index', ['filter' => 'auth']);
+$routes->post('reports/Unacceptable_Technical_Completed_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Unacceptable_Technical_Completed_DateWise_report::index/$1', ['filter' => 'auth']);

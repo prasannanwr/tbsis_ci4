@@ -277,7 +277,7 @@
                                             </a>
                                             <ul class="dropdown-menu2">
                                                 <li>
-                                                <?php echo anchor('reports/Access_Utility_Completed_FYWise', 'DateWise'); ?>
+                                                <?php echo anchor('reports/Access_Utility_Completed_DateWise', 'DateWise'); ?>
                                                 </li>
                                                  <li>
                                                 <?php echo anchor('reports/Access_Utility_Completed_FYWise', 'FYWise'); ?>

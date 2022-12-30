@@ -8,6 +8,7 @@
        <input type="hidden" name="end_year" value="<?php echo $endyear['fis01id']; ?>" />
        <!-- <input type="submit"  class="btn btn-md btn-success btn-print" name="submit" value="Print" data-target="printArea" /> -->
        <input type="button" class="btn btn-md btn-success no-print" name="btn_submit" value="Print" id="cmdPrint" onClick="window.print();return false;" />
+       <p><h4 class="no-print">Filter By Province</h4></p>
        <select name="selProvince" onchange="document.frmProvinceFilter.submit();" class="no-print">
             <option value="">--Select--</option>
             <?php                         

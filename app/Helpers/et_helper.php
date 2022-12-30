@@ -23,8 +23,10 @@ if (!function_exists('et_getObjProp')) {
     {
         $ret = '';
 
-        if (is_array($obj) && $obj[$prop] != '') {
-            $ret = $obj[$prop];
+        if (is_array($obj) && isset($obj[$prop])) {
+            if($obj[$prop] != '') {
+                $ret = $obj[$prop];
+            }
         } elseif (isset($obj->{$prop}) && $obj->{$prop} != ''){
                 $ret = $obj->{$prop};
         }

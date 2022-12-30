@@ -3,6 +3,7 @@
 namespace App\Modules\bridge\Models;
 
 use App\Modules\auth\Models\sel_district_model;
+use App\Modules\fiscal_year\Models\FiscalYearModel;
 use App\Modules\vdc_municipality\Models\MunicipalityModel;
 use App\Modules\view\Models\view_vdc_new_model;
 use CodeIgniter\Model;
@@ -146,16 +147,41 @@ class bridge_model extends Model
      * @param integer $offset
      * @return void
      */
-    public function getBridgeUtilities($distId, $perPage='', $offset = 0) {
+    public function getBridgeUtilities($distId, $startDate='', $endDate='', $perPage='', $offset = 0) {
 
+        $startDate = explode("-",$startDate);
+        $endDate = explode("-",$endDate);
+
+        // $startYear = $startDate[0];
+        // $startMonth = $startDate[1];
+        // $startDay = $startDate[2];
+        // $endYear = $endDate[0];
+        //$fstartfy = $startfy . "-07-16";
+        //$fendfy = $endfy . "-07-15";
+        // if($startMonth < 7) {
+        //     $startYear = $startYear;
+        // } else {
+        //     $startYear = $startYear;
+        // }
+        //get fiscal year id
+        // $fiscalStartYear = $fiscalYearModel->asObject()->where('fis01id',$emp_id)->first();
+        $startDate = 33;
+        $endDate = 33;
         //using builder
         $builder = $this->db->table("view_bridge_child");
         $builder = $builder
-            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`,`view_bridge_child`.`bri03portering_distance` AS `bri03portering_distance`,`view_bridge_child`.`bri03road_head` AS `bri03road_head`,`view_bridge_child`.`bri03river_type` AS `bri03river_type`,`bu`.`bu_name` as 'bri03utility_lb_name',`bu1`.`bu_name` as `bri03utility_rb_name`")
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`,`view_bridge_child`.`bri03portering_distance` AS `bri03portering_distance`,`view_bridge_child`.`bri03road_head` AS `bri03road_head`,`view_bridge_child`.`bri03river_type` AS `bri03river_type`, `view_bridge_child`.`bri03major_vdc` as `major_vdc`, `lb`.`muni01name` as `left_palika`, `rb`.`muni01name` as `right_palika`, `bu`.`bu_name` as 'bri03utility_lb_name',`bu1`.`bu_name` as `bri03utility_rb_name`")
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
             ->join('bridge_utilities as `bu`','`bu`.`bu_id` = `view_bridge_child`.`bri03utility_left_bank`', 'left')
-            ->join('bridge_utilities as `bu1`','`bu1`.`bu_id` = `view_bridge_child`.`bri03utility_right_bank`', 'left');
+            ->join('bridge_utilities as `bu1`','`bu1`.`bu_id` = `view_bridge_child`.`bri03utility_right_bank`', 'left')
+            ->join('`muni01municipality_vcd` `lb`','`view_bridge_child`.`bri03municipality_lb` = `lb`.`muni01id`','left')
+            ->join('muni01municipality_vcd rb','`view_bridge_child`.`bri03municipality_rb` = `rb`.`muni01id`','left');
         
+        if($startDate != '')
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
+        if($endDate != '')
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);
+
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
 

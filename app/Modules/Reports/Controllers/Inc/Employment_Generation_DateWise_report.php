@@ -110,7 +110,7 @@ class Employment_Generation_DateWise_report extends BaseController
                         // var_dump($v1);exit;
                         $arrChild1=null;
 
-                        $arrBridgeList = $this->bridge_employment_generation_model->getEmploymentGeneration($dateStart, $dateEnd, $rr);
+                        $arrBridgeList = $this->bridge_employment_generation_model->getEmploymentGenerationByDate($dateStart, $dateEnd, $rr);
                             
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header

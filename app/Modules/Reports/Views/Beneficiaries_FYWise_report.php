@@ -152,7 +152,7 @@
                                 endif;
                         ?>
                                     <tr>
-                            <td colspan="3" rowspan="2" class="center">Total</td>
+                            <td colspan="4" rowspan="2" class="center">Total</td>
                             <td class="center"><?php echo $total_beneficiaries;?></td>
                             <td class="center"><?php echo $total_women;?></td>
                             <td class="center"><?php echo $total_men;?></td>

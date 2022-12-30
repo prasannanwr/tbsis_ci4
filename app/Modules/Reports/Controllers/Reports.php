@@ -414,7 +414,44 @@ class Reports extends BaseController
         require($x);
     }
 
-    //unacceptable
+    //access utility
+    public function Access_Utility_Completed_FYWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Access_Utility_Completed_FYWise', $data);
+    }
+
+    public function Access_Utility_Completed_FYWise_report($ext = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function Access_Utility_Completed_DateWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Access_Utility_Completed_DateWise', $data);
+    }
+
+    public function Access_Utility_Completed_DateWise_report($ext = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    //unacceptable bridges
     // public function Unacceptable_Underconstruction($ext = '')
     // {
     //     $data = self::$arrDefData;
@@ -464,18 +501,35 @@ class Reports extends BaseController
         return view('\Modules\Reports\Views\Unacceptable_Technical_UnderConstruction', $data);
     }
 
-    //access utility
-    public function Access_Utility_Completed_FYWise($ext = '')
+    public function Unacceptable_Technical_Completed_FYWise($ext = '')
     {
         $data = self::$arrDefData;
         $data['view_file'] = __FUNCTION__;
         // 
         $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
         $data['blnMM'] = $ext;
-        return view('\Modules\Reports\Views\Access_Utility_Completed_FYWise', $data);
+        return view('\Modules\Reports\Views\Unacceptable_Technical_Completed_FYWise', $data);
     }
 
-    public function Access_Utility_Completed_FYWise_report($ext = '')
+    public function Unacceptable_Technical_Completed_FYWise_report($ext = '')
+    {
+        $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
+        $data = self::$arrDefData;
+        $data['view_file'] = __function__;
+        require($x);
+    }
+
+    public function Unacceptable_Technical_Completed_DateWise($ext = '')
+    {
+        $data = self::$arrDefData;
+        $data['view_file'] = __FUNCTION__;
+        // 
+        $data['arrDistList'] = $this->fiscal_year_model->orderBy('fis01id DESC')->asObject()->findAll();
+        $data['blnMM'] = $ext;
+        return view('\Modules\Reports\Views\Unacceptable_Technical_Completed_DateWise', $data);
+    }
+
+    public function Unacceptable_Technical_Completed_DateWise_report($ext = '')
     {
         $x = dirname(__FILE__) . '/inc/' . __FUNCTION__ . '.php';
         $data = self::$arrDefData;

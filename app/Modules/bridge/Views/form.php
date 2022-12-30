@@ -601,6 +601,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td>S.No.</td>
 									<td>Issues</td>
 									<td>Acceptable</td>
+									<td width="60">&nbsp;</td>
 									<td>Deficiency</td>
 									<td>Remedial Action</td>
 								</tr>
@@ -611,6 +612,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bsa_stability" id="bsa_stability" value="1" <?php echo (et_setFormVal('bsa_stability', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
+									<td><input type="text" name="bsa_stability_def" size="20" value="<?=et_setFormValBlank('bsa_stability_def', $objSiteAssesment);?>"></td>
 									<td><input type="text" name="bsa_stability_remark" size="60" value="<?=et_setFormValBlank('bsa_stability_remark', $objSiteAssesment);?>"></td>
 								</tr>
 								<tr>
@@ -622,6 +624,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										<input type="checkbox" class=" form-control " name="bsa_influencing_rivulet" id="bsa_influencing_rivulet" value="1" <?php echo (et_setFormVal('bsa_influencing_rivulet', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
 									</div>
 									</td>
+									<td><input type="text" name="bsa_rivulet_def" size="20" value="<?=et_setFormValBlank('bsa_rivulet_def', $objSiteAssesment);?>"></td>
 									<td><input type="text" name="bsa_rivulet_remark" size="60" value="<?=et_setFormValBlank('bsa_rivulet_remark', $objSiteAssesment);?>"></td>
 								</tr>
 								<tr>
@@ -631,6 +634,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bsa_source_gravel" id="bsa_source_gravel" value="1" <?php echo (et_setFormVal('bsa_source_gravel', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
+									<td><input type="text" name="bsa_source_gravel_def" size="20" value="<?=et_setFormValBlank('bsa_source_gravel_def', $objSiteAssesment);?>"></td>
 									<td><input type="text" name="bsa_source_gravel_remark" size="60" value="<?=et_setFormValBlank('bsa_source_gravel_remark', $objSiteAssesment);?>"></td>
 								</tr>
 								<tr>
@@ -640,6 +644,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bsa_source_sand" id="bsa_source_sand" value="1" <?php echo (et_setFormVal('bsa_source_sand', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
+									<td><input type="text" name="bsa_source_sand_def" size="20" value="<?=et_setFormValBlank('bsa_source_sand_def', $objSiteAssesment);?>"></td>
 									<td><input type="text" name="bsa_source_sand_remark" size="60" value="<?=et_setFormValBlank('bsa_source_sand_remark', $objSiteAssesment);?>"></td>
 								</tr>
 								<tr>
@@ -649,6 +654,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bsa_source_stone" id="bsa_source_stone" value="1" <?php echo (et_setFormVal('bsa_source_stone', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
+									<td><input type="text" name="bsa_source_stone_def" size="20" value="<?=et_setFormValBlank('bsa_source_stone_def', $objSiteAssesment);?>"></td>
 									<td><input type="text" name="bsa_source_stone_remark" size="60" value="<?=et_setFormValBlank('bsa_source_stone_remark', $objSiteAssesment);?>"></td>
 								</tr>
 								<tr>
@@ -658,6 +664,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bsa_meandering" id="bsa_meandering" value="1" <?php echo (et_setFormVal('bsa_meandering', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
+									<td><input type="text" name="bsa_meandering_def" size="20" value="<?=et_setFormValBlank('bsa_meandering_def', $objSiteAssesment);?>"></td>
 									<td><input type="text" name="bsa_meandering_remark" size="60" value="<?=et_setFormValBlank('bsa_meandering_remark', $objSiteAssesment);?>"></td>
 								</tr>
 								<tr>
@@ -667,6 +674,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bsa_profile_survey" id="bsa_profile_survey" value="1" <?php echo (et_setFormVal('bsa_profile_survey', $objSiteAssesment) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
+									<td><input type="text" name="bsa_profile_survey_def" size="20" value="<?=et_setFormValBlank('bsa_profile_survey_def', $objSiteAssesment);?>"></td>
 									<td><input type="text" name="bsa_profile_survey_remark" size="60" value="<?=et_setFormValBlank('bsa_profile_survey_remark', $objSiteAssesment);?>"></td>
 								</tr>
 					</table>
@@ -728,6 +736,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td>S.No.</td>
 								<td>Issues</td>
 								<td>Acceptable</td>
+								<td width="60">&nbsp;</td>
 								<td>Deficiency</td>
 								<td>Remedial Action</td>
 							</tr>
@@ -738,6 +747,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_cable_check" id="bri_cable_check" value="1" <?php echo (et_setFormVal('bri_cable_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_cable_def" size="20" value="<?=et_setFormValBlank('bri_cable_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_cable_action" size="60" value="<?=et_setFormValBlank('bri_cable_action', $objFinalInspection);?>"></td>
 							</tr>
 							<tr>
@@ -747,6 +757,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_bulldog_check" id="bri_bulldog_check" value="1" <?php echo (et_setFormVal('bri_bulldog_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_bulldog_def" size="20" value="<?=et_setFormValBlank('bri_bulldog_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_bulldog_action" size="60" value="<?=et_setFormValBlank('bri_bulldog_action', $objFinalInspection);?>"></td>
 							</tr>
 
@@ -757,6 +768,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_anchorage_check" id="bri_anchorage_check" value="1" <?php echo (et_setFormVal('bri_anchorage_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_anchorage_def" size="20" value="<?=et_setFormValBlank('bri_anchorage_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_anchorage_action" size="60" value="<?=et_setFormValBlank('bri_anchorage_action', $objFinalInspection);?>"></td>
 							</tr>
 							<tr>
@@ -766,6 +778,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_fixtures_check" id="bri_fixtures_check" value="1" <?php echo (et_setFormVal('bri_fixtures_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_fixtures_def" size="20" value="<?=et_setFormValBlank('bri_fixtures_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_fixtures_action" size="60" value="<?=et_setFormValBlank('bri_fixtures_action', $objFinalInspection);?>"></td>
 							</tr>
 							<tr>
@@ -775,6 +788,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_wire_check" id="bri_wire_check" value="1" <?php echo (et_setFormVal('bri_wire_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_wire_def" size="20" value="<?=et_setFormValBlank('bri_wire_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_wire_action" size="60" value="<?=et_setFormValBlank('bri_wire_action', $objFinalInspection);?>"></td>
 							</tr>
 							<tr>
@@ -784,6 +798,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_anchorage_dimension_check" id="bri_anchorage_dimension_check" value="1" <?php echo (et_setFormVal('bri_anchorage_dimension_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_anchorage_dimension_def" size="20" value="<?=et_setFormValBlank('bri_anchorage_dimension_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_anchorage_dimension_action" size="60" value="<?=et_setFormValBlank('bri_anchorage_dimension_action', $objFinalInspection);?>"></td>
 							</tr>
 							<tr>
@@ -793,6 +808,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_suspenders_check" id="bri_suspenders_check" value="1" <?php echo (et_setFormVal('bri_suspenders_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_suspenders_def" size="20" value="<?=et_setFormValBlank('bri_suspenders_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_suspenders_action" size="60" value="<?=et_setFormValBlank('bri_suspenders_action', $objFinalInspection);?>"></td>
 							</tr>
 							<tr>
@@ -802,6 +818,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_walkway_check" id="bri_walkway_check" value="1" <?php echo (et_setFormVal('bri_walkway_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_walkway_def" size="20" value="<?=et_setFormValBlank('bri_walkway_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_walkway_action" size="60" value="<?=et_setFormValBlank('bri_walkway_action', $objFinalInspection);?>"></td>
 							</tr>
 							
@@ -812,6 +829,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_relative_check" id="bri_relative_check" value="1" <?php echo (et_setFormVal('bri_relative_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_relative_def" size="20" value="<?=et_setFormValBlank('bri_relative_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_relative_action" size="60" value="<?=et_setFormValBlank('bri_relative_action', $objFinalInspection);?>"></td>
 							</tr>
 							<tr>
@@ -821,6 +839,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_anchorage_stone_check" id="bri_anchorage_stone_check" value="1" <?php echo (et_setFormVal('bri_anchorage_stone_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_anchorage_stone_def" size="20" value="<?=et_setFormValBlank('bri_anchorage_stone_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_anchorage_stone_action" size="60" value="<?=et_setFormValBlank('bri_anchorage_stone_action', $objFinalInspection);?>"></td>
 							</tr>
 							<tr>
@@ -830,6 +849,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_wire_mesh_check" id="bri_wire_mesh_check" value="1" <?php echo (et_setFormVal('bri_wire_mesh_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_wire_mesh_def" size="20" value="<?=et_setFormValBlank('bri_wire_mesh_def', $objFinalInspection);?>"></td>
 								<td><input type="text" name="bri_wire_mesh_action" size="60" value="<?=et_setFormValBlank('bri_wire_mesh_action', $objFinalInspection);?>"></td>
 							</tr>	
 						</table>
@@ -1598,6 +1618,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td>S.No.</td>
 								<td>Issues</td>
 								<td>Acceptable</td>
+								<td width="60">&nbsp;</td>
 								<td>Deficiency</td>
 								<td>Remedial Action</td>
 							</tr>
@@ -1608,6 +1629,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_quality_steel_check" id="bri_quality_steel_check" value="1" <?php echo (et_setFormVal('bri_quality_steel_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_quality_steel_def" size="20" value="<?=et_setFormValBlank('bri_quality_steel_def', $objBridgeSteelParts);?>"></td>
 								<td><input type="text" name="bri_quality_steel_action" size="60" value="<?=et_setFormValBlank('bri_quality_steel_action', $objBridgeSteelParts);?>"></td>
 							</tr>
 							<tr>
@@ -1617,6 +1639,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_qa_document_check" id="bri_qa_document_check" value="1" <?php echo (et_setFormVal('bri_qa_document_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_qa_document_def" size="20" value="<?=et_setFormValBlank('bri_qa_document_def', $objBridgeSteelParts);?>"></td>
 								<td><input type="text" name="bri_qa_document_action" size="60" value="<?=et_setFormValBlank('bri_qa_document_action', $objBridgeSteelParts);?>"></td>
 							</tr>
 							<tr>
@@ -1626,6 +1649,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_welding_check" id="bri_welding_check" value="1" <?php echo (et_setFormVal('bri_welding_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_welding_def" size="20" value="<?=et_setFormValBlank('bri_welding_def', $objBridgeSteelParts);?>"></td>
 								<td><input type="text" name="bri_welding_action" size="60" value="<?=et_setFormValBlank('bri_welding_action', $objBridgeSteelParts);?>"></td>
 							</tr>
 							<tr>
@@ -1635,6 +1659,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_zinc_coating_check" id="bri_zinc_coating_check" value="1" <?php echo (et_setFormVal('bri_zinc_coating_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_zinc_coating_def" size="20" value="<?=et_setFormValBlank('bri_zinc_coating_def', $objBridgeSteelParts);?>"></td>
 								<td><input type="text" name="bri_zinc_coating_action" size="60" value="<?=et_setFormValBlank('bri_zinc_coating_action', $objBridgeSteelParts);?>"></td>
 							</tr>
 							<tr>
@@ -1644,6 +1669,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<td><div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_assembled_fitting_check" id="bri_assembled_fitting_check" value="1" <?php echo (et_setFormVal('bri_assembled_fitting_check', $objBridgeSteelParts) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
+								<td><input type="text" name="bri_assembled_fitting_def" size="20" value="<?=et_setFormValBlank('bri_assembled_fitting_def', $objBridgeSteelParts);?>"></td>
 								<td><input type="text" name="bri_assembled_fitting_action" size="60" value="<?=et_setFormValBlank('bri_assembled_fitting_action', $objBridgeSteelParts);?>"></td>
 							</tr>
 						</table>
@@ -1717,7 +1743,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bri_quality_stones_check" id="bri_quality_stones_check" value="1" <?php echo (et_setFormVal('bri_quality_stones_check', $objBridgeConstructionWork) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
-									<td>&nbsp;</td>
+									<td><input type="text" name="bri_quality_stones_def" size="20" value="<?=et_setFormValBlank('bri_quality_stones_def', $objBridgeConstructionWork);?>"></td>
 									<td><input type="text" name="bri_quality_stones_remarks" size="60" value="<?=et_setFormValBlank('bri_quality_stones_remarks', $objBridgeConstructionWork);?>"></td>
 								</tr>
 								<tr>
@@ -1749,7 +1775,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bri_workmanship_check" id="bri_workmanship_check" value="1" <?php echo (et_setFormVal('bri_workmanship_check', $objBridgeConstructionWork) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
-									<td>&nbsp;</td>
+									<td><input type="text" name="bri_workmanship_def" size="20" value="<?=et_setFormValBlank('bri_workmanship_def', $objBridgeConstructionWork);?>"></td>
 									<td><input type="text" name="bri_workmanship_remarks" size="60" value="<?=et_setFormValBlank('bri_workmanship_remarks', $objBridgeConstructionWork);?>"></td>
 								</tr>
 								<tr>
@@ -1759,7 +1785,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bri_masonry_stone_check" id="bri_masonry_stone_check" value="1" <?php echo (et_setFormVal('bri_masonry_stone_check', $objBridgeConstructionWork) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
-									<td>NA</td>
+									<td><input type="text" name="bri_masonry_stone_def" size="20" value="<?=et_setFormValBlank('bri_masonry_stone_def', $objBridgeConstructionWork);?>"></td>
 									<td><input type="text" name="bri_masonry_stone_remarks" size="60" value="<?=et_setFormValBlank('bri_masonry_stone_remarks', $objBridgeConstructionWork);?>"></td>
 								</tr>
 								<tr>
@@ -1769,7 +1795,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bri_verify_concrete_foundation_check" id="bri_verify_concrete_foundation_check" value="1" <?php echo (et_setFormVal('bri_verify_concrete_foundation_check', $objBridgeConstructionWork) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
-									<td>&nbsp;</td>
+									<td><input type="text" name="bri_verify_concrete_foundation_def" size="20" value="<?=et_setFormValBlank('bri_verify_concrete_foundation_def', $objBridgeConstructionWork);?>"></td>
 									<td><input type="text" name="bri_verify_concrete_foundation_remarks" size="60" value="<?=et_setFormValBlank('bri_verify_concrete_foundation_remarks', $objBridgeConstructionWork);?>"></td>
 								</tr>
 								<tr>
@@ -1791,7 +1817,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										<input type="checkbox" class=" form-control " name="bri_cement_check" id="bri_cement_check" value="1" <?php echo (et_setFormVal('bri_cement_check', $objBridgeConstructionWork) == 1) ? 'checked="checked"' : '' ?>>
 									</div>
 									</td>
-									<td>&nbsp;</td>
+									<td><input type="text" name="bri_cement_def" size="20" value="<?=et_setFormValBlank('bri_cement_def', $objBridgeConstructionWork);?>"></td>
 									<td><input type="text" name="bri_cement_remarks" size="60" value="<?=et_setFormValBlank('bri_cement_remarks', $objBridgeConstructionWork);?>"></td>
 								</tr>
 								<tr>
@@ -1801,7 +1827,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bri_dimension_anchorage_check" id="bri_dimension_anchorage_check" value="1" <?php echo (et_setFormVal('bri_dimension_anchorage_check', $objBridgeConstructionWork) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
-									<td>&nbsp;</td>
+									<td><input type="text" name="bri_dimension_anchorage_def" size="20" value="<?=et_setFormValBlank('bri_dimension_anchorage_def', $objBridgeConstructionWork);?>"></td>
 									<td><input type="text" name="bri_dimension_anchorage_remarks" size="60" value="<?=et_setFormValBlank('bri_dimension_anchorage_remarks', $objBridgeConstructionWork);?>"></td>
 								</tr>
 								<tr>
@@ -1947,7 +1973,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										<input type="checkbox" class=" form-control " name="bri_unit_rates_steel_check" id="bri_unit_rates_steel_check" value="1" <?php echo (et_setFormVal('bri_unit_rates_steel_check', $objCostEstimate) == 1) ? 'checked="checked"' : '' ?>>
 									</div>
 									</td>
-									<td>NA</td>
+									<td><input type="text" name="bri_unit_rates_steel_deficiency" size="60" value="<?=et_setFormValBlank('bri_unit_rates_steel_deficiency', $objCostEstimate);?>">&nbsp;</td>
 									<td><input type="text" name="bri_unit_rates_steel_remarks" size="60" value="<?=et_setFormValBlank('bri_unit_rates_steel_remarks', $objCostEstimate);?>"></td>
 								</tr>
 								<tr>
@@ -1959,7 +1985,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										<input type="checkbox" class=" form-control " name="bri_unit_rates_check" id="bri_unit_rates_check" value="1" <?php echo (et_setFormVal('bri_unit_rates_check', $objCostEstimate) == 1) ? 'checked="checked"' : '' ?>>
 									</div>
 									</td>
-									<td>NA</td>
+									<td><input type="text" name="bri_unit_rates_deficiency" size="60" value="<?=et_setFormValBlank('bri_unit_rates_deficiency', $objCostEstimate);?>">&nbsp;</td>
 									<td><input type="text" name="bri_unit_rates_remarks" size="60" value="<?=et_setFormValBlank('bri_unit_rates_remarks', $objCostEstimate);?>"></td>
 								</tr>
 								<tr>
@@ -1971,7 +1997,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										<input type="checkbox" class=" form-control " name="bri_portering_dis_check" id="bri_portering_dis_check" value="1" <?php echo (et_setFormVal('bri_portering_dis_check', $objCostEstimate) == 1) ? 'checked="checked"' : '' ?>>
 									</div>
 									</td>
-									<td>NA</td>
+									<td><input type="text" name="bri_portering_dis_deficiency" size="60" value="<?=et_setFormValBlank('bri_portering_dis_deficiency', $objCostEstimate);?>">&nbsp;</td>
 									<td><input type="text" name="bri_portering_dis_remarks" size="60" value="<?=et_setFormValBlank('bri_portering_dis_remarks', $objCostEstimate);?>"></td>
 								</tr>
 								<tr>

@@ -145,7 +145,6 @@ class Beneficiaries_DateWise_report extends BaseController
                   
             } else
             {
-                die("redirect");
                 redirect("reports/Beneficiaries_DateWise/".$stat);
                 //return redirect()->to(base_url('reports/Beneficiaries_DateWise_report/'));  
             }
