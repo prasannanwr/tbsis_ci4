@@ -441,12 +441,13 @@ color:#fff!important;
 .footer-text
 {
     width: 100%;
-  text-align: center;
-  background: black;
-  color: white;
-  padding: 15px;
-  position: relative;
-  clear:both;
+    text-align: center;
+    background: black;
+    color: white;
+    padding: 15px;
+    /*position: fixed;*/
+    bottom: 0;
+    clear:both;
 }
 /*}*/
 .padding-top {
