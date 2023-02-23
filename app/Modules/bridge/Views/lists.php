@@ -77,7 +77,7 @@
 								<div class="panel-body">
 									<div class="form-group">
 									<label>Select District</label>
-         <?php echo et_form_dropdown_db('district', 'dist01district', 'dist01name', 'dist01id','', '', 'class="form-control distName_search"', array('AddNone'=>true, 'NoneCaption'=>'All District', 'NoneValue'=>'', 'SortBy'=>'dist01name')) ?>
+         <?php echo et_form_dropdown_db_dist('district', 'dist01district', 'dist01name', 'dist01id','', getPermittedDists(), 'class="form-control distName_search"', array('AddNone'=>true, 'NoneCaption'=>'All District', 'NoneValue'=>'', 'SortBy'=>'dist01name')) ?>
  		                             
                                     <!-- <input type="submit"  name="distSubmit" class="btn btn-sm btn-primary" value="Show" />
 				                    <input type="submit"  name="ShowAll" class="btn btn-sm btn-info" value="Show All" />-->

@@ -339,7 +339,7 @@
                                             <li class="divider"> </li>
 
                                             <li>
-                                                <?php echo anchor('user', '<i class="fa fa-user fa-1x"></i> Users'); ?>
+                                                <?php echo anchor('user/list', '<i class="fa fa-user fa-1x"></i> Users'); ?>
                                             </li>
 
                                         </div>

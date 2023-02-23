@@ -299,16 +299,53 @@ class bridge extends BaseController
 			// endforeach;
 			
 			//check if the form is submitted or not bri03project_fiscal_year
+			// $rules = [
+			// 	'bri03bridge_name' => 'required',
+			// 	'bri03place_name' => 'required',
+			// 	'bri03district_name_lb' => 'required',
+			// 	'bri03district_name_rb' => 'required',
+			// 	'bri03river_name' => 'required',
+			// 	'bri03supporting_agency' => 'required',
+			// 	'bri03work_category' => 'required',
+			// 	'bri03project_fiscal_year' => 'required'
+			// ];
+
 			$rules = [
-				'bri03bridge_name' => 'required',
-				'bri03place_name' => 'required',
-				'bri03district_name_lb' => 'required',
-				'bri03district_name_rb' => 'required',
-				'bri03river_name' => 'required',
-				'bri03supporting_agency' => 'required',
-				'bri03work_category' => 'required',
-				'bri03project_fiscal_year' => 'required'
-			];
+	            "bri03bridge_name" => [
+	                "label" => "Bridge name", 
+	                "rules" => "required"
+	            ],
+	            "bri03place_name" => [
+	                "label" => "Place name", 
+	                "rules" => "required"
+	            ],
+	            "bri03river_name" => [
+	                "label" => "River name", 
+	                "rules" => "required"
+	            ],
+	            "bri03district_name_lb" => [
+	                "label" => "Left bank district", 
+	                "rules" => "required"
+	            ],
+	            "bri03district_name_rb" => [
+	                "label" => "Right bank district", 
+	                "rules" => "required"
+	            ],
+	            "bri03supporting_agency" => [
+	                "label" => "Supporing agency", 
+	                "rules" => "required"
+	            ],
+	            "bri03work_category" => [
+	                "label" => "Work category", 
+	                "rules" => "required"
+	            ],
+	            "bri03project_fiscal_year" => [
+	                "label" => "Project fiscal year", 
+	                "rules" => "required"
+	            ],
+
+	        ];
+
 			// $errors = [
 			// 	'bri03bridge_name' => 'Bridge name is required',
 			// 	'bri03place_name' => 'Place name required',
@@ -930,6 +967,11 @@ class bridge extends BaseController
 						'bri_we_check' =>  @$this->request->getVar("bri_we_check"),
 						'bri_we_def' =>  @$this->request->getVar("bri_we_def"),
 						'bri_we_action' =>  @$this->request->getVar("bri_we_action"),
+
+						'bri_we_angles_check' =>  @$this->request->getVar("bri_we_angles_check"),
+						'bri_we_angles_def' =>  @$this->request->getVar("bri_we_angles_def"),
+						'bri_we_angles_action' =>  @$this->request->getVar("bri_we_angles_action"),
+
 						'bri_windties_check' =>  @$this->request->getVar("bri_windties_check"),
 						'bri_windties_def' =>  @$this->request->getVar("bri_windties_def"),
 						'bri_windties_action' =>  @$this->request->getVar("bri_windties_action"),
@@ -1013,6 +1055,9 @@ class bridge extends BaseController
 						'bri_masonry_stone_check' =>  @$this->request->getVar("bri_masonry_stone_check"),
 						'bri_masonry_stone_def' =>  @$this->request->getVar("bri_masonry_stone_def"),
 						'bri_masonry_stone_remarks' =>  @$this->request->getVar("bri_masonry_stone_remarks"),
+						'bri_masonry_monolithic_check' =>  @$this->request->getVar("bri_masonry_monolithic_check"),
+						'bri_masonry_monolithic_def' =>  @$this->request->getVar("bri_masonry_monolithic_def"),
+						'bri_masonry_monolithic_remarks' =>  @$this->request->getVar("bri_masonry_monolithic_remarks"),
 						'bri_verify_concrete_foundation_check' =>  @$this->request->getVar("bri_verify_concrete_foundation_check"),
 						'bri_verify_concrete_foundation_def' =>  @$this->request->getVar("bri_verify_concrete_foundation_def"),
 						'bri_verify_concrete_foundation_remarks' =>  @$this->request->getVar("bri_verify_concrete_foundation_remarks"),
@@ -1067,6 +1112,7 @@ class bridge extends BaseController
 			}
 		}
 		}
+		//echo "<pre>"; var_dump($data['arrVDCList']);exit;
 
 		return view('\Modules\bridge\Views'. DIRECTORY_SEPARATOR .__FUNCTION__, $data);
 	}

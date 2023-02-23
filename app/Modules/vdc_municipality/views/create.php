@@ -39,7 +39,7 @@
 							District Name:
 						</label>
 						<div class="col-sm-6">
-                         <?php echo et_form_dropdown_db('muni01dist01id', 'dist01district', 'dist01name', 'dist01id', et_setFormVal('muni01dist01id', $objOldRec), '', 'class="form-control"') ?>
+                         <?php echo et_form_dropdown_db('muni01dist01id', 'dist01district', 'dist01name', 'dist01code', et_setFormVal('muni01dist01id', $objOldRec), '', 'class="form-control"') ?>
 						</div>
 					</div>
                     <div class="form-group">

@@ -169,6 +169,7 @@ function getPermittedDists()
     $blnIsLogged = $users_model->is_logged_in();
     $intUserType = ($blnIsLogged) ? $users_model->getLoggedType() : ENUM_GUEST;
     //var_dump($blnIsLogged);
+
     if ($intUserType == ENUM_REGIONAL_MANAGER || $intUserType == ENUM_REGIONAL_OPERATOR) {
         //comma seperated value
         if (count($arrPerm) > 0) {
