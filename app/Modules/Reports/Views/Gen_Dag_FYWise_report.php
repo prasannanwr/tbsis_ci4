@@ -52,6 +52,20 @@
 
 if(is_array($arrPrintList)){
     $sum1 = 0;
+
+    $g_total_household = 0;
+    $g_total_beneficiaries = 0;
+    $g_dalit_total = 0;
+    $g_bct_total = 0;
+    $g_janjati_total = 0;
+    $g_minorities_total = 0;
+    $g_grand_total = 0;
+
+    $g_dalit_percent = 0;
+    $g_janjati_percent = 0;
+    $g_minorities_percent = 0;
+    $g_bct_percent = 0;
+    $g_grand_total_pecent = 0;
     
     foreach($arrPrintList as $dataRow){
 
@@ -71,7 +85,7 @@ if(is_array($arrPrintList)){
                     $bct_total = 0;
                     $grand_total = 0;
                      
-                     $percent_women = 0;
+                    $percent_women = 0;
                     $percent_men = 0;
                     $dalit_percent = 0;
                     $dalit_poor_percent = 0;
@@ -82,6 +96,7 @@ if(is_array($arrPrintList)){
                     $bct_percent = 0;
                     $bct_poor_percent = 0;
                     $grand_total_pecent = 0;
+
                     foreach($dataRow['data'] as $dataRow1){
                         $beneficiaries = $dataRow1['total_women'] + $dataRow1['total_men'];
                         $total_household = $total_household + $dataRow1['total_household'];
@@ -118,14 +133,30 @@ if(is_array($arrPrintList)){
                                         </tbody>
                                         <?php $sum1 += $i; ?>
                                         <?php
+                                        //grant total
+                                    $g_total_household = $g_total_household + $total_household;
+                                    $g_total_beneficiaries = $g_total_beneficiaries + $total_beneficiaries;
+                                    $g_dalit_total = $g_dalit_total + $dalit_total;
+                                    $g_bct_total = $g_bct_total + $bct_total;
+                                    $g_janjati_total = $g_janjati_total + $janjati_total;
+                                    $g_minorities_total = $g_minorities_total + $minorities_total;
+                                    $g_grand_total = $g_grand_total + $grand_total;
+
                                    if($total_beneficiaries > 0) :
                                     $dalit_percent = ($dalit_total/$total_beneficiaries) * 100;
                                     $janjati_percent = ($janjati_total/$total_beneficiaries) * 100;
                                     $minorities_percent = ($minorities_total/$total_beneficiaries) * 100;
                                     $bct_percent = ($bct_total/$total_beneficiaries) * 100;
-
                                     $grand_total_pecent = ($grand_total/$total_beneficiaries) * 100;
                                 endif;
+
+
+                                    $g_dalit_percent = $g_dalit_percent + $dalit_percent;
+                                    $g_janjati_percent = $g_janjati_percent + $janjati_percent;
+                                    $g_minorities_percent = $g_minorities_percent + $minorities_percent;
+                                    $g_bct_percent = $g_bct_percent + $bct_percent;
+                                    $g_grand_total_pecent = $g_grand_total_pecent + $grand_total_pecent;
+                                    
                         ?>
                         <tr>
                             <td colspan="3" class="center">Total per District: </td>
@@ -150,6 +181,24 @@ if(is_array($arrPrintList)){
                        } //end of dist
                         }
                         ?>
+                        <tr>
+                            <td colspan="3" class="center">Overall</td>
+                            <td class="center"><?php echo $g_total_household;?></td>
+                            <td class="center"><?php echo $g_total_beneficiaries;?></td>
+                            <td class="center"><?php echo $g_dalit_total;?></td>
+                            <td class="center"><?php echo $g_janjati_total;?></td>
+                            <td class="center"><?php echo $g_minorities_total;?></td>
+                            <td class="center"><?php echo $g_bct_total;?></td>
+                            <td class="center"><?php echo $g_grand_total;?></td>
+                        </tr>
+                        <tr>
+                            <td class="center" colspan="5">%</td>
+                            <td class="center"><?php echo number_format($g_dalit_percent, 2);?></td>
+                            <td class="center"><?php echo number_format($g_janjati_percent,2);?></td>
+                            <td class="center"><?php echo number_format($g_minorities_percent, 2);?></td>
+                            <td class="center"><?php echo number_format($g_bct_percent, 2);?></td>
+                            <td class="center"><?php echo number_format($g_grand_total_pecent, 2);?></td>
+                        </tr>
                         </table>
                         <!-- pagination block -->
                         <div class="mt-3">

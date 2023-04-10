@@ -64,7 +64,7 @@ class Access_Utility_Completed_FYWise_report extends BaseController
             $dateEnd = @$this->request->getVar('end_year');
         } 
 
-        $perPage = 4;
+        $perPage = ITEMS_PER_PAGE;
         $arrPrintList = array();
         $selProvince = @$this->request->getVar('selProvince');       
         $data['selProvince'] = $selProvince;

@@ -70,7 +70,7 @@ class Public_Audit_DateWise_report extends BaseController
         } 
           
         $data['blnMM'] = $stat;
-        $data['title'] = "Beneficiaries DateWise Report";
+        $data['title'] = "Public Audit DateWise Report";
         
         $data['startdate'] = $dateStart;
         $data['enddate'] = $dateEnd;
@@ -83,7 +83,7 @@ class Public_Audit_DateWise_report extends BaseController
             if ($dateStart != 0 || $dateEnd != 0)
             {
                 $arrPrintList = array();
-                $perPage = 4;
+                $perPage = ITEMS_PER_PAGE;
                 //pager
                 // $pager=service('pager');
                 // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;
@@ -102,7 +102,7 @@ class Public_Audit_DateWise_report extends BaseController
                         // var_dump($v1);exit;
                         $arrChild1=null;
                         
-                        $arrBridgeList = $this->bridge_public_audit_model                                               ->getInfoDateWise($dateStart, $dateEnd, $rr);
+                        $arrBridgeList = $this->bridge_public_audit_model->getInfoDateWise($dateStart, $dateEnd, $rr);
                         
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header

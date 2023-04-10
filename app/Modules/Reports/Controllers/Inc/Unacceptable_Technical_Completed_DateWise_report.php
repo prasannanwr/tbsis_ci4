@@ -7,6 +7,7 @@ use App\Modules\template\Controllers\Template;
 use App\Modules\view\Models\view_district_reg_office_model;
 use App\Modules\bridge\Models\bridge_model;
 use App\Modules\province\Models\ProvinceModel;
+use App\Modules\User\Models\UserModel;
 
 class Unacceptable_Technical_Completed_DateWise_report extends BaseController
 {
@@ -64,7 +65,7 @@ class Unacceptable_Technical_Completed_DateWise_report extends BaseController
             $dateEnd = @$this->request->getVar('end_year');
         } 
 
-        $perPage = 4;
+        $perPage = ITEMS_PER_PAGE;
         $arrPrintList = array();
         $selProvince = @$this->request->getVar('selProvince');       
         $data['selProvince'] = $selProvince;

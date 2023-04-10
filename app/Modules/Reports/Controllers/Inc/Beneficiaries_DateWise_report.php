@@ -9,6 +9,7 @@ use App\Modules\template\Controllers\Template;
 use App\Modules\view\Models\view_bridge_detail_model;
 use App\Modules\view\Models\view_district_reg_office_model;
 use App\Modules\view\Models\view_regional_office_model;
+use App\Modules\User\Models\UserModel;
 //use App\Modules\Reports\Models\ReportsModel;
 
 class Beneficiaries_DateWise_report extends BaseController
@@ -94,7 +95,7 @@ class Beneficiaries_DateWise_report extends BaseController
             if ($dateStart != 0 || $dateEnd != 0)
             {
                 $arrPrintList = array();
-                $perPage = 4;
+                $perPage = ITEMS_PER_PAGE;
                 //pager
                 // $pager=service('pager');
                 // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;
@@ -103,11 +104,31 @@ class Beneficiaries_DateWise_report extends BaseController
                 // $offset = $page * $perPage;
                 //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
                 
+                // if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                //     $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
+                // } else {
+                //     $selDist=$this->view_district_reg_office_model->paginate($perPage);
+                // }
+
                 if($selProvince != '' && strtolower($selProvince) != "all") {                             
-                    $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
+                    $this->view_district_reg_office_model->where('province_id',$selProvince);
+                }
+
+                //get user assigned disticts
+                $userModel = new UserModel();
+                $arrPermittedDistList = $userModel->getArrPermitedDistList();
+                $intUserType = (session()->get('type')) ? session()->get('type') : ENUM_GUEST;
+                if ($intUserType == ENUM_REGIONAL_MANAGER || $intUserType == ENUM_REGIONAL_OPERATOR) {
+                  //comma seperated value
+                  if (count($arrPermittedDistList) > 0) {
+                    // $selDist = $this->view_district_reg_office_model->whereIn('dist01id', $arrPermittedDistList)->paginate($perPage);
+                    $selDist = $this->view_district_reg_office_model->whereIn('dist01id', $arrPermittedDistList)->findAll();
+                  }
                 } else {
-                    $selDist=$this->view_district_reg_office_model->paginate($perPage);
-                } 
+                  // $selDist = $this->view_district_reg_office_model->paginate($perPage);
+                    $selDist = $this->view_district_reg_office_model->findAll();
+                }
+
                 $data['selDist'] = $selDist;
                 $data['pager'] = $this->view_district_reg_office_model->pager;
                 

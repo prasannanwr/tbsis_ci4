@@ -71,7 +71,7 @@ class Employment_Generation_DateWise_report extends BaseController
         } 
           
         $data['blnMM'] = $stat;
-        $data['title'] = "Beneficiaries DateWise Report";
+        $data['title'] = "Employment Generation DateWise Report";
         $selProvince = @$this->request->getVar('selProvince');       
         $data['selProvince'] = $selProvince;
         
@@ -87,7 +87,7 @@ class Employment_Generation_DateWise_report extends BaseController
             if ($dateStart != 0 || $dateEnd != 0)
             {
                 $arrPrintList = array();
-                $perPage = 4;
+                $perPage = ITEMS_PER_PAGE;
                 //pager
                 // $pager=service('pager');
                 // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;

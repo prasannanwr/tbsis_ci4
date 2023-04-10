@@ -30,6 +30,7 @@ use App\Modules\view\Models\view_regional_office_model;
 use App\Modules\regional_office\Models\regional_office_model;
 use App\Modules\vdc_municipality\Models\MunicipalityModel;
 use App\Modules\view\Models\view_bridge_actual_cost;
+use App\Modules\User\Models\UserModel;
 //use App\Modules\Reports\Models\ReportsModel;
 
 class Reports extends BaseController
@@ -473,7 +474,21 @@ class Reports extends BaseController
         $data['dataStart'] = $dataStart;
         $data['dateEnd'] = $dateEnd;
         $arrPrintList = array();
-        $selDist=$this->view_district_reg_office_model->paginate($perPage);
+        //$selDist=$this->view_district_reg_office_model->paginate($perPage);
+
+        //get user assigned disticts
+        $userModel = new UserModel();
+        $arrPermittedDistList = $userModel->getArrPermitedDistList();
+        $intUserType = (session()->get('type')) ? session()->get('type') : ENUM_GUEST;
+        if ($intUserType == ENUM_REGIONAL_MANAGER || $intUserType == ENUM_REGIONAL_OPERATOR) {
+          //comma seperated value
+          if (count($arrPermittedDistList) > 0) {
+            $selDist = $this->view_district_reg_office_model->whereIn('dist01id', $arrPermittedDistList)->paginate($perPage);
+          }
+        } else {
+          $selDist = $this->view_district_reg_office_model->paginate($perPage);
+        }
+
         $data['selDist'] = $selDist;
         $data['pager'] = $this->view_district_reg_office_model->pager;
         if(is_array( $selDist)){
@@ -485,7 +500,8 @@ class Reports extends BaseController
                 // var_dump($v1);exit;
                 $arrChild1=null;
                 
-                $arrBridgeList = $this->bridge_model->getBridgeUtilities($rr);
+                //$arrBridgeList = $this->bridge_model->getBridgeUtilities($rr);
+                $arrBridgeList = $this->bridge_model->getUnacceptableTechnicalUC($rr);
                 
                 if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                     //print header

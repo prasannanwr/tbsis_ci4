@@ -121,8 +121,8 @@ $routes->post('reports/UC_Executive_Position_FYWise_report/(:any)', '\App\Module
 $routes->get('reports/UC_Executive_Position_FYWise_report', '\App\Modules\Reports\Controllers\Inc\UC_Executive_Position_FYWise_report::index', ['filter' => 'auth']);
 $routes->get('reports/UC_Executive_Position_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\UC_Executive_Position_FYWise_report::index/$1', ['filter' => 'auth']);
 
-$routes->post('reports/UC_Executive_Position_DateWise_report', '\App\Modules\Reports\Controllers\Inc\UC_Executive_Position_DateWise_report::index', ['filter' => 'auth']);
-$routes->post('reports/UC_Executive_Position_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\UC_Executive_Position_DateWise_report::index/$1', ['filter' => 'auth']);
+$routes->get('reports/UC_Executive_Position_DateWise_report', '\App\Modules\Reports\Controllers\Inc\UC_Executive_Position_DateWise_report::index', ['filter' => 'auth']);
+$routes->get('reports/UC_Executive_Position_DateWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\UC_Executive_Position_DateWise_report::index/$1', ['filter' => 'auth']);
 
 $routes->post('reports/Employment_Generation_FYWise_report', '\App\Modules\Reports\Controllers\Inc\Employment_Generation_FYWise_report::index', ['filter' => 'auth']);
 $routes->post('reports/Employment_Generation_FYWise_report/(:any)', '\App\Modules\Reports\Controllers\Inc\Employment_Generation_FYWise_report::index/$1', ['filter' => 'auth']);

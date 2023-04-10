@@ -8,6 +8,7 @@ use App\Modules\province\Models\ProvinceModel;
 use App\Modules\template\Controllers\Template;
 use App\Modules\view\Models\view_district_reg_office_model;
 use App\Modules\view\Models\view_regional_office_model;
+use App\Modules\User\Models\UserModel;
 //use App\Modules\Reports\Models\ReportsModel;
 
 class UC_Executive_Position_DateWise_report extends BaseController
@@ -87,7 +88,7 @@ class UC_Executive_Position_DateWise_report extends BaseController
             {
                 // echo $dateStart;exit;
                 $arrPrintList = array();
-                $perPage = 4;
+                $perPage = ITEMS_PER_PAGE;
                 //pager
                 // $pager=service('pager');
                 // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;

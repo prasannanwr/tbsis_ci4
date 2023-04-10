@@ -197,29 +197,96 @@ class bridge_model extends Model
     /**
      * Unacceptable_Technical_UnderConstruction
      *
+     * @param [bridge_status] $bri_status | default Completed 4
      * @param [type] $distId
      * @param string $perPage
      * @param integer $offset
      * @return void
      */
-    public function getUTechUnderConstruction($distId, $perPage='', $offset = 0) {
+    // public function getUTechUnderConstruction($distId, $perPage='', $offset = 0) {
+    public function getUnacceptableTechnical($bri_status = '4', $distId, $perPage='', $offset = 0) {
 
         //using builder
         $builder = $this->db->table("view_bridge_child");
         $builder = $builder
-            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`,`view_bridge_child`.`bri03portering_distance` AS `bri03portering_distance`,`view_bridge_child`.`bri03road_head` AS `bri03road_head`,`view_bridge_child`.`bri03river_type` AS `bri03river_type`,`bu`.`bu_name` as 'bri03utility_lb_name',`bu1`.`bu_name` as `bri03utility_rb_name`")
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`,`view_bridge_child`.`bri03physical_progress`,`physical_progress_types`.`pp_name` as `physical_progress`,
+                `bridge_site_assesment`.*,`bridge_design`.*,`bridge_cost_estimate`.*,`bridge_steel_parts`.*,`bridge_construction_work`.*,`bridge_final_inspection`.*")
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
-            ->join('bridge_utilities as `bu`','`bu`.`bu_id` = `view_bridge_child`.`bri03utility_left_bank`', 'left');
-        
+            ->join('physical_progress_types','`physical_progress_types`.`pp_id` = `view_bridge_child`.`bri03physical_progress`', 'left')
+            ->join('bridge_site_assesment','`bridge_site_assesment`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_design','`bridge_design`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_cost_estimate','`bridge_cost_estimate`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_steel_parts','`bridge_steel_parts`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_construction_work','`bridge_construction_work`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_final_inspection','`bridge_final_inspection`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
+            
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
 
+        if($bri_status != '')
+            $builder = $builder->where('`view_bridge_child`.`bri03work_category` =', $bri_status);
+
         $result = $builder->get();
-        
 
         if($result->getNumRows() <= 0)
             return '';
 
         return $result->getResultArray();
+    }
+
+    public function getUnacceptableTechnicalUC($distId, $perPage='', $offset = 0) {
+
+        //using builder
+        $builder = $this->db->table("view_bridge_child");
+        $builder = $builder
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`,`view_bridge_child`.`bri03physical_progress`,`physical_progress_types`.`pp_name` as `physical_progress`, `bridge_site_assesment`.*, `bridge_design`.*,`bridge_cost_estimate`.*,`bridge_steel_parts`.*,`bridge_construction_work`.*,`bridge_final_inspection`.*")
+            ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
+            ->join('physical_progress_types','`physical_progress_types`.`pp_id` = `view_bridge_child`.`bri03physical_progress`', 'left')
+            ->join('bridge_site_assesment','`bridge_site_assesment`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_design','`bridge_design`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_cost_estimate','`bridge_cost_estimate`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_steel_parts','`bridge_steel_parts`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_construction_work','`bridge_construction_work`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_final_inspection','`bridge_final_inspection`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
+            
+        if($distId != '')
+            $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+
+        //underconstruction
+        $builder->where('`view_bridge_child`.`bri03work_category` !=', 4);
+
+        $result = $builder->get();
+
+        if($result->getNumRows() <= 0)
+            return '';
+
+        return $result->getResultArray();
+    }
+
+    public function convertDateToFY($date = "2023-07-20") 
+    {
+        if($date) 
+        {
+            $FiscalYearModel = new FiscalYearModel();
+            $dateparts =explode("-", $date);
+            $fy = '';
+            if($dateparts[1] <= 7) //month is less than or equal to july 
+            {
+                $prev_year = $dateparts[0] - 1;
+                $fy = $prev_year.$dateparts[0]; //20222023
+            } else {
+                $next_year = $dateparts[0] + 1;
+                $fy = $dateparts[0].$next_year;
+            }
+            $builder = $this->db->table("fis01fiscal_year");
+            $builder = $builder->select('fis01id')->where('fis01year',$fy);
+            $result = $builder->get();
+            if($result->getNumRows() <= 0)
+                return '';
+            $result_row = $result->getRow();
+            $fy = $result_row->fis01id;
+            return $fy;
+        }
+
     }
 }

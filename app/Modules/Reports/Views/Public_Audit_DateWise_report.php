@@ -17,7 +17,7 @@
             <div class="col-lg-12 mainBoard">
 
 
-                <h2 class="reportHeader center">Public Audit (Between <?php echo $startdate." - ".$enddate; ?>) as of <?php echo date("j F, Y"); ?></h2>
+                <h2 class="reportHeader center">Participation during Public Audit (Between <?php echo $startdate." - ".$enddate;?>)</h2>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -25,13 +25,7 @@
                                 <th style="width:55px;" class="center">SN</th>
                                 <th class="center" style="width:150px;">Bridge Id</th>
                                 <th class="center" style="width:150px;">Name</th>
-                                <th style="width:160px;" class="center">Total no. of Members</th>
-                                <th class="center">Men</th>
-                                <th class="center">Women</th>
-                                <th class="center">Dalits</th>
-                                <th class="center">Janjaties</th>
-                                <th class="center">Minorities</th>
-                                <th class="center">BCT</th>
+                                <th class="center" style="width: 300px;">Public Audit Conducted</th>
                             </tr>
                         </thead>
 
@@ -49,96 +43,18 @@
                                     </td>
                                 </tr>
                                 <?php
-                                $grand_total_members = 0;
-                                $total_members = 0;
-                                $total_men = 0;
-                                $total_women = 0;
-                                $dalit_total = 0;
-                                $janjati_total = 0;
-                                $minorities_total = 0;
-                                $bct_total = 0;
-
-                                $percent_women = 0;
-                                $percent_men = 0;
-                                $dalit_percent = 0;
-                                $janjati_percent = 0;
-                                $minorities_percent = 0;
-                                $bct_percent = 0;
                                 foreach ($dataRow['data'] as $dataRow1) {
-                                    $total_members = $dataRow1['b_uc_cp_total'] + $dataRow1['b_uc_dy_total'] + $dataRow1['b_uc_sc_total'] + $dataRow1['b_uc_tr_total'] + $dataRow1['b_uc_mm_total'];
-                                    $men = $dataRow1['b_uc_cp_male'] + $dataRow1['b_uc_dy_male'] + $dataRow1['b_uc_sc_male'] + $dataRow1['b_uc_tr_male'] + $dataRow1['b_uc_mm_male']; 
-                                    $women = $dataRow1['b_uc_cp_female'] + $dataRow1['b_uc_dy_female'] + $dataRow1['b_uc_sc_female'] + $dataRow1['b_uc_tr_female'] + $dataRow1['b_uc_mm_female']; 
-
-                                    $dalit = $dataRow1['b_uc_cp_dalit'] + $dataRow1['b_uc_dy_dalit'] + $dataRow1['b_uc_sc_dalit'] + $dataRow1['b_uc_tr_dalit'] + $dataRow1['b_uc_mm_dalit'];
-                                    $janjati = $dataRow1['b_uc_cp_janjati'] + $dataRow1['b_uc_dy_janjati'] + $dataRow1['b_uc_sc_janjati'] + $dataRow1['b_uc_tr_janjati'] + $dataRow1['b_uc_mm_janjati'];
-                                    $minorities = $dataRow1['b_uc_cp_minorities'] + $dataRow1['b_uc_dy_minorities'] + $dataRow1['b_uc_sc_minorities'] + $dataRow1['b_uc_tr_minorities'] + $dataRow1['b_uc_mm_minorities'];
-                                    $bct = $dataRow1['b_uc_cp_bct'] + $dataRow1['b_uc_dy_bct'] + $dataRow1['b_uc_sc_bct'] + $dataRow1['b_uc_tr_bct'] + $dataRow1['b_uc_mm_bct'];
-
-                                    $grand_total_members = $grand_total_members + $total_members;
-                                    $total_men = $total_men + $men;
-                                    $total_women = $total_women + $women;
-
-                                    $dalit_total = $dalit_total + $dalit;
-                                    $bct_total = $bct_total + $bct;
-                                    $janjati_total = $janjati_total + $janjati;
-                                    $minorities_total = $minorities_total + $minorities;
-                                    //$grand_total = $grand_total + $total_dag;
                                 ?>
-
-
-
-
                                     <tbody>
-
                                         <tr>
                                             <td style="width:55px;" class="center"><?php echo $i + 1; ?></td>
                                             <td style="width:120px;" class="center"><?php echo $dataRow1['bri03bridge_no']; ?></td>
                                             <td style="width:120px;" class="center"><?php echo $dataRow1['bri03bridge_name']; ?></td>
-                                            <td style="width:60px;" class="center"><?php echo $total_members; ?></td>
-                                            <td style="width:60px;" class="center"><?php echo $men; ?></td>
-                                            <td style="width:75px;" class="center"><?php echo $women; ?></td>
-
-                                            <td style="width:75px;" class="center"><?php echo $dalit; ?></td>
-                                            <td style="width:75px;" class="center"><?php echo $janjati; ?></td>
-                                            <td style="width:75px;" class="center"><?php echo $minorities; ?></td>
-                                            <td style="width:75px;" class="center"><?php echo $bct; ?></td>
-
-                                            
+                                            <td style="width:60px;" class="center"><?php echo ($dataRow1['pa_status'] == 1? 'yes':'no'); ?></td> 
                                         </tr>
                                     <?php $i++;
                                 } ?>
                                     </tbody>
-                                    <?php $sum1 += $i; ?>
-                                    <?php
-                                    if ($grand_total_members > 0) :
-                                        $dalit_percent = ($dalit_total / $grand_total_members) * 100;
-                                        $janjati_percent = ($janjati_total / $grand_total_members) * 100;
-                                        $minorities_percent = ($minorities_total / $grand_total_members) * 100;
-                                        $bct_percent = ($bct_total / $grand_total_members) * 100;
-
-                                        $percent_women = ($total_women / $grand_total_members) * 100;
-                                        $percent_men = ($total_men / $grand_total_members) * 100;
-                                    endif;
-                                    ?>
-                                    <tr>
-                                        <td colspan="3" class="center">Total: </td>
-                                        <td class="center"><?php echo $grand_total_members; ?></td>
-                                        <td class="center"><?php echo $total_men; ?></td>
-                                        <td class="center"><?php echo $total_women; ?></td>
-                                        <td class="center"><?php echo $dalit_total; ?></td>
-                                        <td class="center"><?php echo $janjati_total; ?></td>
-                                        <td class="center"><?php echo $minorities_total; ?></td>
-                                        <td class="center"><?php echo $bct_total; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center" colspan="4">%</td>
-                                        <td class="center"><?php echo number_format($percent_men, 2); ?></td>
-                                        <td class="center"><?php echo number_format($percent_women, 2); ?></td>
-                                        <td class="center"><?php echo number_format($dalit_percent, 2); ?></td>
-                                        <td class="center"><?php echo number_format($janjati_percent, 2); ?></td>
-                                        <td class="center"><?php echo number_format($minorities_percent, 2); ?></td>
-                                        <td class="center"><?php echo number_format($bct_percent, 2); ?></td>
-                                    </tr>
                             <?php
 
                             } //end of dist
@@ -150,7 +66,7 @@
                         <?php //$pager = \Config\Services::pager(); 
                         ?>
                         <?php if ($pager) : ?>
-                            <?php $pagi_path = 'reports/UC_Composition_DateWise_report?dataStart=' . $dataStart; ?>
+                            <?php $pagi_path = 'reports/Public_Audit_FYWise_report?dataStart=' . $dataStart; ?>
                             <?php //$pager->setPath($pagi_path); 
                             ?>
                             <?= $pager->links(); ?>

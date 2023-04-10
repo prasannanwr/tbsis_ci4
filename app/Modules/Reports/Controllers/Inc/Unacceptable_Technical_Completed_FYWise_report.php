@@ -7,6 +7,7 @@ use App\Modules\template\Controllers\Template;
 use App\Modules\view\Models\view_district_reg_office_model;
 use App\Modules\bridge\Models\bridge_model;
 use App\Modules\province\Models\ProvinceModel;
+use App\Modules\User\Models\UserModel;
 
 class Unacceptable_Technical_Completed_FYWise_report extends BaseController
 {
@@ -64,14 +65,15 @@ class Unacceptable_Technical_Completed_FYWise_report extends BaseController
             $dateEnd = @$this->request->getVar('end_year');
         } 
 
-        $perPage = 4;
+        //$perPage = ITEMS_PER_PAGE;
         $arrPrintList = array();
         $selProvince = @$this->request->getVar('selProvince');       
         $data['selProvince'] = $selProvince;
         if($selProvince != '' && strtolower($selProvince) != "all") {                          
-          $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
+          //$selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
+          $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->findAll();
         } else {
-          $selDist=$this->view_district_reg_office_model->paginate($perPage);
+          $selDist=$this->view_district_reg_office_model->findAll();
         } 
         
         if ($Postback == 'Back')
@@ -88,6 +90,7 @@ class Unacceptable_Technical_Completed_FYWise_report extends BaseController
               $data['endyear'] = $this->fiscal_year_model->where('fis01id', $dateEnd)->first();
               
               if(is_array( $selDist)){
+
                   $i = 0;
                   // echo "<pre>";
                   // var_dump($selDist);exit;
@@ -95,7 +98,8 @@ class Unacceptable_Technical_Completed_FYWise_report extends BaseController
                       $rr=$v['dist01id'];
                       // var_dump($v1);exit;
                       $arrChild1=null;
-                      $arrBridgeList = $this->bridge_model->getBridgeUtilities($rr,$dataStart, $dateEnd);
+                      //$arrBridgeList = $this->bridge_model->getBridgeUtilities($rr,$dataStart, $dateEnd);
+                      $arrBridgeList = $this->bridge_model->getUnacceptableTechnical(4,$rr,$dataStart, $dateEnd);
                       
                       if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                           //print header

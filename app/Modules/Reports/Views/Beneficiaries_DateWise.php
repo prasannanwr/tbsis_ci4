@@ -7,7 +7,7 @@
                 <!-- Page Heading -->
              
                 <div class="row center">
-                    <h3>DAGS</h3>
+                    <h3>Immediate Beneficiaries</h3>
                    <h4>Choose Date</h4>
                 </div>                 
                 <!-- /.row -->

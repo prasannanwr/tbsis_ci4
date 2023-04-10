@@ -144,7 +144,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 										et_setFormVal('bri03district_name_lb', $objOldRec),
 
-										getPermittedDists(),
+										'',
 
 										'class="form-control onChangeDist" data-targetvdc="#bri03municipality_lb" ' . $valDisableDist . ' ',
 										array('SortBy' => 'dist01name')
@@ -344,7 +344,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 								<div class="col-lg-7 ">
 
-									<?php echo et_form_dropdown_db('bri03physical_progress', 'physical_progress_types', 'pp_name', 'pp_id', et_setFormVal('bri03physical_progress', $objOldRec), '', 'class="form-control"') ?>
+									<?php echo et_form_dropdown_db('bri03physical_progress', 'physical_progress_types', 'pp_name', 'pp_id', et_setFormVal('bri03physical_progress', $objOldRec), array('0'=>array('pp_status','where','1')), 'class="form-control"') ?>
 
 								</div>
 
@@ -395,7 +395,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 								<div class="col-lg-7 ">
 
-									<?php echo et_form_dropdown_db_dist('bri03district_name_rb', 'dist01district', 'dist01name', 'dist01id', et_setFormVal('bri03district_name_rb', $objOldRec), getPermittedDists(), 'class="form-control onChangeDist" data-targetvdc="#bri03municipality_rb" ' . $valDisableDist . '', array('SortBy' => 'dist01name')) ?>
+									<?php echo et_form_dropdown_db_dist('bri03district_name_rb', 'dist01district', 'dist01name', 'dist01id', et_setFormVal('bri03district_name_rb', $objOldRec), '', 'class="form-control onChangeDist" data-targetvdc="#bri03municipality_rb" ' . $valDisableDist . '', array('SortBy' => 'dist01name')) ?>
 
 								</div>
 
@@ -431,7 +431,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 								<div class="col-lg-7 ">
 
-									<?php echo et_form_dropdown_db('bri03supporting_agency', 'sup03basic_supporting_agency', 'sup03sup_agency_name', 'sup03id', et_setFormVal('bri03supporting_agency', $objOldRec), '', 'class="form-control"') ?>
+									<?php echo et_form_dropdown_db('bri03supporting_agency', 'sup03basic_supporting_agency', 'sup03sup_agency_name', 'sup03id', et_setFormVal('bri03supporting_agency', $objOldRec), array('0'=>array('status','where','1')), 'class="form-control"', array('SortBy'=> 'sup03index')) ?>
 
 								</div>
 

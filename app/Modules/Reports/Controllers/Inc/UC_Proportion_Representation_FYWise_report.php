@@ -8,6 +8,7 @@ use App\Modules\province\Models\ProvinceModel;
 use App\Modules\template\Controllers\Template;
 use App\Modules\view\Models\view_district_reg_office_model;
 use App\Modules\view\Models\view_regional_office_model;
+use App\Modules\User\Models\UserModel;
 //use App\Modules\Reports\Models\ReportsModel;
 
 class UC_Proportion_Representation_FYWise_report extends BaseController
@@ -72,6 +73,7 @@ class UC_Proportion_Representation_FYWise_report extends BaseController
         $data['selProvince'] = $selProvince;
           
         $data['blnMM'] = $stat;
+        $data['title'] = "UC Proportion Representation FYWise Report";
         //echo $dataStart;exit;
     
         $data['startyear'] =$this->fiscal_year_model->where('fis01id', $dataStart)->first();
@@ -85,7 +87,7 @@ class UC_Proportion_Representation_FYWise_report extends BaseController
             if ($dataStart != 0 || $dateEnd != 0)
             {
                 $arrPrintList = array();
-                $perPage = 4;
+                $perPage = ITEMS_PER_PAGE;
                 //pager
                 // $pager=service('pager');
                 // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;

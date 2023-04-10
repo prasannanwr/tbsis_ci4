@@ -71,6 +71,7 @@ class Public_Audit_FYWise_report extends BaseController
         } 
           
             $data['blnMM'] = $stat;
+            $data['title'] = "Public Audit FYWise Report";
 
             //echo $dataStart;exit;
         
@@ -84,7 +85,7 @@ class Public_Audit_FYWise_report extends BaseController
                 if ($dataStart != 0 || $dateEnd != 0)
                 {
                     $arrPrintList = array();
-                    $perPage = 4;
+                    $perPage = ITEMS_PER_PAGE;
                     //pager
                     // $pager=service('pager');
                     // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;

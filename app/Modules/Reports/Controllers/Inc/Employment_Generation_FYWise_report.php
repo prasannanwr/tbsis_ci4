@@ -70,6 +70,7 @@ class Employment_Generation_FYWise_report extends BaseController
         } 
           
         $data['blnMM'] = $stat;
+        $data['title'] = "Employment Generation FYWise Report";
         $selProvince = @$this->request->getVar('selProvince');       
         $data['selProvince'] = $selProvince;
 
@@ -86,7 +87,7 @@ class Employment_Generation_FYWise_report extends BaseController
             if ($dataStart != 0 || $dateEnd != 0)
             {
                 $arrPrintList = array();
-                $perPage = 4;
+                $perPage = ITEMS_PER_PAGE;
                 //pager
                 // $pager=service('pager');
                 // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;

@@ -156,23 +156,23 @@
                                                 </li>
                                                 <li class="divider"></li>
 
-                                                <li class="dropdown">
+                                                <!-- <li class="dropdown">
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                                         Public Hearing <b class="caret"></b>
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'DateWise'); ?>
+                                                        <?php //echo anchor('reports/Gen_Dist_DateWise', 'DateWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dist_DateWise', 'FYWise'); ?>
+                                                        <?php //echo anchor('reports/Gen_Dist_DateWise', 'FYWise'); ?>
                                                         </li>
                                                         <li class="divider"></li>
                                                     </ul>
                                                 </li>
                                                 <li class="divider"></li>
-
+ -->
                                                 <li class="dropdown">
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                                         Public Audit <b class="caret"></b>

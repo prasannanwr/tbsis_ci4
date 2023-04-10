@@ -82,9 +82,14 @@ class bridge extends BaseController
 
 	private $bridge_construction_work_model;
 
+	protected $table = 'view_all_join_bridge_table';
+
+	private $db;
+
 	public function __construct()
 	{
 		helper(['form', 'html', 'et_helper']);
+		$this->db = \Config\Database::connect();
 		$fiscal_year_model = new FiscalYearModel();
 		$construction_model = new construction_model();
 		$view_vdc_model = new view_vdc_model();
@@ -1141,7 +1146,6 @@ class bridge extends BaseController
 		return view('\Modules\bridge\Views'. DIRECTORY_SEPARATOR .__FUNCTION__, $data);
 	}
 
-
 	function delete($delete_id= '')
 	{
 		if (session()->get('type') == 6) {
@@ -1213,39 +1217,78 @@ class bridge extends BaseController
 		}
 	}
 
-	function ajaxData()
+	function ajaxDataApplyWhereOptimized()
 	{
 
-		//todo: count total records and put the no here
-		//Apply Where Condition for counting
-		//$this->ajaxDataApplyWhere();
-		
-		//Apply Where condition for Data
-		$this->ajaxDataApplyWhere();
+		$gtc = @$this->request->getVar('columns');
+		$sql = '';
+		if (is_array($gtc)) {
+			foreach ($gtc as $k => $v) {
+				$search_value = trim($v['search']['value']);
+				//echo "search val: ".$search_value;
+				if ( $search_value !== '' && $search_value != '0' && $search_value != 'All District') {
+					$sql .=" AND `{$v['data']}` = '{$v['search']['value']}'";
+				} 
+			}
+		}
 
+
+		$search = $this->request->getVar('search');
+		//var_dump($search['value']);exit;
+		if ($search['value'] !== '') {
+			$sql .= " AND (`bri03bridge_name` LIKE '%{$search['value']}%'";
+			$sql .= " OR `bri03bridge_no` LIKE '%{$search['value']}%')";
+		}
+		
+		return $sql;
+	}
+
+	function ajaxData()
+	{
+		//Apply Where condition for Data
+		//$this->ajaxDataApplyWhere();
 		//Apply Limit for data
 		$length = ($this->request->getVar('length') != ''?$this->request->getVar('length'):10);
 		$start  = ($this->request->getVar('start') != ''?$this->request->getVar('start'):0);
+		$search = $this->request->getVar('search');
+		$arrDataList = '';
+		$extra_sql = '';
 
 		//for ordering
 		//$arrColumns = array('bri03bridge_no', 'bri03bridge_name', 'bri03river_name', 'bri03design', 'dist01name', 'bri05bridge_complete', 'bri05bridge_complete_check', 'bri03construction_type');
 		// $arrColumns = array('bri03bridge_no', 'bri03bridge_name', 'bri03river_name', 'bri03design', 'dist01name', 'bri05bridge_complete', 'bri05bridge_complete_check', 'bri03construction_type', 'bri03work_category');
 		$arrColumns = array('bri03bridge_no', 'bri03bridge_name', 'bri03river_name', 'dist01name', 'bri05bridge_complete', 'bri05bridge_complete_check', 'bri03construction_type', 'bri03work_category');
 		$order = $this->request->getVar('order');
-		// var_dump($order['0']['column']);
-		// if (is_array($order)) {
-		// 	$x = $order;
-		// 	foreach ($order as $k => $v) {
-		// 		$this->view_all_join_bridge_table_model->orderBy($arrColumns[$v['column']] . ' ' .  $v['dir']);
-		// 	}
-		// } else {
-		// 	$this->view_all_join_bridge_table_model->orderBy('bri05bridge_complete_check asc')->orderBy('bri05bridge_complete desc');
-		// 	$x = false;
-		// }
-		// $arrDataList = $this->view_all_join_bridge_table_model->findAll($length, $start);
-		$arrDataList = $this->view_all_join_bridge_table_model->findAll($length, $start);
+		
+		//$arrDataList = $this->view_all_join_bridge_table_model->findAll($length, $start);
+		//new
+		$sql = "select `a`.* FROM `view_all_bridges_list_major_dist` a WHERE 1=1";
+		$extra_sql = $this->ajaxDataApplyWhereOptimized();
+		$sql .=$extra_sql;
+		//echo $sql;exit;
 
-		$total = sizeof($this->view_all_join_bridge_table_model->findAll());
+		$arrPermittedDistList = $this->view_all_join_bridge_table_model->permittedDistrict();
+        $blnIsLogged = empty($this->session);
+        //var_dump($arrPermittedDistList);exit;
+        //var_dump(session()->get('type'));
+        $intUserType = ($blnIsLogged)? session()->get('type'): ENUM_GUEST; 
+        //echo $ENUM_REGIONAL_MANAGER;exit;
+        if($intUserType == ENUM_REGIONAL_MANAGER || $intUserType == ENUM_REGIONAL_OPERATOR){
+            //comma seperated value
+            $data = '';
+            if( count( $arrPermittedDistList )> 0) {
+            	$permittedDistList = implode(',', $arrPermittedDistList);
+            	//var_dump($arrPermittedDistList);exit;
+                $sql .= " AND `a`.`dist01id` in ($permittedDistList)";
+            }
+        }
+		$sql .=" LIMIT {$start}, {$length}";
+
+		$arrDataList = $this->db->query($sql)->getResult();
+		//
+
+		//$total = sizeof($this->view_all_join_bridge_table_model->findAll());
+		$total = $this->view_all_join_bridge_table_model->totalBridges($search, $arrPermittedDistList, $extra_sql);
 		//$total = 100;
 		//echo($this->view_all_join_bridge_table_model->getLastQuery());exit;
 

@@ -91,9 +91,9 @@ class bridge_public_audit_model extends Model
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
             ->join('bridge_public_audit','`bridge_public_audit`.`pa_bridge_id` = `view_bridge_child`.`bri03id`', 'left');
         if($startDate != '')
-            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
+            $builder = $builder->where('`bridge_public_audit`.`pa_assessment_date` >=', $startDate);
         if($endDate != '')
-            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);
+            $builder = $builder->where('`bridge_public_audit`.`pa_assessment_date` <=', $endDate);
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
 

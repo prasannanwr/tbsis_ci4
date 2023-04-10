@@ -3,6 +3,7 @@
 namespace App\Modules\bridge\Models;
 
 use CodeIgniter\Model;
+use App\Modules\bridge\Models\bridge_model;
 
 class bridge_employment_generation_model extends Model
 {
@@ -91,8 +92,12 @@ class bridge_employment_generation_model extends Model
     }
 
     public function getEmploymentGenerationByDate($startDate = '', $endDate = '', $distId, $state = '', $perPage='', $offset = 0) {
+        $bridge_model = new bridge_model();
         //using builder
         $builder = $this->db->table("view_bridge_child");
+
+        $startDate = $bridge_model->convertDateToFY($startDate);
+        $endDate = $bridge_model->convertDateToFY($endDate);
         // $startDate = explode("-",$startDate);
         // $endDate = explode("-",$endDate);
         // $startYear = $startDate[0];
