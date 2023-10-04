@@ -110,6 +110,7 @@ class Beneficiaries_DateWise_report extends BaseController
                 //     $selDist=$this->view_district_reg_office_model->paginate($perPage);
                 // }
 
+                /*
                 if($selProvince != '' && strtolower($selProvince) != "all") {                             
                     $this->view_district_reg_office_model->where('province_id',$selProvince);
                 }
@@ -131,6 +132,13 @@ class Beneficiaries_DateWise_report extends BaseController
 
                 $data['selDist'] = $selDist;
                 $data['pager'] = $this->view_district_reg_office_model->pager;
+                */
+                $userModel = new UserModel();
+                if($stat == 2) { // under construction
+                  $selDist = $userModel->getDistrictHavingUnderConsBridges($dateStart, $dateEnd, $selProvince);
+                } else {
+                  $selDist = $userModel->getDistrictHavingCompletedBridgesByDate($dateStart, $dateEnd, $selProvince);
+                }
                 
                 if(is_array( $selDist)){
                     $i =0;
@@ -139,11 +147,17 @@ class Beneficiaries_DateWise_report extends BaseController
                         // var_dump($v1);exit;
                         $arrChild1=null;
                         
-                        if($selProvince != '' && strtolower($selProvince) != "all") {                                                   
-                            $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiariesByDate($dateStart, $dateEnd, $rr, $selProvince);
+                        // if($selProvince != '' && strtolower($selProvince) != "all") {                                                   
+                        //     $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiariesByDate($dateStart, $dateEnd, $rr, $selProvince);
+                        // } else {
+                        //     $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiariesByDate($dateStart, $dateEnd, $rr);
+                        // }
+                         if($stat == 2) { // under construction
+                          $arrBridgeList = $this->bridge_beneficiaries_model->getUnderConsBeneficiariesByDate($dateStart, $dateEnd, $rr);
                         } else {
-                            $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiariesByDate($dateStart, $dateEnd, $rr);
+                          $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiariesByDate($dateStart, $dateEnd, $rr);
                         }
+                        
 
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header

@@ -13,10 +13,10 @@
                     <span class="icon-bar">
                     </span>
                 </button>
-                <img src="<?php echo  base_url("images/tbsu_logo.jpg"); ?> " style="max-height: 110px;" />
+                <img src="<?php echo base_url("images/tbsu_logo.jpg"); ?> " style="max-height: 110px;" />
                 <!--    <img src="<?php // echo base_url(); 
                                     ?>images/final_tbssp.gif" /> -->
-                <a href="<?php echo  base_url() ?>" class="navbar-brand"><?php //echo $logoimg['log01name']; ?></a>
+                <a href="<?php echo base_url() ?>" class="navbar-brand"><?php //echo $logoimg['log01name']; ?></a>
                 <?php // echo anchor( '', 'Trail Bridge Support Unit', array( 'class'=>
                 //'navbar-brand')); 
                 ?>
@@ -76,13 +76,35 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dag_DateWise', 'DateWise'); ?>
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Completed<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                <?php echo anchor('reports/Gen_Dag_DateWise', 'DateWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                <?php echo anchor('reports/Gen_Dag_FYWise', 'FYWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
                                                         </li>
-                                                        <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/Gen_Dag_FYWise', 'FYWise'); ?>
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Under Construction<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                <?php echo anchor('reports/Gen_Dag_DateWise/2', 'DateWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                <?php echo anchor('reports/Gen_Dag_FYWise/2', 'FYWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
                                                         </li>
-                                                        <li class="divider"></li>
                                                     </ul>
                                                 </li>
                                                 <!-- start Completed Bridges Report -->
@@ -94,11 +116,35 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/Beneficiaries_DateWise', 'DateWise'); ?>
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Completed<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                <?php echo anchor('reports/Beneficiaries_DateWise', 'DateWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                <?php echo anchor('reports/Beneficiaries_FYWise', 'FYWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
                                                         </li>
                                                         <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/Beneficiaries_FYWise', 'FYWise'); ?>
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Under Construction<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                <?php echo anchor('reports/Beneficiaries_DateWise/2', 'DateWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                <?php echo anchor('reports/Beneficiaries_FYWise/2', 'FYWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
                                                         </li>
                                                         <li class="divider"></li>
                                                     </ul>
@@ -111,11 +157,35 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/UC_Composition_DateWise', 'DateWise'); ?>
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Completed<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                <?php echo anchor('reports/UC_Composition_DateWise', 'DateWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                <?php echo anchor('reports/UC_Composition_FYWise', 'FYWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
                                                         </li>
                                                         <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/UC_Composition_FYWise', 'FYWise'); ?>
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Under Construction<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                <?php echo anchor('reports/UC_Composition_DateWise/2', 'DateWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                <?php echo anchor('reports/UC_Composition_FYWise/2', 'FYWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
                                                         </li>
                                                         <li class="divider"></li>
                                                     </ul>
@@ -128,12 +198,38 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/UC_Proportion_Representation_DateWise', 'DateWise'); ?>
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Completed<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                 <?php echo anchor('reports/UC_Proportion_Representation_DateWise', 'DateWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                <?php echo anchor('reports/UC_Proportion_Representation_FYWise', 'FYWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                       
                                                         </li>
-                                                        <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/UC_Proportion_Representation_FYWise', 'FYWise'); ?>
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Under Construction<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                 <?php echo anchor('reports/UC_Proportion_Representation_DateWise/2', 'DateWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                <?php echo anchor('reports/UC_Proportion_Representation_FYWise/2', 'FYWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                       
                                                         </li>
+                                                        
                                                         <li class="divider"></li>
                                                     </ul>
                                                 </li>
@@ -145,12 +241,38 @@
                                                     </a>
                                                     <ul class="dropdown-menu2">
                                                         <li>
-                                                        <?php echo anchor('reports/UC_Executive_Position_DateWise', 'DateWise'); ?>
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Completed<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                 <?php echo anchor('reports/UC_Executive_Position_DateWise', 'DateWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                <?php echo anchor('reports/UC_Executive_Position_FYWise', 'FYWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        
                                                         </li>
-                                                        <li class="divider"></li>
                                                         <li>
-                                                        <?php echo anchor('reports/UC_Executive_Position_FYWise', 'FYWise'); ?>
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                                Under Construction<b class="caret"></b>
+                                                            </a>
+                                                            <ul class="dropdown-menu3">
+                                                                <li>
+                                                                 <?php echo anchor('reports/UC_Executive_Position_DateWise/2', 'DateWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                <?php echo anchor('reports/UC_Executive_Position_FYWise/2', 'FYWise'); ?>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                            </ul>
+                                                        
                                                         </li>
+                                                        
                                                         <li class="divider"></li>
                                                     </ul>
                                                 </li>
@@ -279,8 +401,21 @@
                                                 <li>
                                                 <?php echo anchor('reports/Access_Utility_Completed_DateWise', 'DateWise'); ?>
                                                 </li>
-                                                 <li>
+                                                <li>
                                                 <?php echo anchor('reports/Access_Utility_Completed_FYWise', 'FYWise'); ?>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                Underconstruction <b class="caret"></b>
+                                            </a>
+                                            <ul class="dropdown-menu2">
+                                                <li>
+                                                <?php echo anchor('reports/Access_Utility_Completed_DateWise/2', 'DateWise'); ?>
+                                                </li>
+                                                <li>
+                                                <?php echo anchor('reports/Access_Utility_Completed_FYWise/2', 'FYWise'); ?>
                                                 </li>
                                             </ul>
                                         </li>

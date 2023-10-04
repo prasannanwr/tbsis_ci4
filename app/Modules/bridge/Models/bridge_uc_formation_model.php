@@ -91,18 +91,44 @@ class bridge_uc_formation_model extends Model
         $builder = $builder
             ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.* ")
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
-            ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
-        if($startDate != '')
+            ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+			->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+        /*if($startDate != '')
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
         if($endDate != '')
-            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);*/
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
 
-//         $result = $builder->limit($perPage, $offset)->getCompiledSelect();
-// echo $result;exit;
-        // $result = $builder->limit($perPage, $offset)
-        // ->get();
+		$where = "(`bridge_final_inspection`.`bri_completion_fiscal_year`='$startDate' OR `bridge_final_inspection`.`bri_completion_fiscal_year`='$endDate')";
+        $builder = $builder->where($where);
+        $result = $builder->get();
+        
+
+        if($result->getNumRows() <= 0)
+            return '';
+
+        return $result->getResultArray();
+    }
+
+    public function getUCCompostionUnderCons($startDate = '', $endDate = '', $distId, $perPage='', $offset = 0) {
+
+        //using builder
+        $builder = $this->db->table("view_bridge_child");
+        $builder = $builder
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.* ")
+            ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
+            ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
+            //->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+        /*if($startDate != '')
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
+        if($endDate != '')
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);*/
+        if($distId != '')
+            $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+
+        $where = "(`view_bridge_child`.`bri03physical_progress` < 9)";
+        $builder = $builder->where($where);
         $result = $builder->get();
         
 
@@ -115,23 +141,58 @@ class bridge_uc_formation_model extends Model
     public function getUCCompostionByDate($startDate = '', $endDate = '', $distId, $perPage='', $offset = 0) {
 
         //using builder
+		$bridge_model = new bridge_model();
+		$startDate = $bridge_model->convertDateToFY($startDate);
+        $endDate = $bridge_model->convertDateToFY($endDate);
+        $builder = $this->db->table("view_bridge_child");
+        $builder = $builder
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.* ")
+            ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
+            ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+			->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+
+        /*if($startDate != '')
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` >=', $startDate);
+        if($endDate != '')
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` <=', $endDate);*/
+        if($distId != '')
+            $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+
+		$where = "(`bridge_final_inspection`.`bri_completion_fiscal_year`='$startDate' OR `bridge_final_inspection`.`bri_completion_fiscal_year`='$endDate')";
+        $builder = $builder->where($where);
+        $result = $builder->get();
+        
+
+        if($result->getNumRows() <= 0)
+            return '';
+
+        return $result->getResultArray();
+    }
+
+    public function getUCCompostionUnderConsByDate($startDate = '', $endDate = '', $distId, $perPage='', $offset = 0) {
+
+        //using builder
+        $bridge_model = new bridge_model();
+        $startDate = $bridge_model->convertDateToFY($startDate);
+        $endDate = $bridge_model->convertDateToFY($endDate);
         $builder = $this->db->table("view_bridge_child");
         $builder = $builder
             ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.* ")
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
             ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
-        if($startDate != '')
+            //->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+
+        /*if($startDate != '')
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
             $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` >=', $startDate);
         if($endDate != '')
-            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` <=', $endDate);
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` <=', $endDate);*/
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
 
-//         $result = $builder->limit($perPage, $offset)->getCompiledSelect();
-// echo $result;exit;
-        // $result = $builder->limit($perPage, $offset)
-        // ->get();
+        $where = "(`view_bridge_child`.`bri03physical_progress` < 9)";
+        $builder = $builder->where($where);
         $result = $builder->get();
         
 
@@ -146,16 +207,49 @@ class bridge_uc_formation_model extends Model
         //using builder
         $builder = $this->db->table("view_bridge_child");
         $builder = $builder
-            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.*,`bridge_beneficiaries`.`dalit_total`,`bridge_beneficiaries`.`janjati_total`,`bridge_beneficiaries`.`minorities_total`,`bridge_beneficiaries`.`bct_total`,`bridge_beneficiaries`.`total_women`,`bridge_beneficiaries`.`total_men`")
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.*,`bridge_beneficiaries`.`dalit_total`,`bridge_beneficiaries`.`dalit_poor`,`bridge_beneficiaries`.`dalit_men`,`bridge_beneficiaries`.`dalit_women`,`bridge_beneficiaries`.`janjati_total`,`bridge_beneficiaries`.`janjati_poor`,`bridge_beneficiaries`.`janjati_men`,`bridge_beneficiaries`.`janjati_women`,`bridge_beneficiaries`.`minorities_total`,`bridge_beneficiaries`.`minorities_poor`,`bridge_beneficiaries`.`minorities_men`,`bridge_beneficiaries`.`minorities_women`,`bridge_beneficiaries`.`bct_total`,`bridge_beneficiaries`.`bct_poor`,`bridge_beneficiaries`.`bct_men`,`bridge_beneficiaries`.`bct_women`,`bridge_beneficiaries`.`total_women`,`bridge_beneficiaries`.`total_men`")
+            ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
+            ->join('bridge_beneficiaries','`bridge_beneficiaries`.`bb_bridge_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+			->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+        /*if($startDate != '')
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
+        if($endDate != '')
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);*/
+        if($distId != '')
+            $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+		
+		$where = "(`bridge_final_inspection`.`bri_completion_fiscal_year`='$startDate' OR `bridge_final_inspection`.`bri_completion_fiscal_year`='$endDate')";
+        $builder = $builder->where($where);
+
+        $result = $builder->get();
+        
+
+        if($result->getNumRows() <= 0)
+            return '';
+
+        return $result->getResultArray();
+    }
+
+    public function getUCProRepresentationUnderCons($startDate = '', $endDate = '', $distId, $perPage='', $offset = 0) {
+
+        //using builder
+        $builder = $this->db->table("view_bridge_child");
+        $builder = $builder
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.*,`bridge_beneficiaries`.`dalit_total`,`bridge_beneficiaries`.`dalit_poor`,`bridge_beneficiaries`.`dalit_men`,`bridge_beneficiaries`.`dalit_women`,`bridge_beneficiaries`.`janjati_total`,`bridge_beneficiaries`.`janjati_poor`,`bridge_beneficiaries`.`janjati_men`,`bridge_beneficiaries`.`janjati_women`,`bridge_beneficiaries`.`minorities_total`,`bridge_beneficiaries`.`minorities_poor`,`bridge_beneficiaries`.`minorities_men`,`bridge_beneficiaries`.`minorities_women`,`bridge_beneficiaries`.`bct_total`,`bridge_beneficiaries`.`bct_poor`,`bridge_beneficiaries`.`bct_men`,`bridge_beneficiaries`.`bct_women`,`bridge_beneficiaries`.`total_women`,`bridge_beneficiaries`.`total_men`")
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
             ->join('bridge_beneficiaries','`bridge_beneficiaries`.`bb_bridge_id` = `view_bridge_child`.`bri03id`', 'left')
             ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
-        if($startDate != '')
+            //->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+        /*if($startDate != '')
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
         if($endDate != '')
-            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);*/
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+        
+        $where = "(`view_bridge_child`.`bri03physical_progress` < 9)";
+        $builder = $builder->where($where);
 
         $result = $builder->get();
         
@@ -167,20 +261,57 @@ class bridge_uc_formation_model extends Model
     }
 
     public function getUCProRepresentationByDate($startDate = '', $endDate = '', $distId, $perPage='', $offset = 0) {
-
+		$bridge_model = new bridge_model();
+		$startDate = $bridge_model->convertDateToFY($startDate);
+        $endDate = $bridge_model->convertDateToFY($endDate);
         //using builder
         $builder = $this->db->table("view_bridge_child");
         $builder = $builder
-            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.*,`bridge_beneficiaries`.`dalit_total`,`bridge_beneficiaries`.`janjati_total`,`bridge_beneficiaries`.`minorities_total`,`bridge_beneficiaries`.`bct_total`,`bridge_beneficiaries`.`total_women`,`bridge_beneficiaries`.`total_men`")
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.*,`bridge_beneficiaries`.`dalit_total`,`bridge_beneficiaries`.`dalit_poor`,`bridge_beneficiaries`.`dalit_men`,`bridge_beneficiaries`.`dalit_women`,`bridge_beneficiaries`.`janjati_total`,`bridge_beneficiaries`.`janjati_poor`,`bridge_beneficiaries`.`janjati_men`,`bridge_beneficiaries`.`janjati_women`,`bridge_beneficiaries`.`minorities_total`,`bridge_beneficiaries`.`minorities_poor`,`bridge_beneficiaries`.`minorities_men`,`bridge_beneficiaries`.`minorities_women`,`bridge_beneficiaries`.`bct_total`,`bridge_beneficiaries`.`bct_poor`,`bridge_beneficiaries`.`bct_men`,`bridge_beneficiaries`.`bct_women`,`bridge_beneficiaries`.`total_women`,`bridge_beneficiaries`.`total_men`")
+            ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
+            ->join('bridge_beneficiaries','`bridge_beneficiaries`.`bb_bridge_id` = `view_bridge_child`.`bri03id`', 'left')
+            ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+			->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+        /*if($startDate != '')
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` >=', $startDate);
+        if($endDate != '')
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` <=', $endDate);*/
+        if($distId != '')
+            $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+		
+		$where = "(`bridge_final_inspection`.`bri_completion_fiscal_year`='$startDate' OR `bridge_final_inspection`.`bri_completion_fiscal_year`='$endDate')";
+        $builder = $builder->where($where);
+
+        $result = $builder->get();
+        
+
+        if($result->getNumRows() <= 0)
+            return '';
+
+        return $result->getResultArray();
+    }
+
+    public function getUCProRepresentationUnderConsByDate($startDate = '', $endDate = '', $distId, $perPage='', $offset = 0) {
+        $bridge_model = new bridge_model();
+        $startDate = $bridge_model->convertDateToFY($startDate);
+        $endDate = $bridge_model->convertDateToFY($endDate);
+        //using builder
+        $builder = $this->db->table("view_bridge_child");
+        $builder = $builder
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.*,`bridge_beneficiaries`.`dalit_total`,`bridge_beneficiaries`.`dalit_poor`,`bridge_beneficiaries`.`dalit_men`,`bridge_beneficiaries`.`dalit_women`,`bridge_beneficiaries`.`janjati_total`,`bridge_beneficiaries`.`janjati_poor`,`bridge_beneficiaries`.`janjati_men`,`bridge_beneficiaries`.`janjati_women`,`bridge_beneficiaries`.`minorities_total`,`bridge_beneficiaries`.`minorities_poor`,`bridge_beneficiaries`.`minorities_men`,`bridge_beneficiaries`.`minorities_women`,`bridge_beneficiaries`.`bct_total`,`bridge_beneficiaries`.`bct_poor`,`bridge_beneficiaries`.`bct_men`,`bridge_beneficiaries`.`bct_women`,`bridge_beneficiaries`.`total_women`,`bridge_beneficiaries`.`total_men`")
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
             ->join('bridge_beneficiaries','`bridge_beneficiaries`.`bb_bridge_id` = `view_bridge_child`.`bri03id`', 'left')
             ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
-        if($startDate != '')
+            //->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+        /*if($startDate != '')
             $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` >=', $startDate);
         if($endDate != '')
-            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` <=', $endDate);
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` <=', $endDate);*/
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+        
+        $where = "(`view_bridge_child`.`bri03physical_progress` < 9)";
+        $builder = $builder->where($where);
 
         $result = $builder->get();
         
@@ -197,13 +328,17 @@ class bridge_uc_formation_model extends Model
         $builder = $builder
             ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.*")
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
-            ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
-        if($startDate != '')
+            ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+			->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+        /*if($startDate != '')
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
         if($endDate != '')
-            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);*/
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+		
+		$where = "(`bridge_final_inspection`.`bri_completion_fiscal_year`='$startDate' OR `bridge_final_inspection`.`bri_completion_fiscal_year`='$endDate')";
+        $builder = $builder->where($where);
 
         $result = $builder->get();
         
@@ -218,16 +353,80 @@ class bridge_uc_formation_model extends Model
     public function getUCExecutivePositionByDate($startDate = '', $endDate = '', $distId, $perPage='', $offset = 0) {
         //using builder
         $builder = $this->db->table("view_bridge_child");
+        $bridge_model = new bridge_model();
+        $startDate = $bridge_model->convertDateToFY($startDate);
+        $endDate = $bridge_model->convertDateToFY($endDate);
+        $builder = $builder
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.*")
+            ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
+            ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
+			->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+        /*if($startDate != '')
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` >=', $startDate);
+        if($endDate != '')
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` <=', $endDate);*/
+        if($distId != '')
+            $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+		$where = "(`bridge_final_inspection`.`bri_completion_fiscal_year`='$startDate' OR `bridge_final_inspection`.`bri_completion_fiscal_year`='$endDate')";
+        $builder = $builder->where($where);
+
+        $result = $builder->get();
+        
+
+        if($result->getNumRows() <= 0)
+            return '';
+
+        return $result->getResultArray();
+
+    }
+
+    public function getUCExecutivePositionUnderConsByDate($startDate = '', $endDate = '', $distId, $perPage='', $offset = 0) {
+        //using builder
+        $bridge_model = new bridge_model();
+        $startDate = $bridge_model->convertDateToFY($startDate);
+        $endDate = $bridge_model->convertDateToFY($endDate);
+        $builder = $this->db->table("view_bridge_child");
         $builder = $builder
             ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.*")
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
             ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
-        if($startDate != '')
+            //->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+        /*if($startDate != '')
             $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` >=', $startDate);
         if($endDate != '')
-            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` <=', $endDate);
+            $builder = $builder->where('`bridge_uc_composition`.`b_uc_assessment_date` <=', $endDate);*/
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+        $where = "(`view_bridge_child`.`bri03physical_progress` < 9)";
+        $builder = $builder->where($where);
+
+        $result = $builder->get();
+        
+
+        if($result->getNumRows() <= 0)
+            return '';
+
+        return $result->getResultArray();
+
+    }
+
+    public function getUCExecutivePositionUnderCons($startDate = '', $endDate = '', $distId, $perPage='', $offset = 0) {
+        //using builder
+        $builder = $this->db->table("view_bridge_child");
+        $builder = $builder
+            ->select("`view_district`.`dist01id` AS `dist01id`,`view_district`.`dist01name` AS `dist01name`,`view_bridge_child`.`bri03id` AS `bri03id`,`view_bridge_child`.`bri03bridge_name` AS `bri03bridge_name`,`view_bridge_child`.`bri03bridge_no` AS `bri03bridge_no`,`view_bridge_child`.`bri03project_fiscal_year` AS `bri03project_fiscal_year`,`view_bridge_child`.`bri03status` AS `bri03status`,`view_bridge_child`.`bri03major_dist_id` AS `bri03major_dist_id`, `bridge_uc_composition`.*")
+            ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left')
+            ->join('bridge_uc_composition','`bridge_uc_composition`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
+            //->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
+        /*if($startDate != '')
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
+        if($endDate != '')
+            $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` <=', $endDate);*/
+        if($distId != '')
+            $builder = $builder->where('`view_district`.`dist01id` =', $distId);
+        
+        $where = "(`view_bridge_child`.`bri03physical_progress` < 9)";
+        $builder = $builder->where($where);
 
         $result = $builder->get();
         

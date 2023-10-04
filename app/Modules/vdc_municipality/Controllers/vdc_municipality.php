@@ -74,7 +74,7 @@ class Vdc_Municipality extends BaseController
                     'muni01remark' => @$this->request->getVar('muni01remark'),
                     'muni01code' => @$this->request->getVar('muni01code'),
                );
-                //echo "<pre>"; var_dump($form_data);exit;
+
                 // run insert model to write data to db
                 //var_dump( $this->model );
                 if ($this->model->save($form_data) == TRUE) // the information has therefore been successfully saved in the db

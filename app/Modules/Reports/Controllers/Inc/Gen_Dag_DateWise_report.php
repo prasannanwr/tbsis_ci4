@@ -93,25 +93,45 @@ class Gen_Dag_DateWise_report extends BaseController
                 // $pager->makeLinks($page+1, $perPage, $total);
                 // $offset = $page * $perPage;
                 //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
-                if($selProvince != '' && strtolower($selProvince) != "all") {                             
-                    $this->view_district_reg_office_model->where('province_id',$selProvince);
-                }
+                // if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                //     $this->view_district_reg_office_model->where('province_id',$selProvince);
+                // }
 
                 //get user assigned disticts
-                $userModel = new UserModel();
+                /*$userModel = new UserModel();
                 $arrPermittedDistList = $userModel->getArrPermitedDistList();
                 $intUserType = (session()->get('type')) ? session()->get('type') : ENUM_GUEST;
                 if ($intUserType == ENUM_REGIONAL_MANAGER || $intUserType == ENUM_REGIONAL_OPERATOR) {
                   //comma seperated value
                   if (count($arrPermittedDistList) > 0) {
-                    $selDist = $this->view_district_reg_office_model->whereIn('dist01id', $arrPermittedDistList)->paginate($perPage);
+                    $selDist = $this->view_district_reg_office_model->whereIn('dist01id', $arrPermittedDistList);
                   }
                 } else {
-                  $selDist = $this->view_district_reg_office_model->paginate($perPage);
+                  $selDist = $this->view_district_reg_office_model;
+                }
+
+                if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                  // $selDist = $selDist->where('dist01state',$selProvince);
+                   $selDist = $selDist->where('dist01state',$selProvince)->paginate($perPage);
+                } else {
+                  $selDist = $selDist->paginate($perPage);
+                }
+
+                $data['selDist'] = $selDist;
+                $data['pager'] = $this->view_district_reg_office_model->pager;
+                */
+
+                /* optimized query to fetch the districts having the completed|undercons bridges only */
+                $userModel = new UserModel();
+                if($stat == 2) { // under construction
+                  //$selDist = $this->bridge_beneficiaries_model->getDistrictHavingUnderConsBridges($dateStart, $dateEnd, $selProvince);
+                  $selDist = $userModel->getDistrictHavingUnderConsBridges($dateStart, $dateEnd, $selProvince);
+                } else {
+                  $selDist = $userModel->getDistrictHavingCompletedBridgesByDate($dateStart, $dateEnd, $selProvince);
                 }
                 
                 $data['selDist'] = $selDist;
-                $data['pager'] = $this->view_district_reg_office_model->pager;
+                /* end here */
                 
                 if(is_array( $selDist)){
                     $i =0;
@@ -120,7 +140,12 @@ class Gen_Dag_DateWise_report extends BaseController
                         // var_dump($v1);exit;
                         $arrChild1=null;
                         
-                        $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiariesByDate($dateStart, $dateEnd, $rr);
+                        
+                        if($stat == 2) { // under construction
+                          $arrBridgeList = $this->bridge_beneficiaries_model->getUnderConsBeneficiariesByDate($dateStart, $dateEnd, $rr);
+                        } else {
+                          $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiariesByDate($dateStart, $dateEnd, $rr);
+                        }
                         
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header

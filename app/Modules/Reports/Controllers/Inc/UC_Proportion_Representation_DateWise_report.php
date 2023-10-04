@@ -24,6 +24,8 @@ class UC_Proportion_Representation_DateWise_report extends BaseController
     private $bridge_uc_formation_model;
 
     private $view_district_reg_office_model;
+
+    private $user_model;
   
     public function __construct()
     {
@@ -33,12 +35,14 @@ class UC_Proportion_Representation_DateWise_report extends BaseController
       $view_district_reg_office_model = new view_district_reg_office_model();
       $bridge_uc_formation_model = new bridge_uc_formation_model();
       $province_model = new ProvinceModel();
+      $user_model = new UserModel();
       
       $this->fiscal_year_model = $fiscal_year_model;
       $this->view_regional_office_model = $view_regional_office_model;
       $this->province_model = $province_model;
       $this->bridge_uc_formation_model = $bridge_uc_formation_model;
       $this->view_district_reg_office_model = $view_district_reg_office_model;
+      $this->user_model = $user_model;
       $this->template = new Template();
       if (count(self::$arrDefData) <= 0) {
         $FName = basename(__FILE__, '.php');
@@ -97,13 +101,19 @@ class UC_Proportion_Representation_DateWise_report extends BaseController
                 // $pager->makeLinks($page+1, $perPage, $total);
                 // $offset = $page * $perPage;
                 //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
-                if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                /*if($selProvince != '' && strtolower($selProvince) != "all") {                             
                     $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
                 } else {
                     $selDist=$this->view_district_reg_office_model->paginate($perPage);
                 } 
                 $data['selDist'] = $selDist;
-                $data['pager'] = $this->view_district_reg_office_model->pager;
+                $data['pager'] = $this->view_district_reg_office_model->pager;*/
+
+                if($stat == 2) { // under construction
+                  $selDist = $this->user_model->getDistrictHavingUnderConsBridges($dateStart, $dateEnd, $selProvince);
+                } else {
+                  $selDist = $this->user_model->getDistrictHavingCompletedBridgesByDate($dateStart, $dateEnd, $selProvince);
+                }
                 
                 if(is_array( $selDist)){
                     $i =0;
@@ -112,7 +122,11 @@ class UC_Proportion_Representation_DateWise_report extends BaseController
                         // var_dump($v1);exit;
                         $arrChild1=null;
                         
-                        $arrBridgeList = $this->bridge_uc_formation_model->getUCProRepresentationByDate($dateStart, $dateEnd, $rr);
+                        if($stat == 2) { // under construction
+                          $arrBridgeList = $this->bridge_uc_formation_model->getUCProRepresentationUnderConsByDate($dateStart, $dateEnd, $rr);
+                        } else {
+                          $arrBridgeList = $this->bridge_uc_formation_model->getUCProRepresentationByDate($dateStart, $dateEnd, $rr);
+                        }
                         
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header

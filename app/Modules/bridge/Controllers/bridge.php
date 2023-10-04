@@ -171,6 +171,10 @@ class bridge extends BaseController
 
 	function form($emp_id = FALSE)
 	{
+		/*if($emp_id) {
+				var_dump($emp_id);exit;
+		}*/
+		
 		//return redirect()->to('bridge/form2/06 3 0536 18 06 13');
 		if (session()->get('type') == 6) {
 			redirect('bridge/index', 'refresh');
@@ -363,6 +367,7 @@ class bridge extends BaseController
 			// ];
 
 		if (!$this->validate($rules)) {
+			die('validation failed');
 			$data['validation'] = $this->validator;
 			return view('\Modules\bridge\Views'. DIRECTORY_SEPARATOR .__FUNCTION__, $data);
 		} else {
@@ -544,7 +549,7 @@ class bridge extends BaseController
 					if($bridge_id > 0)
 					$bri03id = $bridge_id;
 					else 
-					$bri03id = $this->bridge_basic_data_model->getInsertID();
+					$bri03id = $this->bridge_basic_data_model->getInsertID();					
 
 					//site assesment
 					$sa_data = array(
@@ -863,7 +868,7 @@ class bridge extends BaseController
 					// 	$this->bridge_employment_generation_detail_model->save($eg_data2);
 					// endforeach;
 					$eg_data = array(
-						'beg_id' => @$this->request->getVar("bce_id"),
+						'beg_id' => @$this->request->getVar("beg_id"),
 						'b_id' => $bri03id,
 						'beg_dalit_women' => @$this->request->getVar('beg_dalit_women'),
 						'beg_dalit_men' => @$this->request->getVar('beg_dalit_men'),
@@ -895,6 +900,7 @@ class bridge extends BaseController
 						'beg_percent_poor' => @$this->request->getVar('eg_poor_percent'),
 						'beg_percent_total' => @$this->request->getVar('eg_grand_percent')
 					);
+					
 					$this->bridge_employment_generation_model->save($eg_data);
 
 					$pa_data = array(

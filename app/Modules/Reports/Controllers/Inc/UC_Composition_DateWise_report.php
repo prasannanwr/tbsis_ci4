@@ -95,7 +95,8 @@ class UC_Composition_DateWise_report extends BaseController
                 // $pager->makeLinks($page+1, $perPage, $total);
                 // $offset = $page * $perPage;
                 //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
-                if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                
+                /*if($selProvince != '' && strtolower($selProvince) != "all") {                             
                     $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince);
                 }
 
@@ -116,6 +117,14 @@ class UC_Composition_DateWise_report extends BaseController
 
                 $data['selDist'] = $selDist;
                 $data['pager'] = $this->view_district_reg_office_model->pager;
+                */
+
+                $userModel = new UserModel();
+                if($stat == 2) { // under construction
+                  $selDist = $userModel->getDistrictHavingUnderConsBridgesByDate($dateStart, $dateEnd, $selProvince);
+                } else {
+                  $selDist = $userModel->getDistrictHavingCompletedBridgesByDate($dateStart, $dateEnd, $selProvince);
+                }
                 
                 if(is_array( $selDist)){
                     $i =0;
@@ -124,7 +133,11 @@ class UC_Composition_DateWise_report extends BaseController
                         // var_dump($v1);exit;
                         $arrChild1=null;
                         
-                        $arrBridgeList = $this->bridge_uc_formation_model->getUCCompostionByDate($dateStart, $dateEnd, $rr);
+                        if($stat == 2) { // under construction
+                          $arrBridgeList = $this->bridge_uc_formation_model->getUCCompostionUnderConsByDate($dateStart, $dateEnd, $rr);
+                        } else {
+                          $arrBridgeList = $this->bridge_uc_formation_model->getUCCompostionByDate($dateStart, $dateEnd, $rr);
+                        }
                         
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header

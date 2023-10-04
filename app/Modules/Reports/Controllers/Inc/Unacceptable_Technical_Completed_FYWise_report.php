@@ -69,12 +69,19 @@ class Unacceptable_Technical_Completed_FYWise_report extends BaseController
         $arrPrintList = array();
         $selProvince = @$this->request->getVar('selProvince');       
         $data['selProvince'] = $selProvince;
-        if($selProvince != '' && strtolower($selProvince) != "all") {                          
-          //$selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
-          $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->findAll();
+        // if($selProvince != '' && strtolower($selProvince) != "all") {                          
+        //   //$selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
+        //   $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->findAll();
+        // } else {
+        //   $selDist=$this->view_district_reg_office_model->findAll();
+        // }
+
+        $userModel = new UserModel();
+        if($stat == 2) { // under construction
+          $selDist = $userModel->getDistrictHavingUnderConsBridges($dataStart, $dateEnd, $selProvince);
         } else {
-          $selDist=$this->view_district_reg_office_model->findAll();
-        } 
+          $selDist = $userModel->getDistrictHavingCompletedBridges($dataStart, $dateEnd, $selProvince);
+        }
         
         if ($Postback == 'Back')
         {

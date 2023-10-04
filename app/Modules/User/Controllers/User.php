@@ -171,7 +171,10 @@ class User extends BaseController
                 else
                     $newid = $this->model->getInsertID();
 
+                //delete previous selected dist
+                $this->sel_district_model->where('user02userid', $newid)->delete();
                 $arrDist =  $this->request->getVar('district_auth');
+                //echo "<pre>";var_dump($arrDist);exit;
                 if (isset($arrDist)) {
                     foreach ($arrDist as $k => $v) {
                         $this->sel_district_model->save(array('user02dist01id' => $v, 'user02userid' => $newid));

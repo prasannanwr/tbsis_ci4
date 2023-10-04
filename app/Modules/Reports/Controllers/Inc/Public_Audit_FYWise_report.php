@@ -9,6 +9,7 @@ use App\Modules\province\Models\ProvinceModel;
 use App\Modules\template\Controllers\Template;
 use App\Modules\view\Models\view_district_reg_office_model;
 use App\Modules\view\Models\view_regional_office_model;
+use App\Modules\User\Models\UserModel;
 //use App\Modules\Reports\Models\ReportsModel;
 
 class Public_Audit_FYWise_report extends BaseController
@@ -54,7 +55,6 @@ class Public_Audit_FYWise_report extends BaseController
 
     public function index($stat = '')
     {
-
         $request = service('request');
         $searchData = $request->getGet();
     
@@ -69,9 +69,11 @@ class Public_Audit_FYWise_report extends BaseController
             $dataStart = @$this->request->getVar('start_year');
             $dateEnd = @$this->request->getVar('end_year');
         } 
-          
-            $data['blnMM'] = $stat;
-            $data['title'] = "Public Audit FYWise Report";
+
+        $selProvince = @$this->request->getVar('selProvince');       
+        $data['selProvince'] = $selProvince;
+        $data['blnMM'] = $stat;
+        $data['title'] = "Public Audit FYWise Report";
 
             //echo $dataStart;exit;
         
@@ -93,7 +95,15 @@ class Public_Audit_FYWise_report extends BaseController
                     // $pager->makeLinks($page+1, $perPage, $total);
                     // $offset = $page * $perPage;
                     //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
-                    $selDist=$this->view_district_reg_office_model->paginate($perPage);
+                    
+                    //$selDist=$this->view_district_reg_office_model->paginate($perPage);
+                    $userModel = new UserModel();
+                    if($stat == 2) { // under construction
+                      $selDist = $userModel->getDistrictHavingUnderConsBridges($dataStart, $dateEnd, $selProvince);
+                    } else {
+                      $selDist = $userModel->getDistrictHavingCompletedBridges($dataStart, $dateEnd, $selProvince);
+                    }
+
                     $data['selDist'] = $selDist;
                     $data['pager'] = $this->view_district_reg_office_model->pager;
                     
@@ -104,7 +114,11 @@ class Public_Audit_FYWise_report extends BaseController
                             // var_dump($v1);exit;
                             $arrChild1=null;
                             
-                            $arrBridgeList = $this->bridge_public_audit_model->getInfo($dataStart, $dateEnd, $rr);
+                            if($stat == 2) { // under construction
+                              $arrBridgeList = $this->bridge_public_audit_model->getInfoUnderCons($dataStart, $dateEnd, $rr);
+                            } else {
+                              $arrBridgeList = $this->bridge_public_audit_model->getInfo($dataStart, $dateEnd, $rr);
+                            }
                             
                             if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                                 //print header

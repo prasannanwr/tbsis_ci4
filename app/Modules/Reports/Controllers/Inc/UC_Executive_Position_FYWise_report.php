@@ -9,6 +9,8 @@ use App\Modules\template\Controllers\Template;
 use App\Modules\view\Models\view_district_reg_office_model;
 use App\Modules\view\Models\view_regional_office_model;
 use App\Modules\User\Models\UserModel;
+use App\Modules\bridge\Models\bridge_model;
+
 //use App\Modules\Reports\Models\ReportsModel;
 
 class UC_Executive_Position_FYWise_report extends BaseController
@@ -24,6 +26,10 @@ class UC_Executive_Position_FYWise_report extends BaseController
     private $bridge_uc_formation_model;
 
     private $view_district_reg_office_model;
+	
+	private $bridge_model;
+
+    private $user_model;
   
     public function __construct()
     {
@@ -33,12 +39,16 @@ class UC_Executive_Position_FYWise_report extends BaseController
       $view_district_reg_office_model = new view_district_reg_office_model();
       $bridge_uc_formation_model = new bridge_uc_formation_model();
       $province_model = new ProvinceModel();
+	    $bridge_model = new bridge_model();
+      $user_model = new UserModel();
       
       $this->fiscal_year_model = $fiscal_year_model;
       $this->view_regional_office_model = $view_regional_office_model;
       $this->province_model = $province_model;
       $this->bridge_uc_formation_model = $bridge_uc_formation_model;
       $this->view_district_reg_office_model = $view_district_reg_office_model;
+	    $this->bridge_model = $bridge_model;
+      $this->user_model = $user_model;
       $this->template = new Template();
       if (count(self::$arrDefData) <= 0) {
         $FName = basename(__FILE__, '.php');
@@ -88,20 +98,48 @@ class UC_Executive_Position_FYWise_report extends BaseController
                 {
                     $arrPrintList = array();
                     $perPage = ITEMS_PER_PAGE;
-                    //pager
-                    // $pager=service('pager');
-                    // $page=(int)(($this->request->getVar('page')!==null)?$this->request->getVar('page'):1)-1;
-                    // $total = $this->view_district_reg_office_model->countAll();
-                    // $pager->makeLinks($page+1, $perPage, $total);
-                    // $offset = $page * $perPage;
-                    //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
-                    if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                   
+                    /*if($selProvince != '' && strtolower($selProvince) != "all") {                             
                         $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
                     } else {
                         $selDist=$this->view_district_reg_office_model->paginate($perPage);
-                    } 
-                    $data['selDist'] = $selDist;
-                    $data['pager'] = $this->view_district_reg_office_model->pager;
+                    } */
+
+                    /*
+          					$permittedDist = '';
+          					if (session()->get('user_rights') != 1) {
+          					  $permittedDistArr = $this->user_model->getArrPermitedDistList();
+          					  $permittedDist = implode(',', $permittedDistArr);
+          					  //var_dump($permittedDist);exit;
+          					}
+          					
+          					if($selProvince != '' && strtolower($selProvince) != "all") {                          
+          					  $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince);
+          					} else {
+          					  $selDist=$this->view_district_reg_office_model;
+          					} 
+          					if($permittedDist != ''){
+          					  $selDist = $selDist->whereIn('dist01id',$permittedDistArr);
+          					}
+
+          					//total dist
+          					$totalDist = $selDist->findAll();
+
+          					$selDist = $selDist->paginate($perPage);
+                              $data['selDist'] = $selDist;
+          					
+                              $data['pager'] = $this->view_district_reg_office_model->pager;	
+          					
+          					$currentPage = $data['pager']->getCurrentPage();
+          					$pageCount = $data['pager']->getPageCount();
+                    */
+                    $userModel = new UserModel();
+                    if($stat == 2) { // under construction
+                      $selDist = $userModel->getDistrictHavingUnderConsBridges($dataStart, $dateEnd, $selProvince);
+                    } else {
+                      $selDist = $userModel->getDistrictHavingCompletedBridges($dataStart, $dateEnd, $selProvince);
+                    }
+
                     
                     if(is_array( $selDist)){
                         $i =0;
@@ -110,7 +148,11 @@ class UC_Executive_Position_FYWise_report extends BaseController
                             // var_dump($v1);exit;
                             $arrChild1=null;
                             
-                            $arrBridgeList = $this->bridge_uc_formation_model->getUCExecutivePosition($dataStart, $dateEnd, $rr);
+                            if($stat == 2) { // under construction
+                              $arrBridgeList = $this->bridge_uc_formation_model->getUCExecutivePositionUnderCons($dataStart, $dateEnd, $rr);
+                            } else {
+                              $arrBridgeList = $this->bridge_uc_formation_model->getUCExecutivePosition($dataStart, $dateEnd, $rr);
+                            }
                             
                             if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                                 //print header
@@ -122,6 +164,28 @@ class UC_Executive_Position_FYWise_report extends BaseController
                             }
                         }
                     }
+					
+          					//total bridges
+          					 /* if($currentPage == $pageCount) { //last page
+          						if(is_array( $totalDist)){
+          							 $total_bridges = 0;
+          							 
+          							foreach( $totalDist as $k=>$v){
+          								$rr=$v['dist01id'];
+          								//var_dump($rr);
+          								$arrBridgeList = $this->bridge_uc_formation_model->getUCExecutivePosition($rr,$dataStart, $dateEnd);
+          								
+          								if(is_array($arrBridgeList) && !empty($arrBridgeList)){
+          								  foreach ($arrBridgeList as $bridge) {
+          									$total_bridges++;
+          								  }
+          									//$total_per_page = $total_per_page + sizeof($arrBridgeList);
+
+          								}
+          							}
+          						}
+          						$data['total_bridges'] = $total_bridges;
+          					  }*/
 
                     //$data = ['pager' => $bridge_beneficiaries_model->pager];
                         

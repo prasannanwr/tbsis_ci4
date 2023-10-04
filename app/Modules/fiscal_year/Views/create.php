@@ -49,43 +49,44 @@
 					
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-10">
-                          <?php
-						  if($currentmonth >= 7 && $currentday >= 16) {
-							  $btn_submit = array(
-                                      'id' => 'btn_submit',
-                                      'name' => 'btn_submit',
-                                      'value' => 'submit',
-                                      'type' => 'submit',
-                                      'content' => 'Submit',
-                                      'class' => 'btn btn-primary'
-                                );
-						  } else {
-							  if($objOldRec != '') {
-							  $btn_submit = array(
-                                      'id' => 'btn_submit',
-                                      'name' => 'btn_submit',
-                                      'value' => 'submit',
-                                      'type' => 'submit',
-                                      'content' => 'Submit',
-                                      'class' => 'btn btn-primary'
-                                );								
-							  } else {
-								  $btn_submit = array(
-                                      'id' => 'btn_submit',
-                                      'name' => 'btn_submit',
-                                      'value' => 'submit',
-                                      'type' => 'submit',
-                                      'content' => 'Submit',
-                                      'class' => 'btn btn-primary',
-									  'disabled' => 'disabled'
-                                );
-								echo "You cannot add new Fiscal year before July 16.";
-							  }
-						  }
-                          ?>
-                        <?php echo form_hidden('id', et_setFormVal('id', $objOldRec)); ?>
-                        <?php echo form_button($btn_submit); ?>
-                        <?php echo anchor('fiscal_year', 'Cancel', array('class' => 'btn btn-default')); ?>
+                <?php
+                $btn_submit = array(
+                            'id' => 'btn_submit',
+                            'name' => 'btn_submit',
+                            'value' => 'submit',
+                            'type' => 'submit',
+                            'content' => 'Submit',
+                            'class' => 'btn btn-primary'
+                      );
+  						  if($currentmonth >= 7) {
+                  if($currentmonth == 7 && $currentday <= 16) {
+                    $btn_submit = array(
+                                        'id' => 'btn_submit',
+                                        'name' => 'btn_submit',
+                                        'value' => 'submit',
+                                        'type' => 'submit',
+                                        'content' => 'Submit',
+                                        'class' => 'btn btn-primary',
+                      'disabled' => 'disabled'
+                                  );
+                  }
+  						  } else {
+  								  $btn_submit = array(
+                                        'id' => 'btn_submit',
+                                        'name' => 'btn_submit',
+                                        'value' => 'submit',
+                                        'type' => 'submit',
+                                        'content' => 'Submit',
+                                        'class' => 'btn btn-primary',
+  									  'disabled' => 'disabled'
+                                  );
+  								echo "You cannot add new Fiscal year before July 16.";
+  							  
+  						  }
+                ?>
+              <?php echo form_hidden('id', et_setFormVal('id', $objOldRec)); ?>
+              <?php echo form_button($btn_submit); ?>
+              <?php echo anchor('fiscal_year', 'Cancel', array('class' => 'btn btn-default')); ?>
 						</div>
 					</div>
                     <?php echo form_close();?>

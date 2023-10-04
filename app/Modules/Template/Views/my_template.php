@@ -75,7 +75,7 @@
         </div>
         <!-- /#page-wrapper -->
             <footer class="footer-text mt-auto hidden-print">
-            <p>TBSU/HELVETAS Swiss Intercooperation Nepal © 2022</p>
+            <p>TBSU/HELVETAS Swiss Intercooperation Nepal © 2023</p>
             <p>Trail Bridge Sub-Sector Project - Trail Bridge Strategy Information System</p>
             <p class="visible-xs visible-sm">Not supported in mobile devices.</p>
         </footer>

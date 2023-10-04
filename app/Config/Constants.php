@@ -133,4 +133,4 @@ define('ENUM_SUPPORT_OTHER', 3);
 define('ENUM_SUPPORT_INGO', 4);
 define('ENUM_SUPPORT_NGO', 5);
 
-define('ITEMS_PER_PAGE', 20);
+define('ITEMS_PER_PAGE', 5);

@@ -8,6 +8,7 @@ use App\Modules\province\Models\ProvinceModel;
 use App\Modules\template\Controllers\Template;
 use App\Modules\view\Models\view_district_reg_office_model;
 use App\Modules\view\Models\view_regional_office_model;
+use App\Modules\User\Models\UserModel;
 //use App\Modules\Reports\Models\ReportsModel;
 
 class Public_Audit_DateWise_report extends BaseController
@@ -68,7 +69,9 @@ class Public_Audit_DateWise_report extends BaseController
             $dateStart = @$this->request->getVar('start_date');
             $dateEnd = @$this->request->getVar('end_date');
         } 
-          
+        
+        $selProvince = @$this->request->getVar('selProvince');       
+        $data['selProvince'] = $selProvince;
         $data['blnMM'] = $stat;
         $data['title'] = "Public Audit DateWise Report";
         
@@ -91,7 +94,15 @@ class Public_Audit_DateWise_report extends BaseController
                 // $pager->makeLinks($page+1, $perPage, $total);
                 // $offset = $page * $perPage;
                 //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
-                $selDist=$this->view_district_reg_office_model->paginate($perPage);
+                
+                //$selDist=$this->view_district_reg_office_model->paginate($perPage);
+
+                $userModel = new UserModel();
+                if($stat == 2) { // under construction
+                  $selDist = $userModel->getDistrictHavingUnderConsBridges($dateStart, $dateEnd, $selProvince);
+                } else {
+                  $selDist = $userModel->getDistrictHavingCompletedBridgesByDate($dateStart, $dateEnd, $selProvince);
+                }
                 $data['selDist'] = $selDist;
                 $data['pager'] = $this->view_district_reg_office_model->pager;
                 

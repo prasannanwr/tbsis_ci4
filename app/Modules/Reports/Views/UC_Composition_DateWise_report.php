@@ -3,7 +3,7 @@
 <div id="page-wrapper" class="largeRpt">
 
     <div class="alignLeft">
-        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/UC_Composition_DateWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . MM_CODE : ''; ?>">
+        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/UC_Composition_DateWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . $blnMM : ''; ?>">
             <input type="hidden" name="start_date" value="<?php echo $startdate; ?>" />
             <input type="hidden" name="end_date" value="<?php echo $enddate; ?>" />
             <!-- <input type="submit"  class="btn btn-md btn-success btn-print" name="submit" value="Print" data-target="printArea" /> -->
@@ -27,7 +27,7 @@
             <div class="col-lg-12 mainBoard">
 
 
-                <h2 class="reportHeader center">User Committee Composition (Between <?php echo $startdate." - ".$enddate; ?>) as of <?php echo date("j F, Y"); ?></h2>
+                <h2 class="reportHeader center">User Committee Composition (Between <?php echo $startdate." - ".$enddate; ?>) <!--as of <?php //echo date("j F, Y"); ?>--></h2>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -159,7 +159,7 @@
                     <div class="mt-3">
                         <?php //$pager = \Config\Services::pager(); 
                         ?>
-                        <?php if ($pager) : ?>
+                        <?php if (isset($pager)) : ?>
                             <?php $pagi_path = 'reports/UC_Composition_DateWise_report?dataStart=' . $dataStart; ?>
                             <?php //$pager->setPath($pagi_path); 
                             ?>

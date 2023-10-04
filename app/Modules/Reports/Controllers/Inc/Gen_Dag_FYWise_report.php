@@ -88,6 +88,7 @@ class Gen_Dag_FYWise_report extends BaseController
         
         if ($Postback == 'Back')
         {
+          die("back");
             redirect(site_url());
         } elseif ($dataStart <= $dateEnd)
         {
@@ -101,48 +102,40 @@ class Gen_Dag_FYWise_report extends BaseController
                 // $total = $this->view_district_reg_office_model->countAll();
                 // $pager->makeLinks($page+1, $perPage, $total);
                 // $offset = $page * $perPage;
-                //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
+                // $selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
 
-                //
-                if($selProvince != '' && strtolower($selProvince) != "all") {                             
-                    $this->view_district_reg_office_model->where('province_id',$selProvince);
-                }
-
-                //get user assigned disticts
+        				//total dist
+        				//$totalDist = $selDist->findAll();
                 $userModel = new UserModel();
-                $arrPermittedDistList = $userModel->getArrPermitedDistList();
-                $intUserType = (session()->get('type')) ? session()->get('type') : ENUM_GUEST;
-                if ($intUserType == ENUM_REGIONAL_MANAGER || $intUserType == ENUM_REGIONAL_OPERATOR) {
-                  //comma seperated value
-                  if (count($arrPermittedDistList) > 0) {
-                    $selDist = $this->view_district_reg_office_model->whereIn('dist01id', $arrPermittedDistList)->paginate($perPage);
-                  }
+                if($stat == 2) { // under construction
+                  //$selDist = $this->bridge_beneficiaries_model->getDistrictHavingUnderConsBridges($dataStart, $dateEnd, $selProvince);
+                  $selDist = $userModel->getDistrictHavingUnderConsBridges($dataStart, $dateEnd, $selProvince);
                 } else {
-                  $selDist = $this->view_district_reg_office_model->paginate($perPage);
+                  $selDist = $userModel->getDistrictHavingCompletedBridges($dataStart, $dateEnd, $selProvince);
                 }
-
-                // if($selProvince != '' && strtolower($selProvince) != "all") {                             
-                //     $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
-                // } else {
-                //     $selDist=$this->view_district_reg_office_model->paginate($perPage);
-                // }
+                
 
                 $data['selDist'] = $selDist;
-                $data['pager'] = $this->view_district_reg_office_model->pager;
-                
+                //$data['pager'] = $this->view_district_reg_office_model->pager;
+                //echo "<pre>"; var_dump($selDist);exit;
                 if(is_array( $selDist)){
                     $i =0;
                     foreach( $selDist as $k=>$v){
                         $rr=$v['dist01id'];
-                        // var_dump($v1);exit;
+                        // var_dump($rr);exit;
                         $arrChild1=null;
                         
-                        $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiaries($dataStart, $dateEnd, $rr);
                         //$arrBridgeList = $this->bridge_beneficiaries_model->getDAG($dataStart, $dateEnd, $rr);
+                        if($stat == 2) { // under construction
+                          $arrBridgeList = $this->bridge_beneficiaries_model->getUnderConsBeneficiaries($dataStart, $dateEnd, $rr);
+                        } else {
+                          $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiaries($dataStart, $dateEnd, $rr);
+                        }
                         
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header
                             //echo 'header';
+                          //echo "<pre>"; var_dump($v);exit;
                             $row['dist'] = $v;
                             $row['data'] = $arrBridgeList;
                             $arrPrintList[] = $row;
@@ -150,11 +143,35 @@ class Gen_Dag_FYWise_report extends BaseController
                         }
                     }
                 }
+				// $currentPage = $data['pager']->getCurrentPage();
+				// $pageCount = $data['pager']->getPageCount();
+				
+				 //total bridges
+				  /*if($currentPage == $pageCount) { //last page
+					if(is_array( $totalDist)){
+						 $total_bridges = 0;
+						 
+						foreach( $totalDist as $k=>$v){
+							$rr=$v['dist01id'];
+							//var_dump($rr);
+	 
+							$arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiaries($dataStart, $dateEnd, $rr);
+							
+							if(is_array($arrBridgeList) && !empty($arrBridgeList)){
+							  foreach ($arrBridgeList as $bridge) {
+								$total_bridges++;
+							  }
+								//$total_per_page = $total_per_page + sizeof($arrBridgeList);
+
+							}
+						}
+					}
+					$data['total_bridges'] = $total_bridges;
+				  }*/
 
                 //$data = ['pager' => $bridge_beneficiaries_model->pager];
-                    
-                // echo "<pre>";
-                // print_r($arrPrintList);exit;
+                    //echo "<pre>"; var_dump($arrPrintList);exit;
+                
                 $data['arrPrintList'] = $arrPrintList;
                 $data['dataStart'] = $dataStart;
                 $data['dateEnd'] = $dateEnd;

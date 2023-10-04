@@ -3,7 +3,9 @@
 <div id="page-wrapper" class="largeRpt">
 
     <div class="alignLeft">
-        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/Access_Utility_Completed_DateWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . MM_CODE : ''; ?>">
+        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/Access_Utility_Completed_DateWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . $blnMM : ''; ?>">
+            <input type="hidden" name="start_date" value="<?php echo $startdate; ?>" />
+            <input type="hidden" name="end_date" value="<?php echo $enddate; ?>" />
             <input type="button" class="btn btn-md btn-success no-print" name="btn_submit" value="Print" id="cmdPrint" onClick="window.print();return false;" />
             <p><h4 class="no-print">Filter By Province</h4></p>
             <select name="selProvince" onchange="document.frmProvinceFilter.submit();" class="no-print">
@@ -34,7 +36,7 @@
                                 <th style="width:80px;" rowspan="2" class="center">Palika</th>
                                 <th rowspan="2" class="center" >Distance Gained (hrs)</th>
                                 <th rowspan="2" class="center">Distance to Road Head (days)</th>
-                                <th rowspan="2" class="center">River Type (months)</th>
+                                <th rowspan="2" class="center">River Type (Fordable in months)</th>
                                 <th colspan="2" class="center" style="width:150px;">Bridge Utility</th>
                             </tr>
                             <tr>
@@ -86,6 +88,56 @@
                             <?php
                             $j++;
                             } //end of dist
+                            ?>
+                            <?php //if($currentPage == $pageCount) : ?>
+                                    <tr>
+                                        <td colspan="4" style="text-align: right;">Total:</td>
+                                        <td class="center"><?=$arrTotals['total_bri03portering_distance'];?></td>
+                                        <td class="center"><?=$arrTotals['total_bri03road_head'];?></td>
+                                        <td class="center"><?=$arrTotals['total_bri03river_type'];?></td>
+                                        <td colspan="2" rowspan="6">
+                                            <table>
+                                                <?php foreach ($getUtilities as $utility) { 
+                                                    $buname = str_replace(' ', '_',strtolower(trim($utility['bu_name'])));
+                                                    //$total_buname = 'total_'.$buname;
+                                                    if($utility['bu_id'] == 1)
+                                                        $percent_buname = $arrTotals['markets_percent'];
+                                                    elseif($utility['bu_id'] == 2)
+                                                        $percent_buname = $arrTotals['health_percent'];
+                                                    elseif($utility['bu_id'] == 3)
+                                                        $percent_buname = $arrTotals['schools_percent'];
+                                                    elseif($utility['bu_id'] == 4)
+                                                        $percent_buname = $arrTotals['social_percent'];
+                                                    elseif($utility['bu_id'] == 5)
+                                                        $percent_buname = $arrTotals['household_percent'];
+
+                                                    ?>
+                                                <tr>
+                                                    <td style="font-size: 12px;width:165px;"><strong><?=$utility['bu_name'];?></strong></td>
+                                                    <!-- <td><?php //$$total_buname;?></td> -->
+                                                    <td style="text-align: right;"><?=$percent_buname;?> %</td>
+                                                </tr>
+                                                <?php } ?>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7" rowspan="5">&nbsp;</td>
+                                        <!-- <td colspan="2">
+                                            
+                                        </td> -->
+                                    </tr>
+                                    <tr>
+                                  </tr>
+                                  <tr>
+                                  </tr>
+                                  <tr>
+                                  </tr>
+                                  <tr>
+                                  </tr>
+                                <?php //endif; ?>
+                                <!-- <input type="hidden" name="records_per_page" value="<?php //$records_per_page;?>"> -->
+                            <?php
                         }
                             ?>
                     </table>
@@ -93,7 +145,7 @@
                     <div class="mt-3">
                         <?php //$pager = \Config\Services::pager(); 
                         ?>
-                        <?php if ($pager) : ?>
+                        <?php if (isset($pager)) : ?>
                             <?php $pagi_path = 'reports/Access_Utility_Completed_DateWise_report'; ?>
                             <?php //$pager->setPath($pagi_path); 
                             ?>

@@ -1,5 +1,9 @@
 <?= $this->extend("\Modules\Template\Views\my_template") ?>
 <?= $this->section("body") ?>
+<?php
+// $currentPage = $pager->getCurrentPage();
+// $pageCount = $pager->getPageCount();
+?>
 <div id="page-wrapper" class="largeRpt">
 
 <div class="alignLeft"> 
@@ -27,7 +31,7 @@
                     <div class="col-lg-12 mainBoard">
                         
                          
-                                <h2 class="reportHeader center">Disadvantaged Group (Between <?php echo $startyear['fis01code']." - ".$endyear['fis01code']; ?>) as of <?php echo date("j F, Y");?></h2>
+                                <h2 class="reportHeader center">Disadvantaged Group (Between <?php echo $startyear['fis01code']." - ".$endyear['fis01code']; ?>) <!--as of <?php //echo date("j F, Y");?>--></h2>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover">
                                         <thead>
@@ -49,8 +53,7 @@
                                         </thead>
                                    
                                         <?php 
-
-if(is_array($arrPrintList)){
+if(isset($arrPrintList) && is_array($arrPrintList)){
     $sum1 = 0;
 
     $g_total_household = 0;
@@ -66,7 +69,7 @@ if(is_array($arrPrintList)){
     $g_minorities_percent = 0;
     $g_bct_percent = 0;
     $g_grand_total_pecent = 0;
-    
+    $i=0; 
     foreach($arrPrintList as $dataRow){
 
 ?>
@@ -76,7 +79,7 @@ if(is_array($arrPrintList)){
                             </td>
                            </tr>
                            <?php
-                    $i=0; 
+                    //$i=0;
                     $total_beneficiaries = 0;
                     $total_household = 0;
                     $dalit_total = 0;
@@ -101,13 +104,16 @@ if(is_array($arrPrintList)){
                         $beneficiaries = $dataRow1['total_women'] + $dataRow1['total_men'];
                         $total_household = $total_household + $dataRow1['total_household'];
                         $total_beneficiaries = $total_beneficiaries + $beneficiaries;
-
-                        $dalit_total = $dalit_total + $dataRow1['dalit_total'];
+						if(is_numeric($dataRow1['dalit_total'])) {
+						$dalit_total = $dalit_total + $dataRow1['dalit_total'];	
+						}
+                        
                         $bct_total = $bct_total + $dataRow1['bct_total'];
                         $janjati_total = $janjati_total + $dataRow1['janjati_total'];
                         $minorities_total = $minorities_total + $dataRow1['minorities_total'];
 
-                        $total_dag = $dataRow1['dalit_total'] + $dataRow1['janjati_total'] + $dataRow1['minorities_total'] + $dataRow1['bct_total'];
+                        //$total_dag = $dataRow1['dalit_total'] + $dataRow1['janjati_total'] + $dataRow1['minorities_total'] + $dataRow1['bct_total'];
+						$total_dag = $dalit_total + $janjati_total + $minorities_total + $bct_total;
                         $grand_total = $grand_total + $total_dag;
                     ?>
                             
@@ -199,11 +205,20 @@ if(is_array($arrPrintList)){
                             <td class="center"><?php echo number_format($g_bct_percent, 2);?></td>
                             <td class="center"><?php echo number_format($g_grand_total_pecent, 2);?></td>
                         </tr>
+						<?php
+                           /* if($currentPage == $pageCount) {*/
+                            $total_bridges = $i;
+                            ?>
+                            <tr>
+                                <td colspan="7" style="text-align: right">Total:</td>
+                                <td><?=$total_bridges;?></td>
+                            </tr>
+                        <?php /*} */ ?>
                         </table>
                         <!-- pagination block -->
                         <div class="mt-3">
                             <?php //$pager = \Config\Services::pager(); ?>
-                            <?php if ($pager):?>
+                            <?php if (isset($pager)):?>
                                 <?php $pagi_path = 'reports/Gen_Dag_FYWise_report?dataStart='.$dataStart; ?>
                                 <?php //$pager->setPath($pagi_path); ?>
                                 <?= $pager->links(); ?>

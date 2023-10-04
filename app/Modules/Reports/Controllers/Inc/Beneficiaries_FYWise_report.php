@@ -94,6 +94,8 @@ class Beneficiaries_FYWise_report extends BaseController
                 // $pager->makeLinks($page+1, $perPage, $total);
                 // $offset = $page * $perPage;
                 //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
+
+                /* old one using view
                 if($selProvince != '' && strtolower($selProvince) != "all") {                             
                     // $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
                     $this->view_district_reg_office_model->where('province_id',$selProvince);
@@ -115,7 +117,15 @@ class Beneficiaries_FYWise_report extends BaseController
                 }
 
                 $data['selDist'] = $selDist;
-                $data['pager'] = $this->view_district_reg_office_model->pager;
+                $data['pager'] = $this->view_district_reg_office_model->pager;*/
+                $userModel = new UserModel();
+                if($stat == 2) { // under construction
+                  $selDist = $userModel->getDistrictHavingUnderConsBridges($dataStart, $dateEnd, $selProvince);
+                } else {
+                  $selDist = $userModel->getDistrictHavingCompletedBridges($dataStart, $dateEnd, $selProvince);
+                }
+
+                $data['selDist'] = $selDist;
                 
                 if(is_array( $selDist)){
                     $i =0;
@@ -124,13 +134,18 @@ class Beneficiaries_FYWise_report extends BaseController
                         // var_dump($v1);exit;
                         $arrChild1=null;
                         
-                        if($selProvince != '' && strtolower($selProvince) != "all") {                    
+                        // if($selProvince != '' && strtolower($selProvince) != "all") {                    
                                         
-                            //$brige_list = $this->view_brigde_detail_model->getcbridges($data['currentfy'],$x,$selAgency);
-                            $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiaries($dataStart, $dateEnd, $rr, $selProvince);                               
+                        //     //$brige_list = $this->view_brigde_detail_model->getcbridges($data['currentfy'],$x,$selAgency);
+                        //     $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiaries($dataStart, $dateEnd, $rr, $selProvince);                               
+                        // } else {
+                        //     $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiaries($dataStart, $dateEnd, $rr);
+                        // }  
+                        if($stat == 2) { // under construction
+                          $arrBridgeList = $this->bridge_beneficiaries_model->getUnderConsBeneficiaries($dataStart, $dateEnd, $rr);
                         } else {
-                            $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiaries($dataStart, $dateEnd, $rr);
-                        }    
+                          $arrBridgeList = $this->bridge_beneficiaries_model->getBeneficiaries($dataStart, $dateEnd, $rr);
+                        }  
 
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header

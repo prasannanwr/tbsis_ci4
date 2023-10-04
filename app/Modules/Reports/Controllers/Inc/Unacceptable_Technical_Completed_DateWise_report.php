@@ -61,8 +61,8 @@ class Unacceptable_Technical_Completed_DateWise_report extends BaseController
            $Postback = '';
         } else {
             $Postback = @$this->request->getVar('submit');
-            $dataStart = @$this->request->getVar('start_year');
-            $dateEnd = @$this->request->getVar('end_year');
+            $dateStart = @$this->request->getVar('start_date');
+            $dateEnd = @$this->request->getVar('end_date');
         } 
 
         $perPage = ITEMS_PER_PAGE;
@@ -96,7 +96,8 @@ class Unacceptable_Technical_Completed_DateWise_report extends BaseController
                       $rr=$v['dist01id'];
                       // var_dump($v1);exit;
                       $arrChild1=null;
-                      $arrBridgeList = $this->bridge_model->getBridgeUtilities($rr,$dataStart, $dateEnd);
+                      
+                      $arrBridgeList = $this->bridge_model->getUnacceptableTechnical(4,$rr,$dataStart, $dateEnd);
                       
                       if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                           //print header

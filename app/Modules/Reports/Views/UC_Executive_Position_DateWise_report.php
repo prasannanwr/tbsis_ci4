@@ -1,9 +1,13 @@
 <?= $this->extend("\Modules\Template\Views\my_template") ?>
 <?= $this->section("body") ?>
+<?php
+//$currentPage = $pager->getCurrentPage();
+//$pageCount = $pager->getPageCount();
+?>
 <div id="page-wrapper" class="largeRpt">
 
     <div class="alignLeft">
-        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/UC_Executive_Position_FYWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . MM_CODE : ''; ?>">
+        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/UC_Executive_Position_DateWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . $blnMM : ''; ?>">
             <input type="hidden" name="start_date" value="<?php echo $startdate; ?>" />
             <input type="hidden" name="end_date" value="<?php echo $enddate; ?>" />
             <!-- <input type="submit"  class="btn btn-md btn-success btn-print" name="submit" value="Print" data-target="printArea" /> -->
@@ -27,7 +31,7 @@
             <div class="col-lg-12 mainBoard">
 
 
-                <h2 class="reportHeader center">Executive Position Held in UC DateWise (Between <?php echo $startdate." - ".$enddate; ?>) as of <?php echo date("j F, Y"); ?></h2>
+                <h2 class="reportHeader center">Executive Position Held in UC DateWise (Between <?php echo $startdate." - ".$enddate; ?>) <!--as of <?php //echo date("j F, Y"); ?>--></h2>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -175,7 +179,16 @@
                                     </tbody>
                                     
                             <?php
-                            } //end of dist
+                            } //end of dist ?>
+							<?php
+                            /*if($currentPage == $pageCount) {
+                            ?>
+                            <tr>
+                                <td colspan="11" style="text-align: right">Total:</td>
+                                <td><?=$total_bridges;?></td>
+                            </tr>
+                        <?php } */ ?>
+							<?php
                         }
                             ?>
                     </table>
@@ -183,8 +196,8 @@
                     <div class="mt-3">
                         <?php //$pager = \Config\Services::pager(); 
                         ?>
-                        <?php if ($pager) : ?>
-                            <?php $pagi_path = 'reports/UC_Executive_Position_FYWise_report?dataStart=' . $dataStart; ?>
+                        <?php if (isset($pager)) : ?>
+                            <?php $pagi_path = 'reports/UC_Executive_Position_DateWise_report?dataStart=' . $dataStart; ?>
                             <?php //$pager->setPath($pagi_path); 
                             ?>
                             <?= $pager->links(); ?>

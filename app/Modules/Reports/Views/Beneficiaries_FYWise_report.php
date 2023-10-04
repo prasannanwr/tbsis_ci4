@@ -3,7 +3,7 @@
 <div id="page-wrapper" class="largeRpt">
 
 <div class="alignLeft"> 
-        <form method="get" name="frmProvinceFilter" action="<?php echo site_url();?>/reports/Beneficiaries_FYWise_report<?php echo (isset($blnMM) && $blnMM)? '/'.MM_CODE: ''; ?>" >
+        <form method="get" name="frmProvinceFilter" action="<?php echo site_url();?>/reports/Beneficiaries_FYWise_report<?php echo (isset($blnMM) && $blnMM)? '/'.$blnMM: ''; ?>" >
        <input type="hidden" name="start_year" value="<?php echo $startyear['fis01id']; ?>" />
        <input type="hidden" name="end_year" value="<?php echo $endyear['fis01id']; ?>" />
        <!-- <input type="submit"  class="btn btn-md btn-success btn-print" name="submit" value="Print" data-target="printArea" /> -->
@@ -28,7 +28,7 @@
                     <div class="col-lg-12 mainBoard">
                         
                          
-                                <h2 class="reportHeader center">Immediate Beneficiaries Report (Between <?php echo $startyear['fis01code']." - ".$endyear['fis01code']; ?>) as of <?php echo date("j F, Y");?></h2>
+                                <h2 class="reportHeader center">Immediate Beneficiaries Report (Between <?php echo $startyear['fis01code']." - ".$endyear['fis01code']; ?>) <!--as of <?php //echo date("j F, Y");?>--></h2>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover">
                                         <thead>
@@ -59,9 +59,10 @@
                                         </thead>
                                    
                                                  <?php 
-
-                        if(is_array($arrPrintList)){
+                    if(isset($arrPrintList) && is_array($arrPrintList)){
+                        
                             $sum1 = 0;
+                            $i=0;
                             $g_total_beneficiaries = 0;
                             $g_total_women = 0;
                             $g_total_men = 0;
@@ -95,7 +96,7 @@
                            <tbody>       
                    
            <?php
-                    $i=0; 
+                    // $i=0; 
                     $total_beneficiaries = 0;
                     $total_women = 0;
                      $total_men = 0;
@@ -118,18 +119,20 @@
                     $bct_percent = 0;
                     $bct_poor_percent = 0;
                     foreach($dataRow['data'] as $dataRow1){
-                        $beneficiaries = $dataRow1['total_women'] + $dataRow1['total_men'];
+						//echo $dataRow1['dalit_total'];
+							//	echo "<br>";
+                        $beneficiaries = intval($dataRow1['total_women']) + intval($dataRow1['total_men']);
                         $total_beneficiaries = $total_beneficiaries + $beneficiaries;
-                        $total_women = $total_women + $dataRow1['total_women'];
-                        $total_men = $total_men + $dataRow1['total_men'];
-                        $dalit_total = $dalit_total + $dataRow1['dalit_total'];
-                        $dalit_poor = $dalit_poor + $dataRow1['dalit_poor'];
-                        $janjati_total = $janjati_total + $dataRow1['janjati_total'];
-                        $janjati_poor = $janjati_poor + $dataRow1['janjati_poor'];
-                        $minorities_total = $minorities_total + $dataRow1['minorities_total'];
-                        $minorities_poor = $minorities_poor + $dataRow1['minorities_poor'];
-                        $bct_total = $bct_total + $dataRow1['bct_total'];
-                        $bct_poor = $bct_poor + $dataRow1['bct_poor'];
+                        $total_women = $total_women + intval($dataRow1['total_women']);
+                        $total_men = $total_men + intval($dataRow1['total_men']);
+                        $dalit_total = $dalit_total + intval($dataRow1['dalit_total']);
+                        $dalit_poor = $dalit_poor + intval($dataRow1['dalit_poor']);
+                        $janjati_total = $janjati_total + intval($dataRow1['janjati_total']);
+                        $janjati_poor = $janjati_poor + intval($dataRow1['janjati_poor']);
+                        $minorities_total = $minorities_total + intval($dataRow1['minorities_total']);
+                        $minorities_poor = $minorities_poor + intval($dataRow1['minorities_poor']);
+                        $bct_total = $bct_total + intval($dataRow1['bct_total']);
+                        $bct_poor = $bct_poor + intval($dataRow1['bct_poor']);
 
                         if($dataRow1['major_vdc'] == 0) {
                             $palika = $dataRow1['left_palika'];
@@ -144,8 +147,8 @@
                                                 <td style="width:120px;" class="center"><?php echo $dataRow1['bri03bridge_name']; ?></td>
                                                 <td style="width:120px;" class="center"><?php echo $palika; ?></td>
                                                 <td style="width:60px;" class="center"><?php echo $beneficiaries; ?></td>
-                                                <td style="width:75px;" class="center"><?php echo ($dataRow1['total_women'] != ''? $dataRow1['total_women']:0) ?></td>
-                                                <td style="width:150px;" class="center"><?php echo ($dataRow1['total_men'] != ''?$dataRow1['total_men']:0); ?></td>
+                                                <td style="width:75px;" class="center"><?php echo ($dataRow1['total_men'] != ''?$dataRow1['total_men']:0); ?></td>
+                                                <td style="width:150px;" class="center"><?php echo ($dataRow1['total_women'] != ''? $dataRow1['total_women']:0) ?></td>
                                                 <td class="center"><?php echo ($dataRow1['dalit_total'] != ''? $dataRow1['dalit_total']: 0); ?></td>
                                                 <td class="center"><?php echo ($dataRow1['dalit_poor'] != ''? $dataRow1['dalit_poor'] : 0); ?></td>
                                                 <td class="center"><?php echo ($dataRow1['janjati_total'] != ''? $dataRow1['janjati_total'] : 0); ?></td>
@@ -256,13 +259,21 @@
                             <td class="center"><?php echo number_format($g_bct_percent, 2);?></td>
                             <td class="center"><?php echo number_format($g_bct_poor_percent, 2);?></td>
                         </tr>
-                       
+                       <?php
+                           /* if($currentPage == $pageCount) {*/
+                            $total_bridges = $i;
+                            ?>
+                            <tr>
+                                <td colspan="7" style="text-align: right">Total:</td>
+                                <td><?=$total_bridges;?></td>
+                            </tr>
+                        <?php /*} */ ?>
                         
                         </table>
                         <!-- pagination block -->
                         <div class="mt-3">
                             <?php //$pager = \Config\Services::pager(); ?>
-                            <?php if ($pager):?>
+                            <?php if (isset($pager)):?>
                                 <?php $pagi_path = 'reports/Beneficiaries_FYWise_report?dataStart='.$dataStart; ?>
                                 <?php //$pager->setPath($pagi_path); ?>
                                 <?= $pager->links(); ?>

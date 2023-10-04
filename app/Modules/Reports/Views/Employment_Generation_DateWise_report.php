@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-lg-12 mainBoard">
 
-                <h2 class="reportHeader center">Employment Generation (Between <?php echo $startdate." - ".$enddate; ?>) as of <?php echo date("j F, Y"); ?></h2>
+                <h2 class="reportHeader center">Employment Generation (Between <?php echo $startdate." - ".$enddate; ?>) <!--as of <?php //echo date("j F, Y"); ?>--></h2>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>

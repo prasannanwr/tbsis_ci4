@@ -3,7 +3,7 @@
 <div id="page-wrapper" class="largeRpt">
 
     <div class="alignLeft">
-        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/Employment_Generation_FYWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . MM_CODE : ''; ?>">
+        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/Employment_Generation_FYWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . $blnMM : ''; ?>">
             <input type="hidden" name="start_year" value="<?php echo $startyear['fis01id']; ?>" />
             <input type="hidden" name="end_year" value="<?php echo $endyear['fis01id']; ?>" />
             <!-- <input type="submit"  class="btn btn-md btn-success btn-print" name="submit" value="Print" data-target="printArea" /> -->
@@ -106,6 +106,9 @@
                                 $grand_percent = 0;
 
                                 foreach ($dataRow['data'] as $dataRow1) {
+                                   /* if(empty($dataRow1['bridge_completion_date']) || $dataRow1['bridge_completion_date'] == '0000-00-00') {
+                                        break;
+                                    }*/
                                     $dalit_nonpoor = ($dataRow1['beg_dalit_women'] + $dataRow1['beg_dalit_men']) - $dataRow1['beg_dalit_poor'];
                                     $janjati_nonpoor = ($dataRow1['beg_janjati_women'] + $dataRow1['beg_janjati_men']) - $dataRow1['beg_janjati_poor'];
                                     $minorities_nonpoor = ($dataRow1['beg_minorities_women'] + $dataRow1['beg_minorities_men']) - $dataRow1['beg_minorities_poor'];
@@ -224,7 +227,7 @@
                     <div class="mt-3">
                         <?php //$pager = \Config\Services::pager(); 
                         ?>
-                        <?php if ($pager) : ?>
+                        <?php if (isset($pager)) : ?>
                             <?php $pagi_path = 'reports/Employment_Generation_FYWise_report?dataStart=' . $dataStart; ?>
                             <?php //$pager->setPath($pagi_path); 
                             ?>

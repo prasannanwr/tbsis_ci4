@@ -294,15 +294,16 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 								<div class="col-lg-7 ">
 									<?php
-									if (isset($objOldRec['bri03id']) && $objOldRec['bri03id'] != '') {
-										if ($is_admin == 0) {
-											$valDisableFy = "readonly";
-										} else {
-											$valDisableFy = "";
-										}
-									} else {
-										$valDisableFy = "";
-									}
+									$valDisableFy = "";
+									// if (isset($objOldRec['bri03id']) && $objOldRec['bri03id'] != '') {
+									// 	if ($is_admin == 0) {
+									// 		$valDisableFy = "readonly";
+									// 	} else {
+									// 		$valDisableFy = "";
+									// 	}
+									// } else {
+									// 	$valDisableFy = "";
+									// }
 
 									?>
 									<?php echo et_form_dropdown_db('bri03project_fiscal_year', 'fis01fiscal_year', 'fis01year', 'fis01id', et_setFormVal('bri03project_fiscal_year', $objOldRec), '', 'class="form-control" ', array('SortBy' => 'fis01year desc')) ?>
@@ -728,9 +729,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 										<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 
-										<input type="text" class=" form-control " name="site_assessment_date" id="site_assessment_date" value="<?php if (isset($objSiteAssesment['bsa_assesment_date']) && $objSiteAssesment['bsa_assesment_date'] != "0000-00-00") {
-																																					echo et_setFormVal('bsa_assesment_date', $objSiteAssesment);
-																																				} ?>" />
+										<input type="text" class=" form-control " name="site_assessment_date" id="site_assessment_date" value="<?php if (isset($objSiteAssesment['bsa_assesment_date']) && $objSiteAssesment['bsa_assesment_date'] != "0000-00-00") { echo et_setFormVal('bsa_assesment_date', $objSiteAssesment);} ?>" />
 									</div>
 
 								</div>
@@ -909,10 +908,10 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 							<tr>
 								<td>Uniform mesh weaving and properly fixed with handrail cables & suspenders</td>
 								<td><div class="col-lg-4 checkPad ">
-									<input type="checkbox" class=" form-control " name="bri_wire_mesh_check" id="bri_wire_mesh_check" value="1" <?php echo (et_setFormVal('bri_wire_mesh_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
+									<input type="checkbox" class=" form-control " name="bri_wire_mesh_uniform_check" id="bri_wire_mesh_uniform_check" value="1" <?php echo (et_setFormVal('bri_wire_mesh_uniform_check', $objFinalInspection) == 1) ? 'checked="checked"' : '' ?>>
 								</div></td>
-								<td><input type="text" name="bri_wire_mesh_def" size="20" value="<?=et_setFormValBlank('bri_wire_mesh_def', $objFinalInspection);?>"></td>
-								<td><input type="text" name="bri_wire_mesh_action" size="60" value="<?=et_setFormValBlank('bri_wire_mesh_action', $objFinalInspection);?>"></td>
+								<td><input type="text" name="bri_wire_mesh_uniform_def" size="20" value="<?=et_setFormValBlank('bri_wire_mesh_uniform_def', $objFinalInspection);?>"></td>
+								<td><input type="text" name="bri_wire_mesh_uniform_action" size="60" value="<?=et_setFormValBlank('bri_wire_mesh_uniform_action', $objFinalInspection);?>"></td>
 							</tr>
 							<tr>
 								<td rowspan="2">10</td>
@@ -953,9 +952,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 										<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 
-										<input type="text" class=" form-control " name="bridge_completion_date" id="bridge_completion_date" value="<?php if (isset($objFinalInspection['bridge_completion_date']) && $objFinalInspection['bridge_completion_date'] != "0000-00-00") {
-																																					echo et_setFormVal('bridge_completion_date', $objFinalInspection);
-																																				} ?>" />
+										<input type="text" class=" form-control " name="bridge_completion_date" id="bridge_completion_date" value="<?php if (isset($objFinalInspection['bridge_completion_date']) && $objFinalInspection['bridge_completion_date'] != "0000-00-00") { echo et_setFormVal('bridge_completion_date', $objFinalInspection); } ?>" />
 									</div>
 
 								</div>
@@ -977,9 +974,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 										<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 
-										<input type="text" class=" form-control " name="fi_site_assessment_date" id="fi_site_assessment_date" value="<?php if (isset($objFinalInspection['fi_site_assessment_date']) && $objFinalInspection['fi_site_assessment_date'] != "0000-00-00") {
-																																					echo et_setFormVal('fi_site_assessment_date', $objFinalInspection);
-																																				} ?>" />
+										<input type="text" class=" form-control " name="fi_site_assessment_date" id="fi_site_assessment_date" value="<?php if (isset($objFinalInspection['fi_site_assessment_date']) && $objFinalInspection['fi_site_assessment_date'] != "0000-00-00") { echo et_setFormVal('fi_site_assessment_date', $objFinalInspection); } ?>" />
 									</div>
 
 								</div>
@@ -991,7 +986,8 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 								<div class="col-lg-5 ">
 									<?php
-									if (isset($objOldRec['bri03id']) && $objOldRec['bri03id'] != '') {
+									$valDisableFy = "";
+									/*if (isset($objOldRec['bri03id']) && $objOldRec['bri03id'] != '') {
 										if ($is_admin == 0) {
 											$valDisableFy = "readonly";
 										} else {
@@ -999,7 +995,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										}
 									} else {
 										$valDisableFy = "";
-									}
+									}*/
 
 									?>
 									<?php echo et_form_dropdown_db('bri_completion_fiscal_year', 'fis01fiscal_year', 'fis01year', 'fis01id', et_setFormVal('bri_completion_fiscal_year', $objFinalInspection), '', 'class="form-control" ', array('SortBy' => 'fis01year desc')) ?>
@@ -1075,12 +1071,12 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									}
 								?>
 									<tr>
-										<td><?= ucfirst($caste) ?></td>
-										<td><input type="text" data-row="<?=$key; ?>" class="bc-text bc_total form-control bc_total_<?= $key; ?>" name="bc_total_<?= $caste; ?>" id="bc_total_<?= $key; ?>" value="<?php echo (is_array($objBeneficiariesRec)? $objBeneficiariesRec[$caste.'_total']:0); ?>" /></td>
-										<td><input type="text" data-row="<?=$key; ?>" class="bc-text bc_poor form-control bc_poor_<?= $key; ?>" name="bc_poor_<?= $caste; ?>" id="bc_poor_<?= $key; ?>" value="<?php echo (is_array($objBeneficiariesRec)? $objBeneficiariesRec[$caste.'_poor']:0); ?>" /></td>
-										<td><input type="text" data-row="<?=$key; ?>" class="bc-text bc_women form-control bc_women_<?= $key; ?>" name="bc_women_<?= $caste; ?>" id="bc_women_<?= $key; ?>" value="<?php echo (is_array($objBeneficiariesRec)? $objBeneficiariesRec[$caste.'_women']:0);; ?>" /></td>
-										<td><input type="text" data-row="<?=$key; ?>" class="bc-text bc_men form-control bc_men_<?= $key; ?>" name="bc_men_<?= $caste; ?>" id="bc_men_<?= $key; ?>" value="<?php echo (is_array($objBeneficiariesRec)? $objBeneficiariesRec[$caste.'_men']:0);; ?>" /></td>
-										<td><input type="text" readonly data-row="<?=$key; ?>" data-col="" class="bc_sub_total bc_sub_total_<?= $key; ?> form-control " name="bc_sub_total_<?= $caste; ?>" id="bc_sub_total_<?= $key; ?>" value="<?php echo $total; ?>" /></td>
+										<td><?=ucfirst($caste) ?></td>
+										<td><input type="text" data-row="<?=$key; ?>" class="bc-text bc_total form-control bc_total_<?=$key; ?>" name="bc_total_<?=$caste; ?>" id="bc_total_<?=$key; ?>" value="<?php echo (is_array($objBeneficiariesRec)? $objBeneficiariesRec[$caste.'_total']:0); ?>" /></td>
+										<td><input type="text" data-row="<?=$key; ?>" class="bc-text bc_poor form-control bc_poor_<?=$key; ?>" name="bc_poor_<?=$caste; ?>" id="bc_poor_<?=$key; ?>" value="<?php echo (is_array($objBeneficiariesRec)? $objBeneficiariesRec[$caste.'_poor']:0); ?>" /></td>
+										<td><input type="text" data-row="<?=$key; ?>" class="bc-text bc_women form-control bc_women_<?=$key; ?>" name="bc_women_<?=$caste; ?>" id="bc_women_<?=$key; ?>" value="<?php echo (is_array($objBeneficiariesRec)? $objBeneficiariesRec[$caste.'_women']:0);; ?>" /></td>
+										<td><input type="text" data-row="<?=$key; ?>" class="bc-text bc_men form-control bc_men_<?=$key; ?>" name="bc_men_<?=$caste; ?>" id="bc_men_<?=$key; ?>" value="<?php echo (is_array($objBeneficiariesRec)? $objBeneficiariesRec[$caste.'_men']:0);; ?>" /></td>
+										<td><input type="text" readonly data-row="<?=$key; ?>" data-col="" class="bc_sub_total bc_sub_total_<?=$key; ?> form-control " name="bc_sub_total_<?=$caste; ?>" id="bc_sub_total_<?=$key; ?>" value="<?php echo $total; ?>" /></td>
 									</tr>
 								<?php endforeach; ?>
 								<tr>
@@ -1111,9 +1107,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 											<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 
-											<input type="text" class=" form-control " name="bb_assessment_date" id="bb_assessment_date" value="<?php if (isset($objBeneficiariesRec['bb_assessment_date']) && $objBeneficiariesRec['bb_assessment_date'] != "0000-00-00") {
-																																						echo et_setFormVal('bb_assessment_date', $objBeneficiariesRec);
-																																					} ?>" />
+											<input type="text" class=" form-control " name="bb_assessment_date" id="bb_assessment_date" value="<?php if (isset($objBeneficiariesRec['bb_assessment_date']) && $objBeneficiariesRec['bb_assessment_date'] != "0000-00-00") {	echo et_setFormVal('bb_assessment_date', $objBeneficiariesRec);	} ?>" />
 
 										</div>
 
@@ -1189,7 +1183,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										foreach ($casteGroup as $key => $caste) :
 											$caste = strtolower($caste).'_total';
 										?>
-										<td><input type="text" data-row="<?=$key; ?>" class="ph-text form-control ph_total_<?= $key; ?>" name="ph_total_<?=strtolower($caste); ?>" id="ph_total_<?= $key; ?>" value="<?php echo (is_array($objPublicHearingRec)?$objPublicHearingRec[$caste]:0); ?>" /></td>
+										<td><input type="text" data-row="<?=$key; ?>" class="ph-text form-control ph_total_<?=$key; ?>" name="ph_total_<?=strtolower($caste); ?>" id="ph_total_<?=$key; ?>" value="<?php echo (is_array($objPublicHearingRec)?$objPublicHearingRec[$caste]:0); ?>" /></td>
 										<?php endforeach; ?>										
 										<td><input type="text" readonly class=" ph-sum form-control " name="ph-sum" id="ph-sum" value="<?php echo et_setFormVal('ph_sum', $objPublicHearingRec); ?>" /></td>
 										<td><input type="text" class=" ph-female form-control " name="ph-female" id="ph-female" value="<?php echo et_setFormVal('ph_female', $objPublicHearingRec); ?>" /></td>
@@ -1223,9 +1217,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 											<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 
-											<input type="text" class=" form-control " name="ph_assessment_date" id="ph_assessment_date" value="<?php if (isset($objPublicHearingRec['ph_assessment_date']) && $objPublicHearingRec['ph_assessment_date'] != "0000-00-00") {
-																																						echo et_setFormVal('ph_assessment_date', $objPublicHearingRec);
-																																					} ?>" />
+											<input type="text" class=" form-control " name="ph_assessment_date" id="ph_assessment_date" value="<?php if (isset($objPublicHearingRec['ph_assessment_date']) && $objPublicHearingRec['ph_assessment_date'] != "0000-00-00") {	echo et_setFormVal('ph_assessment_date', $objPublicHearingRec);	} ?>" />
 
 										</div>
 
@@ -1306,7 +1298,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										$caste = 'b_uc_cp_'.strtolower($caste);
 										if(is_array($objUCCompositionRec)) { $totalcp = $totalcp + $objUCCompositionRec[$caste]; }
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" data-col="cp" class="uc-text uc-cp-text form-control uc_caste_<?= $key; ?> uc_cp_total_<?= $key; ?>" name="uc_cp_total_<?=$castename; ?>" id="uc_cp_total_<?= $key; ?>" value="<?php echo (is_array($objUCCompositionRec)?$objUCCompositionRec[$caste]:0); ?>" /></td>
+									<td><input type="text" data-row="<?=$key; ?>" data-col="cp" class="uc-text uc-cp-text form-control uc_caste_<?=$key; ?> uc_cp_total_<?=$key; ?>" name="uc_cp_total_<?=$castename; ?>" id="uc_cp_total_<?=$key; ?>" value="<?php echo (is_array($objUCCompositionRec)?$objUCCompositionRec[$caste]:0); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc-sum form-control " name="uc-cp-sum" id="uc-cp-sum" value="<?php echo $totalcp; ?>" /></td>
 									<td><input type="text" class=" uc-female form-control " name="uc_cp_female" id="uc-cp-female" value="<?php echo et_setFormVal('b_uc_cp_female', $objUCCompositionRec); ?>" /></td>
@@ -1320,7 +1312,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										$caste = 'b_uc_dy_'.strtolower($caste);
 										if(is_array($objUCCompositionRec)) { $totaldy = $totaldy + $objUCCompositionRec[$caste]; }
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" data-col="dy" class="uc-text uc-dy-text form-control uc_caste_<?= $key; ?> uc_dy_total_<?= $key; ?>" name="uc_dy_total_<?= $castename; ?>" id="uc_dy_total_<?= $key; ?>" value="<?php echo (is_array($objUCCompositionRec)?$objUCCompositionRec[$caste]:0); ?>" /></td>
+									<td><input type="text" data-row="<?=$key; ?>" data-col="dy" class="uc-text uc-dy-text form-control uc_caste_<?=$key; ?> uc_dy_total_<?=$key; ?>" name="uc_dy_total_<?=$castename; ?>" id="uc_dy_total_<?=$key; ?>" value="<?php echo (is_array($objUCCompositionRec)?$objUCCompositionRec[$caste]:0); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc-sum form-control " name="uc-dy-sum" id="uc-dy-sum" value="<?php echo $totaldy; ?>" /></td>
 									<td><input type="text" class=" uc-female form-control " name="uc-dy-female" id="uc-dy-female" value="<?php echo et_setFormVal('b_uc_dy_female', $objUCCompositionRec); ?>" /></td>
@@ -1334,7 +1326,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										$caste = 'b_uc_sc_'.strtolower($caste);
 										if(is_array($objUCCompositionRec)) { $totalsc = $totalsc + $objUCCompositionRec[$caste]; }
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" data-col="sc" class="uc-text uc-sc-text form-control uc_caste_<?= $key; ?> uc_sc_total_<?= $key; ?>" name="uc_sc_total_<?= $castename; ?>" id="uc_sc_total_<?= $key; ?>" value="<?php echo (is_array($objUCCompositionRec)?$objUCCompositionRec[$caste]:0); ?>" /></td>
+									<td><input type="text" data-row="<?=$key; ?>" data-col="sc" class="uc-text uc-sc-text form-control uc_caste_<?=$key; ?> uc_sc_total_<?=$key; ?>" name="uc_sc_total_<?=$castename; ?>" id="uc_sc_total_<?=$key; ?>" value="<?php echo (is_array($objUCCompositionRec)?$objUCCompositionRec[$caste]:0); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc-sum form-control " name="uc-sc-sum" id="uc-sc-sum" value="<?php echo $totalsc; ?>" /></td>
 									<td><input type="text" class=" uc-female form-control " name="uc-sc-female" id="uc-sc-female" value="<?php echo et_setFormVal('b_uc_sc_female', $objUCCompositionRec); ?>" /></td>
@@ -1348,7 +1340,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										$caste = 'b_uc_tr_'.strtolower($caste);
 										if(is_array($objUCCompositionRec)) { $totaltr = $totaltr + $objUCCompositionRec[$caste]; }
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" data-col="tr" class="uc-text uc-tr-text form-control uc_caste_<?= $key; ?> uc_tr_total_<?= $key; ?>" name="uc_tr_total_<?= $castename; ?>" id="uc_tr_total_<?= $key; ?>" value="<?php echo (is_array($objUCCompositionRec)?$objUCCompositionRec[$caste]:0); ?>" /></td>
+									<td><input type="text" data-row="<?=$key; ?>" data-col="tr" class="uc-text uc-tr-text form-control uc_caste_<?=$key; ?> uc_tr_total_<?=$key; ?>" name="uc_tr_total_<?=$castename; ?>" id="uc_tr_total_<?=$key; ?>" value="<?php echo (is_array($objUCCompositionRec)?$objUCCompositionRec[$caste]:0); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc-sum form-control " name="uc-tr-sum" id="uc-tr-sum" value="<?php echo $totaltr; ?>" /></td>
 									<td><input type="text" class=" uc-female form-control " name="uc-tr-female" id="uc-tr-female" value="<?php echo et_setFormVal('b_uc_tr_female', $objUCCompositionRec); ?>" /></td>
@@ -1362,7 +1354,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										$caste = 'b_uc_mm_'.strtolower($caste);
 										if(is_array($objUCCompositionRec)) { $totalmm = $totalmm + $objUCCompositionRec[$caste]; }
 									?>
-									<td><input type="text" data-row="<?=$key; ?>" data-col="mem" class="uc-text uc-mem-text form-control uc_caste_<?= $key; ?> uc_mem_total_<?= $key; ?>" name="uc_mem_total_<?= $castename; ?>" id="uc_mem_total_<?= $key; ?>" value="<?php echo (is_array($objUCCompositionRec)?$objUCCompositionRec[$caste]:0); ?>" /></td>
+									<td><input type="text" data-row="<?=$key; ?>" data-col="mem" class="uc-text uc-mem-text form-control uc_caste_<?=$key; ?> uc_mem_total_<?=$key; ?>" name="uc_mem_total_<?=$castename; ?>" id="uc_mem_total_<?=$key; ?>" value="<?php echo (is_array($objUCCompositionRec)?$objUCCompositionRec[$caste]:0); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc-sum form-control " name="uc-mm-sum" id="uc-mem-sum" value="<?php echo $totalmm; ?>" /></td>
 									<td><input type="text" class=" uc-female form-control " name="uc-mem-female" id="uc-mem-female" value="<?php echo et_setFormVal('b_uc_mm_female', $objUCCompositionRec); ?>" /></td>
@@ -1392,7 +1384,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 											$total = $objUCCompositionRec['b_uc_cp_'.strtolower($caste)] + $objUCCompositionRec['b_uc_dy_'.strtolower($caste)] + $objUCCompositionRec['b_uc_sc_'.strtolower($caste)] + $objUCCompositionRec['b_uc_tr_'.strtolower($caste)] + $objUCCompositionRec['b_uc_mm_'.strtolower($caste)];
 										}
 									?>
-									<td><input type="text" readonly data-row="<?=$key; ?>" class="uc-text form-control uc_total_<?= $key; ?>" name="uc_total_<?= $key; ?>" id="uc_total_<?= $key; ?>" value="<?php echo $total; ?>" /></td>
+									<td><input type="text" readonly data-row="<?=$key; ?>" class="uc-text form-control uc_total_<?=$key; ?>" name="uc_total_<?=$key; ?>" id="uc_total_<?=$key; ?>" value="<?php echo $total; ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="form-control " name="uc-sum" id="uc-sum" value="<?php echo $total_sum; ?>" /></td>
 									<td><input type="text" readonly class=" form-control " name="uc-female" id="uc-female" value="<?php echo $total_female; ?>" /></td>
@@ -1411,7 +1403,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 											}
 										}
 									?>
-									<td><input type="text" readonly data-row="<?=$key; ?>" class="uc-percent form-control uc_percent_<?= $key; ?>" name="uc_percent_<?= $key; ?>" id="uc_percent_<?= $key; ?>" value="<?php echo number_format($percent,2); ?>" /></td>
+									<td><input type="text" readonly data-row="<?=$key; ?>" class="uc-percent form-control uc_percent_<?=$key; ?>" name="uc_percent_<?=$key; ?>" id="uc_percent_<?=$key; ?>" value="<?php echo number_format($percent,2); ?>" /></td>
 									<?php endforeach; ?>
 									<td><input type="text" readonly class="uc_total_sum_percent form-control " name="uc_total_sum_percent" id="uc_total_sum_percent" value="<?php echo '100'; ?>" /></td>
 									<td><input type="text" readonly class="uc_total_female_percent form-control " name="uc_total_female_percent" id="uc_total_female_percent" value="<?php echo number_format($female_percent,2); ?>" /></td>
@@ -1562,10 +1554,12 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 							<tr>
 								<td>8</td>
 								<td>Design Optimization</td>
-								<td><=20% of the prevailing district linear cost</td>
-								<td><div class="col-lg-4 checkPad ">
+								<td> less than or equal to 20% of the prevailing district linear cost</td>
+								<td>
+								<div class="col-lg-4 checkPad ">
 									<input type="checkbox" class=" form-control " name="bri_design_opt_check" id="bri_design_opt_check" value="1" <?php echo (et_setFormVal('bri_design_opt_check', $objBridgeDesign) == 1) ? 'checked="checked"' : '' ?>>
-								</div></td>
+								</div>
+								</td>
 								<td><input type="text" name="bri_design_opt_deficiency" size="20" value="<?=et_setFormValBlank('bri_design_opt_deficiency', $objBridgeDesign);?>"></td>
 								<td><input type="text" name="bri_design_opt_action" size="60" value="<?=et_setFormValBlank('bri_design_opt_action', $objBridgeDesign);?>"></td>
 							</tr>
@@ -1587,9 +1581,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 										<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 
-										<input type="text" class=" form-control " name="design_site_assessment_date" id="design_site_assessment_date" value="<?php if (isset($objBridgeDesign['design_site_assessment_date']) && $objBridgeDesign['design_site_assessment_date'] != "0000-00-00") {
-																																					echo et_setFormVal('design_site_assessment_date', $objBridgeDesign);
-																																				} ?>" />
+										<input type="text" class=" form-control " name="design_site_assessment_date" id="design_site_assessment_date" value="<?php if (isset($objBridgeDesign['design_site_assessment_date']) && $objBridgeDesign['design_site_assessment_date'] != "0000-00-00") {	echo et_setFormVal('design_site_assessment_date', $objBridgeDesign); } ?>" />
 									</div>
 
 								</div>
@@ -1640,9 +1632,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 					<div class="col-lg-6 datebox-container ">
 						<div class="col-lg-4 nopad datetimepicker input-group date ">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-							<input type="text" class=" form-control " name="insurance_exp_date" id="insurance_exp_date" value="<?php if (isset($objBridgeInsurance['insurance_exp_date']) && $objBridgeInsurance['insurance_exp_date'] != "0000-00-00") {
-																																		echo et_setFormVal('insurance_exp_date', $objBridgeInsurance);
-																																	} ?>" />
+							<input type="text" class=" form-control " name="insurance_exp_date" id="insurance_exp_date" value="<?php if (isset($objBridgeInsurance['insurance_exp_date']) && $objBridgeInsurance['insurance_exp_date'] != "0000-00-00") { echo et_setFormVal('insurance_exp_date', $objBridgeInsurance); } ?>" />
 						</div>
 					</div>
 				</div>
@@ -1680,9 +1670,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 					<div class="col-lg-6 datebox-container ">
 						<div class="col-lg-4 nopad datetimepicker input-group date ">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-							<input type="text" class=" form-control " name="sign_board_date" id="sign_board_date" value="<?php if (isset($objBridgeSignBoard['sign_board_date']) && $objBridgeSignBoard['sign_board_date'] != "0000-00-00") {
-																																		echo et_setFormVal('sign_board_date', $objBridgeSignBoard);
-																																	} ?>" />
+							<input type="text" class=" form-control " name="sign_board_date" id="sign_board_date" value="<?php if (isset($objBridgeSignBoard['sign_board_date']) && $objBridgeSignBoard['sign_board_date'] != "0000-00-00") { echo et_setFormVal('sign_board_date', $objBridgeSignBoard); } ?>" />
 						</div>
 						<input type="hidden" class="form-control " name="bsb_id" id="bsb_id" value="<?php echo et_setFormVal('bsb_id',$objBridgeSignBoard); ?>"/>
 					</div>
@@ -1784,9 +1772,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<div class="col-lg-6 datebox-container ">
 									<div class="col-lg-8 nopad datetimepicker input-group date ">
 										<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-										<input type="text" class=" form-control " name="factory_visit_assessment_date" id="factory_visit_assessment_date" value="<?php if (isset($objBridgeSteelParts['factory_visit_assessment_date']) && $objBridgeSteelParts['factory_visit_assessment_date'] != "0000-00-00") {
-																																					echo et_setFormVal('factory_visit_assessment_date', $objBridgeSteelParts);
-																																				} ?>" />
+										<input type="text" class=" form-control " name="factory_visit_assessment_date" id="factory_visit_assessment_date" value="<?php if (isset($objBridgeSteelParts['factory_visit_assessment_date']) && $objBridgeSteelParts['factory_visit_assessment_date'] != "0000-00-00") { echo et_setFormVal('factory_visit_assessment_date', $objBridgeSteelParts);} ?>" />
 									</div>
 								</div>
 							</div>
@@ -1830,7 +1816,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td>S.No.</td>
 									<td>Issues</td>
 									<td>Acceptable</td>
-									<td width="60px">&nbsp</td>
+									<td width="60px">&nbsp;</td>
 									<td>Deficiency</td>
 									<td>Remedial Action</td>
 								</tr>
@@ -1942,8 +1928,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<tr>
 									<td rowspan="2">10</td>
 									<td rowspan="2">Plum Concrete</td>
-									<!-- <td>60% Concrete + 40% Boulder</td> -->
-									<td>Size of Boulder < 10cm</td>
+									<td>Size of Boulder upto 10cm</td>
 									<td><div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bri_plum_concrete_check" id="bri_plum_concrete_check" value="1" <?php echo (et_setFormVal('bri_plum_concrete_check', $objBridgeConstructionWork) == 1) ? 'checked="checked"' : '' ?>>
 									</div></td>
@@ -1989,32 +1974,8 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td><input type="text" name="bri_painting_works_remarks" size="60" value="<?=et_setFormValBlank('bri_painting_works_remarks', $objBridgeConstructionWork);?>"></td>
 								</tr>
 								
-								<tr style="display: none">
-									<td>6</td>
-									<td>Verify Concreting of Anchorage/Foundation Block</td>
-									<!-- <td>Rivers not hitting the bank or the bank is rock even if river is hitting</td> -->
-									<td>Laying of Reinforcement and Anchorage steel parts and concreting as per drawing & specifications</td>
-									<td><div class="col-lg-4 checkPad ">
-										<input type="checkbox" class=" form-control " name="bri_verify_concrete_foundation_check" id="bri_verify_concrete_foundation_check" value="1" <?php echo (et_setFormVal('bri_verify_concrete_foundation_check', $objBridgeConstructionWork) == 1) ? 'checked="checked"' : '' ?>>
-									</div></td>
-									<td><input type="text" name="bri_verify_concrete_foundation_def" size="20" value="<?=et_setFormValBlank('bri_verify_concrete_foundation_def', $objBridgeConstructionWork);?>"></td>
-									<td><input type="text" name="bri_verify_concrete_foundation_remarks" size="60" value="<?=et_setFormValBlank('bri_verify_concrete_foundation_remarks', $objBridgeConstructionWork);?>"></td>
-								</tr>
-								
-								<tr style="display: none">
-									<td>12</td>
-									<td>Verify,concreting of deadmam Beam/Drum/Anchorage BLock</td>
-									<td>Laying of reinforcement/anchorage steel parts & pipes & concreting as per drawing</td>
-									<td><div class="col-lg-4 checkPad ">
-										<input type="checkbox" class=" form-control " name="bri_verify_concreting_deadman_check" id="bri_verify_concreting_deadman_check" value="1" <?php echo (et_setFormVal('bri_verify_concreting_deadman_check', $objBridgeConstructionWork) == 1) ? 'checked="checked"' : '' ?>>
-									</div></td>
-									<td><input type="text" name="bri_verify_concreting_deadman_def" size="20" value="<?=et_setFormValBlank('bri_verify_concreting_deadman_def', $objBridgeConstructionWork);?>"></td>
-									<td><input type="text" name="bri_verify_concreting_deadman_remarks" size="60" value="<?=et_setFormValBlank('bri_verify_concreting_deadman_remarks', $objBridgeConstructionWork);?>"></td>
-								</tr>
-								
 					</table>
 					<div class="col-lg-8">
-
 						
 							<div class="form-group clearfix ">
 								<label class="col-lg-3 ">Assessment By</label>
@@ -2032,9 +1993,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 										<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 
-										<input type="text" class=" form-control " name="bcw_assessment_date" id="bcw_assessment_date" value="<?php if (isset($objBridgeConstructionWork['bcw_assessment_date']) && $objBridgeConstructionWork['bcw_assessment_date'] != "0000-00-00") {
-																																					echo et_setFormVal('bcw_assessment_date', $objBridgeConstructionWork);
-																																				} ?>" />
+										<input type="text" class=" form-control " name="bcw_assessment_date" id="bcw_assessment_date" value="<?php if (isset($objBridgeConstructionWork['bcw_assessment_date']) && $objBridgeConstructionWork['bcw_assessment_date'] != "0000-00-00") {	echo et_setFormVal('bcw_assessment_date', $objBridgeConstructionWork);} ?>" />
 									</div>
 
 								</div>
@@ -2072,7 +2031,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 									<td>S.No.</td>
 									<td>Issues</td>
 									<td>Acceptable</td>
-									<td width="60px">&nbsp</td>
+									<td width="60px">&nbsp;</td>
 									<td>Deficiency</td>
 									<td>Remedial Action</td>
 								</tr>
@@ -2121,7 +2080,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<tr>
 									<td>4</td>
 									<td>Portering distance</td>
-									<td>DCC's/Palika norms but not inferior to 1 ported by 12.8 km or 8 miles for 40 kg weight</td>
+									<td>DCC's/Palika norms but not inferior to 1 porter day by 12.8 km or 8 miles for 40 kg weight</td>
 									<td>
 									<div class="col-lg-4 checkPad ">
 										<input type="checkbox" class=" form-control " name="bri_portering_dis_check" id="bri_portering_dis_check" value="1" <?php echo (et_setFormVal('bri_portering_dis_check', $objCostEstimate) == 1) ? 'checked="checked"' : '' ?>>
@@ -2156,9 +2115,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								<div class="col-lg-6 datebox-container ">
 									<div class="col-lg-8 nopad datetimepicker input-group date ">
 										<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-										<input type="text" class=" form-control " name="cost_est_site_assessment_date" id="cost_est_site_assessment_date" value="<?php if (isset($objCostEstimate['cost_est_site_assessment_date']) && $objCostEstimate['cost_est_site_assessment_date'] != "0000-00-00") {
-																																					echo et_setFormVal('cost_est_site_assessment_date', $objCostEstimate);
-																																				} ?>" />
+										<input type="text" class=" form-control " name="cost_est_site_assessment_date" id="cost_est_site_assessment_date" value="<?php if (isset($objCostEstimate['cost_est_site_assessment_date']) && $objCostEstimate['cost_est_site_assessment_date'] != "0000-00-00") {	echo et_setFormVal('cost_est_site_assessment_date', $objCostEstimate); } ?>" />
 									</div>
 								</div>
 							</div>
@@ -2226,7 +2183,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 										foreach ($casteGroup as $key => $caste) :
 											$caste = strtolower($caste).'_total';
 										?>
-										<td><input type="text" data-row="<?=$key; ?>" class="pa-text form-control pa_total_<?= $key; ?>" name="pa_<?=strtolower($caste); ?>" id="pa_total_<?= $key; ?>" value="<?php echo (is_array($objPublicAudit)?$objPublicAudit[$caste]:0); ?>" /></td>
+										<td><input type="text" data-row="<?=$key; ?>" class="pa-text form-control pa_total_<?=$key; ?>" name="pa_<?=strtolower($caste); ?>" id="pa_total_<?=$key; ?>" value="<?php echo (is_array($objPublicAudit)?$objPublicAudit[$caste]:0); ?>" /></td>
 										<?php endforeach; ?>										
 										<td><input type="text" readonly class=" pa-sum form-control " name="pa-sum" id="pa-sum" value="<?php echo et_setFormVal('pa_sum', $objPublicAudit); ?>" /></td>
 										<td><input type="text" class=" pa-female form-control " name="pa-female" id="pa-female" value="<?php echo et_setFormVal('pa_female', $objPublicAudit); ?>" /></td>
@@ -2260,9 +2217,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 											<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 
-											<input type="text" class=" form-control " name="pa_assessment_date" id="pa_assessment_date" value="<?php if (isset($objPublicAudit['pa_assessment_date']) && $objPublicAudit['pa_assessment_date'] != "0000-00-00") {
-																																						echo et_setFormVal('pa_assessment_date', $objPublicAudit);
-																																					} ?>" />
+											<input type="text" class=" form-control " name="pa_assessment_date" id="pa_assessment_date" value="<?php if (isset($objPublicAudit['pa_assessment_date']) && $objPublicAudit['pa_assessment_date'] != "0000-00-00") { echo et_setFormVal('pa_assessment_date', $objPublicAudit); } ?>" />
 
 										</div>
 
@@ -2344,10 +2299,10 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 								?>
 									<tr>
 										<td><?= $caste ?></td>
-										<td><input type="text" data-row="<?=$key; ?>" <?=$disabled_f;?> class="eg-text eg_women form-control eg_women_<?= $key; ?>" name="<?= $beg_caste; ?>_women" id="eg_women_<?= $key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_women']:0); ?>" /></td>
-										<td><input type="text" data-row="<?=$key; ?>" <?=$disabled_m;?> <?php echo (strtolower($caste) == "bct_f") ? 'disabled':'';?> class="eg-text eg_men form-control eg_men_<?= $key; ?>" name="<?= $beg_caste; ?>_men" id="eg_men_<?= $key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_men']:0); ?>" /></td>
-										<td><input type="text" data-row="<?=$key; ?>" class="eg-text eg_poor form-control eg_poor_<?= $key; ?>" name="<?= $beg_caste; ?>_poor" id="eg_poor_<?= $key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_poor']:0); ?>" /></td>
-										<td><input type="text" readonly data-row="<?=$key; ?>" data-col="" class="eg_sub_total eg_sub_total_<?= $key; ?> form-control " name="eg_sub_total_<?= $key; ?>" id="eg_sub_total_<?= $key; ?>" value="<?php echo $total; ?>" /></td>
+										<td><input type="text" data-row="<?=$key; ?>" <?=$disabled_f;?> class="eg-text eg_women form-control eg_women_<?=$key; ?>" name="<?=$beg_caste; ?>_women" id="eg_women_<?=$key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_women']:0); ?>" /></td>
+										<td><input type="text" data-row="<?=$key; ?>" <?=$disabled_m;?> <?php echo (strtolower($caste) == "bct_f") ? 'disabled':'';?> class="eg-text eg_men form-control eg_men_<?=$key; ?>" name="<?=$beg_caste; ?>_men" id="eg_men_<?=$key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_men']:0); ?>" /></td>
+										<td><input type="text" data-row="<?=$key; ?>" class="eg-text eg_poor form-control eg_poor_<?=$key; ?>" name="<?=$beg_caste; ?>_poor" id="eg_poor_<?=$key; ?>" value="<?php echo (is_array($objEmploymentGeneration) ? $objEmploymentGeneration[$beg_caste.'_poor']:0); ?>" /></td>
+										<td><input type="text" readonly data-row="<?=$key; ?>" data-col="" class="eg_sub_total eg_sub_total_<?=$key; ?> form-control " name="eg_sub_total_<?=$key; ?>" id="eg_sub_total_<?=$key; ?>" value="<?php echo $total; ?>" /></td>
 									</tr>
 								<?php endforeach; ?>
 								<tr>
@@ -2377,6 +2332,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 			</div>
 			<!----end fifth Bridge---->
+			
 			<script type="text/javascript">
 				$(document).ready(function() {
 					//iterate through each textboxes and add keyup
@@ -2641,9 +2597,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 <script type="text/javascript">
 	$(document).ready(function()
-
 		{
-
 			$('.tabHeads li a').click(function(e) {
 
 				e.preventDefault()
@@ -2689,25 +2643,7 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 <script>
 	$(document).ready(function() {
 		//iterate through each textboxes and add keyup
-
-		//handler to trigger sum event
-
-		// $(".bc-text").each(function() {
-
-		// 	$(this).keyup(function() {
-
-		// 		calculateSum1($(this), 'Estimated');
-		// 		//calculate grand total
-		// 		//calculate percent
-		// 		reCalc();
-		// 	});
-
-		// });
-
 		$(".ContributionAmt").each(function() {
-
-
-
 			$(this).keyup(function() {
 
 				calculateSum1($(this), 'Contribution');
@@ -2719,50 +2655,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 	});
 
-	// function sumNum($selector) {
-
-	// 	sum = 0;
-
-	// 	$($selector).each(function() {
-
-	// 		//add only if the value is number
-	// 		if (!isNaN(this.value) && this.value.length != 0) {
-
-	// 			sum += parseFloat(this.value);
-
-	// 		}
-
-	// 	});
-	// 	console.log($selector);
-	// 	console.log(sum);
-
-	// 	return sum;
-
-
-
-	// }
-
-	// function calculateSum1($obj, $strRef) {
-
-	// 	colId = $obj.data('col');
-
-	// 	rowId = $obj.data('row');
-
-	// 	x = sumNum('.' + $strRef + 'Amt.' + colId).toFixed(2);
-
-	// 	y = sumNum('.' + $strRef + 'Amt.' + rowId).toFixed(2);
-
-	// 	$('.' + $strRef + 'Total.' + colId).html(x);
-
-	// 	$('.' + $strRef + 'Total.' + rowId).html(y);
-
-	// 	}
-
-	// function calculateSum() {
-
-	// 	return;
-
-	// }
 </script>
 
 <script>
@@ -2815,25 +2707,17 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 
 	$(document).ready(function() {
 
-		//$("input").val(document.getElementById("bri03id").innerHTML);
-
 		$('#bri03bridge_name').on('change', function() {
 
 			$('.bri03disp_name').val($(this).val());
 
 		});
-
-		//$('.onChangeDist').trigger('change');
 		if ($fcase == 1) {
 			$('#bri03municipality_lb').val($lVDCID);
 			$('#bri03municipality_rb').val($rVDCID);
 		} else {}
 
-
-
 	});
-
-
 
 	$(document).ready(function() {
 
@@ -2880,7 +2764,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 					maxlength: 10
 				},
 
-
 			},
 			highlight: function(element) {
 				$(element).closest('.form-group').removeClass('success').addClass('error');
@@ -2889,8 +2772,6 @@ if ($objOldRec && $objOldRec['bri03id'] != '') {
 				element.addClass('valid').closest('.form-group').removeClass('error');
 			}
 		});
-
-
 
 	});
 </script>

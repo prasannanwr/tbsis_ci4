@@ -102,10 +102,9 @@ class fiscal_year extends BaseController {
 				// run insert model to write data to db
 				if ($this->model->save($form_data) == TRUE) // the information has therefore been successfully saved in the db
 				
-				{
-					/* save fiscal data */
+				{			
+					//save carry over bridges from previous fy
 					
-					$arrDistList= $this->district_name_model->findAll();			
 
 					//set_message('Fiscal Year successfully created.', 'success');
 					session()->setFlashdata('message', 'Fiscal Year successfully created.');

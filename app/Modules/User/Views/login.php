@@ -16,7 +16,7 @@
             <div class="login-header">
                 <div class="header">
                     <div class="logo" style="text-align: center;">
-                        <a href="#"><img src='<?= base_url('images/TBSU_HELVETAS.jpg');?>'></a>
+                        <a href="#"><img src='<?= base_url('images/top_logo.jpg');?>'></a>
                     </div>
                 </div>
             </div>
@@ -52,18 +52,22 @@
 				<div class="inner-info-section">
 				<p>For Guest users,</p>
 				<ul>
-				<li>Username: <span>guestuser</span></li>
+				<li>Username: <span>guestuser@nepaltrailbridges.gov.np</span></li>
 				<li>Password: <span>guestuser</span></li>
 				</ul>
 			</div>
 						</div>
     </div>
     
-
 </div>
+<div class="logo" style="text-align: center;">
+                        <a href="#"><img src='<?= base_url('images/TBSU_HELVETAS.jpg');?>'></a>
+                    </div>
+
 <div class="footer-text mt-auto">
-    <p>TBSU/HELVETAS Swiss Intercooperation Nepal © 2022</p>
+    <p>TBSU/HELVETAS Swiss Intercooperation Nepal © 2023</p>
     <p>Trail Bridge Sub-Sector Project - Trail Bridge Strategy Information System</p>
+	<p>For technical problems and feedbacks please email to System Officer: akaram.salamani@helvetas.org</p>
     <p class="visible-xs visible-sm">Not supported in mobile devices.</p>
 </div>
 </div>
