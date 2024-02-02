@@ -3,7 +3,7 @@
 <div id="page-wrapper" class="largeRpt">
 
 <div class="alignRight"> 
-        <form method="post" action="<?php echo site_url();?>/reports/Unacceptable_Technical_Completed_DateWise_report<?php echo (isset($blnMM) && $blnMM)? '/'.MM_CODE: ''; ?>" target="_blank">
+        <form method="post" action="<?php echo site_url();?>/reports/Unacceptable_Technical_Completed_DateWise_report<?php echo (isset($blnMM) && $blnMM)? '/'.$blnMM: ''; ?>" target="_blank">
        <!-- <input type="submit"  class="btn btn-md btn-success btn-print" name="submit" value="Print" data-target="printArea" /> -->
        <input type="button" class="btn btn-md btn-success no-print" name="submit" value="Print" id="cmdPrint" onClick="window.print();return false;" />
        </form>

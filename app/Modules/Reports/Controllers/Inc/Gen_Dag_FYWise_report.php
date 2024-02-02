@@ -88,8 +88,9 @@ class Gen_Dag_FYWise_report extends BaseController
         
         if ($Postback == 'Back')
         {
-          die("back");
-            redirect(site_url());
+          //die("back");
+            //return redirect(site_url(''));
+            return redirect()->to(base_url('bridge/lists'));
         } elseif ($dataStart <= $dateEnd)
         {
             if ($dataStart != 0 || $dateEnd != 0)

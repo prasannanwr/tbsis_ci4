@@ -3,7 +3,7 @@
 <div id="page-wrapper" class="largeRpt">
 
     <div class="alignLeft">
-        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/Employment_Generation_DateWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . MM_CODE : ''; ?>">
+        <form method="get" name="frmProvinceFilter" action="<?php echo site_url(); ?>/reports/Employment_Generation_DateWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . $blnMM : ''; ?>">
             <input type="hidden" name="start_date" value="<?php echo $startdate; ?>" />
             <input type="hidden" name="end_date" value="<?php echo $enddate; ?>" />
             <!-- <input type="submit"  class="btn btn-md btn-success btn-print" name="submit" value="Print" data-target="printArea" /> -->

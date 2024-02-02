@@ -3,7 +3,7 @@
 <div id="page-wrapper" class="largeRpt">
 
     <div class="alignRight">
-        <form method="post" action="<?php echo site_url(); ?>/reports/UC_Composition_DateWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . MM_CODE : ''; ?>" target="_blank">
+        <form method="post" action="<?php echo site_url(); ?>/reports/UC_Composition_DateWise_report<?php echo (isset($blnMM) && $blnMM) ? '/' . $blnMM : ''; ?>" target="_blank">
             <input type="hidden" name="start_date" value="<?php echo $startdate; ?>" />
             <input type="hidden" name="end_date" value="<?php echo $enddate; ?>" />
             <!-- <input type="submit"  class="btn btn-md btn-success btn-print" name="submit" value="Print" data-target="printArea" /> -->
