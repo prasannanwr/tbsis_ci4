@@ -142,8 +142,8 @@ if(is_array($arrPrintList)){
                                                 <td style="width:120px;" class="center"><?php echo $dataRow1['bri03bridge_name']; ?></td>
                                                 <td style="width:120px;" class="center"><?php echo $palika; ?></td>
                                                 <td style="width:60px;" class="center"><?php echo $beneficiaries; ?></td>
-                                                <td style="width:75px;" class="center"><?php echo ($dataRow1['total_women'] != ''? $dataRow1['total_women']:0) ?></td>
                                                 <td style="width:150px;" class="center"><?php echo ($dataRow1['total_men'] != ''?$dataRow1['total_men']:0); ?></td>
+                                                <td style="width:75px;" class="center"><?php echo ($dataRow1['total_women'] != ''? $dataRow1['total_women']:0) ?></td>
                                                 <td class="center"><?php echo ($dataRow1['dalit_total'] != ''? $dataRow1['dalit_total']: 0); ?></td>
                                                 <td class="center"><?php echo ($dataRow1['dalit_poor'] != ''? $dataRow1['dalit_poor'] : 0); ?></td>
                                                 <td class="center"><?php echo ($dataRow1['janjati_total'] != ''? $dataRow1['janjati_total'] : 0); ?></td>
@@ -184,7 +184,7 @@ if(is_array($arrPrintList)){
                                     $bct_poor_percent = ($bct_poor/$total_beneficiaries) * 100;
                                 endif;
 
-                                $g_percent_women = $g_percent_women + $percent_women;
+                                /*$g_percent_women = $g_percent_women + $percent_women;
                                     $g_percent_men = $g_percent_men + $percent_men;
                                     $g_dalit_percent = $g_dalit_percent + $dalit_percent;
                                     $g_dalit_poor_percent = $g_dalit_poor_percent + $dalit_poor_percent;
@@ -193,13 +193,13 @@ if(is_array($arrPrintList)){
                                     $g_minorities_percent = $g_minorities_percent + $minorities_percent;
                                     $g_minorities_poor_percent = $g_minorities_poor_percent + $minorities_poor_percent;
                                     $g_bct_percent = $g_bct_percent + $bct_percent;
-                                    $g_bct_poor_percent = $g_bct_poor_percent + $bct_poor_percent;
+                                    $g_bct_poor_percent = $g_bct_poor_percent + $bct_poor_percent;*/
                         ?>
                                     <tr>
                             <td colspan="4" rowspan="2" class="center">Total</td>
                             <td class="center"><?php echo $total_beneficiaries;?></td>
-                            <td class="center"><?php echo $total_women;?></td>
                             <td class="center"><?php echo $total_men;?></td>
+                            <td class="center"><?php echo $total_women;?></td>
                             <td class="center"><?php echo $dalit_total;?></td>
                             <td class="center"><?php echo $dalit_poor;?></td>
                             <td class="center"><?php echo $janjati_total;?></td>
@@ -211,8 +211,8 @@ if(is_array($arrPrintList)){
                         </tr>
                         <tr>
                             <td class="center">%</td>
-                            <td class="center"><?php echo number_format($percent_women, 2);?></td>
                             <td class="center"><?php echo number_format($percent_men,2);?></td>
+                            <td class="center"><?php echo number_format($percent_women, 2);?></td>
                             <td class="center"><?php echo number_format($dalit_percent, 2);?></td>
                             <td class="center"><?php echo number_format($dalit_poor_percent, 2);?></td>
                             <td class="center"><?php echo number_format($janjati_percent, 2);?></td>
@@ -226,12 +226,22 @@ if(is_array($arrPrintList)){
                          
                      } //end of dist
                         }
+                        $g_percent_women = ($g_total_women/$g_total_beneficiaries) * 100;
+                        $g_percent_men = ($g_total_men/$g_total_beneficiaries) * 100;
+                        $g_dalit_percent = ($g_dalit_total/$g_total_beneficiaries) * 100;
+                        $g_dalit_poor_percent = ($g_dalit_poor/$g_total_beneficiaries) * 100;
+                        $g_janjati_percent = ($g_janjati_total/$g_total_beneficiaries) * 100;
+                        $g_janjati_poor_percent = ($g_janjati_poor/$g_total_beneficiaries) * 100;
+                        $g_minorities_percent = ($g_minorities_total/$g_total_beneficiaries) * 100;
+                        $g_minorities_poor_percent = ($g_minorities_poor/$g_total_beneficiaries) * 100;
+                        $g_bct_percent = ($g_bct_total/$g_total_beneficiaries) * 100;
+                        $g_bct_poor_percent = ($g_bct_poor/$g_total_beneficiaries) * 100;
                         ?>
                         <tr>
                             <td colspan="4" rowspan="2" class="center">Overall</td>
                             <td class="center"><?php echo $g_total_beneficiaries;?></td>
-                            <td class="center"><?php echo $g_total_women;?></td>
                             <td class="center"><?php echo $g_total_men;?></td>
+                            <td class="center"><?php echo $g_total_women;?></td>
                             <td class="center"><?php echo $g_dalit_total;?></td>
                             <td class="center"><?php echo $g_dalit_poor;?></td>
                             <td class="center"><?php echo $g_janjati_total;?></td>
@@ -243,8 +253,8 @@ if(is_array($arrPrintList)){
                         </tr>
                         <tr>
                             <td class="center">%</td>
-                            <td class="center"><?php echo number_format($g_percent_women, 2);?></td>
                             <td class="center"><?php echo number_format($g_percent_men,2);?></td>
+                            <td class="center"><?php echo number_format($g_percent_women, 2);?></td>
                             <td class="center"><?php echo number_format($g_dalit_percent, 2);?></td>
                             <td class="center"><?php echo number_format($g_dalit_poor_percent, 2);?></td>
                             <td class="center"><?php echo number_format($g_janjati_percent, 2);?></td>

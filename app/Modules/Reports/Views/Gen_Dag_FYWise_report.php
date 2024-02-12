@@ -104,16 +104,15 @@ if(isset($arrPrintList) && is_array($arrPrintList)){
                         $beneficiaries = $dataRow1['total_women'] + $dataRow1['total_men'];
                         $total_household = $total_household + $dataRow1['total_household'];
                         $total_beneficiaries = $total_beneficiaries + $beneficiaries;
-						if(is_numeric($dataRow1['dalit_total'])) {
-						$dalit_total = $dalit_total + $dataRow1['dalit_total'];	
-						}
-                        
-                        $bct_total = $bct_total + $dataRow1['bct_total'];
-                        $janjati_total = $janjati_total + $dataRow1['janjati_total'];
-                        $minorities_total = $minorities_total + $dataRow1['minorities_total'];
 
-                        //$total_dag = $dataRow1['dalit_total'] + $dataRow1['janjati_total'] + $dataRow1['minorities_total'] + $dataRow1['bct_total'];
-						$total_dag = $dalit_total + $janjati_total + $minorities_total + $bct_total;
+                        if(is_numeric($dataRow1['dalit_poor'])) {
+                            $dalit_total = $dalit_total + $dataRow1['dalit_poor'];
+                        }
+                        $bct_total = $bct_total + $dataRow1['bct_poor'];
+                        $janjati_total = $janjati_total + $dataRow1['janjati_poor'];
+                        $minorities_total = $minorities_total + $dataRow1['minorities_poor'];
+
+                        $total_dag = $dataRow1['dalit_poor'] + $dataRow1['bct_poor'] + $dataRow1['janjati_poor'] + $dataRow1['minorities_poor'];
                         $grand_total = $grand_total + $total_dag;
                     ?>
                             
@@ -128,11 +127,10 @@ if(isset($arrPrintList) && is_array($arrPrintList)){
                                                 <td style="width:120px;" class="center"><?php echo $dataRow1['bri03bridge_name']; ?></td>
                                                 <td style="width:60px;" class="center"><?php echo ($dataRow1['total_household'] != ''? $dataRow1['total_household']:0); ?></td>
                                                 <td style="width:75px;" class="center"><?php echo $beneficiaries; ?></td>
-                                                
-                                                <td class="center"><?php echo ($dataRow1['dalit_total'] != ''? $dataRow1['dalit_total']: 0); ?></td>
-                                                <td class="center"><?php echo ($dataRow1['janjati_total'] != ''? $dataRow1['janjati_total'] : 0); ?></td>
-                                                <td class="center"><?php echo ($dataRow1['minorities_total'] != ''?$dataRow1['minorities_total'] : 0); ?></td>
-                                                <td class="center"><?php echo ($dataRow1['bct_total'] != ''? $dataRow1['bct_total']:0); ?></td>
+                                                <td class="center"><?php echo ($dataRow1['dalit_poor'] != ''? $dataRow1['dalit_poor']: 0); ?></td>
+                                                <td class="center"><?php echo ($dataRow1['janjati_poor'] != ''? $dataRow1['janjati_poor'] : 0); ?></td>
+                                                <td class="center"><?php echo ($dataRow1['minorities_poor'] != ''?$dataRow1['minorities_poor'] : 0); ?></td>
+                                                <td class="center"><?php echo ($dataRow1['bct_poor'] != ''? $dataRow1['bct_poor']:0); ?></td>
                                                 <td class="center"><?php echo $total_dag; ?></td>
                                             </tr>
                                             <?php $i++;} ?>
@@ -157,11 +155,11 @@ if(isset($arrPrintList) && is_array($arrPrintList)){
                                 endif;
 
 
-                                    $g_dalit_percent = $g_dalit_percent + $dalit_percent;
+                                  /*  $g_dalit_percent = $g_dalit_percent + $dalit_percent;
                                     $g_janjati_percent = $g_janjati_percent + $janjati_percent;
                                     $g_minorities_percent = $g_minorities_percent + $minorities_percent;
                                     $g_bct_percent = $g_bct_percent + $bct_percent;
-                                    $g_grand_total_pecent = $g_grand_total_pecent + $grand_total_pecent;
+                                    $g_grand_total_pecent = $g_grand_total_pecent + $grand_total_pecent;*/
                                     
                         ?>
                         <tr>
@@ -186,6 +184,11 @@ if(isset($arrPrintList) && is_array($arrPrintList)){
                       
                        } //end of dist
                         }
+                        $g_dalit_percent = ($g_dalit_total / $g_total_beneficiaries) * 100;
+                        $g_janjati_percent = ($g_janjati_total / $g_total_beneficiaries) * 100;
+                        $g_minorities_percent = ($g_minorities_total / $g_total_beneficiaries) * 100;
+                        $g_bct_percent = ($g_bct_total / $g_total_beneficiaries) * 100;
+                        $g_grand_total_pecent = ($g_grand_total / $g_total_beneficiaries) * 100;
                         ?>
                         <tr>
                             <td colspan="3" class="center">Overall</td>

@@ -46,6 +46,20 @@
                         </thead>
 
                         <?php
+                        $g_grand_total_members = 0;
+                        $g_total_men = 0;
+                        $g_total_women = 0;
+                        $g_dalit_total = 0;
+                        $g_janjati_total = 0;
+                        $g_minorities_total = 0;
+                        $g_bct_total = 0;
+
+                        $g_percent_women = 0;
+                        $g_percent_men = 0;
+                        $g_dalit_percent = 0;
+                        $g_janjati_percent = 0;
+                        $g_minorities_percent = 0;
+                        $g_bct_percent = 0;
 
                         if (is_array($arrPrintList)) {
                             $sum1 = 0;
@@ -74,6 +88,7 @@
                                 $janjati_percent = 0;
                                 $minorities_percent = 0;
                                 $bct_percent = 0;
+
                                 foreach ($dataRow['data'] as $dataRow1) {
                                     $total_members = $dataRow1['b_uc_cp_total'] + $dataRow1['b_uc_dy_total'] + $dataRow1['b_uc_sc_total'] + $dataRow1['b_uc_tr_total'] + $dataRow1['b_uc_mm_total'];
                                     $men = $dataRow1['b_uc_cp_male'] + $dataRow1['b_uc_dy_male'] + $dataRow1['b_uc_sc_male'] + $dataRow1['b_uc_tr_male'] + $dataRow1['b_uc_mm_male']; 
@@ -120,6 +135,15 @@
                                     </tbody>
                                     <?php $sum1 += $i; ?>
                                     <?php
+                                    //grant total
+                                    $g_grand_total_members = $g_grand_total_members + $grand_total_members;
+                                    $g_total_men = $g_total_men + $total_men;
+                                    $g_total_women = $g_total_women + $total_women;
+                                    $g_dalit_total = $g_dalit_total + $dalit_total;
+                                    $g_janjati_total = $g_janjati_total + $janjati_total;
+                                    $g_minorities_total = $g_minorities_total + $minorities_total;
+                                    $g_bct_total = $g_bct_total + $bct_total;
+
                                     if ($grand_total_members > 0) :
                                         $dalit_percent = ($dalit_total / $grand_total_members) * 100;
                                         $janjati_percent = ($janjati_total / $grand_total_members) * 100;
@@ -129,6 +153,7 @@
                                         $percent_women = ($total_women / $grand_total_members) * 100;
                                         $percent_men = ($total_men / $grand_total_members) * 100;
                                     endif;
+
                                     ?>
                                     <tr>
                                         <td colspan="3" class="center">Total: </td>
@@ -153,7 +178,33 @@
 
                             } //end of dist
                         }
+                        $g_percent_women = ($g_total_women/$g_grand_total_members) * 100;
+                        $g_percent_men = ($g_total_men/$g_grand_total_members) * 100;
+                        $g_dalit_percent = ($g_dalit_total/$g_grand_total_members) * 100;
+                        $g_janjati_percent = ($g_janjati_total/$g_grand_total_members) * 100;
+                        $g_minorities_percent = ($g_minorities_total/$g_grand_total_members) * 100;
+                        $g_bct_percent = ($g_bct_total/$g_grand_total_members) * 100;
+
                             ?>
+                        <tr>
+                            <td colspan="3" class="center">Overall</td>
+                            <td class="center"><?php echo $g_grand_total_members; ?></td>
+                            <td class="center"><?php echo $g_total_men; ?></td>
+                            <td class="center"><?php echo $g_total_women; ?></td>
+                            <td class="center"><?php echo $g_dalit_total; ?></td>
+                            <td class="center"><?php echo $g_janjati_total; ?></td>
+                            <td class="center"><?php echo $g_minorities_total; ?></td>
+                            <td class="center"><?php echo $g_bct_total; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="center" colspan="4">%</td>
+                            <td class="center"><?php echo number_format($g_percent_men, 2); ?></td>
+                            <td class="center"><?php echo number_format($g_percent_women, 2); ?></td>
+                            <td class="center"><?php echo number_format($g_dalit_percent, 2); ?></td>
+                            <td class="center"><?php echo number_format($g_janjati_percent, 2); ?></td>
+                            <td class="center"><?php echo number_format($g_minorities_percent, 2); ?></td>
+                            <td class="center"><?php echo number_format($g_bct_percent, 2); ?></td>
+                        </tr>
                     </table>
                     <!-- pagination block -->
                     <div class="mt-3">
