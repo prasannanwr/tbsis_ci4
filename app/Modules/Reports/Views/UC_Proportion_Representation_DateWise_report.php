@@ -11,9 +11,9 @@
             <p><h4 class="no-print">Filter By Province</h4></p>
             <select name="selProvince" onchange="document.frmProvinceFilter.submit();" class="no-print">
                 <option value="">--Select--</option>
-                <?php                         
-                foreach($provinceList as $province) {                                              
-                    ?>                            
+                <?php
+                foreach($provinceList as $province) {
+                    ?>
                 <option value="<?php echo $province->province_id;?>" <?php echo ($selProvince != '' && $selProvince == $province->province_id)?'selected="selected"':'';?>><?php echo $province->province_name;?></option>
                 <?php } ?>
                 <option value="all">All</option>
@@ -43,7 +43,7 @@
                                 <th class="center">Dalits (%)</th>
                                 <th class="center">Janjaties (%)</th>
                                 <th class="center">Minorities (%)</th>
-                                <th class="center">Others (%)</th>
+                                <th class="center">BCT (%)</th>
                                 <th class="center">Dalits (%)</th>
                                 <th class="center">Janjaties (%)</th>
                                 <th class="center">Minorities (%)</th>
@@ -56,7 +56,7 @@
                         if (is_array($arrPrintList)) {
                             $sum1 = 0;
                             $i = 0; $j = 0;
-                            
+
                             foreach ($arrPrintList as $dataRow) {
                                 $total_accepted = 0;
                                 $djm_total_percent = 0;
@@ -97,12 +97,12 @@
 
                                     $grand_total = $dataRow1['b_uc_cp_total'] + $dataRow1['b_uc_dy_total'] + $dataRow1['b_uc_sc_total'] + $dataRow1['b_uc_tr_total'] + $dataRow1['b_uc_mm_total'];
                                     $dalit_total = $dataRow1['b_uc_cp_dalit'] + $dataRow1['b_uc_dy_dalit'] + $dataRow1['b_uc_sc_dalit'] + $dataRow1['b_uc_tr_dalit'] + $dataRow1['b_uc_mm_dalit'];
-                                    $janjati_total = $dataRow1['b_uc_cp_janjati'] + $dataRow1['b_uc_cp_janjati'] + $dataRow1['b_uc_sc_janjati'] + $dataRow1['b_uc_tr_janjati'] + $dataRow1['b_uc_mm_janjati'];
+                                    $janjati_total = $dataRow1['b_uc_cp_janjati'] + $dataRow1['b_uc_dy_janjati'] + $dataRow1['b_uc_sc_janjati'] + $dataRow1['b_uc_tr_janjati'] + $dataRow1['b_uc_mm_janjati'];
                                     $minorities_total = $dataRow1['b_uc_cp_minorities'] + $dataRow1['b_uc_dy_minorities'] + $dataRow1['b_uc_sc_minorities'] + $dataRow1['b_uc_tr_minorities'] + $dataRow1['b_uc_mm_minorities'];
                                     $bct_total = $dataRow1['b_uc_cp_bct'] + $dataRow1['b_uc_dy_bct'] + $dataRow1['b_uc_sc_bct'] + $dataRow1['b_uc_tr_bct'] + $dataRow1['b_uc_mm_bct'];
 
                                     if($grand_total > 0) {
-                                       
+
                                         $uc_dalit_percent = ($dalit_total/$grand_total) * 100;
                                         $uc_janjati_percent = ($janjati_total/$grand_total) * 100;
                                         $uc_minorities_percent = ($minorities_total/$grand_total) * 100;
@@ -139,7 +139,7 @@
                                         <td><?=$total_accepted;?></td>
                                     </tr>
                                     </tbody>
-                                    
+
                             <?php
                             $j++;
                             } //end of dist
@@ -148,11 +148,11 @@
                     </table>
                     <!-- pagination block -->
                     <div class="mt-3">
-                        <?php //$pager = \Config\Services::pager(); 
+                        <?php //$pager = \Config\Services::pager();
                         ?>
                         <?php if (isset($pager)) : ?>
                             <?php $pagi_path = 'reports/UC_Proportion_Representation_DateWise_report?dataStart=' . $dataStart; ?>
-                            <?php //$pager->setPath($pagi_path); 
+                            <?php //$pager->setPath($pagi_path);
                             ?>
                             <?= $pager->links(); ?>
                         <?php endif; ?>
