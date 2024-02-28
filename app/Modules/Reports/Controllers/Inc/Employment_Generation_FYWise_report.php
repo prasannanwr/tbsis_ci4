@@ -24,7 +24,7 @@ class Employment_Generation_FYWise_report extends BaseController
     private $bridge_employment_generation_model;
 
     private $view_district_reg_office_model;
-  
+
     public function __construct()
     {
       helper(['form', 'html', 'et_helper']);
@@ -33,7 +33,7 @@ class Employment_Generation_FYWise_report extends BaseController
       $view_district_reg_office_model = new view_district_reg_office_model();
       $bridge_employment_generation_model = new bridge_employment_generation_model();
       $province_model = new ProvinceModel();
-      
+
       $this->fiscal_year_model = $fiscal_year_model;
       $this->view_regional_office_model = $view_regional_office_model;
       $this->province_model = $province_model;
@@ -57,7 +57,7 @@ class Employment_Generation_FYWise_report extends BaseController
 
         $request = service('request');
         $searchData = $request->getGet();
-    
+
         $dataStart = "";
         $dateEnd = "";
         if(isset($searchData) && isset($searchData['dataStart'])){
@@ -68,18 +68,18 @@ class Employment_Generation_FYWise_report extends BaseController
             $Postback = @$this->request->getVar('submit');
             $dataStart = @$this->request->getVar('start_year');
             $dateEnd = @$this->request->getVar('end_year');
-        } 
-          
+        }
+
         $data['blnMM'] = $stat;
         $data['title'] = "Employment Generation FYWise Report";
-        $selProvince = @$this->request->getVar('selProvince');       
+        $selProvince = @$this->request->getVar('selProvince');
         $data['selProvince'] = $selProvince;
 
         //echo $dataStart;exit;
-    
+
         $data['startyear'] =$this->fiscal_year_model->where('fis01id', $dataStart)->first();
         $data['endyear'] = $this->fiscal_year_model->where('fis01id', $dateEnd)->first();
-        
+
         $data['provinceList'] = $this->province_model->asObject()->findAll();
         if ($Postback == 'Back')
         {
@@ -99,11 +99,11 @@ class Employment_Generation_FYWise_report extends BaseController
                 //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
 
                 /*
-                if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                if($selProvince != '' && strtolower($selProvince) != "all") {
                     $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
                 } else {
                     $selDist=$this->view_district_reg_office_model->paginate($perPage);
-                } 
+                }
                 $data['selDist'] = $selDist;
                 $data['pager'] = $this->view_district_reg_office_model->pager;
                 */
@@ -113,20 +113,20 @@ class Employment_Generation_FYWise_report extends BaseController
                 } else {
                   $selDist = $userModel->getDistrictHavingCompletedBridges($dataStart, $dateEnd, $selProvince);
                 }
-                
+
                 if(is_array( $selDist)){
                     $i =0;
                     foreach( $selDist as $k=>$v){
                         $rr=$v['dist01id'];
                         // var_dump($v1);exit;
                         $arrChild1=null;
-                        
+
                         if($stat == 2) { // under construction
                           $arrBridgeList = $this->bridge_employment_generation_model->getUnderConsEmploymentGeneration($dataStart, $dateEnd, $rr);
                         } else {
                           $arrBridgeList = $this->bridge_employment_generation_model->getEmploymentGeneration($dataStart, $dateEnd, $rr);
-                        }  
-                        
+                        }
+
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header
                             //echo 'header';
@@ -139,21 +139,21 @@ class Employment_Generation_FYWise_report extends BaseController
                 }
 
                 //$data = ['pager' => $bridge_beneficiaries_model->pager];
-                    
+
                 // echo "<pre>";
                 // print_r($arrPrintList);exit;
                 $data['arrPrintList'] = $arrPrintList;
                 $data['dataStart'] = $dataStart;
                 $data['dateEnd'] = $dateEnd;
-                
 
-                
+
+
             } else
             {
                 redirect("reports/Employment_Generation_FYWise/".$stat);
-                //return redirect()->to(base_url('reports/Beneficiaries_FYWise_report/'));  
+                //return redirect()->to(base_url('reports/Beneficiaries_FYWise_report/'));
             }
-            
+
         } else
         {
             'start date is Smaller than End Date';
@@ -164,6 +164,6 @@ class Employment_Generation_FYWise_report extends BaseController
 
     }
 }
-       
-	   
+
+
         ?>

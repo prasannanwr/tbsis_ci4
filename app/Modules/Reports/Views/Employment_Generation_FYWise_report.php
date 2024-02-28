@@ -11,9 +11,9 @@
             <p><h4 class="no-print">Filter By Province</h4></p>
             <select name="selProvince" onchange="document.frmProvinceFilter.submit();" class="no-print">
                 <option value="">--Select--</option>
-                <?php                         
-                foreach($provinceList as $province) {                                              
-                    ?>                            
+                <?php
+                foreach($provinceList as $province) {
+                    ?>
                 <option value="<?php echo $province->province_id;?>" <?php echo ($selProvince != '' && $selProvince == $province->province_id)?'selected="selected"':'';?>><?php echo $province->province_name;?></option>
                 <?php } ?>
                 <option value="all">All</option>
@@ -60,7 +60,7 @@
                                 <th class="center">Non-DAG</th>
                                 <th class="center">Women</th>
                             </tr>
-                            
+
                         </thead>
 
                         <?php
@@ -115,15 +115,15 @@
                                     //$grand_total = $grand_total + $total_dag;
                                     $bct_women_non_poor = $dataRow1['beg_bct_f_women'] - $dataRow1['beg_bct_f_poor'];
                                     $dag = $dataRow1['beg_dalit_poor'] + $dataRow1['beg_janjati_poor'] + $dataRow1['beg_minorities_poor'] + $dataRow1['beg_bct_f_poor'];
-                                    
+
                                     $non_dag = $dalit_nonpoor + $janjati_nonpoor + $minorities_nonpoor + $bct_women_non_poor + $dataRow1['beg_bct_m_men'];
                                     $women = $dataRow1['beg_dalit_women'] + $dataRow1['beg_janjati_women'] + $dataRow1['beg_minorities_women'] + $dataRow1['beg_bct_f_women'];
                                     $total = $dag + $non_dag;
-                                    
+
                                     //totals
                                     $dalit_poor_total = $dalit_poor_total + $dataRow1['beg_dalit_poor'];
                                     $dalit_non_poor_total = $dalit_non_poor_total + $dalit_nonpoor;
-                                    $janjati_poor_total = $janjati_poor_total + $dataRow1['beg_janjati_women'];
+                                    $janjati_poor_total = $janjati_poor_total + $dataRow1['beg_janjati_poor'];
                                     $janjati_non_poor_total = $janjati_non_poor_total + $janjati_nonpoor;
                                     $minor_poor_total = $minor_poor_total + $dataRow1['beg_minorities_poor'];
                                     $minor_non_poor_total = $minor_non_poor_total + $minorities_nonpoor;
@@ -134,7 +134,7 @@
                                     $total_non_dag = $total_non_dag + $non_dag;
                                     $total_women = $total_women + $women;
                                     $grand_total = $grand_total + $total;
-                                   
+
                                     ?>
                                     <tbody>
 
@@ -156,7 +156,7 @@
                                             <td style="width:75px;" class="center"><?php echo $women; ?></td>
                                             <td style="width:75px;" class="center"><?php echo $total; ?></td>
 
-                                            
+
                                         </tr>
                                     <?php $i++;
                                 } ?>
@@ -225,11 +225,11 @@
                     </table>
                     <!-- pagination block -->
                     <div class="mt-3">
-                        <?php //$pager = \Config\Services::pager(); 
+                        <?php //$pager = \Config\Services::pager();
                         ?>
                         <?php if (isset($pager)) : ?>
                             <?php $pagi_path = 'reports/Employment_Generation_FYWise_report?dataStart=' . $dataStart; ?>
-                            <?php //$pager->setPath($pagi_path); 
+                            <?php //$pager->setPath($pagi_path);
                             ?>
                             <?= $pager->links(); ?>
                         <?php endif; ?>

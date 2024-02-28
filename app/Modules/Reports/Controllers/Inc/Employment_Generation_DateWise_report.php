@@ -25,7 +25,7 @@ class Employment_Generation_DateWise_report extends BaseController
     private $bridge_employment_generation_model;
 
     private $view_district_reg_office_model;
-  
+
     public function __construct()
     {
       helper(['form', 'html', 'et_helper']);
@@ -34,7 +34,7 @@ class Employment_Generation_DateWise_report extends BaseController
       $view_district_reg_office_model = new view_district_reg_office_model();
       $bridge_employment_generation_model = new bridge_employment_generation_model();
       $province_model = new ProvinceModel();
-      
+
       $this->fiscal_year_model = $fiscal_year_model;
       $this->view_regional_office_model = $view_regional_office_model;
       $this->province_model = $province_model;
@@ -57,7 +57,7 @@ class Employment_Generation_DateWise_report extends BaseController
     {
         $request = service('request');
         $searchData = $request->getGet();
-    
+
         $dateStart = "";
         $dateEnd = "";
         if(isset($searchData) && isset($searchData['dateStart'])){
@@ -69,13 +69,13 @@ class Employment_Generation_DateWise_report extends BaseController
             $Postback = @$this->request->getVar('submit');
             $dateStart = @$this->request->getVar('start_date');
             $dateEnd = @$this->request->getVar('end_date');
-        } 
-          
+        }
+
         $data['blnMM'] = $stat;
-        $data['title'] = "Beneficiaries DateWise Report";
-        $selProvince = @$this->request->getVar('selProvince');       
+        $data['title'] = "Employment Generation Datewise Report";
+        $selProvince = @$this->request->getVar('selProvince');
         $data['selProvince'] = $selProvince;
-        
+
         $data['startdate'] = $dateStart;
         $data['enddate'] = $dateEnd;
         $data['provinceList'] = $this->province_model->asObject()->findAll();
@@ -96,7 +96,7 @@ class Employment_Generation_DateWise_report extends BaseController
                 // $pager->makeLinks($page+1, $perPage, $total);
                 // $offset = $page * $perPage;
                 //$selDist=$this->view_district_reg_office_model->findAll($perPage, $offset);
-                // if($selProvince != '' && strtolower($selProvince) != "all") {                             
+                // if($selProvince != '' && strtolower($selProvince) != "all") {
                 //     $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
                 // } else {
                 //     $selDist=$this->view_district_reg_office_model->paginate($perPage);
@@ -111,7 +111,7 @@ class Employment_Generation_DateWise_report extends BaseController
 
                 $data['selDist'] = $selDist;
                 $data['pager'] = $this->view_district_reg_office_model->pager;
-                
+
                 if(is_array( $selDist)){
                     $i =0;
                     foreach( $selDist as $k=>$v){
@@ -123,8 +123,8 @@ class Employment_Generation_DateWise_report extends BaseController
                           $arrBridgeList = $this->bridge_employment_generation_model->getUnderConsEmploymentGeneration($dataStart, $dateEnd, $rr);
                         } else {
                           $arrBridgeList = $this->bridge_employment_generation_model->getEmploymentGenerationByDate($dateStart, $dateEnd, $rr);
-                        }  
-                            
+                        }
+
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header
                             //echo 'header';
@@ -133,26 +133,26 @@ class Employment_Generation_DateWise_report extends BaseController
                             $arrPrintList[] = $row;
                             $i++;
                         }
-                            
+
                     }
                 }
 
                 //$data = ['pager' => $bridge_beneficiaries_model->pager];
-                    
+
                 // echo "<pre>";
                 // print_r($arrPrintList);exit;
                 $data['arrPrintList'] = $arrPrintList;
                 $data['dataStart'] = $dateStart;
                 $data['dateEnd'] = $dateEnd;
-                
 
-                
+
+
             } else
             {
                 redirect("reports/Employment_Generation_DateWise/".$stat);
-                //return redirect()->to(base_url('reports/Beneficiaries_FYWise_report/'));  
+                //return redirect()->to(base_url('reports/Beneficiaries_FYWise_report/'));
             }
-            
+
         } else
         {
             'start date is Smaller than End Date';
@@ -163,6 +163,6 @@ class Employment_Generation_DateWise_report extends BaseController
 
     }
 }
-       
-	   
+
+
         ?>
