@@ -20,13 +20,13 @@
             <p><h4 class="no-print">Filter By Province</h4></p>
             <select name="selProvince" onchange="document.frmProvinceFilter.submit();" class="no-print">
                     <option value="">--Select--</option>
-                    <?php                         
-                    foreach($provinceList as $province) {                                              
-                        ?>                            
+                    <?php
+                    foreach($provinceList as $province) {
+                        ?>
                     <option value="<?php echo $province->province_id;?>" <?php echo ($selProvince != '' && $selProvince == $province->province_id)?'selected="selected"':'';?>><?php echo $province->province_name;?></option>
                     <?php } ?>
                     <option value="all">All</option>
-                </select> 
+                </select>
         </form>
     </div>
 
@@ -67,8 +67,8 @@
 
                             //$i= $start_from;
                             //$start=0;
-                            
-                           
+
+
                             $total_bri03portering_distance = 0;
                             $total_bri03road_head = 0;
                             $total_bri03river_type = 0;
@@ -105,28 +105,28 @@
                                     }
                                     $total_bri03portering_distance = $total_bri03portering_distance + $dataRow1['bri03portering_distance'];
                                     if(is_numeric($dataRow1['bri03road_head'])) {
-                                        $total_bri03road_head = $total_bri03road_head + $dataRow1['bri03road_head'];    
-                                    }
-                                    
-                                    if(is_numeric($dataRow1['bri03river_type'])) {
-                                        $total_bri03river_type = $total_bri03river_type + $dataRow1['bri03river_type']; 
+                                        $total_bri03road_head = $total_bri03road_head + $dataRow1['bri03road_head'];
                                     }
 
-                                    foreach ($getUtilities as $utility) { 
+                                    if(is_numeric($dataRow1['bri03river_type'])) {
+                                        $total_bri03river_type = $total_bri03river_type + $dataRow1['bri03river_type'];
+                                    }
+
+                                    foreach ($getUtilities as $utility) {
                                         if($utility['bu_id'] == $dataRow1['bri03utility_left_bank'] || $utility['bu_id'] == $dataRow1['bri03utility_right_bank']) {
                                             $uname = str_replace(' ', '_',strtolower(trim($utility['bu_name'])));
                                             $total_uname = 'total_'.$uname;
                                             if($utility['bu_id'] == $dataRow1['bri03utility_left_bank']) {
-                                                $$total_uname = $$total_uname + $dataRow1['bri03utility_left_bank'];    
+                                                $$total_uname = $$total_uname + $dataRow1['bri03utility_left_bank'];
                                             }
                                             if($utility['bu_id'] == $dataRow1['bri03utility_right_bank']) {
-                                                $$total_uname = $$total_uname + $dataRow1['bri03utility_right_bank'];    
+                                                $$total_uname = $$total_uname + $dataRow1['bri03utility_right_bank'];
                                             }
-                                            
-                                            //break;    
+
+                                            //break;
                                         }
 
-                                        
+
                                     }
                                 ?>
                                     <tbody>
@@ -145,9 +145,9 @@
                                         </tr>
                                     <?php $i++;
                                 } ?>
-                                
+
                                     </tbody>
-                                    
+
                             <?php
                             $j++;
                             } //end of dist
@@ -155,12 +155,15 @@
                             <?php //if($currentPage == $pageCount) : ?>
                                     <tr>
                                         <td colspan="4" style="text-align: right;">Total:</td>
-                                        <td class="center"><?=$arrTotals['total_bri03portering_distance'];?></td>
-                                        <td class="center"><?=$arrTotals['total_bri03road_head'];?></td>
-                                        <td class="center"><?=$arrTotals['total_bri03river_type'];?></td>
+<!--                                        <td class="center">--><?php //=$arrTotals['total_bri03portering_distance'];?><!--</td>-->
+<!--                                        <td class="center">--><?php //=$arrTotals['total_bri03road_head'];?><!--</td>-->
+<!--                                        <td class="center">--><?php //=$arrTotals['total_bri03river_type'];?><!--</td>-->
+                                        <td class="center"><?=$total_bri03portering_distance;?></td>
+                                        <td class="center"><?=$total_bri03road_head;?></td>
+                                        <td class="center"><?=$total_bri03river_type;?></td>
                                         <td colspan="2" rowspan="6">
                                             <table>
-                                                <?php foreach ($getUtilities as $utility) { 
+                                                <?php foreach ($getUtilities as $utility) {
                                                     $buname = str_replace(' ', '_',strtolower(trim($utility['bu_name'])));
                                                     //$total_buname = 'total_'.$buname;
                                                     if($utility['bu_id'] == 1)
@@ -187,7 +190,7 @@
                                     <tr>
                                         <td colspan="7" rowspan="5">&nbsp;</td>
                                         <!-- <td colspan="2">
-                                            
+
                                         </td> -->
                                     </tr>
                                     <tr>
@@ -214,11 +217,11 @@
                     </table>
                     <!-- pagination block -->
                     <div class="mt-3 hidden-print">
-                        <?php //$pager = \Config\Services::pager(); 
+                        <?php //$pager = \Config\Services::pager();
                         ?>
                         <?php if (isset($pager)) : ?>
                             <?php $pagi_path = 'reports/Access_Utility_Completed_FYWise_report'; ?>
-                            <?php //$pager->setPath($pagi_path); 
+                            <?php //$pager->setPath($pagi_path);
                             ?>
                             <?= $pager->links(); ?>
                         <?php endif; ?>
