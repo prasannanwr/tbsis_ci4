@@ -46,7 +46,7 @@
                                 <th style="width:80px;" rowspan="2" class="center">Palika</th>
                                 <th rowspan="2" class="center" >Distance Gained (hrs)</th>
                                 <th rowspan="2" class="center">Distance to Road Head (days)</th>
-                                <th rowspan="2" class="center">River Type (months)</th>
+                                <th rowspan="2" class="center">River Type (Fordable in months)</th>
                                 <th colspan="2" class="center" style="width:150px;">Bridge Utility</th>
                             </tr>
                             <tr>
@@ -86,24 +86,25 @@
                                     </td>
                                 </tr>
                                 <?php
-                                $total_bri03portering_distance = 0; $total_bri03road_head = 0; $total_bri03river_type = 0;
+                                //$total_bri03portering_distance = 0; $total_bri03road_head = 0; $total_bri03river_type = 0;
                                 //echo "<pre>"; var_dump($dataRow['data']);exit;
                                 foreach ($dataRow['data'] as $dataRow1) {
 
                                     //totals
                                     if(isset($dataRow1['bri03portering_distance']))
                                         $total_bri03portering_distance = $total_bri03portering_distance + $dataRow1['bri03portering_distance'];
-                                    if(isset($dataRow1['bri03road_head']))
-                                        $total_bri03road_head = $total_bri03road_head + (float) $dataRow1['bri03road_head'];
-                                    if(isset($dataRow1['bri03river_type']))
-                                        $total_bri03river_type = $total_bri03river_type + (float) $dataRow1['bri03river_type'];
+//                                    if(isset($dataRow1['bri03road_head']))
+//                                        $total_bri03road_head = $total_bri03road_head + (float) $dataRow1['bri03road_head'];
+//                                    if(isset($dataRow1['bri03river_type']))
+//                                        $total_bri03river_type = $total_bri03river_type + (float) $dataRow1['bri03river_type'];
+
 
                                     if($dataRow1['major_vdc'] == 0) {
                                         $palika = $dataRow1['left_palika'];
                                     } else {
                                         $palika = $dataRow1['right_palika'];
                                     }
-                                    $total_bri03portering_distance = $total_bri03portering_distance + $dataRow1['bri03portering_distance'];
+                                    //$total_bri03portering_distance = $total_bri03portering_distance + $dataRow1['bri03portering_distance'];
                                     if(is_numeric($dataRow1['bri03road_head'])) {
                                         $total_bri03road_head = $total_bri03road_head + $dataRow1['bri03road_head'];
                                     }
@@ -158,9 +159,9 @@
 <!--                                        <td class="center">--><?php //=$arrTotals['total_bri03portering_distance'];?><!--</td>-->
 <!--                                        <td class="center">--><?php //=$arrTotals['total_bri03road_head'];?><!--</td>-->
 <!--                                        <td class="center">--><?php //=$arrTotals['total_bri03river_type'];?><!--</td>-->
-                                        <td class="center"><?=$total_bri03portering_distance;?></td>
-                                        <td class="center"><?=$total_bri03road_head;?></td>
-                                        <td class="center"><?=$total_bri03river_type;?></td>
+                                        <td class="center"><?=number_format($total_bri03portering_distance,2);?></td>
+                                        <td class="center"><?=number_format($total_bri03road_head, 2);?></td>
+                                        <td class="center"><?=number_format($total_bri03river_type, 2);?></td>
                                         <td colspan="2" rowspan="6">
                                             <table>
                                                 <?php foreach ($getUtilities as $utility) {

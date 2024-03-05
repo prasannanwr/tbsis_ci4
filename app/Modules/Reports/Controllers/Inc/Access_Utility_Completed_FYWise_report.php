@@ -22,7 +22,7 @@ class Access_Utility_Completed_FYWise_report extends BaseController
     private $province_model;
 
     private $user_model;
-  
+
     public function __construct()
     {
       helper(['form', 'html', 'et_helper']);
@@ -31,7 +31,7 @@ class Access_Utility_Completed_FYWise_report extends BaseController
       $bridge_model = new bridge_model();
       $province_model = new ProvinceModel();
       $user_model = new UserModel();
-      
+
       $this->fiscal_year_model = $fiscal_year_model;
       $this->view_district_reg_office_model = $view_district_reg_office_model;
       $this->bridge_model = $bridge_model;
@@ -68,21 +68,21 @@ class Access_Utility_Completed_FYWise_report extends BaseController
             $Postback = @$this->request->getVar('submit');
             $dataStart = @$this->request->getVar('start_year');
             $dateEnd = @$this->request->getVar('end_year');
-        } 
+        }
 
         //$records_per_page = @$this->request->getVar('records_per_page');
         //echo $records_per_page;exit;
         $records_per_page = 0;
         if(isset($searchData['rpp'])) {
-          $records_per_page = $searchData['rpp'];  
+          $records_per_page = $searchData['rpp'];
         }
-        
+
         $perPage = ITEMS_PER_PAGE;
         //$perPage = 2;
         $arrPrintList = array();
-        $selProvince = @$this->request->getVar('selProvince');       
+        $selProvince = @$this->request->getVar('selProvince');
         $data['selProvince'] = $selProvince;
-        
+
         $permittedDist = '';
         if (session()->get('user_rights') != 1) {
           $permittedDistArr = $this->user_model->getArrPermitedDistList();
@@ -90,11 +90,11 @@ class Access_Utility_Completed_FYWise_report extends BaseController
           //var_dump($permittedDist);exit;
         }
         /*
-        if($selProvince != '' && strtolower($selProvince) != "all") {                          
+        if($selProvince != '' && strtolower($selProvince) != "all") {
           $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince);
         } else {
           $selDist=$this->view_district_reg_office_model;
-        } 
+        }
         if($permittedDist != ''){
           $selDist = $selDist->whereIn('dist01id',$permittedDistArr);
         }
@@ -110,7 +110,7 @@ class Access_Utility_Completed_FYWise_report extends BaseController
         } else {
           $selDist = $userModel->getDistrictHavingCompletedBridges($dataStart, $dateEnd, $selProvince);
         }
-        
+
         if ($Postback == 'Back')
         {
             redirect(site_url());
@@ -125,12 +125,12 @@ class Access_Utility_Completed_FYWise_report extends BaseController
               $data['startyear'] =$this->fiscal_year_model->where('fis01id', $dataStart)->first();
               $data['endyear'] = $this->fiscal_year_model->where('fis01id', $dateEnd)->first();
 
-              
+
 
               //$currentPage = $data['pager']->getCurrentPage();
               //$pageCount = $data['pager']->getPageCount();
               //if($currentPage == $pageCount) { //last page
-                
+
                 $totalBridge  = $this->bridge_model->getTotalBridgeUtilities($dataStart, $dateEnd,$permittedDist);
                 $total_bri03portering_distance = 0;
                 $total_bri03road_head = 0;
@@ -139,7 +139,7 @@ class Access_Utility_Completed_FYWise_report extends BaseController
 
                 foreach ($totalBridge as $value) {
                   if(is_numeric($value['bri03portering_distance'])) {
-                    $total_bri03portering_distance = $total_bri03portering_distance + $value['bri03portering_distance'];  
+                    $total_bri03portering_distance = $total_bri03portering_distance + $value['bri03portering_distance'];
                   }
                   if(is_numeric($value['bri03road_head'])) {
                     $total_bri03road_head = $total_bri03road_head + $value['bri03road_head'];
@@ -170,7 +170,7 @@ class Access_Utility_Completed_FYWise_report extends BaseController
                   $total_social++;
                   elseif($bri03utility_right_bank == 5) //household activities
                   $total_household++;
-                  
+
                 }
                 $grand_total_utility = $total_markets + $total_health + $total_schools + $total_social + $total_household;
                 $markets_percent = number_format((($total_markets/$grand_total_utility) * 100),2);
@@ -190,30 +190,30 @@ class Access_Utility_Completed_FYWise_report extends BaseController
 
                 //echo "<pre>";var_dump($data['arrTotals']);exit;
              // }
-              
+
               // $total_pages = $pager->getPageCount();
               // $current_page = $pager->getCurrentPage();
               if(isset($_SESSION['total_per_page']))
               $total_per_page = $_SESSION['total_per_page'];
-              else 
+              else
               $total_per_page = 0;
 
               if(is_array( $selDist)){
                    $i = 0;
-                   
+
                   // echo "<pre>";
                   // var_dump($selDist);exit;
                   foreach( $selDist as $k=>$v){
                       $rr=$v['dist01id'];
                       // var_dump($v1);exit;
                       $arrChild1=null;
-                      
+
                       if($stat == 2) { // under construction
                         $arrBridgeList = $this->bridge_model->getBridgeUtilitiesUnderCons($rr,$dataStart, $dateEnd);
                       } else {
                         $arrBridgeList = $this->bridge_model->getBridgeUtilities($rr,$dataStart, $dateEnd);
                       }
-                      
+
                       if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                         // echo "<pre>"; var_dump($arrBridgeList);exit;
                           //print header
@@ -232,12 +232,12 @@ class Access_Utility_Completed_FYWise_report extends BaseController
               /*if($currentPage == $pageCount) { //last page
                 if(is_array( $totalDist)){
                      $total_bridges = 0;
-                     
+
                     foreach( $totalDist as $k=>$v){
                         $rr=$v['dist01id'];
                         //var_dump($rr);
                         $arrBridgeList = $this->bridge_model->getBridgeUtilities($rr,$dataStart, $dateEnd);
-                        
+
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                           foreach ($arrBridgeList as $bridge) {
                             $total_bridges++;
@@ -274,13 +274,13 @@ class Access_Utility_Completed_FYWise_report extends BaseController
               //echo $data['previous_records'];exit;
               $data['arrPrintList'] = $arrPrintList;
               $data['provinceList'] = $this->province_model->asObject()->findAll();
-             
+
               $data['dataStart'] = $dataStart;
               $data['dateEnd'] = $dateEnd;
 
               return view('\Modules\Reports\Views\Access_Utility_Completed_FYWise_report', $data);
             }
         }
-        
+
     }
 }

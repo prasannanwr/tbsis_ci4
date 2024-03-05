@@ -68,8 +68,11 @@
                                     } else {
                                         $palika = $dataRow1['right_palika'];
                                     }
+                                    if(is_numeric($dataRow1['bri03portering_distance']))
                                     $total_portering_distance += $dataRow1['bri03portering_distance'];
+                                    if(is_numeric($dataRow1['bri03road_head']))
                                     $total_road_head += $dataRow1['bri03road_head'];
+                                    if(is_numeric($dataRow1['bri03river_type']))
                                     $total_river_type += $dataRow1['bri03river_type'];
                                 ?>
                                     <tbody>
@@ -100,9 +103,9 @@
 <!--                                        <td class="center">--><?php //=$arrTotals['total_bri03portering_distance'];?><!--</td>-->
 <!--                                        <td class="center">--><?php //=$arrTotals['total_bri03road_head'];?><!--</td>-->
 <!--                                        <td class="center">--><?php //=$arrTotals['total_bri03river_type'];?><!--</td>-->
-                                        <td class="center"><?=$total_portering_distance;?></td>
-                                        <td class="center"><?=$total_road_head;?></td>
-                                        <td class="center"><?=$total_river_type;?></td>
+                                        <td class="center"><?=number_format($total_portering_distance,2);?></td>
+                                        <td class="center"><?=number_format($total_road_head,2);?></td>
+                                        <td class="center"><?=number_format($total_river_type,2);?></td>
                                         <td colspan="2" rowspan="6">
                                             <table>
                                                 <?php foreach ($getUtilities as $utility) {

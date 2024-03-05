@@ -80,7 +80,7 @@ class UserModel extends Model
     {
         $user = session()->get('user_id');
         return isset($user);
-    }   
+    }
     public function getLoggedType()
     {
         $user = session()->get('type');
@@ -100,7 +100,7 @@ class UserModel extends Model
         if($selProvince != '' && strtolower($selProvince) != "all") {
             $sql .= " AND dist01state = '$selProvince'";
         }
-
+//echo $sql;exit;
         if ($intUserType == ENUM_REGIONAL_MANAGER || $intUserType == ENUM_REGIONAL_OPERATOR) {
           //comma seperated value
           if (count($arrPermittedDistList) > 0) {
@@ -111,7 +111,9 @@ class UserModel extends Model
         }
 
         $sql .= ")";
-        
+
+        //echo $sql;exit;
+
         $query = $this->db->query($sql);
 
         if($query->getNumRows() > 0) {
@@ -214,7 +216,7 @@ class UserModel extends Model
           }
         }
         $sql .= ")";
-        
+
         $query = $this->db->query($sql);
 
 
@@ -236,8 +238,8 @@ class UserModel extends Model
         $intUserType = (session()->get('type')) ? session()->get('type') : ENUM_GUEST;
 
         $bridge_model = new bridge_model();
-        $startDate = $bridge_model->convertDateToFY($startDate);
-        $endDate = $bridge_model->convertDateToFY($endDate);
+        $startfy = $bridge_model->convertDateToFY($startDate);
+        $endfy = $bridge_model->convertDateToFY($endDate);
 
         $sql = "select `dist01id`,`dist01name` from `view_district` where `dist01id` IN (select DISTINCT case `d`.`bri03major_vdc` when 0 then `d`.`bri03district_name_lb` else `d`.`bri03district_name_rb` end AS `major_dist` from `bri03basic_bridge_datatable` `d` left join `bridge_final_inspection` `e` on(`d`.`bri03id` = `e`.`b_id`) where `bri03physical_progress` < 9";
 
@@ -255,7 +257,7 @@ class UserModel extends Model
         }
 
         $sql .= ")";
-        
+
         $query = $this->db->query($sql);
 
         if($query->getNumRows() > 0) {

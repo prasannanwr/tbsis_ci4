@@ -20,7 +20,7 @@ class Access_Utility_Completed_DateWise_report extends BaseController
     private $bridge_model;
 
     private $province_model;
-  
+
     public function __construct()
     {
       helper(['form', 'html', 'et_helper']);
@@ -28,7 +28,7 @@ class Access_Utility_Completed_DateWise_report extends BaseController
       $view_district_reg_office_model = new view_district_reg_office_model();
       $bridge_model = new bridge_model();
       $province_model = new ProvinceModel();
-      
+
       $this->fiscal_year_model = $fiscal_year_model;
       $this->view_district_reg_office_model = $view_district_reg_office_model;
       $this->bridge_model = $bridge_model;
@@ -52,7 +52,7 @@ class Access_Utility_Completed_DateWise_report extends BaseController
         $data['view_file'] = __FUNCTION__;
         $request = service('request');
         $searchData = $request->getGet();
-    
+
         $dateStart = "";
         $dateEnd = "";
         if(isset($searchData) && isset($searchData['dateStart'])){
@@ -63,11 +63,11 @@ class Access_Utility_Completed_DateWise_report extends BaseController
             $Postback = @$this->request->getVar('submit');
             $dateStart = @$this->request->getVar('start_date');
             $dateEnd = @$this->request->getVar('end_date');
-        } 
+        }
 
         $perPage = ITEMS_PER_PAGE;
         $arrPrintList = array();
-        $selProvince = @$this->request->getVar('selProvince');       
+        $selProvince = @$this->request->getVar('selProvince');
         $data['selProvince'] = $selProvince;
 
         $permittedDist = '';
@@ -77,7 +77,7 @@ class Access_Utility_Completed_DateWise_report extends BaseController
           $permittedDist = implode(',', $permittedDistArr);
           //var_dump($permittedDist);exit;
         }
-        /*if($selProvince != '' && strtolower($selProvince) != "all") {                          
+        /*if($selProvince != '' && strtolower($selProvince) != "all") {
           $selDist=$this->view_district_reg_office_model->where('province_id',$selProvince)->paginate($perPage);
         } else {
           $selDist=$this->view_district_reg_office_model->paginate($perPage);
@@ -89,7 +89,7 @@ class Access_Utility_Completed_DateWise_report extends BaseController
         } else {
           $selDist = $userModel->getDistrictHavingCompletedBridgesByDate($dateStart, $dateEnd, $selProvince);
         }
-        
+
         if ($Postback == 'Back')
         {
             redirect(site_url());
@@ -100,7 +100,7 @@ class Access_Utility_Completed_DateWise_report extends BaseController
                 $data['selDist'] = $selDist;
                 $data['pager'] = $this->view_district_reg_office_model->pager;
                 $data['provinceList'] = $this->province_model->asObject()->findAll();
-                $data['getUtilities'] = $this->bridge_model->getUtilities();              
+                $data['getUtilities'] = $this->bridge_model->getUtilities();
                 // $data['startyear'] =$this->fiscal_year_model->where('fis01id', $dateStart)->first();
                 // $data['endyear'] = $this->fiscal_year_model->where('fis01id', $dateEnd)->first();
 
@@ -112,7 +112,7 @@ class Access_Utility_Completed_DateWise_report extends BaseController
 
                 foreach ($totalBridge as $value) {
                   if(is_numeric($value['bri03portering_distance'])) {
-                    $total_bri03portering_distance = $total_bri03portering_distance + $value['bri03portering_distance'];  
+                    $total_bri03portering_distance = $total_bri03portering_distance + $value['bri03portering_distance'];
                   }
                   if(is_numeric($value['bri03road_head'])) {
                     $total_bri03road_head = $total_bri03road_head + $value['bri03road_head'];
@@ -143,7 +143,7 @@ class Access_Utility_Completed_DateWise_report extends BaseController
                   $total_social++;
                   elseif($bri03utility_right_bank == 5) //household activities
                   $total_household++;
-                  
+
                 }
                 $grand_total_utility = $total_markets + $total_health + $total_schools + $total_social + $total_household;
                 $markets_percent = number_format((($total_markets/$grand_total_utility) * 100),2);
@@ -160,7 +160,7 @@ class Access_Utility_Completed_DateWise_report extends BaseController
                                           'schools_percent' => $schools_percent,
                                           'social_percent' => $social_percent,
                                           'household_percent' => $household_percent);
-                
+
                 if(is_array( $selDist)){
                     $i = 0;
                     // echo "<pre>";
@@ -169,13 +169,13 @@ class Access_Utility_Completed_DateWise_report extends BaseController
                         $rr=$v['dist01id'];
                         // var_dump($v1);exit;
                         $arrChild1=null;
-                        
+
                         if($stat == 2) { // under construction
                           $arrBridgeList = $this->bridge_model->getBridgeUtilitiesUnderConsByDate($rr,$dateStart, $dateEnd);
                         } else {
                           $arrBridgeList = $this->bridge_model->getBridgeUtilitiesByDate($rr,$dateStart, $dateEnd);
                         }
-                        
+
                         if(is_array($arrBridgeList) && !empty($arrBridgeList)){
                             //print header
                             //echo 'header';

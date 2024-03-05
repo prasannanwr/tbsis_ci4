@@ -89,13 +89,13 @@ class bridge_model extends Model
         //
         $sel_district_model = new sel_district_model();
         $arrPermittedDistListFull = $sel_district_model->where('user02userid', session()->get('user_id'))->findAll();
-       
+
         $arrPermittedDistList = array();
         foreach( $arrPermittedDistListFull as $k=>$v ){
             $arrPermittedDistList[] = $v->user02dist01id;
         }
         $blnIsLogged = empty(session());
-        $intUserType = ($blnIsLogged)? session()->get('type'): ENUM_GUEST; 
+        $intUserType = ($blnIsLogged)? session()->get('type'): ENUM_GUEST;
         if($intUserType == ENUM_REGIONAL_MANAGER || $intUserType == ENUM_REGIONAL_OPERATOR){
             //comma seperated value
             /*if( count( $arrPermittedDistList )> 0){
@@ -103,33 +103,33 @@ class bridge_model extends Model
             }else{
                 $this->where('dist01id', null);
             }*/
-			
+
 			 if( count( $arrPermittedDistList )> 0){
                 $this->where_in('bri03district_name_lb', $arrPermittedDistList);
             }else{
                 $this->where('bri03district_name_lb', null);
             }
-			
-			
+
+
         }
-		//echo $this->db->last_query();		
+		//echo $this->db->last_query();
         return parent::dbGetList();
     }
     public function generate_bridge_code($intVDCNo, $ctype='')
     {
         $view_vdc_new_model = new view_vdc_new_model();
-        
+
         $arrInfo = $view_vdc_new_model->where('muni01id', $intVDCNo)->first();
-        
+
         $nb = ((int)$arrInfo['muni01last_bridge_no']) + 1;
         $nb = ($nb < 10) ? '0' . $nb : $nb;
         $x = $arrInfo['dist01code'] . ' ' . $arrInfo['muni01code'] . '' . BRIDGE_INF_CODE .'' . $nb;
-        
+
         if($ctype== ENUM_MAJOR_MAINTENANCE){
             //$x .= MM_CODE;
             $x .= "M";
         }
-        
+
         $vdc_municipality_model = new MunicipalityModel();
         $vdc_municipality_model->update($intVDCNo, array('muni01id'=>$intVDCNo, 'muni01last_bridge_no'=> $arrInfo['muni01last_bridge_no'] + 1 ));
         //echo $this->db->last_query();
@@ -159,7 +159,7 @@ class bridge_model extends Model
             ->join('`muni01municipality_vcd` `lb`','`view_bridge_child`.`bri03municipality_lb` = `lb`.`muni01id`','left')
             ->join('muni01municipality_vcd rb','`view_bridge_child`.`bri03municipality_rb` = `rb`.`muni01id`','left')
 			->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
-        
+
         /*if($startDate != '')
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
         if($endDate != '')
@@ -167,12 +167,12 @@ class bridge_model extends Model
 
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
-		
+
 		$where = "(`bridge_final_inspection`.`bri_completion_fiscal_year`='$startDate' OR `bridge_final_inspection`.`bri_completion_fiscal_year`='$endDate')";
         $builder = $builder->where($where);
 
         $result = $builder->get();
-        
+
 
         if($result->getNumRows() <= 0)
             return '';
@@ -201,7 +201,7 @@ class bridge_model extends Model
             ->join('`muni01municipality_vcd` `lb`','`view_bridge_child`.`bri03municipality_lb` = `lb`.`muni01id`','left')
             ->join('muni01municipality_vcd rb','`view_bridge_child`.`bri03municipality_rb` = `rb`.`muni01id`','left');
             //->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
-        
+
         /*if($startDate != '')
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
         if($endDate != '')
@@ -209,12 +209,12 @@ class bridge_model extends Model
 
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
-        
+
         $where = "(`view_bridge_child`.`bri03physical_progress` < 9)";
         $builder = $builder->where($where);
 
         $result = $builder->get();
-        
+
 
         if($result->getNumRows() <= 0)
             return '';
@@ -245,7 +245,7 @@ class bridge_model extends Model
             ->join('`muni01municipality_vcd` `lb`','`view_bridge_child`.`bri03municipality_lb` = `lb`.`muni01id`','left')
             ->join('muni01municipality_vcd rb','`view_bridge_child`.`bri03municipality_rb` = `rb`.`muni01id`','left')
 			->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
-        
+
        /* if($startDate != '')
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
         if($endDate != '')
@@ -253,12 +253,12 @@ class bridge_model extends Model
 
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
-		
+
 		$where = "(`bridge_final_inspection`.`bri_completion_fiscal_year`='$startDate' OR `bridge_final_inspection`.`bri_completion_fiscal_year`='$endDate')";
         $builder = $builder->where($where);
 
         $result = $builder->get();
-        
+
 
         if($result->getNumRows() <= 0)
             return '';
@@ -289,7 +289,7 @@ class bridge_model extends Model
             ->join('`muni01municipality_vcd` `lb`','`view_bridge_child`.`bri03municipality_lb` = `lb`.`muni01id`','left')
             ->join('muni01municipality_vcd rb','`view_bridge_child`.`bri03municipality_rb` = `rb`.`muni01id`','left')
             ->join('bridge_final_inspection','`view_bridge_child`.`bri03id` = `bridge_final_inspection`.`b_id`', 'left');
-        
+
        /* if($startDate != '')
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
         if($endDate != '')
@@ -297,12 +297,13 @@ class bridge_model extends Model
 
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
-        
-        $where = "(`bridge_final_inspection`.`bri_completion_fiscal_year`='$startDate' OR `bridge_final_inspection`.`bri_completion_fiscal_year`='$endDate')";
+
+        //$where = "(`bridge_final_inspection`.`bri_completion_fiscal_year`='$startDate' OR `bridge_final_inspection`.`bri_completion_fiscal_year`='$endDate')";
+        $where = "(`view_bridge_child`.`bri03physical_progress` < 9)";
         $builder = $builder->where($where);
 
         $result = $builder->get();
-        
+
 
         if($result->getNumRows() <= 0)
             return '';
@@ -324,7 +325,7 @@ class bridge_model extends Model
             ->join('bridge_utilities as `bu`','`bu`.`bu_id` = `view_bridge_child`.`bri03utility_left_bank`', 'left')
             ->join('bridge_utilities as `bu1`','`bu1`.`bu_id` = `view_bridge_child`.`bri03utility_right_bank`', 'left')
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left');
-        
+
         if($startDate != '')
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
         if($endDate != '')
@@ -359,7 +360,7 @@ class bridge_model extends Model
             ->join('bridge_utilities as `bu`','`bu`.`bu_id` = `view_bridge_child`.`bri03utility_left_bank`', 'left')
             ->join('bridge_utilities as `bu1`','`bu1`.`bu_id` = `view_bridge_child`.`bri03utility_right_bank`', 'left')
             ->join('view_district','`view_bridge_child`.`bri03major_dist_id` = `view_district`.`dist01id`', 'left');
-        
+
         if($startDate != '')
             $builder = $builder->where('`view_bridge_child`.`bri03project_fiscal_year` >=', $startDate);
         if($endDate != '')
@@ -403,7 +404,7 @@ class bridge_model extends Model
             ->join('bridge_steel_parts','`bridge_steel_parts`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
             ->join('bridge_construction_work','`bridge_construction_work`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
             ->join('bridge_final_inspection','`bridge_final_inspection`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
-            
+
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
 
@@ -432,7 +433,7 @@ class bridge_model extends Model
             ->join('bridge_steel_parts','`bridge_steel_parts`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
             ->join('bridge_construction_work','`bridge_construction_work`.`b_id` = `view_bridge_child`.`bri03id`', 'left')
             ->join('bridge_final_inspection','`bridge_final_inspection`.`b_id` = `view_bridge_child`.`bri03id`', 'left');
-            
+
         if($distId != '')
             $builder = $builder->where('`view_district`.`dist01id` =', $distId);
 
@@ -447,9 +448,9 @@ class bridge_model extends Model
         return $result->getResultArray();
     }
 
-    public function convertDateToFY($date = "2023-07-20") 
+    public function convertDateToFY($date = "2023-07-20")
     {
-        if($date) 
+        if($date)
         {
             //2022-07-14 :: yesko fiscal year chai 2021/2022 huncha?
             //yes sir normally every  july-16 to july-15 =1 fy
@@ -464,9 +465,9 @@ class bridge_model extends Model
             if($month < 7 ) {
                 $prev_year = $year - 1;
                 $fy = $prev_year.$year; //20222023
-                
+
             } elseif($month == 7) {
-                if($month == 7 && $day <= 15) //month is less than or equal to july 
+                if($month == 7 && $day <= 15) //month is less than or equal to july
                 {
                     $prev_year = $year - 1;
                     $fy = $prev_year.$year; //20222023
@@ -478,7 +479,7 @@ class bridge_model extends Model
                 $next_year = $dateparts[0] + 1;
                 $fy = $dateparts[0].$next_year;
             }
-            
+
             //echo $fy;exit;
             $builder = $this->db->table("fis01fiscal_year");
             $builder = $builder->select('fis01id')->where('fis01year',$fy);
@@ -497,7 +498,7 @@ class bridge_model extends Model
         $builder = $builder
             ->select("*")
             ->where('`bridge_utilities`.`bu_status` =', 1);
-       
+
         $result = $builder->get();
 
         if($result->getNumRows() <= 0)
